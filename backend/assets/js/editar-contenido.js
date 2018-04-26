@@ -94,7 +94,19 @@ app.controller('myCtrl', function ($scope) {
         if (debug) console.log(errGetObject);
         expiredToken();
       } else {
-        var file = JSON.parse(fileData.Body.toString('utf-8'));
+        var f = fileData.Body.toString('utf-8');
+        // preserve newlines, etc - use valid JSON
+        f = f.replace(/\\n/g, "\\n")  
+        .replace(/\\'/g, "\\'")
+        .replace(/\\"/g, '\\"')
+        .replace(/\\&/g, "\\&")
+        .replace(/\\r/g, "\\r")
+        .replace(/\\t/g, "\\t")
+        .replace(/\\b/g, "\\b")
+        .replace(/\\f/g, "\\f");
+        // remove non-printable and other non-valid JSON chars
+        f = f.replace(/[\u0000-\u0019]+/g,""); 
+        var file = JSON.parse(f);
         $scope.content = file;
         $scope.$apply();
       }
