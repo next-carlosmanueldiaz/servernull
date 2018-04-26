@@ -1,0 +1,1 @@
+[{ "id" : "title", "name" : "Título", "type" : "title", "value" : "Alfombra de IKEA" },{ "id" : "precio", "name" : "Precio", "type" : "number", "value" : "12" },{ "id" : "color", "name" : "Color", "type" : "text", "value" : "azul eléctrico" },{ "id" : "img", "name" : "Imagen", "type" : "image", "value" : "http://farmvilles.com/wp-content/uploads/2016/11/alfombras-azules-.jpg" }]

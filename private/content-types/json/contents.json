@@ -1,1 +1,36 @@
-[]
+[{
+        "title": "La naturaleza",
+        "type": "article",
+        "slug": "la-naturaleza"
+    }, {
+        "title": "Una 'startup' de inteligencia artificial gana la principal competición 'fintech' del mundo",
+        "type": "article",
+        "slug": "una-startup-de-inteligencia-artificial-gana-la-principal-competicion-fintech-del-mundo"
+    }, {
+        "title": "‘Mi gestor’, espacio seguro y privado para comunicarse con los gestores de BBVA",
+        "type": "article",
+        "slug": "mi-gestor-espacio-seguro-y-privado-para-comunicarse-con-los-gestores-de-bbva"
+    }, {
+        "title": "Linterna",
+        "type": "producto",
+        "slug": "linterna"
+    }, {
+        "title": "Alfombra de IKEA",
+        "type": "alfombra",
+        "slug": "alfombra-de-ikea"
+    }, {
+        "title": "Francisco González: “Esta cuarta revolución industrial va a cambiar el mundo y a dar oportunidades a todos”",
+        "type": "article",
+        "slug": "francisco-gonzalez-esta-cuarta-revolucion-industrial-va-a-cambiar-el-mundo-y-a-dar-oportunidades-a-todos"
+    }, {
+        "title": "BBVA elige a Telefónica para potenciar su red de comunicaciones",
+        "type": "article",
+        "slug": "bbva-elige-a-telefonica-para-potenciar-su-red-de-comunicaciones"
+    }, {
+        "title": "Resultados: BBVA gana €3.449 millones en los primeros nueve meses (+23%)",
+        "type": "article",
+        "slug": "resultados-bbva-gana-3449-millones-en-los-primeros-nueve-meses-23"
+    }, {
+        "title": "Hoy será noticia",
+        "type": "article"
+    }]
