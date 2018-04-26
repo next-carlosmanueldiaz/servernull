@@ -1,0 +1,1 @@
+[{ "id" : "title", "name" : "Título", "type" : "title", "value" : "¿por qué?" },{ "id" : "pregunta", "name" : "Pregunta", "type" : "text", "value" : "¿por qué?" },{ "id" : "respuesta", "name" : "Respuesta", "type" : "textarea", "value" : "¿y por qué no?" }]
