@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Backend - ServerNull</title>
+    <link rel="shortcut icon" href="//aws.amazon.com/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/estilos.css">
+    <script type="text/javascript" src="assets/js/beautify-html.js"></script>
+    <script type="text/javascript" src="assets/js/edit.js"></script>
+
+  </head>
+  <body>
+    <div class="container">
+      <header class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+              <a class="nav-link" href="/home/index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/backend/index.html">Contenidos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/backend/tipos.html">Tipos de contenido <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="mailto:carlos.manuel@beeva.com">Contact</a>
+            </li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Tipos de contenido</h3>
+      </header>
+      <main role="main">
+        <div class="row">
+          <div class="col-lg-12">
+            <div>
+              <form ng-app="myApp" ng-submit="submit()" ng-controller="editarCtrl" name="miForm" novalidate>
+                <div class="row">
+                  <div class="col">
+                    <label>
+                      Nombre: <span style="color: red;">*</span>
+                      <br/>
+                      <input type="text" name="name" ng-model="cts[pos].name" required>
+                    </label>
+                    <span style="color:red" ng-show="miForm.name.$dirty">
+                      <span ng-show="miForm.name.$error.required">Obligatorio.</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label>
+                      Nombre de sistema: <span style="color: red;">*</span>:
+                      <br>
+                      <input type="text" name="id" ng-model="cts[pos].id" required>
+                    </label>
+                    <span style="color:red" ng-show="miForm.id.$dirty">
+                      <span ng-show="miForm.id.$error.required">Obligatorio.</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label>Descripción:
+                      <br/>
+                      <textarea name="description" rows="4" cols="50" ng-model="cts[pos].description"></textarea>
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label>Campos:</label>
+                    <br/>
+                    <div class="row">
+                      <div class="col">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr class="fondo-lightsteelblue">
+                              <th>Etiqueta</th>
+                              <th>Nombre de sistema</th>
+                              <th>Tipo</th>
+                              <th style="width: 150px;">Operaciones</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="field in cts[pos].fields track by $index">
+                              <td>
+                                <input ng-if="$index != 0" id="campo" type="text" ng-model="field.name">
+                                <span ng-if="$index == 0">{{field.name}}</span>
+                              </td>
+                              <td>
+                                <input ng-if="$index != 0" id="campo" type="text" ng-model="field.id">
+                                <span ng-if="$index == 0">{{field.id}}</span>
+                              </td>
+                              <td>
+                                <select ng-if="$index != 0" ng-model="field.type">
+                                  <option value="title">Título</option>
+                                  <option value="text">Texto</option>
+                                  <option value="textarea">Texto largo</option>
+                                  <option value="image">Imagen</option>
+                                  <option value="number">Número</option>
+                                </select>
+                                <span ng-if="$index == 0">{{field.type}}</span>
+                              </td>
+                              <td>
+                                <a ng-if="$index != 0" href="#" ng-click='eliminarCampo($index);'>Eliminar</a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col centered">
+                        <a href="javascript:;" ng-click="agregarCampo()">Añadir campo</a>
+                        <hr/>
+                        <br/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label>TPL (<a href="#" ng-click="loadDefaultTpl()">Generar plantilla inicial</a>):</label>
+                    <br/>
+                    <textarea class="textarea" id="tpl" name="tpl" rows="16" ng-model="cts[pos].tpl" ng-change="formatCode()" ng-paste="formatCode()"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label>CSS:</label>
+                    <br/>
+                    <textarea class="textarea" id="css" name="css" rows="16" ng-model="cts[pos].css"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label>JS:</label>
+                    <br/>
+                    <textarea class="textarea" id="js" name="js" rows="16" ng-model="cts[pos].js"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <input type="submit" value="Guardar" ng-disabled="miForm.name.$error.required || miForm.id.$error.required"/>
+                    <div ng-show="miForm.$submitted" style="display: inline-block;">
+                      <div style="color:blue">Guardado.</div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-12 text-center margin-all-20">
+            <a href="tipos.html">Volver al listado</a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

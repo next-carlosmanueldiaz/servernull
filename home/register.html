@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-controller="myCtrl" lang="es">
+  <head>
+    <title>ServerNull</title>
+    <link rel="shortcut icon" href="//aws.amazon.com/favicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="{{googleSigninClientId}}">
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js" crossorigin="anonymous"></script>
+    <script id="googleGapi" src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css" crossorigin="anonymous">
+    <script type="text/javascript" src="../assets/js/config.js"></script>
+    <script type="text/javascript" src="../assets/js/auth.js"></script>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <a target="_blank" href="/home/index.html">
+          Inicio
+        </a>
+      </li>
+    </ul>
+    <div class="g-signin2" data-onsuccess="register"></div>
+    <br/>
+    <a href="#" onclick="signOut();">Sign out</a>
+    <br/>
+  </body>
+</html>
