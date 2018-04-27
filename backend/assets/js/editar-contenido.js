@@ -171,9 +171,8 @@ app.controller('myCtrl', function ($scope) {
             
             // PAKO - DEFLATE FILE
             // https://github.com/nodeca/pako
-            //var pako = window.pako;
-            //var htmlData = pako.deflate(html);
-            var htmlData = html; // no hacemos deflate
+            var pako = window.pako;
+            var htmlData = pako.deflate(html);
             
             var today = new Date();
             var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
