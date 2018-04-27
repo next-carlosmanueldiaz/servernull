@@ -870,7 +870,7 @@ small, .small {
   z-index: 500;
   margin-bottom: 0; }
 .header-main .link-map {
-  background: url("../img/v1/logo-header.png") no-repeat top left;
+  background: url("../img/logo-header.png") no-repeat top left;
   background-size: contain;
   display: block;
   width: 96px;
@@ -888,7 +888,7 @@ small, .small {
       left: 15px;
       top: 20px;
       height: 28px;
-      background-image: url("../img/v1/logo-header-140.png"); } }
+      background-image: url("../img/logo-header-140.png"); } }
 @media only screen and (max-width: 767px) {
   .header-main.fixed .header-nav {
     min-height: initial !important; } }
