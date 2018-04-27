@@ -1,0 +1,145 @@
+#!/bin/bash
+
+# An example hook script to verify what is about to be pushed.  Called by "git
+# push" after it has checked the remote status, but before anything has been
+# pushed.  If this script exits with a non-zero status nothing will be pushed.
+#
+# This hook is called with the following parameters:
+#
+# $1 -- Name of the remote to which the push is being done
+# $2 -- URL to which the push is being done
+#
+# If pushing without using a named remote those arguments will be equal.
+#
+# Information about the commits which are being pushed is supplied as lines to
+# the standard input in the form:
+#
+#   <local ref> <local sha1> <remote ref> <remote sha1>
+#
+# This sample shows how to prevent push of commits where the log message starts
+# with "WIP" (work in progress).
+
+# -----------------------------------------------------------------------------
+# Un ejemplo de script hook para verificar qué se va a subir. Llamado por "git
+# push" después de checkear el estatus remoto, pero antes de que se suba nada. 
+# Si este script existe con un status non-zero no se subirá nada.
+# 
+# Este hook es llamado con los siguientes parámetros:
+# 
+# $1 -- Nombre del remoto al que se realizará el push
+# $2 -- URL a la que se realizará el push
+#
+# Si se hace push usando un remoto sin nombre los argumentos serán iguales.
+# 
+# Información sobre los commits que serán pusheados se proveen como lineas a la
+# entrada estandar en la forma:
+# 
+# 	<local ref> <local sha1> <remote ref> <remote sha1>
+# 
+# Este ejemplo muestra cómo prevenir los push de commits donde el mensaje de log 
+# comienza con "WIP" (Work In Progress).
+RED='\e[31m'
+BLUE='\e[34m'
+GREEN='\e[92m'
+NC='\e[39m' # No Color
+
+remote="$1"
+url="$2"
+
+z40=0000000000000000000000000000000000000000
+
+while read local_ref local_sha remote_ref remote_sha
+do
+	# echo -e >&2 "local_ref: $local_ref"
+	# echo -e >&2 "local_sha: $local_sha"
+	# echo -e >&2 "remote_ref: $remote_ref"
+	# echo -e >&2 "remote_sha: $remote_sha"
+
+	# ******************************************************************************
+	# LEER CONFIGURACIÓN DE S3
+	# Establecemos el nombre del bucket en el fichero .s3config y leemos su configuración
+	# ------------------------------------------------------------------------------
+	s3configFile=./.s3config
+	if [ -f $s3configFile ]; then
+		OIFS=$IFS;
+		IFS="=";
+		branch=$(git symbolic-ref --short HEAD)
+		while read -r line
+		do
+			if [ -n "$line" ]; then
+				if [[ $line = *"="* ]]; then
+					lineArray=($line);
+					# echo $line
+					# echo ${lineArray[0]}
+
+					if [[ ${lineArray[0]} = "bucket" ]]; then
+						bucket=${lineArray[1]}
+						# echo -e "bucket: ${BLUE} $bucket ${NC}"
+					fi
+
+					# for ((i=0; i<${#lineArray[@]}; ++i)); do
+					#   echo "valor $i: ${lineArray[$i]}"; 
+					# done
+
+				fi
+			fi    
+		done < "$s3configFile"
+
+		echo -e "bucket: ${BLUE} $bucket ${NC}"
+		echo -e "branch: ${BLUE} $branch ${NC}"
+		s3upload=false
+		if [ "$bucket" ]; then
+			s3upload=true
+		fi
+	else
+		echo -e >&2 "File .s3config does not exist in you repository and is necesary to push to your s3 repo."
+		echo -e >&2 "Put inside something like this:"
+		echo -e >&2 "bucket=myBucketName"
+		echo -e >&2 "branch=develop"
+	fi
+	# ******************************************************************************
+
+	if [ "$local_sha" = $z40 ]
+	then
+		# Handle delete
+		echo >&2 "Handle delete in $local_ref, not pushing"
+		:
+	else
+		if [ "$remote_sha" = $z40 ]
+		then
+			# New branch, examine all commits
+			echo >&2 "New branch, examine all commits in $local_ref, not pushing"
+			range="$local_sha"
+		else
+			# Update to existing branch, examine new commits
+			echo >&2 "Update to existing branch, examine new commits in $local_ref, not pushing"
+			range="$remote_sha..$local_sha"
+			echo >&2 "Rango: $range"
+		fi
+
+		if [ "$s3upload" ]; then
+			
+			# Check for commits files
+			files2Push="$(git diff --name-only origin/${branch}..HEAD)"
+			# files2Push=`git diff --name-only origin/develop..HEAD`
+			echo "git diff --name-only origin/${branch}..HEAD"
+
+			if [ -n "$files2Push" ]
+			then
+				echo -e >&2 "Uploading to s3:"
+				echo -e "${GREEN}"
+				while IFS= read -r line
+				do
+						
+				done < <(printf '%s\n' "$files2Push")
+				echo -e "${NC}"
+				exit 0
+			else
+				echo >&2 "Nothing to upload to s3."
+				exit 1
+			fi
+		fi
+	fi
+done
+
+exit 0
