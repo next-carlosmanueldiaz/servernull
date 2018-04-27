@@ -534,7 +534,7 @@ small, .small {
 
 /*==========  Buscador  ==========*/
 .styled-search .btn {
-  background: url("../img/v1/ico-lupablue.png") no-repeat;
+  background: url("../img/ico-lupablue.png") no-repeat;
   width: 29px;
   height: 29px; }
 .styled-search input[type="text"] {
@@ -644,7 +644,7 @@ small, .small {
     display: inline-block;
     margin-bottom: 12px; }
     .breadcrumb a:after {
-      background: url("../img/v1/ico-breadcrumb-arrow.png") no-repeat 100% 25%;
+      background: url("../img/ico-breadcrumb-arrow.png") no-repeat 100% 25%;
       content: "";
       height: 14px;
       padding-left: 22px;
@@ -1004,7 +1004,7 @@ small, .small {
     border-color: #e5e5e5; }
 
 .buscador {
-  background: url("../img/v1/ico-lupablue.png") no-repeat;
+  background: url("../img/ico-lupablue.png") no-repeat;
   display: inline-block;
   width: 25px;
   height: 24px;
@@ -1012,12 +1012,12 @@ small, .small {
   bottom: 5px;
   transition: background 0.3s ease; }
   .buscador:hover {
-    background: url("../img/v1/ico-lupawhite.png") no-repeat; }
+    background: url("../img/ico-lupawhite.png") no-repeat; }
   .buscador.inactive {
-    background: url("../img/v1/ico-lupablue.png") no-repeat; }
+    background: url("../img/ico-lupablue.png") no-repeat; }
 
 .toggle-menu .toggle-icon {
-  background: url("../img/v1/ico-menublue.png");
+  background: url("../img/ico-menublue.png");
   border: none;
   position: relative;
   bottom: 5px;
@@ -1025,7 +1025,7 @@ small, .small {
   width: 27px;
   transition: background 0.3s ease; }
 .toggle-menu .toggle-icon:hover {
-  background: url("../img/v1/ico-menuwhite.png"); }
+  background: url("../img/ico-menuwhite.png"); }
 .toggle-menu .toggle-icon .icon-bar + .icon-bar {
   margin-top: 7px; }
 .toggle-menu .toggle-icon .icon-bar {
@@ -1035,7 +1035,7 @@ small, .small {
   border-radius: 1px;
   background-color: #237aba; }
 .toggle-menu .toggle-icon.inactive {
-  background: url("../img/v1/ico-menublue.png"); }
+  background: url("../img/ico-menublue.png"); }
 
 .header-tags {
   background: #004481;
@@ -1091,7 +1091,7 @@ small, .small {
       .header-tags .bluepills.featured li a {
         font-size: 10px; } }
     .header-tags .bluepills.featured li:first-child a {
-      background: #043263 url("../img/v1/ico-bluearrow.png") no-repeat right 13px top 10px;
+      background: #043263 url("../img/ico-bluearrow.png") no-repeat right 13px top 10px;
       padding-right: 40px; }
       @media only screen and (max-width: 480px) {
         .header-tags .bluepills.featured li:first-child a {
@@ -1326,7 +1326,7 @@ small, .small {
     display: none; } }
 
 .close-modal {
-  background: url("../img/v1/ico-cerrar.png") no-repeat !important;
+  background: url("../img/ico-cerrar.png") no-repeat !important;
   position: absolute;
   display: block;
   height: 22px;
@@ -1340,7 +1340,7 @@ small, .small {
   color: #fff;
   margin-bottom: 10px; }
 .modal-menu .blueline:before {
-  background: url("../img/v1/ico-taggroup.png") no-repeat;
+  background: url("../img/ico-taggroup.png") no-repeat;
   content: "";
   float: left;
   height: 20px;
@@ -1357,7 +1357,7 @@ small, .small {
     color: #fff;
     text-align: left; }
 .modal-search .blueline:before {
-  background: url("../img/v1/ico-taggroup.png") no-repeat;
+  background: url("../img/ico-taggroup.png") no-repeat;
   content: "";
   float: left;
   height: 20px;
@@ -1642,13 +1642,13 @@ small, .small {
         top: 8px !important;
         height: 60px !important; } }
   .header-nav.menu-active .search-btn a {
-    background: url("../img/v1/ico-lupawhite.png"); }
+    background: url("../img/ico-lupawhite.png"); }
   .header-nav.menu-active .search-btn .inactive {
-    background: url("../img/v1/ico-lupablue.png"); }
+    background: url("../img/ico-lupablue.png"); }
   .header-nav.menu-active .toggle-menu .toggle-icon {
-    background: url("../img/v1/ico-menuwhite.png"); }
+    background: url("../img/ico-menuwhite.png"); }
   .header-nav.menu-active .toggle-menu .inactive {
-    background: url("../img/v1/ico-menublue.png") !important; }
+    background: url("../img/ico-menublue.png") !important; }
 
 .header-main.fixed .header-nav.menu-active .magic-bg {
   top: -3px !important; }
@@ -1735,12 +1735,12 @@ footer {
     padding: 0; }
 
 body.en .pie-footer .legal {
-  background-image: url("../img/v1/logo-footer-en.png"); }
+  background-image: url("../img/logo-footer-en.png"); }
 
 .pie-footer {
   position: relative; }
   .pie-footer .legal {
-    background: #072146 url("../img/v1/logo-footer.png") no-repeat 15px 0;
+    background: #072146 url("../img/logo-footer.png") no-repeat 15px 0;
     margin: 50px auto 80px auto;
     padding: 75px 15px 15px 16px;
     position: relative;
@@ -1812,7 +1812,7 @@ body.en .pie-footer .legal {
       .pie-footer .social-icons li a {
         display: block; }
       .pie-footer .social-icons li i {
-        background: url("../img/v1/icon-social.png") no-repeat;
+        background: url("../img/icon-social.png") no-repeat;
         display: block;
         height: 25px;
         width: 25px; }
@@ -1965,7 +1965,7 @@ body.en .pie-footer .legal {
 .clients-access {
   margin-bottom: 20px;
   margin-right: 2%;
-  background: #fff url("../img/v1/ico-home-login.png") no-repeat 18px 22px; }
+  background: #fff url("../img/ico-home-login.png") no-repeat 18px 22px; }
   @media only screen and (max-width: 992px) {
     .clients-access {
       margin-right: 2%;
@@ -2038,7 +2038,7 @@ body.en .pie-footer .legal {
     position: relative; }
   .clients-access .selector label:after {
     content: '';
-    background: url("../img/v1/ico-arrow-down.gif") no-repeat 0 -2px;
+    background: url("../img/ico-arrow-down.gif") no-repeat 0 -2px;
     height: 40px;
     width: 40px;
     position: absolute;
@@ -3081,7 +3081,7 @@ body.en .pie-footer .legal {
  * Widgets
  * ---------------------------------------------------------------------- */
 .more-news-btn {
-  background: url("../img/v1/ico-plus.gif") no-repeat;
+  background: url("../img/ico-plus.gif") no-repeat;
   color: #237aba !important;
   display: inline-block;
   font-size: 12px !important;
@@ -3163,9 +3163,9 @@ body.en .pie-footer .legal {
     .article-header .box-info .event-date {
       z-index: 9; }
     .article-header .box-info .rsbtn_colorskin .rsbtn_text {
-      background: url("../img/v1/ico-mic.png") no-repeat; }
+      background: url("../img/ico-mic.png") no-repeat; }
     .article-header .box-info .rsbtn_colorskin .rsbutton {
-      background: transparent url("../img/v1/iconos_player.png") no-repeat; }
+      background: transparent url("../img/iconos_player.png") no-repeat; }
       .article-header .box-info .rsbtn_colorskin .rsbutton:hover {
         background-color: transparent;
         opacity: 0.6; }
@@ -3720,7 +3720,7 @@ body.en .pie-footer .legal {
       .article-body .container > blockquote {
         padding: 50px 30px 40px 30px; } }
     .article-body .container > blockquote p:before {
-      background: url("../img/v1/ico-quotes.png") no-repeat;
+      background: url("../img/ico-quotes.png") no-repeat;
       color: transparent;
       content: "";
       display: block;
@@ -4441,7 +4441,7 @@ aside.positioned {
   .media-caption .rsbtn_colorskin {
     display: none;
                                /*top:40px}
-.rsbtn_colorskin .rsbtn_left .rsbtn_text {background-image:url('../img/v1/ico-mic-white.png')}
+.rsbtn_colorskin .rsbtn_left .rsbtn_text {background-image:url('../img/ico-mic-white.png')}
 .rsbtn_colorskin + h2 {padding-right: 50px*/ }
   .media-caption h2 {
     font-family: "BBold";
@@ -6535,7 +6535,7 @@ aside.positioned {
     font-family: "BMedium";
     position: relative; }
     .sitemap .sitelist h3:before {
-      background: url("../img/v1/ico-sitemap-title.gif") no-repeat;
+      background: url("../img/ico-sitemap-title.gif") no-repeat;
       content: "";
       display: block;
       height: 15px;
@@ -6676,7 +6676,7 @@ body.en #cookie-law-info-bar span:before {
       font-size: 12px !important;
       line-height: 16px !important; } }
   #cookie-law-info-bar span:before {
-    background: url("../img/v1/ico-info.png") no-repeat 0 50%;
+    background: url("../img/ico-info.png") no-repeat 0 50%;
     content: "Informaci\00F3n: ";
     display: inline;
     text-align: left;
@@ -6709,7 +6709,7 @@ body.en #cookie-law-info-bar span:before {
   padding: 0 !important; }
 
 #cookie_action_close_header {
-  background: transparent url("../img/v1/ico-cerrar.png") no-repeat !important;
+  background: transparent url("../img/ico-cerrar.png") no-repeat !important;
   position: absolute;
   right: 0;
   top: 0;
@@ -8427,7 +8427,7 @@ body.en #cookie-law-info-bar span:before {
  * EMBED ELEMENTS
  * ---------------------------------------------------------------------- */
 .form-block.suscripcion {
-  background: #fff url("../img/v1/ico-home-newsletter.png") no-repeat 18px 22px; }
+  background: #fff url("../img/ico-home-newsletter.png") no-repeat 18px 22px; }
   @media only screen and (max-width: 992px) {
     .form-block.suscripcion {
       background-size: 75px; } }
@@ -8495,7 +8495,7 @@ body.en #cookie-law-info-bar span:before {
     position: relative;
     width: 24px; }
   .form-block.suscripcion .mauticform-checkboxgrp-checkbox:checked::before {
-    background: #fff url("../img/v1/ico-checkbox.gif") no-repeat 3px 4px; }
+    background: #fff url("../img/ico-checkbox.gif") no-repeat 3px 4px; }
   .form-block.suscripcion .mauticform-checkboxgrp-label:first-letter {
     text-transform: uppercase; }
   .form-block.suscripcion .mauticform-checkboxgrp-row {
