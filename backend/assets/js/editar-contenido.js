@@ -171,13 +171,15 @@ app.controller('myCtrl', function ($scope) {
             
             // PAKO - DEFLATE FILE
             // https://github.com/nodeca/pako
-            var pako = window.pako;
-            var htmlData = pako.deflate(html);
+            // var pako = window.pako;
+            // var htmlData = pako.deflate(html);
+            var htmlData = html; // not deflate
             
             var today = new Date();
             var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
             
-            var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "deflate", Expires: nextweek};
+            // var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "deflate", Expires: nextweek};
+            var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "", Expires: nextweek};
             s3.putObject(paramsHtmlObject, function (errSavingFile, dataPutObject) {
               if (errSavingFile) {
                 if (debug) console.log('El fichero ' + keyHTML + ' NO existe en el bucket o no tiene permisos.');
