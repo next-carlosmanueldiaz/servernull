@@ -173,7 +173,7 @@ app.controller('myCtrl', function ($scope) {
             // https://github.com/nodeca/pako
             // var pako = window.pako;
             // var htmlData = pako.deflate(html);
-            var htmlData = html; // not deflate
+            var htmlData = html; // no hacemos deflate: NO MUESTRA BIEN EL HTML EN PÁGINAS PRIVADAS (en modo incognito)
             
             var today = new Date();
             var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
