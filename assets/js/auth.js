@@ -151,7 +151,7 @@ function onLogIn(googleUser) {
                           sessionStorage.expireTime = rolAsumido.Credentials.Expiration;
                           sessionStorage.expired = false
                           sessionStorage.counter = 2;
-                          window.location.replace("/backend/index.html");
+                          // window.location.replace("/backend/index.html");
                         } else {
                           if (debug) console.log('Sorry! No Web Storage support..');
                         }
