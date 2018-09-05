@@ -49,14 +49,15 @@ fi
 # ******************************************************************************
 # DESCARGAMOS FICHEROS DE "base de datos" de S3
 # Descargamos los ficheros de datos que se van almacenando dinámicamente en el servidor de s3
-# 
+# Dado que SERVERNULL no tiene bases de datos asociadas, todos los datos guardados se almacenan en ficheros json.
+# Este script realiza un backup de todos los JSON que almacenan datos en SERVERNULL.
 # ------------------------------------------------------------------------------
-echo -e "${NC}Content types JSON:${GREEN}"
+echo -e "${NC}Content types JSON:${GREEN} content-types.json"
 aws s3 cp s3://servernull/private/content-types/json/content-types.json private/content-types/json/content-types.json
-echo -e "${NC}Contents List JSON:${GREEN}"
+echo -e "${NC}Contents List JSON:${GREEN} contents.json"
 aws s3 cp s3://servernull/private/content-types/json/contents.json private/content-types/json/contents.json
-echo -e "${NC}Contents DATA:${GREEN}"
+echo -e "${NC}Contents DATA:${GREEN} content/"
 aws s3 cp s3://servernull/home/content home/content --recursive
-echo -e "${NC}HTML BASE:${GREEN}"
+echo -e "${NC}HTML BASE:${GREEN} html.html"
 aws s3 cp s3://servernull/backend/html.html backend/html.html
 echo -e "${NC}"
