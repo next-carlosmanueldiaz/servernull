@@ -1,5 +1,7 @@
 #!/bin/bash
 # ******************************************************************************
+# GUARDAR BASE DE DATOS SERVERNULL
+# ******************************************************************************
 # LEER CONFIGURACIÓN DE S3
 # Establecemos el nombre del bucket en el fichero .s3config y leemos su configuración
 # ------------------------------------------------------------------------------
