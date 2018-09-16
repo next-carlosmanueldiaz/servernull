@@ -52,10 +52,11 @@ Here is the [executive presentation of this PoC](https://docs.google.com/a/bbva.
    We can use the pre-push git hook to upload all files changed in the project. To do this, you must:
 	- put pre-push hook in hooks folder on .git folder of the project.
 	- create a virtualenv inside the project
-	- install pipenv: pip install pipenv
-	- install aws cli: pipenv install aws
+	- install pipenv: $> pip install pipenv
+	- install aws cli: $> pipenv install aws
+	- check aws requirements with command: $> pipenv graph
 	- configure ~/.aws/credentials
-	- activate virtualenv from project root with: $ source venv/bin/activate
+	- activate virtualenv from project root with: $> source venv/bin/activate
 	- every push you do in the project will be copy to s3 the changed files.
 
 [Configuration Tasks](#table-of-contents)
