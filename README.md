@@ -48,6 +48,15 @@ Here is the [executive presentation of this PoC](https://docs.google.com/a/bbva.
 > **Note:**
 > - Possibly it will be necessary to create a Lambda to find out if an authenticated user is in the list of Admins (User Pool) to make a really secure login.
 
+ - Automatic s3 upload 
+   We can use the pre-push git hook to upload all files changed in the project. To do this, you must:
+	- put pre-push hook in hooks folder on .git folder of the project.
+	- create a virtualenv inside the project
+	- install pipenv
+	- install aws cli
+	- configure ~/.aws/credentials
+	- every push you do in the project will be copy to s3 the changed files.
+
 [Configuration Tasks](#table-of-contents)
 --------------------
 To set up and run this example, you must first complete these tasks:
