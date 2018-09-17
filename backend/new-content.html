@@ -15,8 +15,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/css/estilos.css" crossorigin="anonymous">
-    <script type="text/javascript" src="assets/js/contenidos.js"></script>
+    <link rel="stylesheet" href="../assets/css/estilos.css">
+    <script type="text/javascript" src="assets/js/nuevo-contenido.js"></script>
   </head>
   <body ng-app="myApp" ng-controller="myCtrl">
     <div class="container">
@@ -43,36 +43,40 @@
             </li>
           </ul>
         </nav>
-        <h3 class="text-muted">Contenidos</h3>
+        <h3 class="text-muted">Nuevo contenido: {{cts[pos].name}}</h3>
       </header>
       <main role="main">
         <div class="row">
-          <div class="col-lg-12 text-center margin-all-20">
-            <a href="crear-contenido.html">Crear contenido</a>
-          </div>
           <div class="col-lg-12">
             <div>
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr class="fondo-lightsteelblue">
-                      <th>Título</th>
-                      <th>Tipo</th>
-                      <th style="width: 222px;">Operaciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="content in contents track by $index">
-                      <td><a target="_blank" href="/home/content/html/{{content.type}}/{{content.slug}}.html">{{content.title}}</a></td>
-                      <td>{{content.type}}</td>
-                      <td>
-                        <a href="editar-contenido.html?tipo={{content.type}}&id={{content.slug}}">Editar</a> | <a href="#" ng-click='eliminar($index);'>Eliminar</a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <form id="nc" name="form" ng-submit="submit()" class="css-form" novalidate>
+                <div class="row margin-bottom-20" ng-repeat="field in cts[pos].fields track by $index">
+                  <div class="col">
+                    <label class="margin-bottom-2"> {{field.name}} <span style="color: red;">*</span>:</label>
+                    <br/>
+                    <input ng-model="field.value" ng-if="field.type == 'title'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
+                    <input ng-model="field.value" ng-if="field.type == 'text'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
+                    <input ng-model="field.value" ng-if="field.type == 'image'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
+                    <input ng-model="field.value" ng-if="field.type == 'number'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
+                    <textarea ng-model="field.value" ng-if="field.type == 'textarea'" id="{{field.id}}" style="width: 100%;" class="areatext" rows="8"></textarea>
+                    <div ng-if="form.$submitted || form.name.$touched" style="display: inline-block;">
+                      <div style="color:red" ng-show="form.name.$error.required">Obligatorio.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <input type="submit" value="Guardar" />
+                    <div ng-show="form.$submitted" style="display: inline-block;">
+                      <div style="color:blue">Guardado.</div>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
+          </div>
+          <div class="col-lg-12 text-center margin-all-20">
+            <a href="index.html">Volver al listado</a>
           </div>
         </div>
       </main>

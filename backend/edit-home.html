@@ -15,8 +15,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/css/estilos.css" crossorigin="anonymous">
-    <script type="text/javascript" src="assets/js/crear-contenido.js"></script>
+    <link rel="stylesheet" href="../assets/css/estilos.css">
+    <script type="text/javascript" src="assets/js/editar-html.js"></script>
   </head>
   <body ng-app="myApp" ng-controller="myCtrl">
     <div class="container">
@@ -27,10 +27,10 @@
               <a class="nav-link" href="/home/index.html">Home </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/backend/index.html">Contenidos <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/backend/index.html">Contenidos <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/backend/tipos.html">Tipos de contenido</a>
+              <a class="nav-link active" href="/backend/types.html">Tipos de contenido</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/backend/edit-home.html">Editar Home</a>
@@ -43,42 +43,35 @@
             </li>
           </ul>
         </nav>
-        <h3 class="text-muted">Contenidos</h3>
+        <h3 class="text-muted">Editar HTML base</h3>
       </header>
       <main role="main">
         <div class="row">
-          <div class="col-lg-12 text-center margin-all-20">
-            <h4>Crear nuevo Contenido</h4>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-3 centered">
-          </div>
-          <div class="col-lg-6 centered">
+          <div class="col-lg-12">
             <div>
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr class="fondo-lightsteelblue">
-                      <th>Etiqueta</th>
-                      <th>Descripción</th>
-                      <th style="width: 150px;">Operaciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="ct in cts track by $index">
-                      <td>{{ct.name}}</td>
-                      <td>{{ct.description}}</td>
-                      <td>
-                        <a href="nuevo-contenido.html?id={{ct.id}}">Crear {{ct.name}}</a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <form id="form" name="form" ng-submit="submit()" class="css-form" novalidate>
+                <div class="row margin-bottom-20">
+                  <div class="col">
+                    <label class="margin-bottom-2">Base HTML <span style="color: red;">*</span>:</label>
+                    <textarea ng-model="html" id="html" style="width: 100%;" class="areatext" rows="20"></textarea>
+                    <div ng-if="form.$submitted || form.name.$touched" style="display: inline-block;">
+                      <div style="color:red" ng-show="form.name.$error.required">Obligatorio.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <input type="submit" value="Guardar" />
+                    <div ng-show="form.$submitted" style="display: inline-block;">
+                      <div style="color:blue">Guardado.</div>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-          <div class="col-lg-3 centered">
+          <div class="col-lg-12 text-center margin-all-20">
+            <a href="/backend/tipos.html">Volver al listado</a>
           </div>
         </div>
       </main>
