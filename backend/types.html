@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Backend - ServerNull</title>
+    <link rel="shortcut icon" href="//aws.amazon.com/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/estilos.css">
+    <script type="text/javascript" src="../assets/js/auth.js"></script>
+    <script type="text/javascript" src="assets/js/listado.js"></script>
+  </head>
+  <body ng-app="myApp" ng-controller="myCtrl">
+    <div class="container">
+      <header class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+              <a class="nav-link" href="/home/index.html">Home </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/backend/index.html">Contenidos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/backend/types.html">Tipos de contenido <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/backend/edit-home.html">Editar Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="mailto:carlos.manuel@beeva.com">Contacto</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/home/index.html" onclick="signOut(event);">Salir</a>
+            </li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Tipos de contenido</h3>
+      </header>
+      <main role="main">
+        <div class="row">
+          <div class="col-lg-6 text-center margin-top-20 margin-bottom-20">
+            <a href="nuevo.html">Crear nuevo Tipo de Contenido</a>
+          </div>
+          <div class="col-lg-6 text-center margin-top-20 margin-bottom-20">
+            <a href="edit-html.html">Editar Documento base HTML</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr class="fondo-lightsteelblue">
+                      <th>Etiqueta</th>
+                      <th>Nombre de sistema</th>
+                      <th>Descripción</th>
+                      <th style="width: 222px;">Operaciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="ct in cts track by $index">
+                      <td>{{ct.name}}</td>
+                      <td>{{ct.id}}</td>
+                      <td>{{ct.description}}</td>
+                      <td>
+                        <a href="edit.html?id={{ct.id}}">Editar</a> | <a href="#" ng-click='eliminar($index);'>Eliminar</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

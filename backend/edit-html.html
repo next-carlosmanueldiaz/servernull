@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Backend - ServerNull</title>
+    <link rel="shortcut icon" href="//aws.amazon.com/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/estilos.css">
+    <script type="text/javascript" src="assets/js/editar-html.js"></script>
+  </head>
+  <body ng-app="myApp" ng-controller="myCtrl">
+    <div class="container">
+      <header class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+              <a class="nav-link" href="/home/index.html">Home </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/backend/index.html">Contenidos <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/backend/types.html">Tipos de contenido</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/backend/edit-home.html">Editar Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="mailto:carlos.manuel@beeva.com">Contacto</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/home/index.html" onclick="signOut(event);">Salir</a>
+            </li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Editar HTML base</h3>
+      </header>
+      <main role="main">
+        <div class="row">
+          <div class="col-lg-12">
+            <div>
+              <form id="form" name="form" ng-submit="submit()" class="css-form" novalidate>
+                <div class="row margin-bottom-20">
+                  <div class="col">
+                    <label class="margin-bottom-2">Base HTML <span style="color: red;">*</span>:</label>
+                    <textarea ng-model="html" id="html" style="width: 100%;" class="areatext" rows="20"></textarea>
+                    <div ng-if="form.$submitted || form.name.$touched" style="display: inline-block;">
+                      <div style="color:red" ng-show="form.name.$error.required">Obligatorio.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <input type="submit" value="Guardar" />
+                    <div ng-show="form.$submitted" style="display: inline-block;">
+                      <div style="color:blue">Guardado.</div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-12 text-center margin-all-20">
+            <a href="/backend/tipos.html">Volver al listado</a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
