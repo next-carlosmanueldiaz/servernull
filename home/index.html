@@ -19,21 +19,436 @@
     <script type="text/javascript" src="../assets/js/config.js"></script>
     <script type="text/javascript" src="../assets/js/auth.js"></script>
   </head>
-  <body>
-    <ul>
-      <li>
-        <a target="_blank" href="https://servernull.s3-eu-west-1.amazonaws.com/home/index.html">
-          Inicio
-        </a>
-      </li>
-    </ul>
-    <div class="g-signin2" data-onsuccess="onLogIn"></div>
-    <br/>
-    <a href="register.html">Solicitar acceso</a><br/>
-    <br/>
-    <a href="#" onclick="signOut();">Sign out</a><br/>
-    <div id="enlace-backend"></div>
-    <br/>
-    <pre id="instrucciones" style="width: 100%; height: 80vh;"></pre>
-  </body>
+      <body>
+        <header class="header-main">
+            <!-- ============= Row superior: navegación ============= -->
+            <a href="#" class="link-map">
+            BBVA. Noticias, Resultados financieros, Videos, Notas de Prensa, Knowledge Banking
+            </a>
+            <!-- Navegación row superior -->
+            <ul class="header-nav" style="width: auto; left: 277px;">
+            <!-- Login user -->
+            <li>
+              <a href="#" class="btn btn-login btn-info btn-sm">
+                <span class="glyphicon glyphicon-log-in"></span> Log in
+              </a>
+              <div class="login-box">
+                <div class="row">
+                  <div class="col text-center">
+                    <div class="g-signin2" data-onsuccess="onLogIn" data-gapiscan="true" data-onload="true"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col text-center">
+                    <a href="register.html">Solicitar acceso</a><br>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col text-center">
+                    <a href="#" onclick="signOut();">Sign out</a><br>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col text-center">
+                    <div id="enlace-backend"><a href="/backend/index.html">Panel de Control</a></div>
+                  </div>
+                </div>          
+              </div>
+            </li>
+            <li class="magic-bg" style="width: 55px; height: 100px; top: 0px; left: 1305px;"></li>
+            <li class="titlelimit"></li>
+            <li class="search-btn"><a href="" class="buscador" data-menu="#openSearch" data-focus="#panel-searcher"></a></li>
+            <li class="toggle-menu rs_skip">
+              <!-- Icono hamburguesa -->
+              <button type="button" class="toggle-icon" data-menu="#openMenu">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </li>
+            </ul>
+            <!-- ============= Row inferior: tags y switch ============= -->
+
+            <!-- Tags -->
+            <div class="header-tags">
+            <ul class="bluepills featured">
+              <li><a href="#" onclick="return false;">Accionistas e inversores</a></li>
+              <li><a href="#">Información corporativa</a></li>
+            </ul>
+            <span>Atentos a:</span>
+
+            <ul class="bluepills">
+
+              <li><a href="#">Resultados</a></li>
+              <li><a href="#">Fintech</a></li>
+              <li><a href="#">'Creando Oportunidades'</a></li>
+            </ul>
+            </div>
+
+            <!-- Switch languages -->
+            <div class="switch-lang">
+            <a href="#" onclick="document.location.href = '/en/';" data-erase-country-preference="" class="initialized">
+              <label class="language " id="eng">eng</label>
+
+              <div class="toggle">
+                <input type="checkbox" id="switcher" class="check">
+                <b class="b switch"></b>
+              </div>
+              <label class="language is-active" id="esp">esp</label>
+            </a>
+            </div>
+
+
+
+            <!-- ============= Modales ============= -->
+
+
+            <!-- Modal Menú categorías -->
+            <div class="menu-modal rs_skip" style="right: 0px; display: none;" id="openMenu">
+            <div class="panel_open modal-menu">
+              <div class="switch-lang">
+                <a href="#" onclick="document.location.href = '/en/';" data-erase-country-preference="" class="initialized">
+                  <label class="language " id="eng">eng</label>
+
+                  <div class="toggle">
+                    <input type="checkbox" id="switcher" class="check">
+                    <b class="b switch"></b>
+                  </div>
+                  <label class="language is-active" id="esp">esp</label>
+                </a>
+              </div>
+
+
+              <nav class="menu-body rs_skip" data-menu-version="20171122142722" style="margin-top: 100px; right: 0px;">
+                <div class="row">
+                  <div class="col-sm-6 menu-tags-group">
+                    <h2 lang="" class="blueline">Destacados</h2>
+                    <ul class="bluepills">
+                      <li lang="es"><a href="#">Análisis y opinión</a></li>
+                      <li lang="es"><a href="#">Finanzas</a></li>
+                      <li lang="es"><a href="#">Economía</a></li>
+                      <li lang="es"><a href="#">Fintech</a></li>
+                      <li lang="es"><a href="#">Innovación</a></li>
+                      <li lang="es"><a href="#">Vida y cultura</a></li>
+                      <li lang="es"><a href="#">Países y BBVA</a></li>
+                      <li lang="es"><a href="#">Últimas noticias</a></li>
+                      <li lang="es"><a href="#">Creando oportunidades</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-6 menu-tags-group">
+                    <h2 lang="es" class="blueline">Temas</h2>
+                    <ul class="bluepills">
+                      <li lang="es"><a href="#">Historia de BBVA</a></li>
+                      <li lang="es"><a href="#">Ciudad BBVA</a></li>
+                      <li lang="es"><a href="#">Educación financiera</a></li>
+                      <li lang="es"><a href="#">BBVA Research</a></li>
+                      <li lang="es"><a href="#">BBVA Labs</a></li>
+                      <li lang="es"><a href="#">Especiales países BBVA</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-6 menu-tags-group">
+                    <h2 lang="es" class="blueline">Social Media</h2>
+                    <ul class="bluepills">
+                      <li lang="es"><a href="#" target="_blank">BBVA en social media</a></li>
+                      <li lang="es"><a href="#">Actividad BBVA en Twitter</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-6 menu-tags-group">
+                    <h2 lang="es" class="blueline">Prensa</h2>
+                    <ul class="bluepills">
+                      <li lang="es"><a href="#">Notas de prensa</a></li>
+                      <li lang="es"><a href="#">Contacto</a></li>
+                      <li lang="es"><a href="#">Imágenes</a></li>
+                      <li lang="es"><a href="#">Biografías</a></li>
+                      <li lang="es"><a href="#">Premios y reconocimientos</a></li>
+                      <li lang="es"><a href="#">Staff Communications</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-6 menu-tags-group">
+                    <h2 lang="es" class="blueline">Te interesa</h2>
+                    <ul class="bluepills">
+                      <li lang="es"><a href="#">Agenda 2017</a></li>
+                      <li lang="es"><a href="#">Vídeos</a></li>
+                      <li lang="es"><a href="#">Descargas</a></li>
+                      <li lang="es"><a href="#">Infografías</a></li>
+                      <li lang="es"><a href="#">Mapa del sitio</a></li>
+                      <li lang="es"><a href="#">Francisco González Rodríguez</a></li>
+                      <li lang="es"><a href="#">Carlos Torres Vila</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-6 menu-tags-group">
+                    <h2 lang="es" class="blueline">Patrocinios</h2>
+                    <ul class="bluepills">
+                      <li lang="es"><a href="#">El Celler de Can Roca</a></li>
+                      <li lang="es"><a href="http://www.fundeu.es/" target="_blank">Fundéu BBVA</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-6 menu-tags-group">
+                    <h2 lang="es" class="blueline">Información corporativa</h2>
+                    <ul class="bluepills">
+                      <li lang="es"><a href="#">Carta del Presidente</a></li>
+                      <li lang="es"><a href="#">Acerca del Grupo</a></li>
+                      <li lang="es"><a href="#">Historia de BBVA</a></li>
+                      <li lang="es"><a href="#">Datos básicos</a></li>
+                      <li lang="es"><a href="#">Organigrama</a></li>
+                      <li lang="es"><a href="#">La Transformación en BBVA</a></li>
+                      <li lang="es"><a href="">Presentación Institucional</a></li>
+                      <li lang="es"><a href="#">Código de conducta</a></li>
+                      <li lang="es"><a href="#">Estrategia Fiscal BBVA</a></li>
+                      <li lang="es"><a href="#">USA Patriot Act</a></li>
+                      <li lang="es"><a href="#">FATCA</a></li>
+                      <li lang="es"><a href="#">BBVA en el mundo</a></li>
+                      <li lang="es"><a href="#">Factsheet</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-6 menu-tags-group">
+                    <h2 lang="es" class="blueline">Otras webs del grupo</h2>
+                    <ul class="bluepills">
+                      <li lang="es"><a href="http://inversores.bbva.com/" target="_blank">Accionistas e inversores</a></li>
+                      <li lang="es"><a href="https://www.bbvaresearch.com/" target="_blank">BBVA Research</a></li>
+                      <li lang="es"><a href="https://careers.bbva.com/es/" target="_blank">Empleo</a></li>
+                      <li lang="es"><a href="http://www.centrodeinnovacionbbva.com/" target="_blank">Centro de Innovación</a></li>
+                      <li lang="es"><a href="https://suppliers.bbva.com/">Portal de Proveedores</a></li>
+                      <li lang="es"><a href="http://bancaresponsable.com/" target="_blank">Banca Responsable</a></li>
+                      <li lang="es"><a href="https://www.bbvaopenmind.com/" target="_blank">OpenMind</a></li>
+                      <li lang="es"><a href="http://www.fbbva.es/" target="_blank">Fundación BBVA</a></li>
+                      <li lang="es"><a href="#" class="menu-item-custom">Todas las webs</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-6 menu-tags-group">
+                    <h2 lang="es" class="blueline">Información financiera BBVA</h2>
+                    <ul class="bluepills">
+                      <li lang="es"><a href="#">BBVA en 2016</a></li>
+                      <li lang="es"><a href="#">Resultados BBVA</a></li>
+                      <li lang="es"><a href="#">La acción BBVA</a></li>
+                      <li lang="es"><a href="#">Memoria anual</a></li>
+                      <li lang="es"><a href="#">Informes trimestrales de resultados</a></li>
+                      <li lang="es"><a href="#">Hechos relevantes</a></li>
+                      <li lang="es"><a href="#">Emisiones</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            </div>
+            </div>
+
+
+            <!-- Modal Buscador -->
+            <div class="menu-modal rs_skip" style="right: 0px; display: none;" id="openSearch">
+            <div class="panel_open modal-search">
+              <!-- Modal body -->
+              <div class="menu-body" style="margin-top: 100px; right: 0px;">
+                <div class="styled-search">
+                  <form id="search-formulario" role="search" method="get" action="" target="_blank" class="navbar-form ng-pristine ng-valid" data-search="#">
+                    <div class="form-group">
+                      <input id="panel-searcher" data-dynamic-search="" type="text" name="searchbbvaes" value="" autocomplete="off" placeholder="Buscar..." class="initialized">
+                      <button type="submit" class="btn"></button>
+                    </div>
+                  </form>
+                </div>
+                <div class="search-results">  
+                </div>
+                <div class="search-pills hidden" data-base-url="#">
+                  <h2 class="blueline"><span>Estas son tus búsquedas más recientes</span></h2>
+                  <ul class="bluepills truncatePills">
+                  </ul>
+                </div>
+              </div>
+            </div>
+            </div>
+
+
+            <!-- Modal Directos -->
+            <div class="menu-modal rs_skip" style="display: none;" id="openLiveView">
+
+            <div class="panel_open modal-LiveView">
+              <!-- Modal body -->
+              <div class="menu-body">
+              </div>
+
+            </div>
+            </div>
+            <div class="reading-progress" style="width: 0%; display: none;"></div>
+        </header>
+        <div id="containers" class="containers" data-redirect-home="">
+
+          <div class="container"><!-- FILA CON UNA COLUMNA -->
+            <div class="row wpb_row vc_row-fluid">
+              <div class="wpb_column vc_column_container col-sm-12">
+                <div class="vc_column-inner ">
+                  <div class="wpb_wrapper">
+                    <article data-new-block="383157" class="noticia formato2">
+                      <div class="box-image" data-new-bg-img="" style="background-image: url('https://www.bbva.com/wp-content/uploads/2017/12/Helado-de-Navidad-de-Jordi-Roca-para-Rocambolesc-BBVA-1920x0-c-f.jpg')">
+                        <div class="filterGrad"></div>                
+                        <div class="box-info ">
+                          <a data-new-link="" href="https://www.bbva.com/es/celler-can-roca-pone-dulce-navidad/" data-new-id="383157">
+                            <h3 class="titular small" data-new-title="">
+                              El Celler de Can Roca se pone dulce en Navidad
+                            </h3>
+                          </a>
+                          <ul class="bluepills" data-new-tags="">
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/estilo-vida/restaurantes-cocina/cocina/">Cocina</a></li>
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/estilo-vida/restaurantes-cocina/gastronomia/">Gastronomía</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="vc_row-full-width"></div>
+          </div><!-- // container -->
+
+          <div class="container"><!-- FILA CON DOS COLUMNAS -->
+            <div class="row wpb_row vc_row-fluid">
+              <div class="wpb_column vc_column_container col-sm-6">
+                <div class="vc_column-inner ">
+                  <div class="wpb_wrapper">
+                    <article data-new-block="363928" class="noticia formato1">
+                      <div class="box-image">
+                        <div class="img-image" data-new-bg-img="" style="background-image: url('https://www.bbva.com/wp-content/uploads/2015/11/juegos-ninos-home-1920x0-c-f.jpg')"></div>
+                        <div class="box-info ">
+                          <a data-new-link="" href="https://www.bbva.com/es/aplicaciones-ensenan-ninos-manejar-bien-dinero/" data-new-id="363928">
+                            <h3 class="titular small" data-new-title="">
+                              Aplicaciones que enseñan a los niños a manejar bien el dinero
+                            </h3>
+                          </a>
+                          <ul class="bluepills" data-new-tags="">
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/asuntos-sociales/">Asuntos sociales</a></li>
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/educacion/educacion-financiera/">Educación financiera</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+              <div class="wpb_column vc_column_container col-sm-6">
+                <div class="vc_column-inner ">
+                  <div class="wpb_wrapper">
+                    <article data-new-block="383157" class="noticia formato2">
+                      <div class="box-image" data-new-bg-img="" style="background-image: url('https://www.bbva.com/wp-content/uploads/2017/12/Helado-de-Navidad-de-Jordi-Roca-para-Rocambolesc-BBVA-1920x0-c-f.jpg')">
+                        <div class="filterGrad"></div>                
+                        <div class="box-info ">
+                          <a data-new-link="" href="https://www.bbva.com/es/celler-can-roca-pone-dulce-navidad/" data-new-id="383157">
+                            <h3 class="titular small" data-new-title="">
+                              El Celler de Can Roca se pone dulce en Navidad
+                            </h3>
+                          </a>
+                          <ul class="bluepills" data-new-tags="">
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/estilo-vida/restaurantes-cocina/cocina/">Cocina</a></li>
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/estilo-vida/restaurantes-cocina/gastronomia/">Gastronomía</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="vc_row-full-width"></div>
+          </div><!-- // container -->
+          <div class="container">
+            <div class="row wpb_row vc_row-fluid">
+              <div class="wpb_column vc_column_container col-sm-6">
+                <div class="vc_column-inner ">
+                  <div class="wpb_wrapper">
+                    <article data-new-block="363928" class="noticia formato1">
+                      <div class="box-image">
+                        <div class="img-image" data-new-bg-img="" style="background-image: url('https://www.bbva.com/wp-content/uploads/2015/11/juegos-ninos-home-1920x0-c-f.jpg')"></div>
+                        <div class="box-info ">
+                          <a data-new-link="" href="https://www.bbva.com/es/aplicaciones-ensenan-ninos-manejar-bien-dinero/" data-new-id="363928">
+                            <h3 class="titular small" data-new-title="">
+                              Aplicaciones que enseñan a los niños a manejar bien el dinero
+                            </h3>
+                          </a>
+                          <ul class="bluepills" data-new-tags="">
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/asuntos-sociales/">Asuntos sociales</a></li>
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/educacion/educacion-financiera/">Educación financiera</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+              <div class="wpb_column vc_column_container col-sm-6">
+                <div class="vc_column-inner ">
+                  <div class="wpb_wrapper">
+                    <article data-new-block="383157" class="noticia formato2">
+                      <div class="box-image" data-new-bg-img="" style="background-image: url('https://www.bbva.com/wp-content/uploads/2017/12/Helado-de-Navidad-de-Jordi-Roca-para-Rocambolesc-BBVA-1920x0-c-f.jpg')">
+                        <div class="filterGrad"></div>                
+                        <div class="box-info ">
+                          <a data-new-link="" href="https://www.bbva.com/es/celler-can-roca-pone-dulce-navidad/" data-new-id="383157">
+                            <h3 class="titular small" data-new-title="">
+                              El Celler de Can Roca se pone dulce en Navidad
+                            </h3>
+                          </a>
+                          <ul class="bluepills" data-new-tags="">
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/estilo-vida/restaurantes-cocina/cocina/">Cocina</a></li>
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/estilo-vida/restaurantes-cocina/gastronomia/">Gastronomía</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="vc_row-full-width"></div>
+          </div><!-- // container -->
+          <div class="container">
+            <div class="row wpb_row vc_row-fluid">
+              <div class="wpb_column vc_column_container col-sm-6">
+                <div class="vc_column-inner ">
+                  <div class="wpb_wrapper">
+                    <article data-new-block="363928" class="noticia formato1">
+                      <div class="box-image">
+                        <div class="img-image" data-new-bg-img="" style="background-image: url('https://www.bbva.com/wp-content/uploads/2015/11/juegos-ninos-home-1920x0-c-f.jpg')"></div>
+                        <div class="box-info ">
+                          <a data-new-link="" href="https://www.bbva.com/es/aplicaciones-ensenan-ninos-manejar-bien-dinero/" data-new-id="363928">
+                            <h3 class="titular small" data-new-title="">
+                              Aplicaciones que enseñan a los niños a manejar bien el dinero
+                            </h3>
+                          </a>
+                          <ul class="bluepills" data-new-tags="">
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/asuntos-sociales/">Asuntos sociales</a></li>
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/educacion/educacion-financiera/">Educación financiera</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+              <div class="wpb_column vc_column_container col-sm-6">
+                <div class="vc_column-inner ">
+                  <div class="wpb_wrapper">
+                    <article data-new-block="383157" class="noticia formato2">
+                      <div class="box-image" data-new-bg-img="" style="background-image: url('https://www.bbva.com/wp-content/uploads/2017/12/Helado-de-Navidad-de-Jordi-Roca-para-Rocambolesc-BBVA-1920x0-c-f.jpg')">
+                        <div class="filterGrad"></div>                
+                        <div class="box-info ">
+                          <a data-new-link="" href="https://www.bbva.com/es/celler-can-roca-pone-dulce-navidad/" data-new-id="383157">
+                            <h3 class="titular small" data-new-title="">
+                              El Celler de Can Roca se pone dulce en Navidad
+                            </h3>
+                          </a>
+                          <ul class="bluepills" data-new-tags="">
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/estilo-vida/restaurantes-cocina/cocina/">Cocina</a></li>
+                            <li data-new-tag=""><a href="https://www.bbva.com/es/estilo-vida/restaurantes-cocina/gastronomia/">Gastronomía</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="vc_row-full-width"></div>
+          </div><!-- // container -->
+        </div>
+    </body>
 </html>
