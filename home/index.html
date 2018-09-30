@@ -16,9 +16,148 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/master.css">
+    <style media="all" onload="if (media !== 'all') media = 'all'">
+      .login-box {
+        display: none;
+        background-color: #004481;
+        color: white;
+        padding: 20px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+      
+      .login-box .row {
+        padding: 10px;
+      }
+      .login-box .row:hover {
+        background: #072146;
+      }
+    </style>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function(event) {
+        var defaultThrottle = 250;
+        window.stickyFrom = null;
+        var stickyEnabled = true;
+        
+        // SCROLL CABECERA
+        $(document).ready(function () {
+            if (!stickyEnabled) {
+                return;
+            }
+
+            var stickyFrom = window.stickyFrom;
+
+            var header = $('.header-main');
+            //var headerHeight = header.height();
+            var headerHeight = 153;
+
+            if (!stickyFrom) {
+                stickyFrom = header.attr('data-sticky-from');
+            }
+
+            if (stickyFrom && stickyFrom.match(/^\d+(\s*px)?$/)) {
+                stickyFrom = parseInt(stickyFrom.replace(/\s*px/g, ''));
+
+            } else {
+                var el = $(stickyFrom);
+
+                if (el.length > 0) {
+                    stickyFrom = el.offset().top + el.outerHeight(false) + 40;
+                }
+            }
+
+            if (!stickyFrom) {
+                stickyFrom = headerHeight;
+            }
+
+            //var totalHeader = $('header').height() + 20;
+            var totalHeader = headerHeight + 20;
+            var cintillo = $('.cintillo');
+            if (cintillo.length > 0) totalHeader = totalHeader + cintillo.height() + 10;
+
+            stickyFrom = Math.max(50, Math.min($(document).height() - $(window).height() - headerHeight, stickyFrom), totalHeader);
+
+            var checkScroll = function () {
+                if (!stickyEnabled) {
+                    return;
+                }
+
+                var sticky = $('.header-main'),
+                    scroll = $(window).scrollTop();
+
+                if (scroll >= stickyFrom) {
+                    sticky.addClass('fixed');
+                    $('body').css('padding-top', headerHeight + "px");
+                    $(window).trigger('resize');
+
+                } else {
+                    sticky.removeClass('fixed');
+                    $('body').css('padding-top', '0px');
+                    $(window).trigger('resize');
+                }
+            };
+
+            $(window).scroll(_.throttle(checkScroll, defaultThrottle));
+            checkScroll();
+        });
+
+        // DOCUMENT-READY
+        $(document).ready(function () {
+          var stickyFrom = window.stickyFrom;
+          var header = $('.header-main');
+          var headerHeight = header.height();
+          if (!stickyFrom) {
+            stickyFrom = header.attr('data-sticky-from');
+          }
+
+          if (stickyFrom && stickyFrom.match(/^\d+(\s*px)?$/)) {
+            stickyFrom = parseInt(stickyFrom.replace(/\s*px/g, ''));
+          } else {
+            var el = $(stickyFrom);
+            if (el.length > 0) {
+              stickyFrom = el.offset().top + el.outerHeight(false) + 40;
+            }
+          }
+
+          if (!stickyFrom) {
+            stickyFrom = headerHeight;
+          }
+
+          var totalHeader = $('header').height() + 20;
+          var cintillo = $('.cintillo');
+          if (cintillo.length > 0) totalHeader = totalHeader + cintillo.height() + 10;
+
+          stickyFrom = Math.max(50, Math.min($(document).height() - $(window).height() - headerHeight, stickyFrom), totalHeader);
+
+          var checkScroll = function () {
+              var sticky = $('.header-main'), scroll = $(window).scrollTop();
+
+              if (scroll >= stickyFrom) {
+                sticky.addClass('fixed');
+                $('body').css('padding-top', headerHeight + "px");
+                $(window).trigger('resize');
+              } else {
+                sticky.removeClass('fixed');
+                $('body').css('padding-top', '0px');
+                $(window).trigger('resize');
+              }
+          };
+
+          $(window).scroll(_.throttle(checkScroll, defaultThrottle));
+          checkScroll();
+          
+          // Login div
+          $('.btn-login').click(function() {
+            //$('.login-box').animate({width:'toggle'},500);
+            $('.login-box').toggle('fast');
+          });
+          
+        });
+      });
+    </script>
     <script type="text/javascript" src="../assets/js/config.js"></script>
     <script type="text/javascript" src="../assets/js/auth.js"></script>
-    <link rel="stylesheet" href="../assets/css/master.css">
   </head>
       <body>
         <header class="header-main">
