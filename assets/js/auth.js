@@ -29,7 +29,7 @@ app.controller('myCtrl', function ($scope) {
 
   this.$onInit = function () {
     $scope.googleSigninClientId = googleSigninClientId;
-    $scope.$apply();
+    // $scope.$apply();
   }
 });
 
