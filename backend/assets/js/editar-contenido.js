@@ -178,8 +178,8 @@ app.controller('myCtrl', function ($scope) {
             var today = new Date();
             var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
             
-            // var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "deflate", Expires: nextweek};
-            var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "", Expires: nextweek};
+            var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "deflate", Expires: nextweek};
+            // var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "", Expires: nextweek};
             s3.putObject(paramsHtmlObject, function (errSavingFile, dataPutObject) {
               if (errSavingFile) {
                 if (debug) console.log('El fichero ' + keyHTML + ' NO existe en el bucket o no tiene permisos.');
