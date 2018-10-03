@@ -1,1 +1,37 @@
-[{"title":"Linterna","type":"producto","slug":"linterna"},{"title":"Francisco González: “Esta cuarta revolución industrial va a cambiar el mundo y a dar oportunidades a todos”","type":"article","slug":"francisco-gonzalez-esta-cuarta-revolucion-industrial-va-a-cambiar-el-mundo-y-a-dar-oportunidades-a-todos"},{"title":"BBVA elige a Telefónica para potenciar su red de comunicaciones","type":"article","slug":"bbva-elige-a-telefonica-para-potenciar-su-red-de-comunicaciones"},{"title":"Resultados: BBVA gana €3.449 millones en los primeros nueve meses (+23%)","type":"article","slug":"resultados-bbva-gana-3449-millones-en-los-primeros-nueve-meses-23"},{"title":"Big data para observar las ciudades en alta resolución","type":"article","slug":"big-data-para-observar-las-ciudades-en-alta-resolucion"},{"title":"Hoy será noticia","type":"article"},{"title":"Las apps para disfrutar de un merecido afterwork","type":"article"}]
+[
+  {
+    "title": "Linterna",
+    "type": "producto",
+    "slug": "linterna"
+  },
+  {
+    "title": "Francisco González: “Esta cuarta revolución industrial va a cambiar el mundo y a dar oportunidades a todos”",
+    "type": "article",
+    "slug": "francisco-gonzalez-esta-cuarta-revolucion-industrial-va-a-cambiar-el-mundo-y-a-dar-oportunidades-a-todos"
+  },
+  {
+    "title": "BBVA elige a Telefónica para potenciar su red de comunicaciones",
+    "type": "article",
+    "slug": "bbva-elige-a-telefonica-para-potenciar-su-red-de-comunicaciones"
+  },
+  {
+    "title": "Resultados: BBVA gana €3.449 millones en los primeros nueve meses (+23%)",
+    "type": "article",
+    "slug": "resultados-bbva-gana-3449-millones-en-los-primeros-nueve-meses-23"
+  },
+  {
+    "title": "Big data para observar las ciudades en alta resolución",
+    "type": "article",
+    "slug": "big-data-para-observar-las-ciudades-en-alta-resolucion"
+  },
+  {
+    "title": "Hoy será noticia",
+    "type": "article",
+    "slug": "hoy-sera-noticia"
+  },
+  {
+    "title": "Las apps para disfrutar de un merecido afterwork",
+    "type": "article",
+    "slug": "las-apps-para-disfrutar-de-un-merecido-afterwork"
+  }
+]
