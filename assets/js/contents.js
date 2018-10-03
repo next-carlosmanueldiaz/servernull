@@ -112,8 +112,10 @@ app.controller('myCtrl', function ($scope) {
       } else {
         var file = JSON.parse(data.Body.toString('utf-8'));
         for (var key in file) {
-          file[key].slug = slugify(file[key].title);
-          if (debug) console.log(file[key].slug);
+          if (file[key].type == "article") {
+            file[key].slug = slugify(file[key].title);
+            if (debug) console.log(file[key].slug);
+          }
         }
         $scope.contents = file;
         $scope.$apply();
