@@ -45,7 +45,7 @@ function onLogIn(googleUser) {
     if (debug) console.log('id_token: ' + id_token); // Token para aws
     if (debug) console.log('You are now logged in. (Google)');
 
-    AWS.config.region = region;
+    AWS.config.region = sessionStorage.region;
     var cognitoidentity = new AWS.CognitoIdentity();
     var paramsToGetID = { "IdentityPoolId": IdentityPoolId };
     cognitoidentity.getId(paramsToGetID, function (err, dataID) {
@@ -73,7 +73,7 @@ function onLogIn(googleUser) {
               expired: false
             });
             creds.expired = true;
-            AWS.config.update({ region: region, credentials: creds });
+            AWS.config.update({ region: sessionStorage.region, credentials: creds });
             AWS.config.credentials.refresh((errorRefreshCredentials) => {
               if (errorRefreshCredentials) {
                 if (debug) console.log("error al refrescar las credenciales:");
@@ -106,8 +106,8 @@ function onLogIn(googleUser) {
                     if (debug) console.log('Ahora podemos hacer la llamada a AssumeRoleWithWebIdentity para hacerlo Admin');
                     var sts = new AWS.STS();
                     var paramsAssumeRole = {
-                      RoleArn: roleArn,
-                      RoleSessionName: roleSessionName,
+                      RoleArn: roleArnAccesoAdmin,
+                      RoleSessionName: roleSessionAdminsName,
                       WebIdentityToken: id_token,
                       DurationSeconds: 3600,
                     };
@@ -131,7 +131,7 @@ function onLogIn(googleUser) {
                         var creds = new AWS.Credentials(credsData);
                         if (debug) console.log(creds);
                         creds.expired = true;
-                        AWS.config.update({ region: region, credentials: creds });
+                        AWS.config.update({ region: sessionStorage.region, credentials: creds });
                         AWS.config.credentials.refresh((errorRefreshCreds) => {
                           if (errorRefreshCreds) {
                             if (debug) console.error(errorRefreshCreds);

@@ -20,7 +20,7 @@ function getCredentials() {
       return true;
     } else {
       // Unauthenticated Identities
-      
+      // ===========================================================================
       // Obtenemos el rol de usuario no autenticado.
       sessionStorage.region = 'eu-west-1';
       sessionStorage.bucket = bucket;
@@ -53,7 +53,7 @@ function getCredentials() {
                 expired: false
               });
               creds.expired = true;
-              AWS.config.update({ region: region, credentials: creds });
+              AWS.config.update({ region: sessionStorage.region, credentials: creds });
               AWS.config.credentials.refresh((errorRefreshCredentials) => {
                 if (errorRefreshCredentials) {
                   if (debug) console.log("error al refrescar las credenciales:");
@@ -66,7 +66,63 @@ function getCredentials() {
                   if (debug) console.log(AWS.config.credentials);
                 }
               });
-              var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
+
+              // Usamos STS para asumir el nuevo rol de invitado
+              var sts = new AWS.STS();
+              var paramsAssumeRole = {
+                RoleArn: roleArnAccesoInvitado,
+                RoleSessionName: roleSessionGuestsName,
+                DurationSeconds: 3600,
+              };
+              if (debug) console.log(paramsAssumeRole);
+              sts.assumeRoleWithWebIdentity(paramsAssumeRole, function (errAssumeRole, rolAsumido) {
+                if (errAssumeRole) {
+                  if (debug) console.log('Error al asumir el rol de invitado');
+                  if (debug) console.log(errAssumeRole, errAssumeRole.stack); // an error occurred
+                } else {
+                  if (debug) console.log('ASUMIMOS EL NUEVO ROL DEL INVITADO:');
+                  if (debug) console.log('========================================');
+                  if (debug) console.log(rolAsumido);
+                  if (debug) console.log('VOLVEMOS A ACTUALIZAR LAS CREDENCIALES');
+                  var credsData = {
+                    accessKeyId: rolAsumido.Credentials.AccessKeyId,
+                    secretAccessKey: rolAsumido.Credentials.SecretAccessKey,
+                    sessionToken: rolAsumido.Credentials.SessionToken,
+                    expireTime: rolAsumido.Credentials.Expiration,
+                    expired: false
+                  };
+                  var creds = new AWS.Credentials(credsData);
+                  if (debug) console.log(creds);
+                  creds.expired = true;
+                  AWS.config.update({ region: sessionStorage.region, credentials: creds });
+                  AWS.config.credentials.refresh((errorRefreshCreds) => {
+                    if (errorRefreshCreds) {
+                      if (debug) console.error(errorRefreshCreds);
+                    } else {
+                      if (debug) console.log('Nuevas credenciales del Administrador refrescadas:');
+                      if (debug) console.log('Region: ' + AWS.config.region);
+                      if (debug) console.log('Credenciales:');
+                      if (debug) console.log(AWS.config.credentials);
+                    }
+                  });
+                  if (typeof (Storage) !== "undefined") {
+                    sessionStorage.region = region;
+                    sessionStorage.bucket = bucket;
+                    sessionStorage.accessKeyId = rolAsumido.Credentials.AccessKeyId;
+                    sessionStorage.secretAccessKey = rolAsumido.Credentials.SecretAccessKey;
+                    sessionStorage.sessionToken = rolAsumido.Credentials.SessionToken;
+                    sessionStorage.expireTime = rolAsumido.Credentials.Expiration;
+                    sessionStorage.expired = false
+                    sessionStorage.counter = 2;
+                    // window.location.replace("/backend/index.html"); // Redirect anulado al backend.. mostramos home con login hecho
+                  } else {
+                    if (debug) console.log('Sorry! No Web Storage support..');
+                  }
+
+                  if (debug) console.log('Y POR FIN! YA PODEMOS ACCEDER A LOS FICHEROS PERMITIDOS SÓLO PARA ADMINISTRADOR!:');
+                } // Fin assumeRole correcto
+              }); // Fin llamada assumeRoleWithWebIdentity
+
             } // Fin de Obtener credenciales con getCredentialsForIdentity() correcto
           }); // cognitoidentity.getCredentialsForIdentity
         } // Si ID Cognito obtenido correctamente
