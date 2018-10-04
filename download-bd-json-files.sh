@@ -57,7 +57,7 @@ fi
 echo -e "${NC}Content types JSON:${GREEN} content-types.json"
 aws s3 cp s3://servernull/private/content-types/json/content-types.json private/content-types/json/content-types.json
 echo -e "${NC}Contents List JSON:${GREEN} contents.json"
-aws s3 cp s3://servernull/private/content-types/json/contents.json private/content-types/json/contents.json
+aws s3 cp s3://servernull/home/content/json/contents.json /home/content/json/contents.json
 echo -e "${NC}Contents DATA:${GREEN} content/"
 aws s3 cp s3://servernull/home/content home/content --recursive
 echo -e "${NC}HTML BASE:${GREEN} html.html"

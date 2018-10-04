@@ -50,7 +50,7 @@ function expiredToken() {
   sessionStorage.expired = "";
   console.log('User signed out.');
   
-  window.location.replace("/home/index.html");
+  // window.location.replace("/home/index.html"); // No redireccionamos
 }
 
 /**
@@ -101,7 +101,7 @@ app.controller('myCtrl', function ($scope) {
     $scope.googleSigninClientId = googleSigninClientId;
 
     $scope.bucket = sessionStorage.bucket;
-    $scope.key = 'private/content-types/json/contents.json';
+    $scope.key = '/home/content/json/contents.json';
     
     s3 = new AWS.S3();
     var fileParams = { Bucket: $scope.bucket, Key: $scope.key };
