@@ -18,19 +18,6 @@ function getCredentials() {
       AWS.config.update({region: region, credentials: creds});
       if (debug) console.log('Acceso condecido como administrador.');
       return true;
-    } else {
-      var region = sessionStorage.region; // https://goo.gl/CLhMq3
-      var credsData = {
-        accessKeyId: sessionStorage.accessKeyId,
-        secretAccessKey: sessionStorage.secretAccessKey,
-        sessionToken: sessionStorage.sessionToken,
-        expireTime: sessionStorage.expireTime,
-        expired: sessionStorage.expired
-      };
-      var creds = new AWS.Credentials(credsData);
-      AWS.config.update({region: region, credentials: creds});
-      if (debug) console.log('Acceso condecido como administrador.');
-      return true;
     }
   }
 }
@@ -106,6 +93,7 @@ function slugify (text) {
 }
 
 // En la home pedimos credenciales, es de lectura pública, obtenemos credenciales públicas
+onLogIn();
 const tengoAcceso = getCredentials();
 
 var app = angular.module('myApp', []);
