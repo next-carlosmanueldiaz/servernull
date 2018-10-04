@@ -18,7 +18,13 @@ function getCredentials() {
       AWS.config.update({region: region, credentials: creds});
       if (debug) console.log('Acceso condecido como administrador.');
       return true;
+    } else {
+      sessionStorage.region = region;
+      sessionStorage.bucket = bucket;
     }
+  } else {
+    // El navegador no soporta almacenar en Session Storage
+    if (debug) console.log('Sorry! No Web browser Session Storage support..');
   }
 }
 
