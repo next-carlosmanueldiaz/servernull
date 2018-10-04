@@ -34,6 +34,9 @@ app.controller('myCtrl', function ($scope) {
 });
 
 function onLogIn(googleUser) {
+  if (typeof (googleUser) == "undefined") {
+    var googleUser; // The current user.
+  }
   if (!googleUser.error) {
     var profile = googleUser.getBasicProfile();
     if (debug) console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
