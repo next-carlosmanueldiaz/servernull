@@ -66,6 +66,7 @@ app.controller('myCtrl', function ($scope) {
       refreshValues();
     };
 
+    onLogIn();
     // $scope.$apply();
   }
 });

@@ -93,7 +93,6 @@ function slugify (text) {
 }
 
 // En la home pedimos credenciales, es de lectura pública, obtenemos credenciales públicas
-onLogIn();
 const tengoAcceso = getCredentials();
 
 var app = angular.module('myApp', []);
