@@ -92,8 +92,8 @@ function slugify (text) {
     .replace(/-+$/, '')             // Trim - from end of text
 }
 
-// En la home no pedimos credenciales, es de lectura pública
-// const tengoAcceso = getCredentials();
+// En la home pedimos credenciales, es de lectura pública, obtenemos credenciales públicas
+const tengoAcceso = getCredentials();
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {

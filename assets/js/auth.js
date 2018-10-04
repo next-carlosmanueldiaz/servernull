@@ -47,7 +47,7 @@ function onLogIn(googleUser) {
 
     AWS.config.region = region;
     var cognitoidentity = new AWS.CognitoIdentity();
-    var paramsToGetID = { IdentityPoolId: IdentityPoolId };
+    var paramsToGetID = { "IdentityPoolId": IdentityPoolId };
     cognitoidentity.getId(paramsToGetID, function (err, dataID) {
       if (err) {
         if (debug) console.log('Ha ocurrido un error al obtener el ID de Cognito.');
