@@ -6,7 +6,7 @@ function getCredentials() {
   // var debug = false;
   if (typeof (Storage) !== "undefined") {
     if (sessionStorage.accessKeyId && sessionStorage.secretAccessKey && sessionStorage.sessionToken && sessionStorage.expired) {
-      var region = sessionStorage.region; // https://goo.gl/CLhMq3
+      // HTML5 Web Storage: https://goo.gl/CLhMq3
       var credsData = {
         accessKeyId: sessionStorage.accessKeyId,
         secretAccessKey: sessionStorage.secretAccessKey,
@@ -15,12 +15,64 @@ function getCredentials() {
         expired: sessionStorage.expired
       };
       var creds = new AWS.Credentials(credsData);
-      AWS.config.update({region: region, credentials: creds});
+      AWS.config.update({region: sessionStorage.region, credentials: creds});
       if (debug) console.log('Acceso condecido como administrador.');
       return true;
     } else {
+      // Unauthenticated Identities
+      
+      // Obtenemos el rol de usuario no autenticado.
       sessionStorage.region = 'eu-west-1';
       sessionStorage.bucket = bucket;
+
+      AWS.config.region = sessionStorage.region;
+      var cognitoidentity = new AWS.CognitoIdentity();
+      var paramsToGetID = { "IdentityPoolId": IdentityPoolId };
+      cognitoidentity.getId(paramsToGetID, function (err, dataID) {
+        if (err) {
+          if (debug) console.log('Ha ocurrido un error al obtener el ID de Cognito.');
+          if (debug) console.log(err, err.stack); // an error occurred
+        } else {
+          if (debug) console.log('Se ha obtenido el ID de Cognito correctamente ( cognitoidentity.getId() ).');
+          if (debug) console.log(dataID);
+          var paramsToGetCredentials = { IdentityId: dataID.IdentityId };
+          if (debug) console.log('Retrieve TEMP credentials with IdentityId (cognitoidentity.getCredentialsForIdentity() ):');
+          cognitoidentity.getCredentialsForIdentity(paramsToGetCredentials, function (err, dataCredentialsForIdentity) {
+            if (err) {
+              if (debug) console.log('Error en getCredentialsForIdentity:');
+              if (debug) console.log(err, err.stack);
+            } else {
+              if (debug) console.log('Successful response from Cognito Identity (dataCredentialsForIdentity)!. Con esto ya tenemos AccessKeyId, SecretKey y SessionTokey:');
+              if (debug) console.log(dataCredentialsForIdentity);
+              if (debug) console.log('Actualizamos las credenciales, para evitar el error: Missing credentials');
+              var creds = new AWS.Credentials({
+                accessKeyId: dataCredentialsForIdentity.Credentials.AccessKeyId,
+                secretAccessKey: dataCredentialsForIdentity.Credentials.SecretKey,
+                sessionToken: dataCredentialsForIdentity.Credentials.SessionToken,
+                expireTime: dataCredentialsForIdentity.Credentials.Expiration,
+                expired: false
+              });
+              creds.expired = true;
+              AWS.config.update({ region: region, credentials: creds });
+              AWS.config.credentials.refresh((errorRefreshCredentials) => {
+                if (errorRefreshCredentials) {
+                  if (debug) console.log("error al refrescar las credenciales:");
+                  if (debug) console.log(errorRefreshCredentials);
+                } else {
+                  if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
+                  if (debug) console.log('Estas son las credenciales y refrescadas:');
+                  if (debug) console.log('Region: ' + AWS.config.region);
+                  if (debug) console.log('Credenciales:');
+                  if (debug) console.log(AWS.config.credentials);
+                }
+              });
+              var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
+            } // Fin de Obtener credenciales con getCredentialsForIdentity() correcto
+          }); // cognitoidentity.getCredentialsForIdentity
+        } // Si ID Cognito obtenido correctamente
+      }); // cognitoidentity.getId()
+
+
     }
   } else {
     // El navegador no soporta almacenar en Session Storage
