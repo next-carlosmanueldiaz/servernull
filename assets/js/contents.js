@@ -72,6 +72,7 @@ function getCredentials() {
               var paramsAssumeRole = {
                 RoleArn: roleArnAccesoInvitado,
                 RoleSessionName: roleSessionGuestsName,
+                WebIdentityToken: "",
                 DurationSeconds: 3600,
               };
               if (debug) console.log(paramsAssumeRole);
