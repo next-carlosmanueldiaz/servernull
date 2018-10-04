@@ -19,7 +19,7 @@ function getCredentials() {
       if (debug) console.log('Acceso condecido como administrador.');
       return true;
     } else {
-      sessionStorage.region = region;
+      sessionStorage.region = 'eu-west-1';
       sessionStorage.bucket = bucket;
     }
   } else {
@@ -108,6 +108,7 @@ app.controller('myCtrl', function ($scope) {
     $scope.googleSigninClientId = googleSigninClientId;
 
     $scope.bucket = sessionStorage.bucket;
+    $scope.region = sessionStorage.region;
     $scope.key = 'home/content/json/contents.json';
     
     s3 = new AWS.S3();
