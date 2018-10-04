@@ -100,7 +100,7 @@ app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
     $scope.bucket = sessionStorage.bucket;
-    $scope.key = 'private/content-types/json/contents.json';
+    $scope.key = '/home/content/json/contents.json';
     
     s3 = new AWS.S3();
     var fileParams = { Bucket: $scope.bucket, Key: $scope.key };
