@@ -58,7 +58,7 @@ function expiredToken() {
  * @returns {undefined}
  */
 function signOut(e) {
-  e.preventDefault();
+  // e.preventDefault();
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
     console.log('User signed out.');
