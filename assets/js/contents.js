@@ -98,6 +98,8 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
+    $scope.googleSigninClientId = googleSigninClientId;
+
     $scope.bucket = sessionStorage.bucket;
     $scope.key = 'private/content-types/json/contents.json';
     
@@ -107,14 +109,19 @@ app.controller('myCtrl', function ($scope) {
       if (errGetObject) {
         if (debug) console.log('Error al leer  ' + $scope.key + ' o no tiene permisos.');
         if (debug) console.log(errGetObject);
-        window.location.replace("/home/index.html");
         expiredToken();
       } else {
         var file = JSON.parse(data.Body.toString('utf-8'));
         for (var key in file) {
           if (file[key].type == "article") {
-            file[key].slug = slugify(file[key].title);
+
+            // file[key].slug = slugify(file[key].title);
             if (debug) console.log(file[key].slug);
+            // ========================================================================
+            // Obtenemos el artículo para pintar el teaser
+            var keyJSON = 'home/content/json/' + file[key].type + '/' + file[key].slug + '.json';
+            // ========================================================================
+            // Obtenemos 
           }
         }
         $scope.contents = file;
