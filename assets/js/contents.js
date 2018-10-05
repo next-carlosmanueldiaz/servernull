@@ -5,119 +5,21 @@
 function getCredentials() {
   // var debug = false;
   if (typeof (Storage) !== "undefined") {
-    if (sessionStorage.id_token && sessionStorage.id_token !== "") {
-      userLoggedIn("accounts.google.com", sessionStorage.id_token);
-      return true;
-    } else {
-      // Unauthenticated Identities
-      // ===========================================================================
-      // Obtenemos el rol de usuario no autenticado.
-      sessionStorage.region = 'eu-west-1';
-      sessionStorage.bucket = bucket;
-
-      // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
-      // set the default config object
-      var creds = new AWS.CognitoIdentityCredentials({
-          IdentityPoolId: IdentityPoolId
-      });
-      AWS.config.credentials = creds;
-      AWS.config.region = sessionStorage.region;
-
-      // Actualizamos y refrescamos
-      creds.expired = true;
-      AWS.config.update({ region: sessionStorage.region, credentials: creds });
-      AWS.config.credentials.refresh((errorRefreshCredentials) => {
-        if (errorRefreshCredentials) {
-          if (debug) console.log("error al refrescar las credenciales:");
-          if (debug) console.log(errorRefreshCredentials);
-        } else {
-          if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
-          if (debug) console.log('Estas son las credenciales y refrescadas:');
-          if (debug) console.log('Region: ' + AWS.config.region);
-          if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
-          if (debug) console.log('========================================');
-          if (debug) console.log('Credenciales:');
-          if (debug) console.log(AWS.config.credentials);
-          if (debug) console.log('========================================');
-          if (debug) console.log('Almacenamos en sesión:');
-          sessionStorage.accessKeyId = AWS.config.credentials.accessKeyId; 
-          sessionStorage.secretAccessKey = AWS.config.credentials.secretAccessKey;
-          sessionStorage.sessionToken = AWS.config.credentials.sessionToken;
-          sessionStorage.expireTime = AWS.config.credentials.expireTime;
-          sessionStorage.expired = false
-          sessionStorage.counter = 2;
-          sessionStorage.rol = "invitado"
-          return true;
-        }
-      });
-
-    }
-  } else {
-    // El navegador no soporta almacenar en Session Storage
-    if (debug) console.log('Sorry! No Web browser Session Storage support..');
-  }
-}
-
-// Called when an identity provider has a token for a logged in user
-function userLoggedIn(providerName, token) {
-  // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
-  // ASIGNAMOS ROL DE ADMINISTRADOR.
-  var sts = new AWS.STS();
-  var paramsAssumeRole = {
-    RoleArn: sessionStorage.roleArnAccesoAdmin,
-    RoleSessionName: sessionStorage.roleSessionAdminName,
-    WebIdentityToken: sessionStorage.id_token,
-    DurationSeconds: 3600,
-  };
-  if (debug) console.log(paramsAssumeRole);
-  sts.assumeRoleWithWebIdentity(paramsAssumeRole, function (errAssumeRole, rolAsumido) {
-    if (errAssumeRole) {
-      if (debug) console.log('Error al asumir el rol de administrador');
-      if (debug) console.log(errAssumeRole, errAssumeRole.stack); // an error occurred
-    } else {
-      if (debug) console.log('ASUMIMOS EL NUEVO ROL DEL ADMINISTRADOR:');
-      if (debug) console.log('========================================');
-      if (debug) console.log(rolAsumido);
-      if (debug) console.log('VOLVEMOS A ACTUALIZAR LAS CREDENCIALES');
+    if (sessionStorage.accessKeyId && sessionStorage.secretAccessKey && sessionStorage.sessionToken && sessionStorage.expired) {
+      var region = sessionStorage.region; // https://goo.gl/CLhMq3
       var credsData = {
-        accessKeyId: rolAsumido.Credentials.AccessKeyId,
-        secretAccessKey: rolAsumido.Credentials.SecretAccessKey,
-        sessionToken: rolAsumido.Credentials.SessionToken,
-        expireTime: rolAsumido.Credentials.Expiration,
-        expired: false
+        accessKeyId: sessionStorage.accessKeyId,
+        secretAccessKey: sessionStorage.secretAccessKey,
+        sessionToken: sessionStorage.sessionToken,
+        expireTime: sessionStorage.expireTime,
+        expired: sessionStorage.expired
       };
       var creds = new AWS.Credentials(credsData);
-      if (debug) console.log(creds);
-      creds.expired = true;
-      AWS.config.update({ region: sessionStorage.region, credentials: creds });
-      AWS.config.credentials.refresh((errorRefreshCreds) => {
-        if (errorRefreshCreds) {
-          if (debug) console.error(errorRefreshCreds);
-        } else {
-          if (debug) console.log('Nuevas credenciales del Administrador refrescadas:');
-          if (debug) console.log('Region: ' + AWS.config.region);
-          if (debug) console.log('Credenciales:');
-          if (debug) console.log(AWS.config.credentials);
-        }
-      });
-      if (typeof (Storage) !== "undefined") {
-        // sessionStorage.region = region;
-        // sessionStorage.bucket = bucket;
-        sessionStorage.accessKeyId = rolAsumido.Credentials.AccessKeyId;
-        sessionStorage.secretAccessKey = rolAsumido.Credentials.SecretAccessKey;
-        sessionStorage.sessionToken = rolAsumido.Credentials.SessionToken;
-        sessionStorage.expireTime = rolAsumido.Credentials.Expiration;
-        sessionStorage.expired = false
-        sessionStorage.counter = 2;
-        sessionStorage.rol = "admin"
-        // window.location.replace("/backend/index.html"); // Redirect anulado al backend.. mostramos home con login hecho
-      } else {
-        if (debug) console.log('Sorry! No Web Storage support..');
-      }
-
-      if (debug) console.log('Y POR FIN! YA PODEMOS ACCEDER A LOS FICHEROS PERMITIDOS SÓLO PARA ADMINISTRADOR!:');
-    } // Fin assumeRole correcto
-  }); // Fin llamada assumeRoleWithWebIdentity
+      AWS.config.update({region: region, credentials: creds});
+      if (debug) console.log('Acceso condecido como administrador.');
+      return true;
+    }
+  }
 }
 
 /**
@@ -190,7 +92,6 @@ function slugify (text) {
     .replace(/-+$/, '')             // Trim - from end of text
 }
 
-// En la home pedimos credenciales, es de lectura pública, obtenemos credenciales públicas
 const tengoAcceso = getCredentials();
 
 var app = angular.module('myApp', []);
@@ -200,7 +101,6 @@ app.controller('myCtrl', function ($scope) {
     $scope.googleSigninClientId = googleSigninClientId;
 
     $scope.bucket = sessionStorage.bucket;
-    $scope.region = sessionStorage.region;
     $scope.key = 'home/content/json/contents.json';
     
     s3 = new AWS.S3();
