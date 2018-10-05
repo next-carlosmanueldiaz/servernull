@@ -45,6 +45,18 @@ function onLogIn(googleUser) {
     if (debug) console.log('id_token: ' + id_token); // Token para aws
     if (debug) console.log('You are now logged in. (Google)');
 
+    // PARA CAMBIAR A USUARIO AUTENTICADO
+    // Almacenamos el id_token del usuario autenticado en la sesión para poder recuperarlo posteriormente 
+    // y hacer el cambio de usuario no autenticado (invitado) a usuario autenticado.
+    // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
+    // Esta variable se evalúa en la función getCredentials() del fichero contents.js para saber:
+    // - Si hay id_token: usuario logueado, que puede ser administrador
+    // - Si no hay id_token: usuario invitado.
+    // ====================================================================================
+    sessionStorage.id_token = id_token;
+    // ====================================================================================
+
+
     AWS.config.region = sessionStorage.region;
     var cognitoidentity = new AWS.CognitoIdentity();
     var paramsToGetID = { "IdentityPoolId": IdentityPoolId };

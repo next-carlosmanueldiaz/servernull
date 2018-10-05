@@ -5,7 +5,10 @@
 function getCredentials() {
   // var debug = false;
   if (typeof (Storage) !== "undefined") {
-    if (sessionStorage.accessKeyId && sessionStorage.secretAccessKey && sessionStorage.sessionToken && sessionStorage.expired) {
+    if (sessionStorage.id_token && sessionStorage.id_token !== "") {
+      userLoggedIn("accounts.google.com", sessionStorage.id_token);
+      return true;
+/*    if (sessionStorage.accessKeyId && sessionStorage.secretAccessKey && sessionStorage.sessionToken && sessionStorage.expired) {
       // HTML5 Web Storage: https://goo.gl/CLhMq3
       var credsData = {
         accessKeyId: sessionStorage.accessKeyId,
@@ -17,7 +20,7 @@ function getCredentials() {
       var creds = new AWS.Credentials(credsData);
       AWS.config.update({region: sessionStorage.region, credentials: creds});
       if (debug) console.log('Acceso Concedido.');
-      return true;
+      return true;*/
     } else {
       // Unauthenticated Identities
       // ===========================================================================
@@ -66,6 +69,15 @@ function getCredentials() {
     // El navegador no soporta almacenar en Session Storage
     if (debug) console.log('Sorry! No Web browser Session Storage support..');
   }
+}
+
+// Called when an identity provider has a token for a logged in user
+function userLoggedIn(providerName, token) {
+    creds.params.Logins = creds.params.Logins || {};
+    creds.params.Logins[providerName] = token;
+
+    // Expire credentials to refresh them on the next request
+    creds.expired = true;
 }
 
 /**
