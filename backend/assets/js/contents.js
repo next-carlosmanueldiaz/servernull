@@ -3,7 +3,7 @@
  * @returns {Boolean}
  */
 function getCredentials() {
-  var debug = false;
+  // var debug = false;
   if (typeof (Storage) !== "undefined") {
     if (sessionStorage.accessKeyId && sessionStorage.secretAccessKey && sessionStorage.sessionToken && sessionStorage.expired) {
       var region = sessionStorage.region; // https://goo.gl/CLhMq3
