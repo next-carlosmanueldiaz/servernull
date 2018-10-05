@@ -147,6 +147,7 @@ function userLoggedIn(providerName, token) {
 
         if (debug) console.log('Y POR FIN! YA PODEMOS ACCEDER A LOS FICHEROS PERMITIDOS SÓLO PARA ADMINISTRADOR!:');
       } // Fin assumeRole correcto
+   }); // Fin llamada assumeRoleWithWebIdentity
 }
 
 /**

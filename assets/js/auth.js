@@ -173,7 +173,7 @@ function onLogIn(googleUser) {
 
                         if (debug) console.log('Y POR FIN! YA PODEMOS ACCEDER A LOS FICHEROS PERMITIDOS SÓLO PARA ADMINISTRADOR!:');
                       } // Fin assumeRole correcto
-    //                 }); // Fin llamada assumeRoleWithWebIdentity
+                     }); // Fin llamada assumeRoleWithWebIdentity
     //               } else {
     //                 debug = true;
     //                 if (debug) console.log('Usuario desconocido. Se le mantiene como INVITADO a la página sin permisos.');
@@ -188,10 +188,9 @@ function onLogIn(googleUser) {
     //     }); // cognitoidentity.getCredentialsForIdentity
     //   } // Si ID Cognito obtenido correctamente
     // }); // cognitoidentity.getId()
-
-  } else {
-    if (debug) console.log('There was a problem logging you in.');
-  }
+    // } else {
+    //   if (debug) console.log('There was a problem logging you in.');
+    // }
 }
 
 // Called when an identity provider has a token for a logged in user
