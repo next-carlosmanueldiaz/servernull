@@ -54,6 +54,7 @@ function onLogIn(googleUser) {
     // - Si no hay id_token: usuario invitado.
     // ====================================================================================
     sessionStorage.id_token = id_token;
+    userLoggedIn("accounts.google.com", sessionStorage.id_token);
     // ====================================================================================
     sessionStorage.IdentityPoolId = IdentityPoolId;
 
@@ -189,6 +190,40 @@ function onLogIn(googleUser) {
   } else {
     if (debug) console.log('There was a problem logging you in.');
   }
+}
+
+// Called when an identity provider has a token for a logged in user
+function userLoggedIn(providerName, token) {
+    // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
+    // set the default config object
+    var creds = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: sessionStorage.IdentityPoolId
+    });
+    AWS.config.credentials = creds;
+    AWS.config.region = sessionStorage.region;
+
+    creds.params.Logins = creds.params.Logins || {};
+    creds.params.Logins[providerName] = token;
+
+    // Expire credentials to refresh them on the next request
+    creds.expired = true;
+
+    if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
+    if (debug) console.log('Estas son las credenciales y refrescadas:');
+    if (debug) console.log('Region: ' + AWS.config.region);
+    if (debug) console.log('TOMAMOS EL ROL DE ADMINISTRADOR:');
+    if (debug) console.log('========================================');
+    if (debug) console.log('Credenciales:');
+    if (debug) console.log(AWS.config.credentials);
+    if (debug) console.log('========================================');
+    if (debug) console.log('Almacenamos en sesión:');
+    sessionStorage.accessKeyId = AWS.config.credentials.accessKeyId; 
+    sessionStorage.secretAccessKey = AWS.config.credentials.secretAccessKey;
+    sessionStorage.sessionToken = AWS.config.credentials.sessionToken;
+    sessionStorage.expireTime = AWS.config.credentials.expireTime;
+    sessionStorage.expired = false
+    sessionStorage.counter = 2;
+    sessionStorage.rol = "admin"
 }
 
 /**
