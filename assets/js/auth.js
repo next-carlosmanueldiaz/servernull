@@ -107,7 +107,7 @@ function onLogIn(googleUser) {
                     var sts = new AWS.STS();
                     var paramsAssumeRole = {
                       RoleArn: roleArnAccesoAdmin,
-                      RoleSessionName: roleSessionAdminsName,
+                      RoleSessionName: roleSessionAdminName,
                       WebIdentityToken: id_token,
                       DurationSeconds: 3600,
                     };
