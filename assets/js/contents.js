@@ -94,9 +94,9 @@ function userLoggedIn(providerName, token) {
     // ASIGNAMOS ROL DE ADMINISTRADOR.
     var sts = new AWS.STS();
     var paramsAssumeRole = {
-      RoleArn: roleArnAccesoAdmin,
-      RoleSessionName: roleSessionAdminName,
-      WebIdentityToken: id_token,
+      RoleArn: sessionStorage.roleArnAccesoAdmin,
+      RoleSessionName: sessionStorage.roleSessionAdminName,
+      WebIdentityToken: sessionStorage.id_token,
       DurationSeconds: 3600,
     };
     if (debug) console.log(paramsAssumeRole);

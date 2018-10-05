@@ -188,9 +188,9 @@ function onLogIn(googleUser) {
     //     }); // cognitoidentity.getCredentialsForIdentity
     //   } // Si ID Cognito obtenido correctamente
     // }); // cognitoidentity.getId()
-    // } else {
-    //   if (debug) console.log('There was a problem logging you in.');
-    // }
+    } else {
+      if (debug) console.log('There was a problem logging you in. No id_token');
+    }
 }
 
 // Called when an identity provider has a token for a logged in user
