@@ -60,65 +60,65 @@ function onLogIn(googleUser) {
     sessionStorage.roleArnAccesoAdmin = roleArnAccesoAdmin;
     sessionStorage.roleSessionAdminName = roleSessionAdminName;
 
-    // AWS.config.region = sessionStorage.region;
-    // var cognitoidentity = new AWS.CognitoIdentity();
-    // var paramsToGetID = { "IdentityPoolId": IdentityPoolId };
-    // cognitoidentity.getId(paramsToGetID, function (err, dataID) {
-    //   if (err) {
-    //     if (debug) console.log('Ha ocurrido un error al obtener el ID de Cognito.');
-    //     if (debug) console.log(err, err.stack); // an error occurred
-    //   } else {
-    //     if (debug) console.log('Se ha obtenido el ID de Cognito correctamente ( cognitoidentity.getId() ).');
-    //     if (debug) console.log(dataID);
-    //     var paramsToGetCredentials = { IdentityId: dataID.IdentityId };
-    //     if (debug) console.log('Retrieve TEMP credentials with IdentityId (cognitoidentity.getCredentialsForIdentity() ):');
-    //     cognitoidentity.getCredentialsForIdentity(paramsToGetCredentials, function (err, dataCredentialsForIdentity) {
-    //       if (err) {
-    //         if (debug) console.log('Error en getCredentialsForIdentity:');
-    //         if (debug) console.log(err, err.stack);
-    //       } else {
-    //         if (debug) console.log('Successful response from Cognito Identity (dataCredentialsForIdentity)!. Con esto ya tenemos AccessKeyId, SecretKey y SessionTokey:');
-    //         if (debug) console.log(dataCredentialsForIdentity);
-    //         if (debug) console.log('Actualizamos las credenciales, para evitar el error: Missing credentials');
-    //         var creds = new AWS.Credentials({
-    //           accessKeyId: dataCredentialsForIdentity.Credentials.AccessKeyId,
-    //           secretAccessKey: dataCredentialsForIdentity.Credentials.SecretKey,
-    //           sessionToken: dataCredentialsForIdentity.Credentials.SessionToken,
-    //           expireTime: dataCredentialsForIdentity.Credentials.Expiration,
-    //           expired: false
-    //         });
-    //         creds.expired = true;
-    //         AWS.config.update({ region: sessionStorage.region, credentials: creds });
-    //         AWS.config.credentials.refresh((errorRefreshCredentials) => {
-    //           if (errorRefreshCredentials) {
-    //             if (debug) console.log("error al refrescar las credenciales:");
-    //             if (debug) console.log(errorRefreshCredentials);
-    //           } else {
-    //             if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
-    //             if (debug) console.log('Estas son las credenciales y refrescadas:');
-    //             if (debug) console.log('Region: ' + AWS.config.region);
-    //             if (debug) console.log('Credenciales:');
-    //             if (debug) console.log(AWS.config.credentials);
-    //           }
-    //         });
-    //         var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
-    //         var listUsersParams = {
-    //           UserPoolId: userPoolId,
-    //           AttributesToGet: [ 'email'],
-    //           Filter: 'email = "' + profile.getEmail() + '"',
-    //           Limit: 1
-    //         };
-    //         if (debug) console.log(listUsersParams);
-    //         cognitoidentityserviceprovider.listUsers(listUsersParams, function (errListusers, listaUsuarios) {
-    //           if (errListusers) {
-    //             if (debug) console.log('Error al buscar en el user pool Admins:');
-    //             if (debug) console.log(errListusers, errListusers.stack); // an error occurred
-    //           } else {
-    //             if (listaUsuarios.Users[0]) {
-    //               if (listaUsuarios.Users[0].Attributes[0].Value == profile.getEmail() && listaUsuarios.Users[0].Enabled == true) {
-    //                 if (debug) console.log('Usuario encontrado en el userpool Admins');
-    //                 if (debug) console.log(listaUsuarios);           // successful response
-    //                 if (debug) console.log('Ahora podemos hacer la llamada a AssumeRoleWithWebIdentity para hacerlo Admin');
+    AWS.config.region = sessionStorage.region;
+    var cognitoidentity = new AWS.CognitoIdentity();
+    var paramsToGetID = { "IdentityPoolId": IdentityPoolId };
+    cognitoidentity.getId(paramsToGetID, function (err, dataID) {
+      if (err) {
+        if (debug) console.log('Ha ocurrido un error al obtener el ID de Cognito.');
+        if (debug) console.log(err, err.stack); // an error occurred
+      } else {
+        if (debug) console.log('Se ha obtenido el ID de Cognito correctamente ( cognitoidentity.getId() ).');
+        if (debug) console.log(dataID);
+        var paramsToGetCredentials = { IdentityId: dataID.IdentityId };
+        if (debug) console.log('Retrieve TEMP credentials with IdentityId (cognitoidentity.getCredentialsForIdentity() ):');
+        cognitoidentity.getCredentialsForIdentity(paramsToGetCredentials, function (err, dataCredentialsForIdentity) {
+          if (err) {
+            if (debug) console.log('Error en getCredentialsForIdentity:');
+            if (debug) console.log(err, err.stack);
+          } else {
+            if (debug) console.log('Successful response from Cognito Identity (dataCredentialsForIdentity)!. Con esto ya tenemos AccessKeyId, SecretKey y SessionTokey:');
+            if (debug) console.log(dataCredentialsForIdentity);
+            if (debug) console.log('Actualizamos las credenciales, para evitar el error: Missing credentials');
+            var creds = new AWS.Credentials({
+              accessKeyId: dataCredentialsForIdentity.Credentials.AccessKeyId,
+              secretAccessKey: dataCredentialsForIdentity.Credentials.SecretKey,
+              sessionToken: dataCredentialsForIdentity.Credentials.SessionToken,
+              expireTime: dataCredentialsForIdentity.Credentials.Expiration,
+              expired: false
+            });
+            creds.expired = true;
+            AWS.config.update({ region: sessionStorage.region, credentials: creds });
+            AWS.config.credentials.refresh((errorRefreshCredentials) => {
+              if (errorRefreshCredentials) {
+                if (debug) console.log("error al refrescar las credenciales:");
+                if (debug) console.log(errorRefreshCredentials);
+              } else {
+                if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
+                if (debug) console.log('Estas son las credenciales y refrescadas:');
+                if (debug) console.log('Region: ' + AWS.config.region);
+                if (debug) console.log('Credenciales:');
+                if (debug) console.log(AWS.config.credentials);
+              }
+            });
+            var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
+            var listUsersParams = {
+              UserPoolId: userPoolId,
+              AttributesToGet: [ 'email'],
+              Filter: 'email = "' + profile.getEmail() + '"',
+              Limit: 1
+            };
+            if (debug) console.log(listUsersParams);
+            cognitoidentityserviceprovider.listUsers(listUsersParams, function (errListusers, listaUsuarios) {
+              if (errListusers) {
+                if (debug) console.log('Error al buscar en el user pool Admins:');
+                if (debug) console.log(errListusers, errListusers.stack); // an error occurred
+              } else {
+                if (listaUsuarios.Users[0]) {
+                  if (listaUsuarios.Users[0].Attributes[0].Value == profile.getEmail() && listaUsuarios.Users[0].Enabled == true) {
+                    if (debug) console.log('Usuario encontrado en el userpool Admins');
+                    if (debug) console.log(listaUsuarios);           // successful response
+                    if (debug) console.log('Ahora podemos hacer la llamada a AssumeRoleWithWebIdentity para hacerlo Admin');
                     var sts = new AWS.STS();
                     var paramsAssumeRole = {
                       RoleArn: roleArnAccesoAdmin,
@@ -174,23 +174,104 @@ function onLogIn(googleUser) {
                         if (debug) console.log('Y POR FIN! YA PODEMOS ACCEDER A LOS FICHEROS PERMITIDOS SÓLO PARA ADMINISTRADOR!:');
                       } // Fin assumeRole correcto
                      }); // Fin llamada assumeRoleWithWebIdentity
-    //               } else {
-    //                 debug = true;
-    //                 if (debug) console.log('Usuario desconocido. Se le mantiene como INVITADO a la página sin permisos.');
-    //               }
-    //             } else {
-    //               debug = true;
-    //               if (debug) console.log('Usuario desconocido. Se le mantiene como INVITADO a la página sin permisos.');
-    //             }
-    //           } // Fin retorno de ListUsers() sin error
-    //         }); // Fin ListUsers();
-    //       } // Fin de Obtener credenciales con getCredentialsForIdentity() correcto
-    //     }); // cognitoidentity.getCredentialsForIdentity
-    //   } // Si ID Cognito obtenido correctamente
-    // }); // cognitoidentity.getId()
-    } else {
-      if (debug) console.log('There was a problem logging you in. No id_token');
-    }
+                  } else {
+                    debug = true;
+                    if (debug) console.log('Usuario desconocido. Se le mantiene como INVITADO a la página sin permisos.');
+                    // Unauthenticated Identities
+                    // ===========================================================================
+                    // Obtenemos el rol de usuario no autenticado.
+                    sessionStorage.region = 'eu-west-1';
+                    sessionStorage.bucket = bucket;
+
+                    // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
+                    // set the default config object
+                    var creds = new AWS.CognitoIdentityCredentials({
+                        IdentityPoolId: IdentityPoolId
+                    });
+                    AWS.config.credentials = creds;
+                    AWS.config.region = sessionStorage.region;
+
+                    // Actualizamos y refrescamos
+                    creds.expired = true;
+                    AWS.config.update({ region: sessionStorage.region, credentials: creds });
+                    AWS.config.credentials.refresh((errorRefreshCredentials) => {
+                      if (errorRefreshCredentials) {
+                        if (debug) console.log("error al refrescar las credenciales:");
+                        if (debug) console.log(errorRefreshCredentials);
+                      } else {
+                        if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
+                        if (debug) console.log('Estas son las credenciales y refrescadas:');
+                        if (debug) console.log('Region: ' + AWS.config.region);
+                        if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
+                        if (debug) console.log('========================================');
+                        if (debug) console.log('Credenciales:');
+                        if (debug) console.log(AWS.config.credentials);
+                        if (debug) console.log('========================================');
+                        if (debug) console.log('Almacenamos en sesión:');
+                        sessionStorage.accessKeyId = AWS.config.credentials.accessKeyId; 
+                        sessionStorage.secretAccessKey = AWS.config.credentials.secretAccessKey;
+                        sessionStorage.sessionToken = AWS.config.credentials.sessionToken;
+                        sessionStorage.expireTime = AWS.config.credentials.expireTime;
+                        sessionStorage.expired = false
+                        sessionStorage.counter = 2;
+                        sessionStorage.rol = "invitado"
+                        return true;
+                      }
+                    });
+                  }
+                } else {
+                  if (debug) console.log('Usuario desconocido. Se le mantiene como INVITADO a la página sin permisos.');
+                  // Unauthenticated Identities
+                  // ===========================================================================
+                  // Obtenemos el rol de usuario no autenticado.
+                  sessionStorage.region = 'eu-west-1';
+                  sessionStorage.bucket = bucket;
+
+                  // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
+                  // set the default config object
+                  var creds = new AWS.CognitoIdentityCredentials({
+                      IdentityPoolId: IdentityPoolId
+                  });
+                  AWS.config.credentials = creds;
+                  AWS.config.region = sessionStorage.region;
+
+                  // Actualizamos y refrescamos
+                  creds.expired = true;
+                  AWS.config.update({ region: sessionStorage.region, credentials: creds });
+                  AWS.config.credentials.refresh((errorRefreshCredentials) => {
+                    if (errorRefreshCredentials) {
+                      if (debug) console.log("error al refrescar las credenciales:");
+                      if (debug) console.log(errorRefreshCredentials);
+                    } else {
+                      if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
+                      if (debug) console.log('Estas son las credenciales y refrescadas:');
+                      if (debug) console.log('Region: ' + AWS.config.region);
+                      if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
+                      if (debug) console.log('========================================');
+                      if (debug) console.log('Credenciales:');
+                      if (debug) console.log(AWS.config.credentials);
+                      if (debug) console.log('========================================');
+                      if (debug) console.log('Almacenamos en sesión:');
+                      sessionStorage.accessKeyId = AWS.config.credentials.accessKeyId; 
+                      sessionStorage.secretAccessKey = AWS.config.credentials.secretAccessKey;
+                      sessionStorage.sessionToken = AWS.config.credentials.sessionToken;
+                      sessionStorage.expireTime = AWS.config.credentials.expireTime;
+                      sessionStorage.expired = false
+                      sessionStorage.counter = 2;
+                      sessionStorage.rol = "invitado"
+                      return true;
+                    }
+                  });
+                }
+              } // Fin retorno de ListUsers() sin error
+            }); // Fin ListUsers();
+          } // Fin de Obtener credenciales con getCredentialsForIdentity() correcto
+        }); // cognitoidentity.getCredentialsForIdentity
+      } // Si ID Cognito obtenido correctamente
+    }); // cognitoidentity.getId()
+  } else {
+    if (debug) console.log('There was a problem logging you in. No id_token');
+  }
 }
 
 // Called when an identity provider has a token for a logged in user
