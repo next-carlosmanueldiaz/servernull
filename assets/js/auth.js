@@ -117,15 +117,15 @@ function onLogIn(googleUser) {
     //                 if (debug) console.log('Usuario encontrado en el userpool Admins');
     //                 if (debug) console.log(listaUsuarios);           // successful response
     //                 if (debug) console.log('Ahora podemos hacer la llamada a AssumeRoleWithWebIdentity para hacerlo Admin');
-    //                 var sts = new AWS.STS();
-    //                 var paramsAssumeRole = {
-    //                   RoleArn: roleArnAccesoAdmin,
-    //                   RoleSessionName: roleSessionAdminName,
-    //                   WebIdentityToken: id_token,
-    //                   DurationSeconds: 3600,
-    //                 };
+                    var sts = new AWS.STS();
+                    var paramsAssumeRole = {
+                      RoleArn: roleArnAccesoAdmin,
+                      RoleSessionName: roleSessionAdminName,
+                      WebIdentityToken: id_token,
+                      DurationSeconds: 3600,
+                    };
     //                 if (debug) console.log(paramsAssumeRole);
-    //                 sts.assumeRoleWithWebIdentity(paramsAssumeRole, function (errAssumeRole, rolAsumido) {
+                    sts.assumeRoleWithWebIdentity(paramsAssumeRole, function (errAssumeRole, rolAsumido) {
     //                   if (errAssumeRole) {
     //                     if (debug) console.log('Error al asumir el rol de administrador');
     //                     if (debug) console.log(errAssumeRole, errAssumeRole.stack); // an error occurred
@@ -134,40 +134,40 @@ function onLogIn(googleUser) {
     //                     if (debug) console.log('========================================');
     //                     if (debug) console.log(rolAsumido);
     //                     if (debug) console.log('VOLVEMOS A ACTUALIZAR LAS CREDENCIALES');
-    //                     var credsData = {
-    //                       accessKeyId: rolAsumido.Credentials.AccessKeyId,
-    //                       secretAccessKey: rolAsumido.Credentials.SecretAccessKey,
-    //                       sessionToken: rolAsumido.Credentials.SessionToken,
-    //                       expireTime: rolAsumido.Credentials.Expiration,
-    //                       expired: false
-    //                     };
-    //                     var creds = new AWS.Credentials(credsData);
+                        var credsData = {
+                          accessKeyId: rolAsumido.Credentials.AccessKeyId,
+                          secretAccessKey: rolAsumido.Credentials.SecretAccessKey,
+                          sessionToken: rolAsumido.Credentials.SessionToken,
+                          expireTime: rolAsumido.Credentials.Expiration,
+                          expired: false
+                        };
+                        var creds = new AWS.Credentials(credsData);
     //                     if (debug) console.log(creds);
-    //                     creds.expired = true;
-    //                     AWS.config.update({ region: sessionStorage.region, credentials: creds });
-    //                     AWS.config.credentials.refresh((errorRefreshCreds) => {
-    //                       if (errorRefreshCreds) {
-    //                         if (debug) console.error(errorRefreshCreds);
-    //                       } else {
-    //                         if (debug) console.log('Nuevas credenciales del Administrador refrescadas:');
-    //                         if (debug) console.log('Region: ' + AWS.config.region);
-    //                         if (debug) console.log('Credenciales:');
-    //                         if (debug) console.log(AWS.config.credentials);
-    //                       }
-    //                     });
-    //                     if (typeof (Storage) !== "undefined") {
-    //                       sessionStorage.region = region;
-    //                       sessionStorage.bucket = bucket;
-    //                       sessionStorage.accessKeyId = rolAsumido.Credentials.AccessKeyId;
-    //                       sessionStorage.secretAccessKey = rolAsumido.Credentials.SecretAccessKey;
-    //                       sessionStorage.sessionToken = rolAsumido.Credentials.SessionToken;
-    //                       sessionStorage.expireTime = rolAsumido.Credentials.Expiration;
-    //                       sessionStorage.expired = false
-    //                       sessionStorage.counter = 2;
-    //                       // window.location.replace("/backend/index.html"); // Redirect anulado al backend.. mostramos home con login hecho
-    //                     } else {
-    //                       if (debug) console.log('Sorry! No Web Storage support..');
-    //                     }
+                        creds.expired = true;
+                        AWS.config.update({ region: sessionStorage.region, credentials: creds });
+                        AWS.config.credentials.refresh((errorRefreshCreds) => {
+                          if (errorRefreshCreds) {
+                            if (debug) console.error(errorRefreshCreds);
+                          } else {
+                            if (debug) console.log('Nuevas credenciales del Administrador refrescadas:');
+                            if (debug) console.log('Region: ' + AWS.config.region);
+                            if (debug) console.log('Credenciales:');
+                            if (debug) console.log(AWS.config.credentials);
+                          }
+                        });
+                        if (typeof (Storage) !== "undefined") {
+                          sessionStorage.region = region;
+                          sessionStorage.bucket = bucket;
+                          sessionStorage.accessKeyId = rolAsumido.Credentials.AccessKeyId;
+                          sessionStorage.secretAccessKey = rolAsumido.Credentials.SecretAccessKey;
+                          sessionStorage.sessionToken = rolAsumido.Credentials.SessionToken;
+                          sessionStorage.expireTime = rolAsumido.Credentials.Expiration;
+                          sessionStorage.expired = false
+                          sessionStorage.counter = 2;
+                          // window.location.replace("/backend/index.html"); // Redirect anulado al backend.. mostramos home con login hecho
+                        } else {
+                          if (debug) console.log('Sorry! No Web Storage support..');
+                        }
 
     //                     if (debug) console.log('Y POR FIN! YA PODEMOS ACCEDER A LOS FICHEROS PERMITIDOS SÓLO PARA ADMINISTRADOR!:');
     //                   } // Fin assumeRole correcto
