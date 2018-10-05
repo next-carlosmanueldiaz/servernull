@@ -8,19 +8,6 @@ function getCredentials() {
     if (sessionStorage.id_token && sessionStorage.id_token !== "") {
       userLoggedIn("accounts.google.com", sessionStorage.id_token);
       return true;
-/*    if (sessionStorage.accessKeyId && sessionStorage.secretAccessKey && sessionStorage.sessionToken && sessionStorage.expired) {
-      // HTML5 Web Storage: https://goo.gl/CLhMq3
-      var credsData = {
-        accessKeyId: sessionStorage.accessKeyId,
-        secretAccessKey: sessionStorage.secretAccessKey,
-        sessionToken: sessionStorage.sessionToken,
-        expireTime: sessionStorage.expireTime,
-        expired: sessionStorage.expired
-      };
-      var creds = new AWS.Credentials(credsData);
-      AWS.config.update({region: sessionStorage.region, credentials: creds});
-      if (debug) console.log('Acceso Concedido.');
-      return true;*/
     } else {
       // Unauthenticated Identities
       // ===========================================================================
@@ -80,12 +67,20 @@ function userLoggedIn(providerName, token) {
     });
     AWS.config.credentials = creds;
     AWS.config.region = sessionStorage.region;
-    
+
     creds.params.Logins = creds.params.Logins || {};
     creds.params.Logins[providerName] = token;
 
     // Expire credentials to refresh them on the next request
     creds.expired = true;
+
+    sessionStorage.accessKeyId = AWS.config.credentials.accessKeyId; 
+    sessionStorage.secretAccessKey = AWS.config.credentials.secretAccessKey;
+    sessionStorage.sessionToken = AWS.config.credentials.sessionToken;
+    sessionStorage.expireTime = AWS.config.credentials.expireTime;
+    sessionStorage.expired = false
+    sessionStorage.counter = 2;
+    sessionStorage.rol = "invitado"
 }
 
 /**
