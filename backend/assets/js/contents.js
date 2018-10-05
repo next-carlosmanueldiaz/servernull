@@ -148,7 +148,7 @@ function expiredToken() {
   sessionStorage.expired = "";
   console.log('User signed out.');
   
-  window.location.replace("/home/index.html");
+  // window.location.replace("/home/index.html");
 }
 
 /**
@@ -206,7 +206,7 @@ app.controller('myCtrl', function ($scope) {
       if (errGetObject) {
         if (debug) console.log('Error al leer  ' + $scope.key + ' o no tiene permisos.');
         if (debug) console.log(errGetObject);
-        window.location.replace("/home/index.html");
+        // window.location.replace("/home/index.html");
         expiredToken();
       } else {
         var file = JSON.parse(data.Body.toString('utf-8'));
