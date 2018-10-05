@@ -109,7 +109,7 @@ app.controller('myCtrl', function ($scope) {
       if (errGetObject) {
         if (debug) console.log('Error al leer  ' + $scope.key + ' o no tiene permisos.');
         if (debug) console.log(errGetObject);
-        expiredToken();
+        // expiredToken();
       } else {
         var file = JSON.parse(data.Body.toString('utf-8'));
         for (var key in file) {
