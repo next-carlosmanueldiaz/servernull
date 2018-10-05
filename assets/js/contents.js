@@ -16,7 +16,7 @@ function getCredentials() {
       };
       var creds = new AWS.Credentials(credsData);
       AWS.config.update({region: sessionStorage.region, credentials: creds});
-      if (debug) console.log('Acceso condecido como administrador.');
+      if (debug) console.log('Acceso condecido.');
       return true;
     } else {
       // Unauthenticated Identities
@@ -49,6 +49,15 @@ function getCredentials() {
           if (debug) console.log('Credenciales:');
           if (debug) console.log(AWS.config.credentials);
           if (debug) console.log('========================================');
+          if (debug) console.log('Almacenamos en sesión:');
+          sessionStorage.accessKeyId = AWS.config.credentials.accessKeyId; 
+          sessionStorage.secretAccessKey = AWS.config.credentials.secretAccessKey;
+          sessionStorage.sessionToken = AWS.config.credentials.sessionToken;
+          sessionStorage.expireTime = AWS.config.credentials.expireTime;
+          sessionStorage.expired = false
+          sessionStorage.counter = 2;
+          sessionStorage.rol = "invitado"
+          return true;
         }
       });
 
