@@ -54,9 +54,11 @@ function onLogIn(googleUser) {
     // - Si no hay id_token: usuario invitado.
     // ====================================================================================
     sessionStorage.id_token = id_token;
-    userLoggedIn("accounts.google.com", sessionStorage.id_token);
+    // userLoggedIn("accounts.google.com", sessionStorage.id_token);
     // ====================================================================================
     sessionStorage.IdentityPoolId = IdentityPoolId;
+    sessionStorage.roleArnAccesoAdmin = roleArnAccesoAdmin;
+    sessionStorage.roleSessionAdminName = roleSessionAdminName;
 
     // AWS.config.region = sessionStorage.region;
     // var cognitoidentity = new AWS.CognitoIdentity();
@@ -124,16 +126,16 @@ function onLogIn(googleUser) {
                       WebIdentityToken: id_token,
                       DurationSeconds: 3600,
                     };
-    //                 if (debug) console.log(paramsAssumeRole);
+                    if (debug) console.log(paramsAssumeRole);
                     sts.assumeRoleWithWebIdentity(paramsAssumeRole, function (errAssumeRole, rolAsumido) {
-    //                   if (errAssumeRole) {
-    //                     if (debug) console.log('Error al asumir el rol de administrador');
-    //                     if (debug) console.log(errAssumeRole, errAssumeRole.stack); // an error occurred
-    //                   } else {
-    //                     if (debug) console.log('ASUMIMOS EL NUEVO ROL DEL ADMINISTRADOR:');
-    //                     if (debug) console.log('========================================');
-    //                     if (debug) console.log(rolAsumido);
-    //                     if (debug) console.log('VOLVEMOS A ACTUALIZAR LAS CREDENCIALES');
+                      if (errAssumeRole) {
+                        if (debug) console.log('Error al asumir el rol de administrador');
+                        if (debug) console.log(errAssumeRole, errAssumeRole.stack); // an error occurred
+                      } else {
+                        if (debug) console.log('ASUMIMOS EL NUEVO ROL DEL ADMINISTRADOR:');
+                        if (debug) console.log('========================================');
+                        if (debug) console.log(rolAsumido);
+                        if (debug) console.log('VOLVEMOS A ACTUALIZAR LAS CREDENCIALES');
                         var credsData = {
                           accessKeyId: rolAsumido.Credentials.AccessKeyId,
                           secretAccessKey: rolAsumido.Credentials.SecretAccessKey,
@@ -142,7 +144,7 @@ function onLogIn(googleUser) {
                           expired: false
                         };
                         var creds = new AWS.Credentials(credsData);
-    //                     if (debug) console.log(creds);
+                        if (debug) console.log(creds);
                         creds.expired = true;
                         AWS.config.update({ region: sessionStorage.region, credentials: creds });
                         AWS.config.credentials.refresh((errorRefreshCreds) => {
@@ -169,8 +171,8 @@ function onLogIn(googleUser) {
                           if (debug) console.log('Sorry! No Web Storage support..');
                         }
 
-    //                     if (debug) console.log('Y POR FIN! YA PODEMOS ACCEDER A LOS FICHEROS PERMITIDOS SÓLO PARA ADMINISTRADOR!:');
-    //                   } // Fin assumeRole correcto
+                        if (debug) console.log('Y POR FIN! YA PODEMOS ACCEDER A LOS FICHEROS PERMITIDOS SÓLO PARA ADMINISTRADOR!:');
+                      } // Fin assumeRole correcto
     //                 }); // Fin llamada assumeRoleWithWebIdentity
     //               } else {
     //                 debug = true;
