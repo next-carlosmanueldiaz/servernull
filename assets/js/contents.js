@@ -73,6 +73,14 @@ function getCredentials() {
 
 // Called when an identity provider has a token for a logged in user
 function userLoggedIn(providerName, token) {
+    // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
+    // set the default config object
+    var creds = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: sessionStorage.IdentityPoolId
+    });
+    AWS.config.credentials = creds;
+    AWS.config.region = sessionStorage.region;
+    
     creds.params.Logins = creds.params.Logins || {};
     creds.params.Logins[providerName] = token;
 

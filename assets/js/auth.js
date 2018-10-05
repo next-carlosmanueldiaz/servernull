@@ -55,7 +55,7 @@ function onLogIn(googleUser) {
     // ====================================================================================
     sessionStorage.id_token = id_token;
     // ====================================================================================
-
+    sessionStorage.IdentityPoolId = IdentityPoolId;
 
     AWS.config.region = sessionStorage.region;
     var cognitoidentity = new AWS.CognitoIdentity();
