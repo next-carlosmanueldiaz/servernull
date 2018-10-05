@@ -16,7 +16,7 @@ function getCredentials() {
       };
       var creds = new AWS.Credentials(credsData);
       AWS.config.update({region: sessionStorage.region, credentials: creds});
-      if (debug) console.log('Acceso condecido.');
+      if (debug) console.log('Acceso Concedido.');
       return true;
     } else {
       // Unauthenticated Identities
