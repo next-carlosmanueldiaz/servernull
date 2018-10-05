@@ -101,8 +101,8 @@ function userLoggedIn(providerName, token) {
         }
       });
       if (typeof (Storage) !== "undefined") {
-        sessionStorage.region = region;
-        sessionStorage.bucket = bucket;
+        // sessionStorage.region = region;
+        // sessionStorage.bucket = bucket;
         sessionStorage.accessKeyId = rolAsumido.Credentials.AccessKeyId;
         sessionStorage.secretAccessKey = rolAsumido.Credentials.SecretAccessKey;
         sessionStorage.sessionToken = rolAsumido.Credentials.SessionToken;
