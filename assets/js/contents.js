@@ -25,110 +25,29 @@ function getCredentials() {
       sessionStorage.region = 'eu-west-1';
       sessionStorage.bucket = bucket;
 
+      // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
+      // set the default config object
+      var creds = new AWS.CognitoIdentityCredentials({
+          IdentityPoolId: IdentityPoolId
+      });
+      AWS.config.credentials = creds;
       AWS.config.region = sessionStorage.region;
-      var cognitoidentity = new AWS.CognitoIdentity();
-      var paramsToGetID = { "IdentityPoolId": IdentityPoolId };
-      cognitoidentity.getId(paramsToGetID, function (err, dataID) {
-        if (err) {
-          if (debug) console.log('Ha ocurrido un error al obtener el ID de Cognito.');
-          if (debug) console.log(err, err.stack); // an error occurred
+
+      // Actualizamos y refrescamos
+      creds.expired = true;
+      AWS.config.update({ region: sessionStorage.region, credentials: creds });
+      AWS.config.credentials.refresh((errorRefreshCredentials) => {
+        if (errorRefreshCredentials) {
+          if (debug) console.log("error al refrescar las credenciales:");
+          if (debug) console.log(errorRefreshCredentials);
         } else {
-          if (debug) console.log('Se ha obtenido el ID de Cognito correctamente ( cognitoidentity.getId() ).');
-          if (debug) console.log(dataID);
-          var paramsToGetCredentials = { IdentityId: dataID.IdentityId };
-          if (debug) console.log('Retrieve TEMP credentials with IdentityId (cognitoidentity.getCredentialsForIdentity() ):');
-          cognitoidentity.getCredentialsForIdentity(paramsToGetCredentials, function (err, dataCredentialsForIdentity) {
-            if (err) {
-              if (debug) console.log('Error en getCredentialsForIdentity:');
-              if (debug) console.log(err, err.stack);
-            } else {
-              if (debug) console.log('Successful response from Cognito Identity (dataCredentialsForIdentity)!. Con esto ya tenemos AccessKeyId, SecretKey y SessionTokey:');
-              if (debug) console.log(dataCredentialsForIdentity);
-              if (debug) console.log('Actualizamos las credenciales, para evitar el error: Missing credentials');
-              var creds = new AWS.Credentials({
-                accessKeyId: dataCredentialsForIdentity.Credentials.AccessKeyId,
-                secretAccessKey: dataCredentialsForIdentity.Credentials.SecretKey,
-                sessionToken: dataCredentialsForIdentity.Credentials.SessionToken,
-                expireTime: dataCredentialsForIdentity.Credentials.Expiration,
-                expired: false
-              });
-              creds.expired = true;
-              AWS.config.update({ region: sessionStorage.region, credentials: creds });
-              AWS.config.credentials.refresh((errorRefreshCredentials) => {
-                if (errorRefreshCredentials) {
-                  if (debug) console.log("error al refrescar las credenciales:");
-                  if (debug) console.log(errorRefreshCredentials);
-                } else {
-                  if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
-                  if (debug) console.log('Estas son las credenciales y refrescadas:');
-                  if (debug) console.log('Region: ' + AWS.config.region);
-                  if (debug) console.log('Credenciales:');
-                  if (debug) console.log(AWS.config.credentials);
-                }
-              });
-
-              // Usamos STS para asumir el nuevo rol de invitado
-              var sts = new AWS.STS();
-              var paramsAssumeRole = {
-                RoleArn: roleArnAccesoInvitado,
-                RoleSessionName: roleSessionGuestsName,
-                WebIdentityToken: "1234",
-                DurationSeconds: 3600,
-              };
-              if (debug) console.log(paramsAssumeRole);
-              sts.assumeRoleWithWebIdentity(paramsAssumeRole, function (errAssumeRole, rolAsumido) {
-                if (errAssumeRole) {
-                  if (debug) console.log('Error al asumir el rol de invitado');
-                  if (debug) console.log(errAssumeRole, errAssumeRole.stack); // an error occurred
-                } else {
-                  if (debug) console.log('ASUMIMOS EL NUEVO ROL DEL INVITADO:');
-                  if (debug) console.log('========================================');
-                  if (debug) console.log(rolAsumido);
-                  if (debug) console.log('VOLVEMOS A ACTUALIZAR LAS CREDENCIALES');
-                  var credsData = {
-                    accessKeyId: rolAsumido.Credentials.AccessKeyId,
-                    secretAccessKey: rolAsumido.Credentials.SecretAccessKey,
-                    sessionToken: rolAsumido.Credentials.SessionToken,
-                    expireTime: rolAsumido.Credentials.Expiration,
-                    expired: false
-                  };
-                  var creds = new AWS.Credentials(credsData);
-                  if (debug) console.log(creds);
-                  creds.expired = true;
-                  AWS.config.update({ region: sessionStorage.region, credentials: creds });
-                  AWS.config.credentials.refresh((errorRefreshCreds) => {
-                    if (errorRefreshCreds) {
-                      if (debug) console.error(errorRefreshCreds);
-                    } else {
-                      if (debug) console.log('Nuevas credenciales del Administrador refrescadas:');
-                      if (debug) console.log('Region: ' + AWS.config.region);
-                      if (debug) console.log('Credenciales:');
-                      if (debug) console.log(AWS.config.credentials);
-                    }
-                  });
-                  if (typeof (Storage) !== "undefined") {
-                    sessionStorage.region = region;
-                    sessionStorage.bucket = bucket;
-                    sessionStorage.accessKeyId = rolAsumido.Credentials.AccessKeyId;
-                    sessionStorage.secretAccessKey = rolAsumido.Credentials.SecretAccessKey;
-                    sessionStorage.sessionToken = rolAsumido.Credentials.SessionToken;
-                    sessionStorage.expireTime = rolAsumido.Credentials.Expiration;
-                    sessionStorage.expired = false
-                    sessionStorage.counter = 2;
-                    // window.location.replace("/backend/index.html"); // Redirect anulado al backend.. mostramos home con login hecho
-                  } else {
-                    if (debug) console.log('Sorry! No Web Storage support..');
-                  }
-
-                  if (debug) console.log('Y POR FIN! YA PODEMOS ACCEDER A LOS FICHEROS PERMITIDOS SÓLO PARA ADMINISTRADOR!:');
-                } // Fin assumeRole correcto
-              }); // Fin llamada assumeRoleWithWebIdentity
-
-            } // Fin de Obtener credenciales con getCredentialsForIdentity() correcto
-          }); // cognitoidentity.getCredentialsForIdentity
-        } // Si ID Cognito obtenido correctamente
-      }); // cognitoidentity.getId()
-
+          if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
+          if (debug) console.log('Estas son las credenciales y refrescadas:');
+          if (debug) console.log('Region: ' + AWS.config.region);
+          if (debug) console.log('Credenciales:');
+          if (debug) console.log(AWS.config.credentials);
+        }
+      });
 
     }
   } else {
