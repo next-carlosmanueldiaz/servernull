@@ -54,6 +54,7 @@ function getCredentials() {
           sessionStorage.expired = false
           sessionStorage.counter = 2;
           sessionStorage.rol = "invitado"
+          if (debug) console.log(sessionStorage);
           return true;
         }
       });
