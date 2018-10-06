@@ -109,6 +109,9 @@ function signOut(e) {
     sessionStorage.secretAccessKey = "";
     sessionStorage.sessionToken = "";
     sessionStorage.expired = "";
+    if (cognitoUser != null) {
+      cognitoUser.signOut();
+    }
     console.log('User signed out.');
   });
 }
