@@ -19,6 +19,45 @@ function getCredentials() {
       if (debug) console.log('Acceso condecido como administrador.');
       return true;
     }
+  } else {
+    // Unauthenticated Identities
+    // ===========================================================================
+    // Obtenemos el rol de usuario no autenticado.
+    // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
+    // set the default config object
+    var creds = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: IdentityPoolId
+    });
+    AWS.config.credentials = creds;
+    AWS.config.region = sessionStorage.region;
+
+    // Actualizamos y refrescamos
+    creds.expired = true;
+    AWS.config.update({ region: sessionStorage.region, credentials: creds });
+    AWS.config.credentials.refresh((errorRefreshCredentials) => {
+      if (errorRefreshCredentials) {
+        if (debug) console.log("error al refrescar las credenciales:");
+        if (debug) console.log(errorRefreshCredentials);
+      } else {
+        if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
+        if (debug) console.log('Estas son las credenciales y refrescadas:');
+        if (debug) console.log('Region: ' + AWS.config.region);
+        if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
+        if (debug) console.log('========================================');
+        if (debug) console.log('Credenciales:');
+        if (debug) console.log(AWS.config.credentials);
+        if (debug) console.log('========================================');
+        if (debug) console.log('Almacenamos en sesión:');
+        sessionStorage.accessKeyId = AWS.config.credentials.accessKeyId; 
+        sessionStorage.secretAccessKey = AWS.config.credentials.secretAccessKey;
+        sessionStorage.sessionToken = AWS.config.credentials.sessionToken;
+        sessionStorage.expireTime = AWS.config.credentials.expireTime;
+        sessionStorage.expired = false
+        sessionStorage.counter = 2;
+        sessionStorage.rol = "invitado"
+        return true;
+      }
+    });
   }
 }
 
@@ -99,7 +138,10 @@ app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
     $scope.googleSigninClientId = googleSigninClientId;
+
+    sessionStorage.region = region;
     sessionStorage.bucket = bucket;
+
     $scope.bucket = bucket;
     $scope.key = 'home/content/json/contents.json';
     
