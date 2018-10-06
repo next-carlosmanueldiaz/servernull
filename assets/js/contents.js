@@ -109,11 +109,14 @@ function signOut(e) {
     sessionStorage.secretAccessKey = "";
     sessionStorage.sessionToken = "";
     sessionStorage.expired = "";
-    var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
-    var poolData = {UserPoolId: userPoolId, ClientId: appClientId};
-    var userPool = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserPool(poolData);
-    var userPoolData = {Username: username, Pool: userPool};
-    const cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userPoolData);
+
+    var data = {
+        UserPoolId : userPoolId, // Your user pool id here
+        ClientId : appClientId // Your client id here
+    };
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+    var cognitoUser = userPool.getCurrentUser();
+
     if (cognitoUser != null) {
       cognitoUser.signOut();
     }
