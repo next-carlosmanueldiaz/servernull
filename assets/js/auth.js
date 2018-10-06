@@ -16,7 +16,7 @@ function getQueryVariable(variable) {
       return pair[1];
     }
   }
-  console.debug('Query Variable ' + variable + ' not found');
+  // if (debug) console.debug('Query Variable ' + variable + ' not found');
 }
 
 var salir = getQueryVariable('salir');
