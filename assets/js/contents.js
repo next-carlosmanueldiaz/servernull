@@ -45,6 +45,7 @@ function getCredentials() {
           if (debug) console.log('========================================');
           if (debug) console.log('Credenciales:');
           if (debug) console.log(AWS.config.credentials);
+          if (debug) console.log('RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName)
           if (debug) console.log('========================================');
           if (debug) console.log('Almacenamos en sesión:');
           sessionStorage.accessKeyId = AWS.config.credentials.accessKeyId; 
