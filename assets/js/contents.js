@@ -99,8 +99,8 @@ app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
     $scope.googleSigninClientId = googleSigninClientId;
-
-    $scope.bucket = sessionStorage.bucket;
+    sessionStorage.bucket = bucket;
+    $scope.bucket = bucket;
     $scope.key = 'home/content/json/contents.json';
     
     s3 = new AWS.S3();

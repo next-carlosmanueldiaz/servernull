@@ -20,8 +20,10 @@ function getQueryVariable(variable) {
 }
 
 var salir = getQueryVariable('salir');
-if (salir === "true") {
-  signOut();
+if (typeof salir !== 'undefined') {
+  if (salir === "true") {
+    signOut();
+  }
 }
 
 var app = angular.module('myApp', []);
