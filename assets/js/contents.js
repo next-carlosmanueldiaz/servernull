@@ -119,6 +119,8 @@ function signOut(e) {
 
     if (cognitoUser != null) {
       cognitoUser.signOut();
+    } else {
+      if (debug) console.log('userPool.getCurrentUser() retorna NULL.');
     }
     console.log('User signed out.');
   });
