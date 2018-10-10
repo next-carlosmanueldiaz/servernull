@@ -19,8 +19,21 @@ function getCredentials() {
       if (debug) console.log('========================================');
       if (debug) console.log('Credenciales:');
       if (debug) console.log(AWS.config.credentials);
-      if (debug) console.log('RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
+      // if (debug) console.log('RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
       if (debug) console.log('Acceso condecido como administrador.');
+
+      // Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
+      var sts = new AWS.STS();
+      var params = {};
+      sts.getCallerIdentity(params, function(err, data) {
+        if (err) {
+          if (debug) console.log('Ocurrió un error al consultar la identidad');
+          if (debug) console.log(err, err.stack); // an error occurred
+        } else {
+          if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
+          if (debug) console.log(data);           // successful response
+        }
+      });
       return true;
     } 
     // PERMISOS: ¿QUÉ SE PUEDE VER Y QUÉ SE PUEDE MODIFICAR?
