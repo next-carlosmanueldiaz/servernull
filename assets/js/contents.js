@@ -5,6 +5,7 @@
 function getCredentials() {
   // var debug = false;
 
+
   if (typeof (Storage) !== "undefined") {
     if (sessionStorage.accessKeyId && sessionStorage.secretAccessKey && sessionStorage.sessionToken && sessionStorage.expired) {
       var region = sessionStorage.region; // https://goo.gl/CLhMq3
@@ -24,13 +25,62 @@ function getCredentials() {
       if (debug) console.log('Acceso condecido como administrador.');
       return true;
     } 
-    // ¿y si no?
     // PERMISOS: ¿QUÉ SE PUEDE VER Y QUÉ SE PUEDE MODIFICAR?
     // - USUARIO ANÓNIMO (SIN AUTENTICAR): puede leer todo.
     // - USUARIO AUTENTICADO: puede escribir en algunos archivos
-    // No es necesario hacer nada cuando el usuario es anónimo, porque ya tiene acceso de lectura
-    // 
-    // Lo que debemos hacer es darle acceso de lectura: público
+    
+    // Para poder hacer peticiones a S3 y leer un archivo a través del API, debemos tener algún tipo de credenciales
+    // Aunque el archivo sea público, es necesario tener credenciales para poder hacer peticiones al API de S3.
+
+    else {
+      // Unauthenticated Identities
+      // ===========================================================================
+      // Obtenemos el rol de usuario no autenticado.
+      // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
+      // set the default config object
+      var creds = new AWS.CognitoIdentityCredentials({
+          IdentityPoolId: IdentityPoolId
+      });
+      AWS.config.credentials = creds;
+      AWS.config.region = sessionStorage.region;
+
+      // Actualizamos y refrescamos
+      creds.expired = true;
+      AWS.config.update({ region: sessionStorage.region, credentials: creds });
+      AWS.config.credentials.refresh((errorRefreshCredentials) => {
+        if (errorRefreshCredentials) {
+          if (debug) console.log("error al refrescar las credenciales:");
+          if (debug) console.log(errorRefreshCredentials);
+        } else {
+          if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
+          if (debug) console.log('Estas son las credenciales y refrescadas:');
+          if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
+          if (debug) console.log('========================================');
+          if (debug) console.log('Credenciales:');
+          if (debug) console.log(AWS.config.credentials);
+          if (debug) console.log('RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
+          if (debug) console.log('========================================');
+
+          sessionStorage.rol = "invitado"
+          if (debug) console.log(sessionStorage);
+
+          // Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
+          var sts = new AWS.STS();
+          var params = {};
+          sts.getCallerIdentity(params, function(err, data) {
+            if (err) {
+              if (debug) console.log('Ocurrió un error al consultar la identidad');
+              if (debug) console.log(err, err.stack); // an error occurred
+            } else {
+              if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
+              if (debug) console.log(data);           // successful response
+            }
+          });
+
+          return true;
+        }
+      });
+    }
   } else {
     if (debug) console.log('No sessionStorage allowed.');
   }
