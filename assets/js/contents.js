@@ -4,7 +4,11 @@
  */
 function getCredentials() {
   // var debug = false;
-
+  var myCredentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: IdentityPoolId});
+  var myConfig = new AWS.Config({
+    credentials: myCredentials, 
+    region: region
+  });
   // Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
   var sts = new AWS.STS();
   var params = {};
