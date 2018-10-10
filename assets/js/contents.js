@@ -23,7 +23,13 @@ function getCredentials() {
       if (debug) console.log('Acceso condecido como administrador.');
       return true;
     } 
-    // No es necesario hacer nada cuando el usuario es anónimo.
+    // PERMISOS: ¿QUÉ SE PUEDE VER Y QUÉ SE PUEDE MODIFICAR?
+    // - USUARIO ANÓNIMO (SIN AUTENTICAR): puede leer todo.
+    // - USUARIO AUTENTICADO: puede escribir en algunos archivos
+    // No es necesario hacer nada cuando el usuario es anónimo, porque ya tiene acceso de lectura
+
+
+
 
     // else {
     //   // Unauthenticated Identities

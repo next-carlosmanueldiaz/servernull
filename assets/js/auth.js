@@ -168,6 +168,20 @@ function onLogIn(googleUser) {
                           sessionStorage.expireTime = rolAsumido.Credentials.Expiration;
                           sessionStorage.expired = false
                           sessionStorage.counter = 2;
+
+
+                          // Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
+                          var params = {};
+                          sts.getCallerIdentity(params, function(err, data) {
+                            if (err) {
+                              if (debug) console.log('Ocurrió un error al consultar la identidad');
+                              if (debug) console.log(err, err.stack); // an error occurred
+                            } else {
+                              if (debug) console.log('DATOS DE LA IDENTIDAD IAM');
+                              if (debug) console.log(data);           // successful response
+                            }
+                          });
+
                           // window.location.replace("/backend/index.html"); // Redirect anulado al backend.. mostramos home con login hecho
                         } else {
                           if (debug) console.log('Sorry! No Web Storage support..');
