@@ -36,6 +36,22 @@ app.controller('myCtrl', function ($scope) {
 });
 
 function onLogIn(googleUser) {
+  // SI YA TENEMOS CREDENCIALES, NO NECESITAMOS VOLVER A HACER LOGIN
+  // Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
+  var sts = new AWS.STS();
+  var params = {};
+  sts.getCallerIdentity(params, function(err, data) {
+    if (err) {
+      if (debug) console.log('Ocurrió un error al consultar la identidad');
+      if (debug) console.log(err, err.stack); // an error occurred
+    } else {
+      if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
+      if (debug) console.log(data);           // successful response
+      return;
+    }
+  });
+
+
   if (!googleUser.error) {
     var profile = googleUser.getBasicProfile();
     if (debug) console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
