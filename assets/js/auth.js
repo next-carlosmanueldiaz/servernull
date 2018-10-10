@@ -128,6 +128,7 @@ function onLogIn(googleUser) {
                       WebIdentityToken: id_token,
                       DurationSeconds: 3600,
                     };
+                    if (debug) console.log('SOLICITAMOS ASUMIR ACCESO DE:');
                     if (debug) console.log(paramsAssumeRole);
                     sts.assumeRoleWithWebIdentity(paramsAssumeRole, function (errAssumeRole, rolAsumido) {
                       if (errAssumeRole) {
