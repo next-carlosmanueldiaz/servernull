@@ -39,8 +39,24 @@ function whoAreYou(googleUser) {
   // ¿QUIÉN ERES?
   if (debug) console.log('¿QUIÉN ERES?');
   if (debug) console.log('========================================');
-  // SI YA TENEMOS CREDENCIALES, NO NECESITAMOS VOLVER A HACER LOGIN
   // Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
+
+  // Comprobamos su rol actual. Esto no es inmediato.
+  checkCurrentRoleIdentity();
+  // Vale, eres INVITADO a la fiesta, pero.. ¿eres algo más?
+  // Con su id_token, 
+  // var id_token = getGoogleUser(googleUser).then(userLoggedIn('accounts.google.com', id_token), null);
+  getGoogleUser(googleUser).then(id_token => userLoggedIn('accounts.google.com', id_token));
+  // En base al ARN recibido, hacemos el proceso de Login o no
+  // Casos:
+  // - Anónimo. Rol: ninguno. Se le asigna un rol UnAuth para que use la página
+  // - Invitado: Rol: ?. Se le asigna un rol UnAuth para que use la página
+  // - Admin: Rol:
+      
+
+}
+
+function checkCurrentRoleIdentity() {
   var sts = new AWS.STS();
   var params = {};
   sts.getCallerIdentity(params, function(err, data) {
@@ -54,17 +70,6 @@ function whoAreYou(googleUser) {
       if (debug) console.log('----------------------------------------');
       if (debug) console.log(' -> ROL ACTUAL: ' + data.Arn);
       if (debug) console.log('========================================');
-      
-      // Vale, eres INVITADO a la fiesta, pero.. ¿eres algo más?
-
-      userLoggedIn('accounts.google.com', token)
-
-      // En base al ARN recibido, hacemos el proceso de Login o no
-      // Casos:
-      // - Anónimo. Rol: ninguno. Se le asigna un rol UnAuth para que use la página
-      // - Invitado: Rol: ?. Se le asigna un rol UnAuth para que use la página
-      // - Admin: Rol:
-      
     }
   });
 }
