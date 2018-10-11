@@ -42,11 +42,11 @@ function whoAreYou(googleUser) {
   // Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
 
   // Comprobamos su rol actual. Esto no es inmediato.
-  checkCurrentRoleIdentity();
+  checkCurrentRoleIdentity().then(getGoogleUser(googleUser).then(id_token => userLoggedIn('accounts.google.com', id_token)));
   // Vale, eres INVITADO a la fiesta, pero.. ¿eres algo más?
   // Con su id_token, 
   // var id_token = getGoogleUser(googleUser).then(userLoggedIn('accounts.google.com', id_token), null);
-  getGoogleUser(googleUser).then(id_token => userLoggedIn('accounts.google.com', id_token));
+  
   // En base al ARN recibido, hacemos el proceso de Login o no
   // Casos:
   // - Anónimo. Rol: ninguno. Se le asigna un rol UnAuth para que use la página
@@ -74,15 +74,6 @@ function checkCurrentRoleIdentity() {
   });
 }
 
-// Called when an identity provider has a token for a logged in user
-function userLoggedIn(providerName, token) {
-    creds.params.Logins = creds.params.Logins || {};
-    creds.params.Logins[providerName] = token;
-
-    // Expire credentials to refresh them on the next request
-    creds.expired = true;
-}
-
 function getGoogleUser(googleUser) {
   if (!googleUser.error) {
     var profile = googleUser.getBasicProfile();
@@ -98,6 +89,15 @@ function getGoogleUser(googleUser) {
   } else {
     return null
   }
+}
+
+// Called when an identity provider has a token for a logged in user
+function userLoggedIn(providerName, token) {
+    creds.params.Logins = creds.params.Logins || {};
+    creds.params.Logins[providerName] = token;
+    // Expire credentials to refresh them on the next request
+    creds.expired = true;
+    checkCurrentRoleIdentity();
 }
 
 function setUnauth() {
