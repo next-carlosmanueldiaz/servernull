@@ -48,10 +48,10 @@ function whoAreYou(googleUser) {
     } else {
       if (debug) console.log('========================================');
       if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
-      if (debug) console.log(data);           // successful response
+      // if (debug) console.log(data);           // successful response
+      if (debug) console.log('----------------------------------------');
+      if (debug) console.log('ROL ACTUAL: ' + data.Arn);
       if (debug) console.log('========================================');
-      if (debug) console.log(data.Arn);
-
       // En base al ARN recibido, hacemos el proceso de Login o no
       // Casos:
       // - Anónimo. Rol: ninguno. Se le asigna un rol UnAuth para que use la página
