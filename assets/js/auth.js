@@ -90,6 +90,8 @@ function setUnauth() {
       // if (debug) console.log(AWS.config.credentials);
       if (debug) console.log('RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
       if (debug) console.log('========================================');
+    }
+  });
 }
 
 function onLogIn(googleUser) {
