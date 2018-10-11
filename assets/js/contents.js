@@ -74,7 +74,7 @@ function getCredentials() {
           if (debug) console.log('Credenciales:');
           if (debug) console.log('----------------------------------------');
           // if (debug) console.log(AWS.config.credentials);
-          if (debug) console.log('RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
+          if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
           if (debug) console.log('========================================');
 
           sessionStorage.rol = "invitado"
@@ -92,7 +92,7 @@ function getCredentials() {
               if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
               // if (debug) console.log(data);           // successful response
               if (debug) console.log('----------------------------------------');
-              if (debug) console.log('ROL ACTUAL: ' + data.Arn);
+              if (debug) console.log(' -> ROL ACTUAL: ' + data.Arn);
               if (debug) console.log('========================================');
             }
           });
