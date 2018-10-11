@@ -37,6 +37,8 @@ app.controller('myCtrl', function ($scope) {
 
 function whoAreYou(googleUser) {
   // ¿QUIÉN ERES?
+  if (debug) console.log('¿QUIÉN ERES?');
+  if (debug) console.log('========================================');
   // SI YA TENEMOS CREDENCIALES, NO NECESITAMOS VOLVER A HACER LOGIN
   // Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
   var sts = new AWS.STS();
@@ -53,6 +55,9 @@ function whoAreYou(googleUser) {
       if (debug) console.log(' -> ROL ACTUAL: ' + data.Arn);
       if (debug) console.log('========================================');
       
+      // Vale, eres INVITADO a la fiesta, pero.. ¿eres algo más?
+
+      userLoggedIn('accounts.google.com', token)
 
       // En base al ARN recibido, hacemos el proceso de Login o no
       // Casos:
@@ -62,6 +67,32 @@ function whoAreYou(googleUser) {
       
     }
   });
+}
+
+// Called when an identity provider has a token for a logged in user
+function userLoggedIn(providerName, token) {
+    creds.params.Logins = creds.params.Logins || {};
+    creds.params.Logins[providerName] = token;
+
+    // Expire credentials to refresh them on the next request
+    creds.expired = true;
+}
+
+function getGoogleUser(googleUser) {
+  if (!googleUser.error) {
+    var profile = googleUser.getBasicProfile();
+    if (debug) console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    if (debug) console.log('Name: ' + profile.getName());
+    if (debug) console.log('Image URL: ' + profile.getImageUrl());
+    if (debug) console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+    var id_token = googleUser.getAuthResponse().id_token;
+    if (debug) console.log('You are logged in. (Google account). You have id_token:');
+    if (debug) console.log('id_token: ' + id_token); // Token para aws
+    return id_token;
+  } else {
+    return null
+  }
 }
 
 function setUnauth() {
