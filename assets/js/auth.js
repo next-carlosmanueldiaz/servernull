@@ -35,7 +35,8 @@ app.controller('myCtrl', function ($scope) {
   }
 });
 
-function onLogIn(googleUser) {
+function whoAreYou(googleUser) {
+  // ¿QUIÉN ERES?
   // SI YA TENEMOS CREDENCIALES, NO NECESITAMOS VOLVER A HACER LOGIN
   // Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
   var sts = new AWS.STS();
@@ -45,13 +46,53 @@ function onLogIn(googleUser) {
       if (debug) console.log('Ocurrió un error al consultar la identidad');
       if (debug) console.log(err, err.stack); // an error occurred
     } else {
+      if (debug) console.log('========================================');
       if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
       if (debug) console.log(data);           // successful response
-      return;
+      if (debug) console.log('========================================');
+      if (debug) console.log(data.Arn);
+
+      // En base al ARN recibido, hacemos el proceso de Login o no
+      // Casos:
+      // - Anónimo. Rol: ninguno. Se le asigna un rol UnAuth para que use la página
+      // - Invitado: Rol: ?. Se le asigna un rol UnAuth para que use la página
+      // - Admin: Rol:
+      
     }
   });
+}
 
+function setUnauth() {
+  // Unauthenticated Identities
+  // ===========================================================================
+  // Obtenemos el rol de usuario no autenticado.
+  // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
+  // set the default config object
+  var creds = new AWS.CognitoIdentityCredentials({
+      IdentityPoolId: IdentityPoolId
+  });
+  AWS.config.credentials = creds;
+  AWS.config.region = sessionStorage.region;
 
+  // Actualizamos y refrescamos
+  creds.expired = true;
+  AWS.config.update({ region: sessionStorage.region, credentials: creds });
+  AWS.config.credentials.refresh((errorRefreshCredentials) => {
+    if (errorRefreshCredentials) {
+      if (debug) console.log("error al refrescar las credenciales:");
+      if (debug) console.log(errorRefreshCredentials);
+    } else {
+      if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
+      if (debug) console.log('Estas son las credenciales y refrescadas:');
+      if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
+      if (debug) console.log('========================================');
+      if (debug) console.log('Credenciales:');
+      // if (debug) console.log(AWS.config.credentials);
+      if (debug) console.log('RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
+      if (debug) console.log('========================================');
+}
+
+function onLogIn(googleUser) {
   if (!googleUser.error) {
     var profile = googleUser.getBasicProfile();
     if (debug) console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
