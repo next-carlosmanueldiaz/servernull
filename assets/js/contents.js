@@ -72,12 +72,12 @@ function getCredentials() {
           if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
           if (debug) console.log('========================================');
           if (debug) console.log('Credenciales:');
-          if (debug) console.log(AWS.config.credentials);
+          // if (debug) console.log(AWS.config.credentials);
           if (debug) console.log('RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
           if (debug) console.log('========================================');
 
           sessionStorage.rol = "invitado"
-          if (debug) console.log(sessionStorage);
+          // if (debug) console.log(sessionStorage);
 
           // Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
           var sts = new AWS.STS();
@@ -88,7 +88,9 @@ function getCredentials() {
               if (debug) console.log(err, err.stack); // an error occurred
             } else {
               if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
-              if (debug) console.log(data);           // successful response
+              // if (debug) console.log(data);           // successful response
+              if (debug) console.log('========================================');
+              if (debug) console.log(data.Arn);
             }
           });
 
