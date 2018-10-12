@@ -35,69 +35,108 @@ app.controller('myCtrl', function ($scope) {
   }
 });
 
-function whoAreYou(googleUser) {
+async function whoAreYou(googleUser) {
   // ¿QUIÉN ERES?
   if (debug) console.log('¿QUIÉN ERES?');
   if (debug) console.log('========================================');
   // Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
 
-  // Comprobamos su rol actual. Esto no es inmediato.
-  checkCurrentRoleIdentity().then(getGoogleUser(googleUser).then(id_token => userLoggedIn('accounts.google.com', id_token)));
-  // Vale, eres INVITADO a la fiesta, pero.. ¿eres algo más?
-  // Con su id_token, 
-  // var id_token = getGoogleUser(googleUser).then(userLoggedIn('accounts.google.com', id_token), null);
-  
+  // Comprobamos su rol actual. Esto no es inmediato, es asíncrono. Usamos promesas para obtener la info.
+  if (debug) console.log('1.- Comprobamos el rol actual.');
+  let rolActual = await checkCurrentRoleIdentity();
+  if (debug) console.log('2.- Obtenemos el id_token para ver si se ha logueado.');
+  let id_token = await getGoogleUser(googleUser);
+
+  // Dependiendo del id_token, cambiamos a un rol u otro.
+  if (id_token) {
+    if (debug) console.log('3.- Establecemos el rol del Administrador (Autenticado).');
+    let RoleSessionName = await userLoggedIn('accounts.google.com', id_token);    
+  } else {
+    if (debug) console.log('3.- Establecemos el rol del invitado (No autenticado).');
+    let RoleSessionName = await setUnauth();
+  }
+
+  if (debug) console.log('4.- Comprobamos el rol actual una vez cambiado el rol.');
+  let nuevoRol = await checkCurrentRoleIdentity();
+
+  // Vale, eres INVITADO a la fiesta, pero.. ¿eres algo más? 
   // En base al ARN recibido, hacemos el proceso de Login o no
   // Casos:
   // - Anónimo. Rol: ninguno. Se le asigna un rol UnAuth para que use la página
   // - Invitado: Rol: ?. Se le asigna un rol UnAuth para que use la página
   // - Admin: Rol:
-      
-
 }
 
+// Obtiene datos del rol actual llamando a STS.getCallerIdentity() [AWS Security Token Service]
+/*
+  https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/STS.html#getCallerIdentity-property
+  getCallerIdentity: Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
+  Función asíncrona (devuelve una promesa) que obtiene el ARN del ROL actual pidiéndoselo a AWS.
+  Con esta función podemos saber qué rol actual tenemos. Opciones:
+  - Ningún rol. No hay ningún usuario logueado.
+  - Rol No autenticado: Cognito_ServerNull__Unauth_Role
+  - Rol Autenticado: Cognito_ServerNull__Auth_Role        */
 function checkCurrentRoleIdentity() {
-  var sts = new AWS.STS();
-  var params = {};
-  sts.getCallerIdentity(params, function(err, data) {
-    if (err) {
-      if (debug) console.log('Ocurrió un error al consultar la identidad');
-      if (debug) console.log(err, err.stack); // an error occurred
-    } else {
-      if (debug) console.log('========================================');
-      if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
-      // if (debug) console.log(data);           // successful response
-      if (debug) console.log('----------------------------------------');
-      if (debug) console.log(' -> ROL ACTUAL: ' + data.Arn);
-      if (debug) console.log('========================================');
-    }
-  });
+  return new Promise(resolve => {
+    var sts = new AWS.STS();
+    var params = {};
+    sts.getCallerIdentity(params, function(err, data) {
+      if (err) {
+        if (debug) console.log('Ocurrió un error al consultar la identidad');
+        if (debug) console.log(err, err.stack); // an error occurred
+        resolve(err);
+      } else {
+        if (debug) console.log('========================================');
+        if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
+        // if (debug) console.log(data);           // successful response
+        if (debug) console.log('----------------------------------------');
+        if (debug) console.log(' -> ROL ACTUAL: ' + data.Arn);
+        if (debug) console.log('========================================');
+        resolve(data.Arn);
+      }
+    });
+  }); // Fin Promesa
 }
 
+// Obtiene el id_token del usuario logueado con google.
+/*
+  https://developers.google.com/identity/sign-in/web/backend-auth
+  Dado un googleUser obtenido con el login con google, se obtiene el id_token con getAuthResponse()
+  El id_token se le pasará a AWS para que asuma el rol adecuado a este usuario.
+*/
 function getGoogleUser(googleUser) {
-  if (!googleUser.error) {
-    var profile = googleUser.getBasicProfile();
-    if (debug) console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    if (debug) console.log('Name: ' + profile.getName());
-    if (debug) console.log('Image URL: ' + profile.getImageUrl());
-    if (debug) console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  return new Promise(resolve => {
+    if (!googleUser.error) {
+      var profile = googleUser.getBasicProfile();
+      if (debug) console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      if (debug) console.log('Name: ' + profile.getName());
+      if (debug) console.log('Image URL: ' + profile.getImageUrl());
+      if (debug) console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-    var id_token = googleUser.getAuthResponse().id_token;
-    if (debug) console.log('You are logged in. (Google account). You have id_token:');
-    if (debug) console.log('id_token: ' + id_token); // Token para aws
-    return id_token;
-  } else {
-    return null
-  }
+      // Google nos da el id_token del usuario logueado, si se ha logueado
+      var id_token = googleUser.getAuthResponse().id_token;
+      if (debug) console.log('You are logged in. (Google account). You have id_token:');
+      if (debug) console.log('id_token: ' + id_token); // Token para aws
+      resolve(id_token);
+    } else {
+      resolve(null);
+    }
+  }); // Fin Promesa
 }
 
 // Called when an identity provider has a token for a logged in user
+// Params:
+//  - providerName = 'accounts.google.com'
+//  - token = id_token de googleUser
 function userLoggedIn(providerName, token) {
+  return new Promise(resolve => {
     creds.params.Logins = creds.params.Logins || {};
     creds.params.Logins[providerName] = token;
     // Expire credentials to refresh them on the next request
     creds.expired = true;
-    checkCurrentRoleIdentity();
+
+    resolve(true);
+  }); // Fin Promesa
 }
 
 function setUnauth() {
@@ -106,30 +145,33 @@ function setUnauth() {
   // Obtenemos el rol de usuario no autenticado.
   // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
   // set the default config object
-  var creds = new AWS.CognitoIdentityCredentials({
+  
+  return new Promise(resolve => {
+    var creds = new AWS.CognitoIdentityCredentials({
       IdentityPoolId: IdentityPoolId
-  });
-  AWS.config.credentials = creds;
-  AWS.config.region = sessionStorage.region;
+    });
+    AWS.config.credentials = creds;
+    AWS.config.region = sessionStorage.region;
 
-  // Actualizamos y refrescamos
-  creds.expired = true;
-  AWS.config.update({ region: sessionStorage.region, credentials: creds });
-  AWS.config.credentials.refresh((errorRefreshCredentials) => {
-    if (errorRefreshCredentials) {
-      if (debug) console.log("error al refrescar las credenciales:");
-      if (debug) console.log(errorRefreshCredentials);
-    } else {
-      if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
-      if (debug) console.log('Estas son las credenciales y refrescadas:');
-      if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
-      if (debug) console.log('========================================');
-      if (debug) console.log('Credenciales:');
-      // if (debug) console.log(AWS.config.credentials);
-      if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
-      if (debug) console.log('========================================');
-    }
-  });
+    // Actualizamos y refrescamos
+    creds.expired = true;
+    AWS.config.update({ region: sessionStorage.region, credentials: creds });
+    AWS.config.credentials.refresh((errorRefreshCredentials) => {
+      if (errorRefreshCredentials) {
+        if (debug) console.log("error al refrescar las credenciales:");
+        if (debug) console.log(errorRefreshCredentials);
+      } else {
+        if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
+        if (debug) console.log('Estas son las credenciales y refrescadas:');
+        if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
+        if (debug) console.log('========================================');
+        if (debug) console.log('Credenciales:');
+        // if (debug) console.log(AWS.config.credentials);
+        if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
+        if (debug) console.log('========================================');
+      }
+    }); // Fin de refresco de credenciales
+  }); // Fin Promesa
 }
 
 function onLogIn(googleUser) {
