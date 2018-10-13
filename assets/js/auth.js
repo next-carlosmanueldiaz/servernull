@@ -61,7 +61,7 @@ function whoAreYou() {
   // Obtenemos el googleUser y a continuación el id_token
   if (debug) console.log('2.- Obtenemos el id_token para ver si se ha logueado.');
   // let id_token = await getGoogleUser(googleUser);
-  // getCurrentGoogleUser();
+  getCurrentGoogleUser();
 
   // Miramos si hay id_token
   if (sessionStorage.id_token !== "") {
@@ -95,18 +95,6 @@ function whoAreYou() {
 //    Hacemos el cambio de rol o asumimos el nuevo rol.
 //   Sin googleUser:
 //    usamos el sessionStorage.id_token existente.
-
-gapi.load('auth2', initSigninV2);
-function initSigninV2() {
-  gapi.auth2.init({
-      client_id: googleSigninClientId
-  }).then(function (authInstance) {
-    googleUser = auth2.currentUser.get();
-    onLogIn(googleUser);
-  });
-}
-
-
 function getCurrentGoogleUser() {
   gapi.load('auth2', function() {
     var auth2 = gapi.auth2.getAuthInstance();
