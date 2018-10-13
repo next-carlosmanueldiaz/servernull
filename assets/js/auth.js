@@ -97,17 +97,19 @@ function whoAreYou() {
 //    usamos el sessionStorage.id_token existente.
 
 function getCurrentGoogleUser() {
-  var auth2 = gapi.auth2.getAuthInstance();
-  if (auth2){
-    console.log('Refreshing values...');
-    // Recuperamos googleUser
-    googleUser = auth2.currentUser.get();
-    if (debug) console.log(JSON.stringify(googleUser, undefined, 2));
-    if (debug) console.log(auth2.isSignedIn.get());
-    onLogIn(googleUser);
-  } else {
-    if (debug) console.log('No existe auth2');
-  }
+  gapi.load('auth2', function() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    if (auth2){
+      console.log('Refreshing values...');
+      // Recuperamos googleUser
+      googleUser = auth2.currentUser.get();
+      if (debug) console.log(JSON.stringify(googleUser, undefined, 2));
+      if (debug) console.log(auth2.isSignedIn.get());
+      onLogIn(googleUser);
+    } else {
+      if (debug) console.log('No existe auth2');
+    }
+  });
 }
 
 function onLogIn(googleUser) {
