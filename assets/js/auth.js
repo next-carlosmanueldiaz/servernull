@@ -60,7 +60,8 @@ async function whoAreYou() {
   // Cuando se abre la página y tenemos ya la sesión, pero no tenemos id_token
   // Obtenemos el googleUser y a continuación el id_token
   if (debug) console.log('2.- Obtenemos el id_token para ver si se ha logueado.');
-  let id_token = await getGoogleUser(googleUser);
+  // let id_token = await getGoogleUser(googleUser);
+  getCurrentGoogleUser();
 
   // Miramos si hay id_token
   if (sessionStorage.id_token !== "") {
