@@ -49,8 +49,8 @@ async function whoAreYou() {
   // Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
 
   // Comprobamos su rol actual. Esto no es inmediato, es asíncrono. Usamos promesas para obtener la info.
-  if (debug) console.log('1.- Comprobamos el rol actual.');
-  let rolActual = await checkCurrentRoleIdentity();
+  // if (debug) console.log('1.- Comprobamos el rol actual.');
+  // let rolActual = await checkCurrentRoleIdentity();
   
   // Establecemos el rol no autenticado (rol por defecto)
   // if (debug) console.log('2.- Establecemos el rol del invitado (No autenticado).');
