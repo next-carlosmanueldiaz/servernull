@@ -7,17 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-signin-client_id" content="{{googleSigninClientId}}">
     <script type="text/javascript" src="../assets/js/config.js"></script>
+    <script type="text/javascript" src="../assets/js/auth.js"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js" crossorigin="anonymous"></script>
     <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js" crossorigin="anonymous"></script>
     <script id="googleGapi" src="https://apis.google.com/js/platform.js?onload=onLoadGapiCallback" async defer></script>
-    <script>
+    <script type="text/javascript">
       window.onLoadGapiCallback = function(){
         gapi.auth2.init({
-            client_id: googleSigninClientId
-          });
+          client_id: googleSigninClientId
+        }).then(function (authInstance) {
+          // now auth2 is fully initialized
+          getCurrentGoogleUser();
+        });
       }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
@@ -25,8 +29,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/master.css">
-    
-    <script type="text/javascript" src="../assets/js/auth.js"></script>
     <script type="text/javascript" src="../assets/js/contents.js"></script>
     <style media="all" onload="if (media !== 'all') media = 'all'">
       .login-box {
