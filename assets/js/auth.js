@@ -67,7 +67,7 @@ function whoAreYou() {
   if (sessionStorage.id_token !== "") {
     // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
     if (debug) console.log('Establecemos el rol del Administrador (Autenticado).');
-    userLoggedIn('accounts.google.com', id_token);
+    userLoggedIn('accounts.google.com', sessionStorage.id_token);
     // Quizá necesitemos asumir el rol de administrador.
     // -----------------------------------------------------
   } else {
