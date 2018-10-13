@@ -31,11 +31,20 @@ app.controller('myCtrl', function ($scope) {
 
   this.$onInit = function () {
     $scope.googleSigninClientId = googleSigninClientId;
+    // Identicamos el usuario
+    whoAreYou();
+
     // $scope.$apply();
   }
 });
 
-async function whoAreYou(googleUser) {
+/** 
+ * Identificamos el usuario
+ * 1.- Comprobamos el rol actual
+ * 2.- Establecemos el rol de invitado
+ * 
+ */
+async function whoAreYou() {
   // ¿QUIÉN ERES?
   if (debug) console.log('¿QUIÉN ERES?');
   if (debug) console.log('========================================');
@@ -44,15 +53,27 @@ async function whoAreYou(googleUser) {
   // Comprobamos su rol actual. Esto no es inmediato, es asíncrono. Usamos promesas para obtener la info.
   if (debug) console.log('1.- Comprobamos el rol actual.');
   let rolActual = await checkCurrentRoleIdentity();
+  
+  // Establecemos el rol no autenticado (rol por defecto)
+  // if (debug) console.log('2.- Establecemos el rol del invitado (No autenticado).');
+  // let RoleSessionName = await setUnauth();
+  
+  // Usuario ya autenticado
+  // Cuando se abre la página y tenemos ya la sesión, pero no tenemos id_token
+  // Obtenemos el googleUser y a continuación el id_token
   if (debug) console.log('2.- Obtenemos el id_token para ver si se ha logueado.');
   let id_token = await getGoogleUser(googleUser);
 
-  // Dependiendo del id_token, cambiamos a un rol u otro.
-  if (id_token) {
-    if (debug) console.log('3.- Establecemos el rol del Administrador (Autenticado).');
-    let RoleSessionName = await userLoggedIn('accounts.google.com', id_token);    
+  // Miramos si hay id_token
+  if (sessionStorage.id_token !== "") {
+    // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
+    if (debug) console.log('Establecemos el rol del Administrador (Autenticado).');
+    let RoleSessionName = await userLoggedIn('accounts.google.com', id_token);
+    // Quizá necesitemos asumir el rol de administrador.
+    // -----------------------------------------------------
   } else {
-    if (debug) console.log('3.- Establecemos el rol del invitado (No autenticado).');
+    // Establecemos el rol no autenticado (rol por defecto)
+    if (debug) console.log('2.- Establecemos el rol del invitado (No autenticado).');
     let RoleSessionName = await setUnauth();
   }
 
@@ -65,6 +86,57 @@ async function whoAreYou(googleUser) {
   // - Anónimo. Rol: ninguno. Se le asigna un rol UnAuth para que use la página
   // - Invitado: Rol: ?. Se le asigna un rol UnAuth para que use la página
   // - Admin: Rol:
+}
+
+// Hay 2 situaciones posibles:
+// - NADA MAS ATERRIZAR EN CUALQUIER PÁGINA.. ejecutar setUnauth() SI queremos usar el API (s3 en la home)
+//   Sin googleUser, es decir en ningún momento se ha logueado previamente.
+//    Nada más empezar, se ejecuta la función setUnauth(), que da el rol Unauth
+// - NADA MAS LOGUEARSE EN GOOGLE.. ejecutar onLogIn(googleUser)
+// - NADA MÁS ATERRIZAR EN CUALQUIER PÁGINA.. CON UN id_token YA EXISTENTE: sessionStorage.id_token
+// - CASO ESPECIAL: Cuando se abre de nuevo la página y ya tenemos ya el correo abierto.
+//   Con googleUser:
+//    En el momento en que un usuario se autentica con google o se ha logueado previamente
+//    Almacenamos en la sesión el id_token.
+//    Hacemos el cambio de rol o asumimos el nuevo rol.
+//   Sin googleUser:
+//    usamos el sessionStorage.id_token existente.
+
+function getCurrentGoogleUser() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  if (auth2){
+    console.log('Refreshing values...');
+    // Recuperamos googleUser
+    googleUser = auth2.currentUser.get();
+    if (debug) console.log(JSON.stringify(googleUser, undefined, 2));
+    if (debug) console.log(auth2.isSignedIn.get());
+    onLogIn(googleUser);
+  } else {
+    if (debug) console.log('No existe auth2');
+  }
+}
+
+function onLogIn(googleUser) {
+  if (!googleUser.error) {
+    var profile = googleUser.getBasicProfile();
+    if (debug) console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    if (debug) console.log('Name: ' + profile.getName());
+    if (debug) console.log('Image URL: ' + profile.getImageUrl());
+    if (debug) console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+    var id_token = googleUser.getAuthResponse().id_token;
+    if (debug) console.log('id_token: ' + id_token); // Token para aws
+    if (debug) console.log('You are now logged in. (Google account)');
+
+    // PARA CAMBIAR A USUARIO AUTENTICADO
+    // Almacenamos el id_token del usuario autenticado en la sesión para poder recuperarlo posteriormente 
+    // y hacer el cambio de usuario no autenticado (invitado) a usuario autenticado.
+    // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
+    // Esta variable se evalúa en la función getCredentials() del fichero contents.js para saber:
+    // - Si hay id_token: usuario logueado, que puede ser administrador
+    // - Si no hay id_token: usuario invitado.
+    // ====================================================================================
+    sessionStorage.id_token = id_token;
 }
 
 // Obtiene datos del rol actual llamando a STS.getCallerIdentity() [AWS Security Token Service]
@@ -145,7 +217,7 @@ function setUnauth() {
   // Obtenemos el rol de usuario no autenticado.
   // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
   // set the default config object
-  
+
   return new Promise(resolve => {
     var creds = new AWS.CognitoIdentityCredentials({
       IdentityPoolId: IdentityPoolId
@@ -174,7 +246,7 @@ function setUnauth() {
   }); // Fin Promesa
 }
 
-function onLogIn(googleUser) {
+function onLogIn_backup(googleUser) {
   if (!googleUser.error) {
     var profile = googleUser.getBasicProfile();
     if (debug) console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -541,6 +613,8 @@ function register(googleUser) {
 function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
+    sessionStorage.id_token = "";
+
     sessionStorage.accessKeyId = "";
     sessionStorage.secretAccessKey = "";
     sessionStorage.sessionToken = "";
