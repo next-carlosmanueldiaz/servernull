@@ -137,6 +137,7 @@ function onLogIn(googleUser) {
     // - Si no hay id_token: usuario invitado.
     // ====================================================================================
     sessionStorage.id_token = id_token;
+  }
 }
 
 // Obtiene datos del rol actual llamando a STS.getCallerIdentity() [AWS Security Token Service]
