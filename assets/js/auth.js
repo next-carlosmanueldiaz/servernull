@@ -31,8 +31,6 @@ app.controller('myCtrl', function ($scope) {
 
   this.$onInit = function () {
     $scope.googleSigninClientId = googleSigninClientId;
-    // Identicamos el usuario
-    whoAreYou();
 
     // $scope.$apply();
   }
@@ -79,13 +77,8 @@ async function whoAreYou() {
 
   if (debug) console.log('4.- Comprobamos el rol actual una vez cambiado el rol.');
   let nuevoRol = await checkCurrentRoleIdentity();
-
-  // Vale, eres INVITADO a la fiesta, pero.. ¿eres algo más? 
-  // En base al ARN recibido, hacemos el proceso de Login o no
-  // Casos:
-  // - Anónimo. Rol: ninguno. Se le asigna un rol UnAuth para que use la página
-  // - Invitado: Rol: ?. Se le asigna un rol UnAuth para que use la página
-  // - Admin: Rol:
+  
+  return nuevoRol;
 }
 
 // Hay 2 situaciones posibles:

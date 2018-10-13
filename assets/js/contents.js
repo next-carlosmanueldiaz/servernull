@@ -189,7 +189,7 @@ function slugify (text) {
     .replace(/-+$/, '')             // Trim - from end of text
 }
 
-// const tengoAcceso = getCredentials();
+const tengoAcceso = whoAreYou();
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
