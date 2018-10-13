@@ -5,54 +5,20 @@
     <link rel="shortcut icon" href="/assets/img/favicon.ico">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-signin-client_id" content="{{googleSigninClientId}}">
+    <meta name="google-signin-client_id" content="664927400021-1a3vb18lv0cqk66uohjeiml94e5v9srq.apps.googleusercontent.com">
     <script src="https://code.jquery.com/jquery-1.9.1.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js" crossorigin="anonymous"></script>
     <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js" crossorigin="anonymous"></script>
+    <script id="googleGapi" src="https://apis.google.com/js/platform.js?onload=onGoogleLoad" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/master.css">
     <script type="text/javascript" src="../assets/js/config.js"></script>
     <script type="text/javascript" src="../assets/js/auth.js"></script>
-    <script id="googleGapi" src="https://apis.google.com/js/platform.js?onload=onLoadGapiCallback" async defer></script>
-    <script type="text/javascript">
-      window.onLoadGapiCallback = function(){
-        gapi.auth2.init({
-          client_id: googleSigninClientId
-        }).then(function (authInstance) {
-          // now auth2 is fully initialized
-          // Recuperamos googleUser
-          googleUser = auth2.currentUser.get();
-          if (debug) console.log(JSON.stringify(googleUser, undefined, 2));
-          if (debug) console.log(auth2.isSignedIn.get());
-          if (!googleUser.error) {
-            var profile = googleUser.getBasicProfile();
-            if (debug) console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            if (debug) console.log('Name: ' + profile.getName());
-            if (debug) console.log('Image URL: ' + profile.getImageUrl());
-            if (debug) console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-
-            var id_token = googleUser.getAuthResponse().id_token;
-            if (debug) console.log('id_token: ' + id_token); // Token para aws
-            if (debug) console.log('You are now logged in. (Google account)');
-
-            // PARA CAMBIAR A USUARIO AUTENTICADO
-            // Almacenamos el id_token del usuario autenticado en la sesión para poder recuperarlo posteriormente 
-            // y hacer el cambio de usuario no autenticado (invitado) a usuario autenticado.
-            // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
-            // Esta variable se evalúa en la función getCredentials() del fichero contents.js para saber:
-            // - Si hay id_token: usuario logueado, que puede ser administrador
-            // - Si no hay id_token: usuario invitado.
-            // ====================================================================================
-            sessionStorage.id_token = id_token;
-          }
-        });
-      }
-    </script>
-    <link rel="stylesheet" href="../assets/css/master.css">
     <script type="text/javascript" src="../assets/js/contents.js"></script>
     <style media="all" onload="if (media !== 'all') media = 'all'">
       .login-box {
