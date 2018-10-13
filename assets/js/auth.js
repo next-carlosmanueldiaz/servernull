@@ -132,6 +132,8 @@ function onLogIn(googleUser) {
     // - Si no hay id_token: usuario invitado.
     // ====================================================================================
     sessionStorage.id_token = id_token;
+  } else {
+    console.log(googleUser.error);
   }
 }
 
