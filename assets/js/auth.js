@@ -42,7 +42,7 @@ app.controller('myCtrl', function ($scope) {
  * 2.- Establecemos el rol de invitado
  * 
  */
-async function whoAreYou() {
+function whoAreYou() {
   // ¿QUIÉN ERES?
   if (debug) console.log('¿QUIÉN ERES?');
   if (debug) console.log('========================================');
