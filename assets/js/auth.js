@@ -67,17 +67,17 @@ function whoAreYou() {
   if (sessionStorage.id_token !== "") {
     // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
     if (debug) console.log('Establecemos el rol del Administrador (Autenticado).');
-    let RoleSessionName = await userLoggedIn('accounts.google.com', id_token);
+    userLoggedIn('accounts.google.com', id_token);
     // Quizá necesitemos asumir el rol de administrador.
     // -----------------------------------------------------
   } else {
     // Establecemos el rol no autenticado (rol por defecto)
     if (debug) console.log('2.- Establecemos el rol del invitado (No autenticado).');
-    let RoleSessionName = await setUnauth();
+    setUnauth();
   }
 
   if (debug) console.log('4.- Comprobamos el rol actual una vez cambiado el rol.');
-  let nuevoRol = await checkCurrentRoleIdentity();
+  let nuevoRol = checkCurrentRoleIdentity();
   
   return nuevoRol;
 }
