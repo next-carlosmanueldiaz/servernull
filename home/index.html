@@ -11,6 +11,24 @@
     <script src="https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js" crossorigin="anonymous"></script>
     <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      function onGoogleLoad() {
+        gapi.load('auth2,signin2', function() {
+          var auth2 = gapi.auth2.init();
+          auth2.then(function() {
+            // Current values
+            var isSignedIn = auth2.isSignedIn.get();
+            var currentUser = auth2.currentUser.get();
+
+            if (isSignedIn) {
+              if (debug) console.log('El usuario está autenticado con google.');
+            } else {
+              if (debug) console.log('El usuario NO está autenticado con google.');
+            }
+          });
+        });
+      }
+    </script>
     <script id="googleGapi" src="https://apis.google.com/js/platform.js?onload=onGoogleLoad" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
@@ -38,23 +56,6 @@
       }
     </style>
     <script type="text/javascript">
-      function onGoogleLoad() {
-        gapi.load('auth2,signin2', function() {
-          var auth2 = gapi.auth2.init();
-          auth2.then(function() {
-            // Current values
-            var isSignedIn = auth2.isSignedIn.get();
-            var currentUser = auth2.currentUser.get();
-
-            if (isSignedIn) {
-              if (debug) console.log('El usuario está autenticado con google.');
-            } else {
-              if (debug) console.log('El usuario NO está autenticado con google.');
-            }
-          });
-        });
-      }
-
       document.addEventListener("DOMContentLoaded", function(event) {
         var defaultThrottle = 250;
         window.stickyFrom = null;
