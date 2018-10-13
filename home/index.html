@@ -24,8 +24,31 @@
           client_id: googleSigninClientId
         }).then(function (authInstance) {
           // now auth2 is fully initialized
-          getCurrentGoogleUser();
-          whoAreYou();
+          // Recuperamos googleUser
+          googleUser = auth2.currentUser.get();
+          if (debug) console.log(JSON.stringify(googleUser, undefined, 2));
+          if (debug) console.log(auth2.isSignedIn.get());
+          if (!googleUser.error) {
+            var profile = googleUser.getBasicProfile();
+            if (debug) console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            if (debug) console.log('Name: ' + profile.getName());
+            if (debug) console.log('Image URL: ' + profile.getImageUrl());
+            if (debug) console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+            var id_token = googleUser.getAuthResponse().id_token;
+            if (debug) console.log('id_token: ' + id_token); // Token para aws
+            if (debug) console.log('You are now logged in. (Google account)');
+
+            // PARA CAMBIAR A USUARIO AUTENTICADO
+            // Almacenamos el id_token del usuario autenticado en la sesión para poder recuperarlo posteriormente 
+            // y hacer el cambio de usuario no autenticado (invitado) a usuario autenticado.
+            // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
+            // Esta variable se evalúa en la función getCredentials() del fichero contents.js para saber:
+            // - Si hay id_token: usuario logueado, que puede ser administrador
+            // - Si no hay id_token: usuario invitado.
+            // ====================================================================================
+            sessionStorage.id_token = id_token;
+          }
         });
       }
     </script>
