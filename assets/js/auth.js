@@ -197,7 +197,8 @@ function setUnauth() {
   // Obtenemos el rol de usuario no autenticado.
   // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
   // set the default config object
-
+  if (debug) console.log('====================================================================');
+  if (debug) console.log("ESTABLECIENDO EL ROL NO AUTENTICADO: Cognito_ServerNull__Unauth_Role");
   var creds = new AWS.CognitoIdentityCredentials({
     IdentityPoolId: IdentityPoolId
   });
@@ -219,7 +220,7 @@ function setUnauth() {
       if (debug) console.log('Credenciales:');
       // if (debug) console.log(AWS.config.credentials);
       if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
-      if (debug) console.log('========================================');
+      if (debug) console.log('====================================================================');
     }
   }); // Fin de refresco de credenciales
 }
