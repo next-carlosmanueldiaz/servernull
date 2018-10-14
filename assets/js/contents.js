@@ -197,6 +197,19 @@ app.controller('myCtrl', function ($scope) {
   this.$onInit = function () {
     $scope.googleSigninClientId = googleSigninClientId;
 
+    // Miramos si hay id_token
+    if (sessionStorage.id_token !== "") {
+      // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
+      if (debug) console.log('A.- Establecemos el rol del Administrador (Autenticado).');
+      userLoggedIn('accounts.google.com', sessionStorage.id_token);
+      // Quizá necesitemos asumir el rol de administrador.
+      // -----------------------------------------------------
+    } else {
+      // Establecemos el rol no autenticado (rol por defecto)
+      if (debug) console.log('B.- Establecemos el rol del invitado (No autenticado).');
+      setUnauth();
+    }
+
     sessionStorage.region = region;
     sessionStorage.bucket = bucket;
 
