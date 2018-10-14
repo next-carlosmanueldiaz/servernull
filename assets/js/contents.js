@@ -210,8 +210,6 @@ app.controller('myCtrl', function ($scope) {
           }
         }
 
-        // Comprobamos la identidad
-        checkCurrentRoleIdentity();
         $scope.contents = file;
         $scope.$apply();
       }
