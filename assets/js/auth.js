@@ -135,6 +135,7 @@ function onLogIn(googleUser) {
     
     // Comprobamos la identidad
     checkCurrentRoleIdentity();
+    location.reload(true);
   } else {
     console.log(googleUser.error);
   }
