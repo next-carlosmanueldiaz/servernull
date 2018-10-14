@@ -210,6 +210,8 @@ app.controller('myCtrl', function ($scope) {
       setUnauth();
     }
 
+    checkCurrentRoleIdentity();
+
     sessionStorage.region = region;
     sessionStorage.bucket = bucket;
 

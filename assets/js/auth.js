@@ -194,21 +194,6 @@ function getGoogleUser(googleUser) {
   }); // Fin Promesa
 }
 
-// Called when an identity provider has a token for a logged in user
-// Params:
-//  - providerName = 'accounts.google.com'
-//  - token = id_token de googleUser
-function userLoggedIn(providerName, token) {
-  return new Promise(resolve => {
-    creds.params.Logins = creds.params.Logins || {};
-    creds.params.Logins[providerName] = token;
-    // Expire credentials to refresh them on the next request
-    creds.expired = true;
-
-    resolve(true);
-  }); // Fin Promesa
-}
-
 function setUnauth() {
   // Unauthenticated Identities
   // ===========================================================================
@@ -501,6 +486,9 @@ function onLogIn_backup(googleUser) {
 }
 
 // Called when an identity provider has a token for a logged in user
+// Params:
+//  - providerName = 'accounts.google.com'
+//  - token = id_token de googleUser
 function userLoggedIn(providerName, token) {
     // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
     // set the default config object
@@ -524,13 +512,6 @@ function userLoggedIn(providerName, token) {
     if (debug) console.log('Credenciales:');
     if (debug) console.log(AWS.config.credentials);
     if (debug) console.log('========================================');
-    if (debug) console.log('Almacenamos en sesión:');
-    sessionStorage.accessKeyId = AWS.config.credentials.accessKeyId; 
-    sessionStorage.secretAccessKey = AWS.config.credentials.secretAccessKey;
-    sessionStorage.sessionToken = AWS.config.credentials.sessionToken;
-    sessionStorage.expireTime = AWS.config.credentials.expireTime;
-    sessionStorage.expired = false
-    sessionStorage.counter = 2;
     sessionStorage.rol = "admin"
 }
 
