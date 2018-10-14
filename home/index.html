@@ -24,6 +24,8 @@
               if (debug) console.log('El usuario está autenticado con google.');
             } else {
               if (debug) console.log('El usuario NO está autenticado con google.');
+              signOut();
+              setUnauth();
             }
           });
         });

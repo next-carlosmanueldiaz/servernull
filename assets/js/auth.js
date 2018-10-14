@@ -292,7 +292,6 @@ function onLogIn_backup(googleUser) {
               } else {
                 if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
                 if (debug) console.log('Estas son las credenciales y refrescadas:');
-                if (debug) console.log('Region: ' + AWS.config.region);
                 if (debug) console.log('Credenciales:');
                 if (debug) console.log(AWS.config.credentials);
               }
@@ -456,7 +455,6 @@ function onLogIn_backup(googleUser) {
                     } else {
                       if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
                       if (debug) console.log('Estas son las credenciales y refrescadas:');
-                      if (debug) console.log('Region: ' + AWS.config.region);
                       if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
                       if (debug) console.log('========================================');
                       if (debug) console.log('Credenciales:');
@@ -506,7 +504,6 @@ function userLoggedIn(providerName, token) {
 
     if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
     if (debug) console.log('Estas son las credenciales y refrescadas:');
-    if (debug) console.log('Region: ' + AWS.config.region);
     if (debug) console.log('TOMAMOS EL ROL DE ADMINISTRADOR:');
     if (debug) console.log('========================================');
     if (debug) console.log('Credenciales:');
