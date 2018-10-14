@@ -209,6 +209,9 @@ app.controller('myCtrl', function ($scope) {
             // Obtenemos 
           }
         }
+
+        // Comprobamos la identidad
+        checkCurrentRoleIdentity();
         $scope.contents = file;
         $scope.$apply();
       }
