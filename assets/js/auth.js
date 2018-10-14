@@ -153,7 +153,6 @@ function checkCurrentRoleIdentity() {
     if (err) {
       if (debug) console.log('Ocurrió un error al consultar la identidad');
       if (debug) console.log(err, err.stack); // an error occurred
-      resolve(err);
     } else {
       if (debug) console.log('========================================');
       if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
@@ -161,7 +160,6 @@ function checkCurrentRoleIdentity() {
       if (debug) console.log('----------------------------------------');
       if (debug) console.log(' -> ROL ACTUAL: ' + data.Arn);
       if (debug) console.log('========================================');
-      return data.Arn;
     }
   });
 }
