@@ -138,36 +138,6 @@ function expiredToken() {
 }
 
 /**
- * Finaliza la sesión de google
- * @returns {undefined}
- */
-function signOut(e) {
-  // e.preventDefault();
-  var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    console.log('User signed out.');
-    sessionStorage.accessKeyId = "";
-    sessionStorage.secretAccessKey = "";
-    sessionStorage.sessionToken = "";
-    sessionStorage.expired = "";
-
-    var data = {
-        UserPoolId : userPoolId, // Your user pool id here
-        ClientId : appClientId // Your client id here
-    };
-    var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
-    var cognitoUser = userPool.getCurrentUser();
-
-    if (cognitoUser != null) {
-      cognitoUser.signOut();
-    } else {
-      if (debug) console.log('userPool.getCurrentUser() retorna NULL.');
-    }
-    console.log('User signed out.');
-  });
-}
-
-/**
  * Genera un slug de un texto dado. 
  * 
  * @param String text
