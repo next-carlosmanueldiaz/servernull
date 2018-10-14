@@ -147,25 +147,23 @@ function onLogIn(googleUser) {
   - Rol No autenticado: Cognito_ServerNull__Unauth_Role
   - Rol Autenticado: Cognito_ServerNull__Auth_Role        */
 function checkCurrentRoleIdentity() {
-  return new Promise(resolve => {
-    var sts = new AWS.STS();
-    var params = {};
-    sts.getCallerIdentity(params, function(err, data) {
-      if (err) {
-        if (debug) console.log('Ocurrió un error al consultar la identidad');
-        if (debug) console.log(err, err.stack); // an error occurred
-        resolve(err);
-      } else {
-        if (debug) console.log('========================================');
-        if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
-        // if (debug) console.log(data);           // successful response
-        if (debug) console.log('----------------------------------------');
-        if (debug) console.log(' -> ROL ACTUAL: ' + data.Arn);
-        if (debug) console.log('========================================');
-        resolve(data.Arn);
-      }
-    });
-  }); // Fin Promesa
+  var sts = new AWS.STS();
+  var params = {};
+  sts.getCallerIdentity(params, function(err, data) {
+    if (err) {
+      if (debug) console.log('Ocurrió un error al consultar la identidad');
+      if (debug) console.log(err, err.stack); // an error occurred
+      resolve(err);
+    } else {
+      if (debug) console.log('========================================');
+      if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
+      // if (debug) console.log(data);           // successful response
+      if (debug) console.log('----------------------------------------');
+      if (debug) console.log(' -> ROL ACTUAL: ' + data.Arn);
+      if (debug) console.log('========================================');
+      resolve(data.Arn);
+    }
+  });
 }
 
 // Obtiene el id_token del usuario logueado con google.
