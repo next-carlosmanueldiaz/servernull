@@ -37,9 +37,9 @@ app.controller('myCtrl', function ($scope) {
       // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
       if (debug) console.log('A.- Establecemos el rol del Administrador (Autenticado).');
       // O quizá necesitamos refrescar las credenciales..:
-      // setUnauth();
-      // userLoggedIn('accounts.google.com', sessionStorage.id_token);
-      autenticar('accounts.google.com', sessionStorage.id_token)
+      setUnauth();
+      userLoggedIn('accounts.google.com', sessionStorage.id_token);
+      // autenticar('accounts.google.com', sessionStorage.id_token)
       // Quizá necesitemos asumir el rol de administrador.
       // -----------------------------------------------------
     } else {
