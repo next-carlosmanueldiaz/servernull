@@ -32,55 +32,57 @@ app.controller('myCtrl', function ($scope) {
   this.$onInit = function () {
     $scope.googleSigninClientId = googleSigninClientId;
 
-    // $scope.$apply();
+    // Miramos si hay id_token
+    if (sessionStorage.id_token !== "") {
+      // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
+      if (debug) console.log('A.- Establecemos el rol del Administrador (Autenticado).');
+      userLoggedIn('accounts.google.com', sessionStorage.id_token);
+      // Quizá necesitemos asumir el rol de administrador.
+      // -----------------------------------------------------
+      // O quizá necesitamos refrescar las credenciales..:
+      setUnauth();
+    } else {
+      // Establecemos el rol no autenticado (rol por defecto)
+      if (debug) console.log('B.- Establecemos el rol del invitado (No autenticado).');
+      setUnauth();
+    }
+
+    checkCurrentRoleIdentity();
+
+    sessionStorage.region = region;
+    sessionStorage.bucket = bucket;
+
+    $scope.bucket = bucket;
+    $scope.key = 'home/content/json/contents.json';
+    
+    s3 = new AWS.S3();
+    var fileParams = { Bucket: $scope.bucket, Key: $scope.key };
+    s3.getObject(fileParams, function (errGetObject, data) {
+      if (errGetObject) {
+        if (debug) console.log('Error al leer  ' + $scope.key + ' o no tiene permisos.');
+        if (debug) console.log(errGetObject);
+        // expiredToken();
+      } else {
+        var file = JSON.parse(data.Body.toString('utf-8'));
+        for (var key in file) {
+          if (file[key].type == "article") {
+
+            // file[key].slug = slugify(file[key].title);
+            if (debug) console.log(file[key].slug);
+            // ========================================================================
+            // Obtenemos el artículo para pintar el teaser
+            var keyJSON = 'home/content/json/' + file[key].type + '/' + file[key].slug + '.json';
+            // ========================================================================
+            // Obtenemos 
+          }
+        }
+
+        $scope.contents = file;
+        $scope.$apply();
+      }
+    });
   }
 });
-
-/** 
- * Identificamos el usuario
- * 1.- Comprobamos el rol actual
- * 2.- Establecemos el rol de invitado
- * 
- */
-function whoAreYou() {
-  // ¿QUIÉN ERES?
-  if (debug) console.log('¿QUIÉN ERES?');
-  if (debug) console.log('========================================');
-  // Devuelve detalles sobre la identidad IAM cuyas credenciales se utilizan para llamar a la API.
-
-  // Comprobamos su rol actual. Esto no es inmediato, es asíncrono. Usamos promesas para obtener la info.
-  // if (debug) console.log('1.- Comprobamos el rol actual.');
-  // let rolActual = await checkCurrentRoleIdentity();
-  
-  // Establecemos el rol no autenticado (rol por defecto)
-  // if (debug) console.log('2.- Establecemos el rol del invitado (No autenticado).');
-  // let RoleSessionName = await setUnauth();
-  
-  // Usuario ya autenticado
-  // Cuando se abre la página y tenemos ya la sesión, pero no tenemos id_token
-  // Obtenemos el googleUser y a continuación el id_token
-  if (debug) console.log('2.- Obtenemos el id_token para ver si se ha logueado.');
-  // let id_token = await getGoogleUser(googleUser);
-  // getCurrentGoogleUser();
-
-  // Miramos si hay id_token
-  if (sessionStorage.id_token !== "") {
-    // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
-    if (debug) console.log('Establecemos el rol del Administrador (Autenticado).');
-    userLoggedIn('accounts.google.com', sessionStorage.id_token);
-    // Quizá necesitemos asumir el rol de administrador.
-    // -----------------------------------------------------
-  } else {
-    // Establecemos el rol no autenticado (rol por defecto)
-    if (debug) console.log('2.- Establecemos el rol del invitado (No autenticado).');
-    setUnauth();
-  }
-
-  if (debug) console.log('4.- Comprobamos el rol actual una vez cambiado el rol.');
-  let nuevoRol = checkCurrentRoleIdentity();
-  
-  return nuevoRol;
-}
 
 // Hay 2 situaciones posibles:
 // - NADA MAS ATERRIZAR EN CUALQUIER PÁGINA.. ejecutar setUnauth() SI queremos usar el API (s3 en la home)
@@ -132,9 +134,7 @@ function onLogIn(googleUser) {
     // - Si no hay id_token: usuario invitado.
     // ====================================================================================
     sessionStorage.id_token = id_token;
-    
-    // Comprobamos la identidad
-    checkCurrentRoleIdentity();
+    // ====================================================================================
   } else {
     console.log(googleUser.error);
   }
