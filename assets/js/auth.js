@@ -36,10 +36,7 @@ app.controller('myCtrl', function ($scope) {
     if (sessionStorage.id_token !== "") {
       // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
       if (debug) console.log('A.- Establecemos el rol del Administrador (Autenticado).');
-      // O quizá necesitamos refrescar las credenciales..:
-      setUnauth();
       userLoggedIn('accounts.google.com', sessionStorage.id_token);
-      // autenticar('accounts.google.com', sessionStorage.id_token)
       // Quizá necesitemos asumir el rol de administrador.
       // -----------------------------------------------------
     } else {
@@ -222,65 +219,6 @@ function setUnauth() {
       // if (debug) console.log(AWS.config.credentials);
       if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
       if (debug) console.log('====================================================================');
-    }
-  }); // Fin de refresco de credenciales
-}
-
-function autenticar(providerName, token) {
-  // Unauthenticated Identities
-  // ===========================================================================
-  // Obtenemos el rol de usuario no autenticado.
-  // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
-  // set the default config object
-  if (debug) console.log('====================================================================');
-  if (debug) console.log("ESTABLECIENDO EL ROL NO AUTENTICADO: Cognito_ServerNull__Unauth_Role");
-  var creds = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: IdentityPoolId
-  });
-  AWS.config.credentials = creds;
-  AWS.config.region = sessionStorage.region;
-
-  // Actualizamos y refrescamos
-  creds.expired = true;
-  AWS.config.update({ region: sessionStorage.region, credentials: creds });
-  AWS.config.credentials.refresh((errorRefreshCredentials) => {
-    if (errorRefreshCredentials) {
-      if (debug) console.log("error al refrescar las credenciales:");
-      if (debug) console.log(errorRefreshCredentials);
-    } else {
-      if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
-      if (debug) console.log('Estas son las credenciales y refrescadas:');
-      if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
-      if (debug) console.log('========================================');
-      if (debug) console.log('Credenciales:');
-      // if (debug) console.log(AWS.config.credentials);
-      if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
-      if (debug) console.log('====================================================================');
-
-      if (debug) console.log('AHORA HACEMOS EL SWITCH ROLE A AUTH')
-      if (debug) console.log('====================================================================');
-      // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
-      // set the default config object
-      var creds = new AWS.CognitoIdentityCredentials({
-        IdentityPoolId: sessionStorage.IdentityPoolId
-      });
-      AWS.config.credentials = creds;
-      AWS.config.region = sessionStorage.region;
-
-      creds.params.Logins = creds.params.Logins || {};
-      creds.params.Logins[providerName] = token;
-
-      // Expire credentials to refresh them on the next request
-      creds.expired = true;
-
-      if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
-      if (debug) console.log('Estas son las credenciales y refrescadas:');
-      if (debug) console.log('TOMAMOS EL ROL DE ADMINISTRADOR:');
-      if (debug) console.log('========================================');
-      if (debug) console.log('Credenciales:');
-      if (debug) console.log(AWS.config.credentials);
-      if (debug) console.log('========================================');
-      sessionStorage.rol = "admin";
     }
   }); // Fin de refresco de credenciales
 }
