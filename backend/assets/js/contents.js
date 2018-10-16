@@ -113,7 +113,7 @@ function getAccess() {
   checkCurrentRoleIdentity();
 }
 
-const debug = true;
+// const debug = true;
 // const tengoAcceso = getCredentials();
 
 var app = angular.module('myApp', []);
