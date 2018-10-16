@@ -101,8 +101,7 @@ function getAccess() {
     // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
     if (debug) console.log('A.- Establecemos el rol del Administrador (Autenticado).');
     userLoggedIn('accounts.google.com', sessionStorage.id_token);
-    // Quizá necesitemos asumir el rol de administrador.
-    // -----------------------------------------------------
+    checkCurrentRoleIdentity();
   } else {
     // Establecemos el rol no autenticado (rol por defecto)
     if (debug) console.log('Acceso restringido.');
@@ -110,7 +109,7 @@ function getAccess() {
     // window.location.replace("/home/index.html");
   }
 
-  checkCurrentRoleIdentity();
+  
 }
 
 // const debug = true;
