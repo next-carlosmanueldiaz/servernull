@@ -107,7 +107,7 @@ function getAccess() {
     // Establecemos el rol no autenticado (rol por defecto)
     if (debug) console.log('Acceso restringido.');
     setUnauth();
-    // window.location.replace("/home/index.html");
+    window.location.replace("/home/index.html");
   }
 
   checkCurrentRoleIdentity();
