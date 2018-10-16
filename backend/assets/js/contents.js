@@ -22,23 +22,6 @@ function getCredentials() {
   }
 }
 
-function getAccess() {
-  // Miramos si hay id_token
-  if (sessionStorage.id_token !== "") {
-    // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
-    if (debug) console.log('A.- Establecemos el rol del Administrador (Autenticado).');
-    userLoggedIn('accounts.google.com', sessionStorage.id_token);
-    // Quizá necesitemos asumir el rol de administrador.
-    // -----------------------------------------------------
-  } else {
-    // Establecemos el rol no autenticado (rol por defecto)
-    if (debug) console.log('B.- Establecemos el rol del invitado (No autenticado).');
-    setUnauth();
-  }
-
-  checkCurrentRoleIdentity();
-}
-
 /**
  * Obtiene el valor de una variable pasada por GET
  * @param {type} variable
@@ -107,6 +90,27 @@ function slugify (text) {
     .replace(/\-\-+/g, '-')         // Replace multiple - with single -
     .replace(/^-+/, '')             // Trim - from start of text
     .replace(/-+$/, '')             // Trim - from end of text
+}
+
+/** 
+ * Obtiene credenciales para acceder al backend
+*/
+function getAccess() {
+  // Miramos si hay id_token
+  if (sessionStorage.id_token !== "") {
+    // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
+    if (debug) console.log('A.- Establecemos el rol del Administrador (Autenticado).');
+    userLoggedIn('accounts.google.com', sessionStorage.id_token);
+    // Quizá necesitemos asumir el rol de administrador.
+    // -----------------------------------------------------
+  } else {
+    // Establecemos el rol no autenticado (rol por defecto)
+    if (debug) console.log('Acceso restringido.');
+    setUnauth();
+    // window.location.replace("/home/index.html");
+  }
+
+  checkCurrentRoleIdentity();
 }
 
 const debug = true;
