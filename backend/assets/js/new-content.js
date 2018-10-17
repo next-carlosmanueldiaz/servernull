@@ -153,7 +153,7 @@ app.controller('myCtrl', function ($scope) {
             expiredToken();
           } else {
             if (debug) console.log('Fichero guardado correctamente en ' + keyC);
-            if (debug) console.log(dataPutObject);
+            // if (debug) console.log(dataPutObject);
           }
         }); // / putObject('title.html)
       }
@@ -165,6 +165,7 @@ app.controller('myCtrl', function ($scope) {
     var keyC = 'home/content/json/' + $scope.cts[$scope.pos].id + '/' + title + '.json';
     // ========================================================================
     // Generamos el JSON con los datos del contenido
+    var img = "";
     var contenido = "[";
     // Recogemos los valores del formulario
     for (var key in $scope.cts[$scope.pos].fields) {
@@ -177,6 +178,12 @@ app.controller('myCtrl', function ($scope) {
       
       var campo = '{ "id" : "' + idCampo + '", "name" : "' + nameCampo + '", "type" : "' + typeCampo + '", "value" : "' + valueCampo + '" },';
       
+      if (img == "") {
+        if (idCampo == "img") {
+          img = valueCampo;
+        }
+      }
+
       contenido += campo;
     }
     contenido = contenido.slice(0, -1);
@@ -192,9 +199,11 @@ app.controller('myCtrl', function ($scope) {
         expiredToken();
       } else {
         if (debug) console.log('Fichero guardado correctamente');
-        if (debug) console.log(dataPutObject);
+        // if (debug) console.log(dataPutObject);
+        // ========================================================================
         // ACTUALIZAMOS (OBTENEMOS, AGREGAMOS Y GUARDAMOS) EL JSON CON EL LISTADO DE CONTENIDOS
         const keyCL = 'home/content/json/contents.json';
+        // ========================================================================
         var fileParams = {Bucket: $scope.bucket, Key: keyCL};
         s3.getObject(fileParams, function (errGetObject, fileData) {
           if (errGetObject) {
@@ -205,7 +214,7 @@ app.controller('myCtrl', function ($scope) {
             // OBTENEMOS contents.json
             var file = JSON.parse(fileData.Body.toString('utf-8'));
             const type = getQueryVariable("id");
-            var content = {"title" : titulo, "type": type};
+            var content = {"title" : titulo, "type": type, "img": img};
             // AGREGAMOS el nuevo contenido a contents.json
             file.push(content);
             var fileContents = JSON.stringify(file);
@@ -219,7 +228,7 @@ app.controller('myCtrl', function ($scope) {
                 expiredToken();
               } else {
                 if (debug) console.log('Fichero guardado correctamente');
-                if (debug) console.log(dataPutObject);
+                // if (debug) console.log(dataPutObject);
               }
             }); // /putObject('contents.json)
           }
