@@ -192,7 +192,7 @@ app.controller('myCtrl', function ($scope) {
                 // expiredToken();
               } else {
                 if (debug) console.log('Fichero HTML guardado correctamente en ' + keyHTML);
-                if (debug) console.log(dataPutObject);
+                // if (debug) console.log(dataPutObject);
               }
             }); // / putObject('title.html)
           }
@@ -229,7 +229,7 @@ app.controller('myCtrl', function ($scope) {
             // expiredToken();
           } else {
             if (debug) console.log('Fichero JSON guardado correctamente en ' + keyJSON);
-            if (debug) console.log(dataPutObject);
+            // if (debug) console.log(dataPutObject);
           }
         }); // / putObject('nuevo-contenido.json)        
         
