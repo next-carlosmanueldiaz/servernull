@@ -107,8 +107,6 @@ function getAccess() {
     if (debug) console.log('Acceso restringido.');
     window.location.replace("/home/index.html");
   }
-
-  
 }
 
 // const debug = true;
@@ -118,7 +116,6 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
-
     const permisos = getAccess();
 
     $scope.bucket = sessionStorage.bucket;

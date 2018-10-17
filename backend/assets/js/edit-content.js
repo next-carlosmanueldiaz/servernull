@@ -73,13 +73,14 @@ function slugify (text) {
     .replace(/-+$/, '')             // Trim - from end of text
 }
 
-const debug = true;
-const tengoAcceso = getCredentials();
+// const debug = true;
+// const tengoAcceso = getCredentials();
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
+    const permisos = getAccess();
     $scope.bucket = sessionStorage.bucket;
     $scope.type = getQueryVariable('tipo');
     $scope.slug = getQueryVariable('id');

@@ -34,6 +34,23 @@ app.controller('myCtrl', function ($scope) {
   }
 });
 
+/** 
+ * Obtiene credenciales para acceder al backend
+*/
+function getAccess() {
+  // Miramos si hay id_token
+  if (sessionStorage.id_token !== "") {
+    // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
+    if (debug) console.log('A.- Establecemos el rol del Administrador (Autenticado).');
+    userLoggedIn('accounts.google.com', sessionStorage.id_token);
+    checkCurrentRoleIdentity();
+  } else {
+    // Establecemos el rol no autenticado (rol por defecto)
+    if (debug) console.log('Acceso restringido.');
+    window.location.replace("/home/index.html");
+  }
+}
+
 // Hay 2 situaciones posibles:
 // - NADA MAS ATERRIZAR EN CUALQUIER PÁGINA.. ejecutar setUnauth() SI queremos usar el API (s3 en la home)
 //   Sin googleUser, es decir en ningún momento se ha logueado previamente.
