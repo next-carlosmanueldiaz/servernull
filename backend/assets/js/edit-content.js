@@ -81,7 +81,7 @@ app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
     const permisos = getAccess();
-    
+
     $scope.bucket = sessionStorage.bucket;
     $scope.type = getQueryVariable('tipo');
     $scope.slug = getQueryVariable('id');
@@ -124,6 +124,7 @@ app.controller('myCtrl', function ($scope) {
    * @returns {undefined}
    */
   $scope.submit = function () {
+    const permisos = getAccess();
     // Necesitamos content-types.json para obtener el css y tpl
     const keyCT = 'private/content-types/json/content-types.json';
     var fileParams = {Bucket: $scope.bucket, Key: keyCT};
