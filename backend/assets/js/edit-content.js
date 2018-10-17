@@ -49,7 +49,7 @@ function expiredToken() {
   sessionStorage.sessionToken = "";
   sessionStorage.expired = "";
   console.log('User signed out.');
-  window.location.replace("/home/index.html");
+  // window.location.replace("/home/index.html");
 }
 
 /**
@@ -81,6 +81,7 @@ app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
     const permisos = getAccess();
+    
     $scope.bucket = sessionStorage.bucket;
     $scope.type = getQueryVariable('tipo');
     $scope.slug = getQueryVariable('id');
@@ -131,7 +132,7 @@ app.controller('myCtrl', function ($scope) {
       if (errGetObject) {
         if (debug) console.log('El fichero ' + keyCT + ' NO existe en el bucket o no tiene permisos.');
         if (debug) console.log(errGetObject);
-        expiredToken();
+        // expiredToken();
       } else {
         const id = getQueryVariable("id");
         var file = JSON.parse(fileData.Body.toString('utf-8'));
@@ -152,7 +153,7 @@ app.controller('myCtrl', function ($scope) {
           if (errGetObject) {
             if (debug) console.log('El fichero ' + keyHtml + ' NO existe en el bucket o no tiene permisos.');
             if (debug) console.log(errGetObject);
-            expiredToken();
+            // expiredToken();
           } else {
             // Rellenamos el contenido del HTML con los datos
             var html = fileData.Body.toString('utf-8');
@@ -187,7 +188,7 @@ app.controller('myCtrl', function ($scope) {
                 if (debug) console.log('El fichero ' + keyHTML + ' NO existe en el bucket o no tiene permisos.');
                 if (debug) console.log('Error guardando el fichero')
                 if (debug) console.log(errSavingFile);
-                expiredToken();
+                // expiredToken();
               } else {
                 if (debug) console.log('Fichero HTML guardado correctamente en ' + keyHTML);
                 if (debug) console.log(dataPutObject);
@@ -224,7 +225,7 @@ app.controller('myCtrl', function ($scope) {
             if (debug) console.log('El fichero JSON ' + keyJSON + ' NO existe en el bucket o no tiene permisos.');
             if (debug) console.log('Error guardando el fichero')
             if (debug) console.log(errSavingFile);
-            expiredToken();
+            // expiredToken();
           } else {
             if (debug) console.log('Fichero JSON guardado correctamente en ' + keyJSON);
             if (debug) console.log(dataPutObject);
