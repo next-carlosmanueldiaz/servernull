@@ -49,7 +49,7 @@ function expiredToken() {
   sessionStorage.sessionToken = "";
   sessionStorage.expired = "";
   console.log('User signed out.');
-  window.location.replace("/home/index.html");
+  // window.location.replace("/home/index.html");
 }
 
 /**
