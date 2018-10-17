@@ -45,7 +45,7 @@ function getAccess() {
     userLoggedIn('accounts.google.com', sessionStorage.id_token);
     checkCurrentRoleIdentity();
   } else {
-    // Establecemos el rol no autenticado (rol por defecto)
+    // Acceso restringido sólo a administradores
     if (debug) console.log('Acceso restringido.');
     window.location.replace("/home/index.html");
   }
