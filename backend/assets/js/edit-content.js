@@ -201,6 +201,7 @@ app.controller('myCtrl', function ($scope) {
         var keyJSON = 'home/content/json/' + $scope.type + '/' + $scope.slug + '.json';
         // ========================================================================
         // Generamos el JSON con los datos del contenido
+        var img = "";
         var contenido = "[";
         // Recogemos los valores del formulario
         for (var key in $scope.cts[$scope.pos].fields) {
@@ -212,6 +213,12 @@ app.controller('myCtrl', function ($scope) {
           valueCampo = valueCampo.replace(/(\r?\n|\r|\n)/gm, '<br/>');
 
           var campo = '{ "id" : "' + idCampo + '", "name" : "' + nameCampo + '", "type" : "' + typeCampo + '", "value" : "' + valueCampo + '" },';
+
+          if (img == "") {
+            if (idCampo == "img") {
+              img = valueCampo;
+            }
+          }
 
           contenido += campo;
         }

@@ -198,7 +198,7 @@ app.controller('myCtrl', function ($scope) {
         if (debug) console.log(errSavingFile);
         expiredToken();
       } else {
-        if (debug) console.log('Fichero guardado correctamente');
+        if (debug) console.log('Fichero guardado correctamente en ' + keyC);
         // if (debug) console.log(dataPutObject);
         // ========================================================================
         // ACTUALIZAMOS (OBTENEMOS, AGREGAMOS Y GUARDAMOS) EL JSON CON EL LISTADO DE CONTENIDOS
@@ -227,7 +227,7 @@ app.controller('myCtrl', function ($scope) {
                 if (debug) console.log(errSavingFile);
                 expiredToken();
               } else {
-                if (debug) console.log('Fichero guardado correctamente');
+                if (debug) console.log('Fichero guardado correctamente en ' + keyCL);
                 // if (debug) console.log(dataPutObject);
               }
             }); // /putObject('contents.json)
