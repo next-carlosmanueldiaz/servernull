@@ -301,6 +301,7 @@ function signOut() {
   auth2.signOut().then(function () {
     // Borramos el id_token, que determina si está o no logueado.
     sessionStorage.id_token = "";
+    sessionStorage.IdentityPoolId = "";
     // Una vez eliminado el id_token, iniciamos sesión como usuario no Autenticado.
     setUnauth();
 
