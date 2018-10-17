@@ -245,7 +245,7 @@ function userLoggedIn(providerName, token) {
     if (debug) console.log('Cognito Identity:');
     var cognitoidentity = new AWS.CognitoIdentity({});
     var paramsDescribeIdentity = {
-      IdentityId: AWS.config.credentials.data.IdentityId /* required*/
+      IdentityId: AWS.config.credentials.params.IdentityId /* required*/
     };
     if (debug) console.log('========================================');
     cognitoidentity.describeIdentity(paramsDescribeIdentity, function(err, data) {
