@@ -244,11 +244,11 @@ function userLoggedIn(providerName, token) {
     if (debug) console.log('========================================');
     if (debug) console.log('Cognito Identity:');
     var cognitoidentity = new AWS.CognitoIdentity({});
-    var params = {
-      IdentityId: IdentityPoolId /* required - from config.js*/
+    var paramsDescribeIdentity = {
+      IdentityId: AWS.config.credentials.data.IdentityId /* required*/
     };
     if (debug) console.log('========================================');
-    cognitoidentity.describeIdentity(params, function(err, data) {
+    cognitoidentity.describeIdentity(paramsDescribeIdentity, function(err, data) {
       if (err) {
         if (debug) console.log('Error obteniendo Cognito Identity:')
         if (debug) console.log(err, err.stack); // an error occurred
@@ -258,7 +258,10 @@ function userLoggedIn(providerName, token) {
     });
     if (debug) console.log('========================================');
     if (debug) console.log('getIdentityPoolRoles:');
-    cognitoidentity.getIdentityPoolRoles(params, function(err, data) {
+    var paramsIdentityPoolRoles = {
+      IdentityPoolId: IdentityPoolId /* required - from config.js */
+    };
+    cognitoidentity.getIdentityPoolRoles(paramsIdentityPoolRoles, function(err, data) {
       if (err) {
         if (debug) console.log('Error obteniendo getIdentityPoolRoles:')
         console.log(err, err.stack); // an error occurred
