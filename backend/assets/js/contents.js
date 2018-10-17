@@ -124,6 +124,7 @@ app.controller('myCtrl', function ($scope) {
   }
 
   $scope.eliminar = function (id) {
+    const permisos = getAccess();
     var confirmar = confirm('¿Estás seguro?');
     if (confirmar) {
       console.log('encontrado en la posicion: ' + id);

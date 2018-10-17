@@ -1,5 +1,5 @@
-var debug = true;
-const tengoAcceso = getCredentials();
+//var debug = true;
+// const tengoAcceso = getCredentials();
 var bucket = sessionStorage.bucket;
 var key = 'private/content-types/json/content-types.json';
 
@@ -37,13 +37,14 @@ function expiredToken() {
   sessionStorage.sessionToken = "";
   sessionStorage.expired = "";
   console.log('User signed out.');
-  window.location.replace("/home/index.html");
+  // window.location.replace("/home/index.html");
 }
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
+    const permisos = getAccess();
     $scope.bucket = sessionStorage.bucket;
     $scope.key = 'private/content-types/json/content-types.json';
     
@@ -53,8 +54,8 @@ app.controller('myCtrl', function ($scope) {
       if (errGetObject) {
         if (debug) console.log('El fichero ' + $scope.key + ' NO existe en el bucket o no tiene permisos.');
         if (debug) console.log(errGetObject);
-        window.location.replace("/home/index.html");
-        expiredToken();
+        //window.location.replace("/home/index.html");
+        // expiredToken();
       } else {
         var file = JSON.parse(fileData.Body.toString('utf-8'));
         $scope.cts = file;
@@ -65,6 +66,7 @@ app.controller('myCtrl', function ($scope) {
   
 
   $scope.eliminar = function (id) {
+    const permisos = getAccess();
     var confirmar = confirm('¿Estás seguro?');
     if (confirmar) {
       console.log('encontrado en la posicion: ' + id);
