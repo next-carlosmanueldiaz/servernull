@@ -93,7 +93,7 @@ app.controller('myCtrl', function ($scope) {
       if (errGetObject) {
         if (debug) console.log('El fichero ' + keyJson + ' NO existe en el bucket o no tiene permisos.');
         if (debug) console.log(errGetObject);
-        expiredToken();
+        // expiredToken();
       } else {
         var f = fileData.Body.toString('utf-8');
         // preserve newlines, etc - use valid JSON
