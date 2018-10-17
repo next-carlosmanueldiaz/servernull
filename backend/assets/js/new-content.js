@@ -194,7 +194,7 @@ app.controller('myCtrl', function ($scope) {
         if (debug) console.log('Fichero guardado correctamente');
         if (debug) console.log(dataPutObject);
         // ACTUALIZAMOS (OBTENEMOS, AGREGAMOS Y GUARDAMOS) EL JSON CON EL LISTADO DE CONTENIDOS
-        const keyCL = '/home/content/json/contents.json';
+        const keyCL = 'home/content/json/contents.json';
         var fileParams = {Bucket: $scope.bucket, Key: keyCL};
         s3.getObject(fileParams, function (errGetObject, fileData) {
           if (errGetObject) {
