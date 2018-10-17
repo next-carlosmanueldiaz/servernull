@@ -191,7 +191,8 @@ app.controller('myCtrl', function ($scope) {
                 if (debug) console.log(errSavingFile);
                 // expiredToken();
               } else {
-                if (debug) console.log('Fichero HTML guardado correctamente en ' + keyHTML);
+                // if (debug) console.log('Fichero HTML guardado correctamente en ' + keyHTML);
+                if (debug) console.log('Fichero ', '%c HTML ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyHTML);
                 // if (debug) console.log(dataPutObject);
               }
             }); // / putObject('title.html)
@@ -228,7 +229,8 @@ app.controller('myCtrl', function ($scope) {
             if (debug) console.log(errSavingFile);
             // expiredToken();
           } else {
-            if (debug) console.log('Fichero JSON guardado correctamente en ' + keyJSON);
+            // if (debug) console.log('Fichero JSON guardado correctamente en ' + keyJSON);
+            if (debug) console.log('Fichero ', '%c JSON ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyHTML);
             // if (debug) console.log(dataPutObject);
           }
         }); // / putObject('nuevo-contenido.json)        
