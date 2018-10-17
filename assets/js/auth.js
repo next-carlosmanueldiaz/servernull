@@ -188,6 +188,30 @@ function setUnauth() {
       // if (debug) console.log(AWS.config.credentials);
       if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
       if (debug) console.log('====================================================================');
+      if (debug) console.log('Cognito Identity:');
+      var cognitoidentity = new AWS.CognitoIdentity({});
+      var params = {
+        IdentityId: IdentityPoolId /* required - from config.js*/
+      };
+      if (debug) console.log('========================================');
+      cognitoidentity.describeIdentity(params, function(err, data) {
+        if (err) {
+          if (debug) console.log('Error obteniendo Cognito Identity:')
+          if (debug) console.log(err, err.stack); // an error occurred
+        } else {
+          if (debug) console.log(data);           // successful response
+        }
+      });
+      if (debug) console.log('========================================');
+      if (debug) console.log('getIdentityPoolRoles:');
+      cognitoidentity.getIdentityPoolRoles(params, function(err, data) {
+        if (err) {
+          if (debug) console.log('Error obteniendo getIdentityPoolRoles:')
+          console.log(err, err.stack); // an error occurred
+        } else {
+          console.log(data);           // successful response
+        }
+      });
     }
   }); // Fin de refresco de credenciales
 }
@@ -218,6 +242,30 @@ function userLoggedIn(providerName, token) {
     if (debug) console.log('Credenciales:');
     if (debug) console.log(AWS.config.credentials);
     if (debug) console.log('========================================');
+    if (debug) console.log('Cognito Identity:');
+    var cognitoidentity = new AWS.CognitoIdentity({});
+    var params = {
+      IdentityId: IdentityPoolId /* required - from config.js*/
+    };
+    if (debug) console.log('========================================');
+    cognitoidentity.describeIdentity(params, function(err, data) {
+      if (err) {
+        if (debug) console.log('Error obteniendo Cognito Identity:')
+        if (debug) console.log(err, err.stack); // an error occurred
+      } else {
+        if (debug) console.log(data);           // successful response
+      }
+    });
+    if (debug) console.log('========================================');
+    if (debug) console.log('getIdentityPoolRoles:');
+    cognitoidentity.getIdentityPoolRoles(params, function(err, data) {
+      if (err) {
+        if (debug) console.log('Error obteniendo getIdentityPoolRoles:')
+        console.log(err, err.stack); // an error occurred
+      } else {
+        console.log(data);           // successful response
+      }
+    });
     sessionStorage.rol = "admin";
 }
 
