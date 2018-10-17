@@ -73,13 +73,14 @@ function slugify (text) {
     .replace(/-+$/, '')             // Trim - from end of text
 }
 
-const debug = true;
-const tengoAcceso = getCredentials();
+// const debug = true;
+// const tengoAcceso = getCredentials();
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
+    const permisos = getAccess();
     $scope.bucket = sessionStorage.bucket;
     const keyCT = 'private/content-types/json/content-types.json';
     var fileParams = {Bucket: $scope.bucket, Key: keyCT};
@@ -112,6 +113,7 @@ app.controller('myCtrl', function ($scope) {
    * @returns {undefined}
    */
   $scope.submit = function () {
+    const permisos = getAccess();
     var titulo = $scope.cts[$scope.pos].fields[0].value;
     var title = slugify(titulo);
     
