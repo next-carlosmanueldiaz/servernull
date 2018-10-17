@@ -118,7 +118,9 @@ function onLogIn(googleUser) {
   - Rol Autenticado: Cognito_ServerNull__Auth_Role        */
 function checkCurrentRoleIdentity() {
   var sts = new AWS.STS();
-  var params = {};
+  var params = {
+    IdentityPoolId: IdentityPoolId
+  };
   sts.getCallerIdentity(params, function(err, data) {
     if (err) {
       if (debug) console.log('Ocurrió un error al consultar la identidad');
