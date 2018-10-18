@@ -91,10 +91,12 @@ app.controller('myCtrl', function ($scope) {
           if (file[key].type == "article") {
 
             // file[key].slug = slugify(file[key].title);
-            if (debug) console.log(file[key].slug);
+            if (debug) console.log(file[key].title);
+            if (debug) console.log(file[key].img);
             // ========================================================================
+            // No necesitamos obtener los artículos, con el fichero contents.json tenemos suficiente.
             // Obtenemos el artículo para pintar el teaser
-            var keyJSON = 'home/content/json/' + file[key].type + '/' + file[key].slug + '.json';
+            // var keyJSON = 'home/content/json/' + file[key].type + '/' + file[key].slug + '.json';
             // ========================================================================
             // Obtenemos 
           }
@@ -106,7 +108,7 @@ app.controller('myCtrl', function ($scope) {
     });
   }
 
-  $scope.eliminar = function (id) {
+/*   $scope.eliminar = function (id) {
     var confirmar = confirm('¿Estás seguro?');
     if (confirmar) {
       console.log('encontrado en la posicion: ' + id);
@@ -150,5 +152,5 @@ app.controller('myCtrl', function ($scope) {
         console.log('No se ha encontrado el registro.');
       }
     } // /end-if confirmar
-  };
+  }; */
 });
