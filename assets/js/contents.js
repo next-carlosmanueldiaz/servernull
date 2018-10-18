@@ -90,8 +90,10 @@ app.controller('myCtrl', function ($scope) {
         for (var key in file) {
           if (file[key].type == "article") {
 
-            // file[key].slug = slugify(file[key].title);
+            file[key].slug = slugify(file[key].title);
             if (debug) console.log(file[key].title);
+            if (debug) console.log(file[key].slug);
+            if (debug) console.log(file[key].type);
             if (debug) console.log(file[key].img);
             // ========================================================================
             // No necesitamos obtener los artículos, con el fichero contents.json tenemos suficiente.
