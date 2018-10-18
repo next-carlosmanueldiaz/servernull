@@ -463,7 +463,7 @@
       <div class="container" ng-repeat="content in contents track by $index" ng-if="$index >= 1">
         <!-- FILA CON DOS COLUMNAS -->
         <div class="row wpb_row vc_row-fluid" ng-if="$even">
-          <div class="wpb_column vc_column_container col-sm-6" ng-if="{{contents[$index].img}} != ''">
+          <div class="wpb_column vc_column_container col-sm-6" ng-if="{{contents[$index].img}}">
             <div class="vc_column-inner ">
               <div class="wpb_wrapper">
                 <article data-new-block="363928" class="noticia formato1">
@@ -485,7 +485,7 @@
               </div>
             </div>
           </div>
-          <div class="wpb_column vc_column_container col-sm-6" ng-if="{{contents[$index+1].img}} != ''">
+          <div class="wpb_column vc_column_container col-sm-6" ng-if="{{contents[$index+1].img}}">
             <div class="vc_column-inner ">
               <div class="wpb_wrapper">
                 <article data-new-block="383157" class="noticia formato2">
