@@ -87,24 +87,18 @@ app.controller('myCtrl', function ($scope) {
         // expiredToken();
       } else {
         var file = JSON.parse(data.Body.toString('utf-8'));
+        // Tomamos sólo los artículos para la portada
+        var articles = JSON.parse({});
         for (var key in file) {
-          if (file[key].type == "article") {
-
-            file[key].slug = slugify(file[key].title);
-            if (debug) console.log(file[key].title);
-            if (debug) console.log(file[key].slug);
-            if (debug) console.log(file[key].type);
-            if (debug) console.log(file[key].img);
-            // ========================================================================
-            // No necesitamos obtener los artículos, con el fichero contents.json tenemos suficiente.
-            // Obtenemos el artículo para pintar el teaser
-            // var keyJSON = 'home/content/json/' + file[key].type + '/' + file[key].slug + '.json';
-            // ========================================================================
-            // Obtenemos 
+          if (file[key].type == "article") {           
+            articles[key].title = file[key].title;
+            articles[key].slug  = slugify(file[key].title);
+            articles[key].type = file[key].type;
+            articles[key].img = file[key].img;
           }
         }
 
-        $scope.contents = file;
+        $scope.contents = articles;
         $scope.$apply();
       }
     });
