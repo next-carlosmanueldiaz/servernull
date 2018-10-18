@@ -89,7 +89,7 @@ app.controller('myCtrl', function ($scope) {
       } else {
         var file = JSON.parse(data.Body.toString('utf-8'));
         // Tomamos sólo los artículos para la portada
-        var articles = JSON.parse({});
+        var articles = {};
         for (var key in file) {
           if (file[key].type == "article") {           
             articles[key].title = file[key].title;
