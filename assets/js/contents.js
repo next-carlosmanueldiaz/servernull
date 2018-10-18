@@ -92,10 +92,8 @@ app.controller('myCtrl', function ($scope) {
         for (var key in file) {
           if (file[key].type != "article") {
             file.splice(key, 1);
-            // articles[key].title = file[key].title;
-            // articles[key].slug  = slugify(file[key].title);
-            // articles[key].type = file[key].type;
-            // articles[key].img = file[key].img;
+          } else {
+            file[key].slug = slugify(file[key].title);
           }
         }
 
