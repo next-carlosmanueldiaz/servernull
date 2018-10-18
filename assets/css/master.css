@@ -755,7 +755,9 @@ small, .small {
   margin-bottom: 1px; }
 
 .wpb_row {
-  margin-bottom: 0px !important; }
+  margin-bottom: 0px !important; 
+  padding-top: 30px;
+}
 
 .vc_desktop .noticia {
   /*margin-bottom: 0!important;*/ }
