@@ -55,6 +55,7 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
+    // Esto obliga a que ng-app y ng-controller estén en la etiqueta <html>
     $scope.googleSigninClientId = googleSigninClientId;
 
     // Miramos si hay id_token
