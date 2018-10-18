@@ -89,17 +89,17 @@ app.controller('myCtrl', function ($scope) {
       } else {
         var file = JSON.parse(data.Body.toString('utf-8'));
         // Tomamos sólo los artículos para la portada
-        var articles = {};
         for (var key in file) {
-          if (file[key].type == "article") {           
-            articles[key].title = file[key].title;
-            articles[key].slug  = slugify(file[key].title);
-            articles[key].type = file[key].type;
-            articles[key].img = file[key].img;
+          if (file[key].type != "article") {
+            file.splice(key, 1);
+            // articles[key].title = file[key].title;
+            // articles[key].slug  = slugify(file[key].title);
+            // articles[key].type = file[key].type;
+            // articles[key].img = file[key].img;
           }
         }
 
-        $scope.contents = articles;
+        $scope.contents = file;
         $scope.$apply();
       }
     });
