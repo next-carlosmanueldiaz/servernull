@@ -460,18 +460,18 @@
         <div class="vc_row-full-width"></div>
       </div><!-- // container -->
 
-      <div class="container"><!-- FILA CON DOS COLUMNAS -->
+      <div class="container" ng-repeat="content in contents track by $index+1"><!-- FILA CON DOS COLUMNAS -->
         <div class="row wpb_row vc_row-fluid">
           <div class="wpb_column vc_column_container col-sm-6">
             <div class="vc_column-inner ">
               <div class="wpb_wrapper">
                 <article data-new-block="363928" class="noticia formato1">
                   <div class="box-image">
-                    <div class="img-image" data-new-bg-img="" style="background-image: url('https://www.bbva.com/wp-content/uploads/2015/11/juegos-ninos-home-1920x0-c-f.jpg')"></div>
+                    <div class="img-image" data-new-bg-img="" style="background-image: url('{{content.img}}')"></div>
                     <div class="box-info ">
-                      <a data-new-link="" href="https://www.bbva.com/es/aplicaciones-ensenan-ninos-manejar-bien-dinero/" data-new-id="363928">
+                      <a data-new-link="" href="/home/content/html/{{content.type}}/{{content.slug}}.html" data-new-id="363928">
                         <h3 class="titular small" data-new-title="">
-                          Aplicaciones que enseñan a los niños a manejar bien el dinero
+                          {{content.title}}
                         </h3>
                       </a>
                       <ul class="bluepills" data-new-tags="">
