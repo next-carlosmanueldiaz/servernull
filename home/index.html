@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="myApp" ng-controller="myCtrl" lang="es">
+<html lang="es">
   <head>
     <title>ServerNull</title>
     <link rel="shortcut icon" href="/assets/img/favicon.ico">
@@ -178,7 +178,7 @@
       });
     </script>
   </head>
-  <body>
+  <body ng-app="myApp" ng-controller="myCtrl">
     <header class="header-main">
       <!-- ============= Row superior: navegación ============= -->
       <a href="/home/index.html" class="link-map">
@@ -438,12 +438,12 @@
             <div class="vc_column-inner ">
               <div class="wpb_wrapper">
                 <article data-new-block="383157" class="noticia formato2">
-                  <div class="box-image" data-new-bg-img="" style="background-image: url('{{content[0].img}}')">
+                  <div class="box-image" data-new-bg-img="" style="background-image: url('{{contents[0].img}}')">
                     <div class="filterGrad"></div>                
                     <div class="box-info ">
-                      <a data-new-link="" href="/home/content/html/{{content[0].type}}/{{content[0].slug}}.html" data-new-id="383157">
+                      <a data-new-link="" href="/home/content/html/{{contents[0].type}}/{{contents[0].slug}}.html" data-new-id="383157">
                         <h3 class="titular small" data-new-title="">
-                          {{content[0].title}}
+                          {{contents[0].title}}
                         </h3>
                       </a>
                       <ul class="bluepills" data-new-tags="">
