@@ -124,6 +124,11 @@ function checkCurrentRoleIdentity() {
     if (err) {
       if (debug) console.log('Ocurrió un error al consultar la identidad');
       if (debug) console.log(err, err.stack); // an error occurred
+
+      // HA CADUCADO LA SESIÓN. SE ESTABLECE SESIÓN DE INVITADO.
+      // Establecemos el rol no autenticado (rol por defecto)
+      if (debug) console.log('B.- Establecemos el rol del invitado (No autenticado).');
+      setUnauth();
     } else {
       if (debug) console.log('========================================');
       if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
