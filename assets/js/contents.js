@@ -88,15 +88,23 @@ app.controller('myCtrl', function ($scope) {
         // expiredToken();
       } else {
         var file = JSON.parse(data.Body.toString('utf-8'));
+        
+
         // Tomamos sólo los artículos para la portada
         for (var key in file) {
           if (file[key].type != "article") {
+            // Elimina el elemento del array que no es un artículo
             file.splice(key, 1);
           }
         }
 
         for (var key in file) {
           file[key].slug = slugify(file[key].title);
+
+          if (key == 0) {
+            $scope.titular = file[key];
+            file.splice(key, 1);
+          }
         }
 
         $scope.contents = file;

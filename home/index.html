@@ -438,12 +438,12 @@
             <div class="vc_column-inner ">
               <div class="wpb_wrapper">
                 <article data-new-block="383157" class="noticia formato2">
-                  <div class="box-image" data-new-bg-img="" style="background-image: url('{{contents[0].img}}')">
+                  <div class="box-image" data-new-bg-img="" style="background-image: url('{{titular.img}}')">
                     <div class="filterGrad"></div>                
                     <div class="box-info ">
-                      <a data-new-link="" href="/home/content/html/{{contents[0].type}}/{{contents[0].slug}}.html" data-new-id="383157">
+                      <a data-new-link="" href="/home/content/html/{{titular.type}}/{{titular.slug}}.html" data-new-id="383157">
                         <h3 class="titular small" data-new-title="">
-                          {{contents[0].title}}
+                          {{titular.title}}
                         </h3>
                       </a>
                       <ul class="bluepills" data-new-tags="">
@@ -460,7 +460,7 @@
         <div class="vc_row-full-width"></div>
       </div><!-- // container -->
 
-      <div class="container" ng-repeat="content in contents track by $index" ng-if="$index >= 0">
+      <div class="container" ng-repeat="content in contents track by $index">
         <!-- FILA CON DOS COLUMNAS -->
         <div class="row wpb_row vc_row-fluid" ng-if="$even">
           <div class="wpb_column vc_column_container col-sm-6">
