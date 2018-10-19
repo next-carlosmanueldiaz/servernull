@@ -124,7 +124,6 @@ function checkCurrentRoleIdentity() {
     if (err) {
       if (debug) console.log('Ocurrió un error al consultar la identidad');
       if (debug) console.log(err, err.stack); // an error occurred
-      window.location.replace("/home/index.html");
     } else {
       if (debug) console.log('========================================');
       if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
