@@ -127,8 +127,21 @@ function checkCurrentRoleIdentity() {
 
       // HA CADUCADO LA SESIÓN. SE ESTABLECE SESIÓN DE INVITADO.
       // Establecemos el rol no autenticado (rol por defecto)
-      if (debug) console.log('B.- Establecemos el rol del invitado (No autenticado).');
-      setUnauth();
+      var poolData = {UserPoolId: userPoolId, ClientId: appClientId};
+      var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+      var cognitoUser = userPool.getCurrentUser();
+
+      if (cognitoUser != null) {
+        cognitoUser.getSession(function (err, session) {
+          if (err) {
+            alert(err);
+            return;
+          }
+          console.log('session validity: ' + session.isValid());
+        });
+      }
+      // if (debug) console.log('B.- Establecemos el rol del invitado (No autenticado).');
+      // setUnauth();
     } else {
       if (debug) console.log('========================================');
       if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
