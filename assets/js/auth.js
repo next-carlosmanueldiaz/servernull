@@ -39,7 +39,7 @@ app.controller('myCtrl', function ($scope) {
 */
 function getAccess() {
   // Miramos si hay id_token
-  if (sessionStorage.id_token !== "") {
+  if (typeof sessionStorage.id_token !== "undefined" && sessionStorage.id_token !== "") {
     // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
     if (debug) console.log('A.- Establecemos el rol del Administrador (Autenticado).');
     userLoggedIn('accounts.google.com', sessionStorage.id_token);
