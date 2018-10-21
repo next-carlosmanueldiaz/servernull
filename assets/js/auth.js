@@ -128,7 +128,7 @@ function checkCurrentRoleIdentity() {
       // HA CADUCADO LA SESIÓN. SE ESTABLECE SESIÓN DE INVITADO.
       // Establecemos el rol no autenticado (rol por defecto)
       var poolData = {UserPoolId: userPoolId, ClientId: appClientId};
-      var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+      var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
       var cognitoUser = userPool.getCurrentUser();
 
       if (cognitoUser != null) {
