@@ -1743,7 +1743,7 @@ body.en .pie-footer .legal {
   position: relative; }
   .pie-footer .legal {
     background: #072146 url("../img/logo-footer.png") no-repeat 15px 0;
-    margin: 50px auto 80px auto;
+    margin: 50px auto 0px auto;
     padding: 75px 15px 15px 16px;
     position: relative;
     width: 1200px; }
