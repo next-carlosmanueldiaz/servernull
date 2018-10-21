@@ -8736,7 +8736,8 @@ body.en #cookie-law-info-bar span:before {
   content: '';
   display: block;
   position: absolute;
-  background: #072146;
+  /* background: #072146; */
+  background: rgba(255, 255, 255, 0.33);
   margin: 0;
   top: 0;
   left: 0;
@@ -9046,11 +9047,11 @@ div.col-sm-12[class*="-md-"] .box-info, .col-lg-12 div[class*="col-"] .box-info 
   box-shadow: 0px 0.5px 1px 0px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.3s ease-in-out; }
 
-/* .noticia:hover, .descarga:hover, .cabecera-evento .box-image:hover {
+.noticia:hover, .descarga:hover, .cabecera-evento .box-image:hover {
   -webkit-box-shadow: 3px 3px 1px -1px rgba(0, 0, 0, 0.19);
   -moz-box-shadow: 3px 3px 1px -1px rgba(0, 0, 0, 0.19);
   box-shadow: 3px 3px 1px -1px rgba(0, 0, 0, 0.19);
-  transition: box-shadow 0.3s ease-in-out; } */
+  transition: box-shadow 0.3s ease-in-out; }
 
 .highlight-tags .tag {
   border-radius: 2px; }
