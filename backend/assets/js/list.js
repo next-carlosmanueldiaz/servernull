@@ -49,7 +49,7 @@ function expiredToken() {
   sessionStorage.sessionToken = "";
   sessionStorage.expired = "";
   console.log('User signed out.');
-  window.location.replace("/home/index.html");
+  // window.location.replace("/home/index.html");
 }
 
 // var debug = true;
@@ -64,7 +64,7 @@ app.controller('myCtrl', function ($scope) {
     $scope.bucket = sessionStorage.bucket;
     // Comprobar acceso
     const permisos = getAccess();
-    
+
     $scope.key = 'private/content-types/json/content-types.json';
     
     s3 = new AWS.S3();
