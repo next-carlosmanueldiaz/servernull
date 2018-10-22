@@ -52,14 +52,19 @@ function expiredToken() {
   window.location.replace("/home/index.html");
 }
 
-var debug = true;
-const tengoAcceso = getCredentials();
+// var debug = true;
+// const tengoAcceso = getCredentials();
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
+    // Esto obliga a que ng-app y ng-controller estén en la etiqueta <html>
+    $scope.googleSigninClientId = googleSigninClientId;
     $scope.bucket = sessionStorage.bucket;
+    // Comprobar acceso
+    const permisos = getAccess();
+    
     $scope.key = 'private/content-types/json/content-types.json';
     
     s3 = new AWS.S3();
