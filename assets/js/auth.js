@@ -124,22 +124,28 @@ function checkCurrentRoleIdentity() {
     if (err) {
       if (debug) console.log('Ocurrió un error al consultar la identidad');
       if (debug) console.log(err, err.stack); // an error occurred
+      var errMsg = err.originalError.originalError.message;
+
+      if (errMsg.includes("Invalid login token. Token expired")) {
+        if (debug) console.log(errMsg);
+        setUnauth();
+      }
 
       // HA CADUCADO LA SESIÓN. SE ESTABLECE SESIÓN DE INVITADO.
       // Establecemos el rol no autenticado (rol por defecto)
-      var poolData = {UserPoolId: userPoolId, ClientId: appClientId};
-      var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-      var cognitoUser = userPool.getCurrentUser();
+      // var poolData = {UserPoolId: userPoolId, ClientId: appClientId};
+      // var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+      // var cognitoUser = userPool.getCurrentUser();
 
-      if (cognitoUser != null) {
-        cognitoUser.getSession(function (err, session) {
-          if (err) {
-            alert(err);
-            return;
-          }
-          console.log('session validity: ' + session.isValid());
-        });
-      }
+      // if (cognitoUser != null) {
+      //   cognitoUser.getSession(function (err, session) {
+      //     if (err) {
+      //       alert(err);
+      //       return;
+      //     }
+      //     console.log('session validity: ' + session.isValid());
+      //   });
+      // }
       // if (debug) console.log('B.- Establecemos el rol del invitado (No autenticado).');
       // setUnauth();
     } else {
