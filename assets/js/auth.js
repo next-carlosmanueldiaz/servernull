@@ -26,13 +26,13 @@ if (typeof salir !== 'undefined') {
   }
 }
 
-var app = angular.module('myApp', []);
-app.controller('myCtrl', function ($scope) {
+// var app = angular.module('myApp', []);
+// app.controller('myCtrl', function ($scope) {
 
-  this.$onInit = function () {
-    // ver en /assets/js/contents.js
-  }
-});
+//   this.$onInit = function () {
+//     // ver en /assets/js/contents.js
+//   }
+// });
 
 /** 
  * Obtiene credenciales para acceder al backend
