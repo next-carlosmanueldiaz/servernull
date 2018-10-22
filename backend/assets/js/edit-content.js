@@ -80,6 +80,8 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
+    // Esto obliga a que ng-app y ng-controller estén en la etiqueta <html>
+    $scope.googleSigninClientId = googleSigninClientId;
     const permisos = getAccess();
 
     $scope.bucket = sessionStorage.bucket;
@@ -158,6 +160,7 @@ app.controller('myCtrl', function ($scope) {
           } else {
             // Rellenamos el contenido del HTML con los datos
             var html = fileData.Body.toString('utf-8');
+            html = html.replace("{{googleSigninClientId}}", $scope.googleSigninClientId);
             html = html.replace("{{title}}", $scope.content[0].value);
             html = html.replace("{{script}}", "\r\n" + $scope.cts[$scope.pos].js);
             html = html.replace("{{css}}", "\r\n" + $scope.cts[$scope.pos].css);
