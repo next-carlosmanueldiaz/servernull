@@ -3110,7 +3110,7 @@ body.en .pie-footer .legal {
   .article-header .box-info.tag-fix {
     min-height: 475px; }
   .article-header .box-info {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.5);
     color: #000;
     min-height: 445px;
     width: 100%;
@@ -3154,7 +3154,7 @@ body.en .pie-footer .legal {
       overflow: hidden; }
       .article-header .box-info .bluepills li a {
         border: 0;
-        background: #bdbdbd;
+        background: #737373;
         transition: background 0.3s ease; }
         .article-header .box-info .bluepills li a:hover {
           text-decoration: none;
