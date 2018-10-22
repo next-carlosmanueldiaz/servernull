@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore-min.js"></script>
     <link rel="stylesheet" href="/assets/css/master.css">
+    <script type="text/javascript" src="/assets/js/config.js"></script>
+    <script type="text/javascript" src="/assets/js/auth.js"></script>
     <script type="text/javascript">{{script}}</script>
     <style>{{css}}</style>
   </head>
@@ -30,6 +32,11 @@
             <span class="glyphicon glyphicon-log-in"></span> Log in
           </a>
           <div class="login-box">
+            <div class="row">
+              <div class="col text-center">
+                <div class="g-signin2" data-onsuccess="onLogIn"></div>
+              </div>
+            </div>
             <div class="row">
               <div class="col text-center">
                 <a href="register.html">Solicitar acceso</a><br/>
