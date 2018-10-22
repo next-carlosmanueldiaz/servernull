@@ -128,26 +128,22 @@ function checkCurrentRoleIdentity() {
 
       if (errMsg.includes("Invalid login token. Token expired")) {
         if (debug) console.log(errMsg);
-        setUnauth();
+        // HA CADUCADO LA SESIÓN. SE ESTABLECE SESIÓN DE INVITADO.
+        // Miramos si hay id_token
+        if (typeof sessionStorage.id_token !== "undefined" && sessionStorage.id_token !== "") {
+          // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
+          if (debug) console.log('A.- Establecemos el rol del Administrador (Autenticado).');
+          userLoggedIn('accounts.google.com', sessionStorage.id_token);
+          // Quizá necesitemos asumir el rol de administrador.
+          // -----------------------------------------------------
+        } else {
+          // Establecemos el rol no autenticado (rol por defecto)
+          if (debug) console.log('B.- Establecemos el rol del invitado (No autenticado).');
+          setUnauth();
+        }
       }
 
-      // HA CADUCADO LA SESIÓN. SE ESTABLECE SESIÓN DE INVITADO.
-      // Establecemos el rol no autenticado (rol por defecto)
-      // var poolData = {UserPoolId: userPoolId, ClientId: appClientId};
-      // var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-      // var cognitoUser = userPool.getCurrentUser();
 
-      // if (cognitoUser != null) {
-      //   cognitoUser.getSession(function (err, session) {
-      //     if (err) {
-      //       alert(err);
-      //       return;
-      //     }
-      //     console.log('session validity: ' + session.isValid());
-      //   });
-      // }
-      // if (debug) console.log('B.- Establecemos el rol del invitado (No autenticado).');
-      // setUnauth();
     } else {
       if (debug) console.log('========================================');
       if (debug) console.log('DATOS DE LA IDENTIDAD IAM (STS getCallerIdentity)');
