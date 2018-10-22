@@ -128,7 +128,7 @@ function checkCurrentRoleIdentity() {
 
       if (errMsg.includes("Invalid login token. Token expired")) {
         if (debug) console.log(errMsg);
-        // HA CADUCADO LA SESIÓN. SE ESTABLECE SESIÓN DE INVITADO.
+        // HA CADUCADO LA SESIÓN. SE ESTABLECE SESIÓN DE NUEVO, YA QUE TENEMOS TOKEN.
         // Miramos si hay id_token
         if (typeof sessionStorage.id_token !== "undefined" && sessionStorage.id_token !== "") {
           // Si hay id_token ya guardado en la sesión, hemos hecho login, y establecemos rol
@@ -240,6 +240,24 @@ function userLoggedIn(providerName, token) {
     if (debug) console.log(AWS.config.credentials);
     if (debug) console.log('========================================');
     sessionStorage.rol = "admin";
+
+    // Actualizamos las credenciales
+    AWS.config.update({ region: sessionStorage.region, credentials: creds });
+    AWS.config.credentials.refresh((errorRefreshCredentials) => {
+      if (errorRefreshCredentials) {
+        if (debug) console.log("error al refrescar las credenciales:");
+        if (debug) console.log(errorRefreshCredentials);
+      } else {
+        if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
+        if (debug) console.log('Estas son las credenciales y refrescadas:');
+        if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
+        if (debug) console.log('========================================');
+        if (debug) console.log('Credenciales:');
+        // if (debug) console.log(AWS.config.credentials);
+        if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
+        if (debug) console.log('====================================================================');
+      }
+    }); // Fin de refresco de credenciales
 }
 
 /**
