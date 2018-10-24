@@ -187,15 +187,17 @@ function setUnauth() {
   // set the default config object
   if (debug) console.log('====================================================================');
   if (debug) console.log("ESTABLECIENDO EL ROL NO AUTENTICADO: Cognito_ServerNull__Unauth_Role");
+  if (debug) console.log("IdentityPoolId para setUnauth: " + IdentityPoolId);
   var creds = new AWS.CognitoIdentityCredentials({
     IdentityPoolId: IdentityPoolId
   });
   AWS.config.credentials = creds;
-  AWS.config.region = sessionStorage.region;
+  if (debug) console.log("region para setUnauth: " + region);
+  AWS.config.region = region;
 
   // Actualizamos y refrescamos
   creds.expired = true;
-  AWS.config.update({ region: sessionStorage.region, credentials: creds });
+  AWS.config.update({ region: region, credentials: creds });
   AWS.config.credentials.refresh((errorRefreshCredentials) => {
     if (errorRefreshCredentials) {
       if (debug) console.log("error al refrescar las credenciales:");
