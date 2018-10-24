@@ -96,11 +96,12 @@ app.controller('myCtrl', function ($scope) {
             file.splice(key, 1);
           }
         }
+        var last = file.length;
 
         for (var key in file) {
           file[key].slug = slugify(file[key].title);
 
-          if (key == 0) {
+          if (key == last) {
             $scope.titular = file[key];
             file.splice(key, 1);
           }
