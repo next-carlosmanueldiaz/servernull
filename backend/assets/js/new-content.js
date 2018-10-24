@@ -106,9 +106,9 @@ app.controller('myCtrl', function ($scope) {
   
   /**
    * SUBMIT FORMULARIO: 
-   *  - guardamos los datos del contenido en el nuevo json
-   *  - Actualizamos el JSON con el listado de contenidos.
-   *  - Creamos el fichero HTML mezclando la base (html.html), template y datos
+   *  - guardamos los datos del contenido en el nuevo json:                       slug-tittle.json
+   *  - Creamos el fichero HTML mezclando la base (html.html), template y datos:  slug-title.html
+   *  - Actualizamos el JSON con el listado de contenidos: home/content/json/contents.json
    * 
    * @returns {undefined}
    */
@@ -121,6 +121,7 @@ app.controller('myCtrl', function ($scope) {
     // ========================================================================
     // Obtenemos el HTML GENÉRICO
     const keyHtml = 'backend/html.html';
+    // ========================================================================
     var fileParams = {Bucket: $scope.bucket, Key: keyHtml};
     s3 = new AWS.S3();
     s3.getObject(fileParams, function (errGetObject, fileData) {
@@ -160,11 +161,10 @@ app.controller('myCtrl', function ($scope) {
     });
        
     // ========================================================================
-  
+    // Generamos el JSON con los datos del contenido
     // ========================================================================
     var keyC = 'home/content/json/' + $scope.cts[$scope.pos].id + '/' + title + '.json';
     // ========================================================================
-    // Generamos el JSON con los datos del contenido
     var img = "";
     var contenido = "[";
     // Recogemos los valores del formulario
@@ -214,7 +214,8 @@ app.controller('myCtrl', function ($scope) {
             // OBTENEMOS contents.json
             var file = JSON.parse(fileData.Body.toString('utf-8'));
             const type = getQueryVariable("id");
-            var content = {"title" : titulo, "type": type, "img": img};
+            var date = new Date(); // No necesito guardar la fecha porque puedo darle la vuelta al mostrar el fichero en la home con .reverse()
+            var content = {"title" : titulo, "type": type, "img": img, "date": date};
             // AGREGAMOS el nuevo contenido a contents.json
             file.push(content);
             var fileContents = JSON.stringify(file);
