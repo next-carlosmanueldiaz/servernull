@@ -90,8 +90,7 @@ app.controller('myCtrl', function ($scope) {
         var file = JSON.parse(data.Body.toString('utf-8'));
         
 
-        // Tomamos sólo los artículos para la portada, dándoles la vuelta al array con .reverse()
-        for (var key in file.reverse()) {
+        for (var key in file) {
           if (file[key].type != "article") {
             // Elimina el elemento del array que no es un artículo
             file.splice(key, 1);
@@ -107,7 +106,8 @@ app.controller('myCtrl', function ($scope) {
           }
         }
 
-        $scope.contents = file;
+        // Tomamos sólo los artículos para la portada, dándoles la vuelta al array con .reverse()
+        $scope.contents = file.reverse();
         $scope.$apply();
       }
     });
