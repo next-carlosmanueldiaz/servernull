@@ -96,7 +96,7 @@ app.controller('myCtrl', function ($scope) {
             file.splice(key, 1);
           }
         }
-        var last = file.length;
+        var last = file.length - 1; // Empieza en cero.
 
         for (var key in file) {
           file[key].slug = slugify(file[key].title);
