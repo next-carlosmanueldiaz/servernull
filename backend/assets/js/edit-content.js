@@ -166,7 +166,7 @@ app.controller('myCtrl', function ($scope) {
             html = html.replace("{{script}}", "\r\n" + $scope.cts[$scope.pos].js);
             html = html.replace("{{css}}", "\r\n" + $scope.cts[$scope.pos].css);
             
-            titulo = $scope.cts[$scope.pos].fields[0].value;
+            titulo = $scope.content[0].value;
 
             var tpl = $scope.cts[$scope.pos].tpl;
             for (var key in $scope.cts[$scope.pos].fields) {
