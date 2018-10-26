@@ -145,6 +145,8 @@ app.controller('myCtrl', function ($scope) {
             $scope.pos = key;
           }
         }
+
+        var titulo = $scope.cts[$scope.pos].fields[0].value;
         
         // HTML
         // ========================================================================
