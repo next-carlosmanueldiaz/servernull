@@ -145,8 +145,6 @@ app.controller('myCtrl', function ($scope) {
             $scope.pos = key;
           }
         }
-
-        var titulo = $scope.cts[$scope.pos].fields[0].value;
         
         // HTML
         // ========================================================================
@@ -166,6 +164,8 @@ app.controller('myCtrl', function ($scope) {
             html = html.replace("{{title}}", $scope.content[0].value);
             html = html.replace("{{script}}", "\r\n" + $scope.cts[$scope.pos].js);
             html = html.replace("{{css}}", "\r\n" + $scope.cts[$scope.pos].css);
+            
+            var titulo = $scope.content[0].value;
 
             var tpl = $scope.cts[$scope.pos].tpl;
             for (var key in $scope.cts[$scope.pos].fields) {
