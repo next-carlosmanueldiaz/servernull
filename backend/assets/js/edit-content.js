@@ -238,6 +238,40 @@ app.controller('myCtrl', function ($scope) {
             // expiredToken();
           } else {
             if (debug) console.log('%c JSON ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyJSON);
+            // ========================================================================
+            // ACTUALIZAMOS (OBTENEMOS, AGREGAMOS Y GUARDAMOS) EL JSON CON EL LISTADO DE CONTENIDOS
+            const keyCL = 'home/content/json/contents.json';
+            // ========================================================================
+            var fileParams = {Bucket: $scope.bucket, Key: keyCL};
+            s3.getObject(fileParams, function (errGetObject, fileData) {
+              if (errGetObject) {
+                if (debug) console.log('El fichero ' + key + ' NO existe en el bucket o no tiene permisos.');
+                if (debug) console.log(errGetObject);
+                expiredToken();
+              } else {
+                // OBTENEMOS contents.json
+                var file = JSON.parse(fileData.Body.toString('utf-8'));
+                const type = getQueryVariable("id");
+                var date = new Date(); // No necesito guardar la fecha porque puedo darle la vuelta al mostrar el fichero en la home con .reverse()
+                var content = {"title" : titulo, "type": type, "img": img, "date": date};
+                // AGREGAMOS el nuevo contenido a contents.json, al final del fichero
+                file.push(content);
+                var fileContents = JSON.stringify(file);
+                // GUARDAMOS el nuevo contents.json
+                var paramsContentsObject = { Bucket: $scope.bucket, Key: keyCL, Body: fileContents };
+                s3.putObject(paramsContentsObject, function (errSavingFile, dataPutObject) {
+                  if (errSavingFile) {
+                    if (debug) console.log('El fichero ' + key + ' NO existe en el bucket o no tiene permisos.');
+                    if (debug) console.log('Error guardando el fichero')
+                    if (debug) console.log(errSavingFile);
+                    expiredToken();
+                  } else {
+                    if (debug) console.log('Fichero guardado correctamente en ' + keyCL);
+                    // if (debug) console.log(dataPutObject);
+                  }
+                }); // /putObject('contents.json)
+              }
+            }); // /getObject('contents.json)
           }
         }); // / putObject('nuevo-contenido.json)        
         
