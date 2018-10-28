@@ -258,7 +258,13 @@ app.controller('myCtrl', function ($scope) {
                 var file = JSON.parse(fileData.Body.toString('utf-8'));
                 var date = new Date(); // No necesito guardar la fecha porque puedo darle la vuelta al mostrar el fichero en la home con .reverse()
                 var content = {"date": date, "img": img, "slug": slug, "title" : titulo, "type": type };
-                file.splice(slug, 1); // Eliminamos el contenido antiguo
+                var pos = -1;
+                for (var key in file) {
+                  if (file[key].slug === slug) {
+                    pos = key;
+                  }
+                }
+                file.splice(pos, 1); // Eliminamos el contenido antiguo
                 // AGREGAMOS el nuevo contenido a contents.json al final del fichero
                 file.push(content);
                 var fileContents = JSON.stringify(file);
