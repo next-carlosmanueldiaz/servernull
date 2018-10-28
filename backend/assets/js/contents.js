@@ -117,7 +117,7 @@ app.controller('myCtrl', function ($scope) {
         for (var key in file) {
           file[key].slug = slugify(file[key].title);
         }
-        $scope.contents = file;
+        $scope.contents = file.reverse();
         $scope.$apply();
       }
     });
