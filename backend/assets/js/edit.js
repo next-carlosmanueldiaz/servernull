@@ -32,7 +32,7 @@ function expiredToken() {
   sessionStorage.sessionToken = "";
   sessionStorage.expired = "";
   console.log('User signed out.');
-  window.location.replace("/home/index.html");
+  // window.location.replace("/home/index.html");
 }
 
 /**
@@ -52,8 +52,8 @@ function getQueryVariable(variable) {
   alert('Query Variable ' + variable + ' not found');
 }
 
-const debug = true;
-const tengoAcceso = getCredentials();
+// const debug = true;
+// const tengoAcceso = getCredentials();
 const id = getQueryVariable("id");
 
 if (id) {
@@ -61,7 +61,8 @@ if (id) {
   app.controller('editarCtrl', function ($scope) {
     
     this.$onInit = function () {
-      $scope.bucket = sessionStorage.bucket;
+      const permisos = getAccess();
+      $scope.bucket = bucket;
       $scope.key = 'private/content-types/json/content-types.json';
       var fileParams = {Bucket: $scope.bucket, Key: $scope.key};
       s3 = new AWS.S3();
@@ -69,8 +70,8 @@ if (id) {
         if (errGetObject) {
           if (debug) console.log('El fichero ' + $scope.key + ' NO existe en el bucket o no tiene permisos.');
           if (debug) console.log(errGetObject);
-          window.location.replace("/home/index.html");
-          expiredToken();
+          // window.location.replace("/home/index.html");
+          // expiredToken();
         } else {
           var file = JSON.parse(fileData.Body.toString('utf-8'));
           $scope.cts = file;

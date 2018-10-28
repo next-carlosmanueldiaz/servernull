@@ -49,6 +49,7 @@ function getAccess() {
     if (debug) console.log('Acceso restringido.');
     window.location.replace("/home/index.html");
   }
+  return true;
 }
 
 // Hay 2 situaciones posibles:
