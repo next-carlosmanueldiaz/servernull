@@ -223,10 +223,10 @@ function userLoggedIn(providerName, token) {
     // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
     // set the default config object
     var creds = new AWS.CognitoIdentityCredentials({
-        IdentityPoolId: sessionStorage.IdentityPoolId
+        IdentityPoolId: IdentityPoolId
     });
     AWS.config.credentials = creds;
-    AWS.config.region = sessionStorage.region;
+    AWS.config.region = region;
 
     creds.params.Logins = creds.params.Logins || {};
     creds.params.Logins[providerName] = token;
@@ -243,23 +243,68 @@ function userLoggedIn(providerName, token) {
     if (debug) console.log('========================================');
     sessionStorage.rol = "admin";
 
+    // TOKEN EXPIRED.. UPDATING TOKEN
+    var data = { 
+      UserPoolId : userPoolId,
+      ClientId : appClientId
+    };
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+    var cognitoUser = userPool.getCurrentUser();
+
+    if (cognitoUser != null) {
+      cognitoUser.getSession(function(errGetSession, session) {
+        if (errGetSession) {
+          if (debug) console.log('========================================');
+          if (debug) console.log(errGetSession);
+          if (debug) console.log('========================================');
+        } else {
+          console.log('session validity: ' + session.isValid());
+          var refresh_token = session.getRefreshToken(); // session is the callback from calling cognitoUser.getSession()
+          var update_session = function () {
+            cognitoUser.refreshSession(refresh_token, (errRefreshSession, session) => {
+              if (errRefreshSessionerr) {
+                if (debug) console.log('========================================');
+                if (debug) console.log(errRefreshSession);
+                if (debug) console.log('========================================');
+              }
+              else {
+                AWS.config.credentials.params.Logins[providerName] = session.getIdToken().getJwtToken();
+                AWS.config.credentials.refresh((errRefresh) => {
+                  if (errRefresh) {
+                    if (debug) console.log('========================================');
+                    if (debug) console.log(errRefresh);
+                    if (debug) console.log('========================================');
+                  }
+                  else {
+                    if (debug) console.log('****************************************');
+                    if (debug) console.log("TOKEN SUCCESSFULLY UPDATED");
+                    if (debug) console.log('****************************************');
+                  }
+                });
+              }
+            });
+          }
+        }
+      });
+    }
+
     // Actualizamos las credenciales
-    AWS.config.update({ region: sessionStorage.region, credentials: creds });
-    AWS.config.credentials.refresh((errorRefreshCredentials) => {
-      if (errorRefreshCredentials) {
-        if (debug) console.log("error al refrescar las credenciales:");
-        if (debug) console.log(errorRefreshCredentials);
-      } else {
-        if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
-        if (debug) console.log('Estas son las credenciales y refrescadas:');
-        if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
-        if (debug) console.log('========================================');
-        if (debug) console.log('Credenciales:');
-        // if (debug) console.log(AWS.config.credentials);
-        if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
-        if (debug) console.log('====================================================================');
-      }
-    }); // Fin de refresco de credenciales
+    // AWS.config.update({ region: sessionStorage.region, credentials: creds });
+    // AWS.config.credentials.refresh((errorRefreshCredentials) => {
+    //   if (errorRefreshCredentials) {
+    //     if (debug) console.log("error al refrescar las credenciales:");
+    //     if (debug) console.log(errorRefreshCredentials);
+    //   } else {
+    //     if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
+    //     if (debug) console.log('Estas son las credenciales y refrescadas:');
+    //     if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
+    //     if (debug) console.log('========================================');
+    //     if (debug) console.log('Credenciales:');
+    //     // if (debug) console.log(AWS.config.credentials);
+    //     if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
+    //     if (debug) console.log('====================================================================');
+    //   }
+    // }); // Fin de refresco de credenciales
 }
 
 /**
