@@ -250,12 +250,8 @@ function userLoggedIn(providerName, token) {
       if (errorRefreshCredentials) {
         if (debug) console.log("error al refrescar las credenciales:");
         if (debug) console.log(errorRefreshCredentials);
-        alert('Su sesión ha caducado. ¿Actualizar página para refrescar credenciales?');
-        if (confirm("Su sesión ha caducado. ¿Actualizar página para refrescar credenciales?")) {
-          location.reload();
-        } else {
-          window.location.replace("/home/index.html"); // Si ha caducado la sesión, avisamos y redirigimos a la home.
-        }
+        alert('Su sesión ha caducado. Actualizar página para refrescar credenciales.');
+        window.location.replace("/home/index.html"); // Si ha caducado la sesión, avisamos y redirigimos a la home.
       } else {
         if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
         if (debug) console.log('Estas son las credenciales y refrescadas:');
