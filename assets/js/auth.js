@@ -244,56 +244,18 @@ function userLoggedIn(providerName, token) {
     sessionStorage.rol = "admin";
 
     // TOKEN EXPIRED.. UPDATING TOKEN
-    // var data = { 
-    //   UserPoolId : userPoolId,
-    //   ClientId : appClientId
-    // };
-    // var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
-    // var cognitoUser = userPool.getCurrentUser();
-    // if (cognitoUser != null) {
-    //   cognitoUser.getSession(function(errGetSession, session) {
-    //     if (errGetSession) {
-    //       if (debug) console.log('========================================');
-    //       if (debug) console.log(errGetSession);
-    //       if (debug) console.log('========================================');
-    //     } else {
-    //       console.log('session validity: ' + session.isValid());
-    //       var refresh_token = session.getRefreshToken(); // session is the callback from calling cognitoUser.getSession()
-    //       var update_session = function () {
-    //         cognitoUser.refreshSession(refresh_token, (errRefreshSession, session) => {
-    //           if (errRefreshSessionerr) {
-    //             if (debug) console.log('========================================');
-    //             if (debug) console.log(errRefreshSession);
-    //             if (debug) console.log('========================================');
-    //           }
-    //           else {
-    //             AWS.config.credentials.params.Logins[providerName] = session.getIdToken().getJwtToken();
-    //             AWS.config.credentials.refresh((errRefresh) => {
-    //               if (errRefresh) {
-    //                 if (debug) console.log('========================================');
-    //                 if (debug) console.log(errRefresh);
-    //                 if (debug) console.log('========================================');
-    //               }
-    //               else {
-    //                 if (debug) console.log('****************************************');
-    //                 if (debug) console.log("TOKEN SUCCESSFULLY UPDATED");
-    //                 if (debug) console.log('****************************************');
-    //               }
-    //             });
-    //           }
-    //         });
-    //       }
-    //     }
-    //   });
-    // }
-
     // Actualizamos las credenciales
     AWS.config.update({ region: sessionStorage.region, credentials: creds });
     AWS.config.credentials.refresh((errorRefreshCredentials) => {
       if (errorRefreshCredentials) {
         if (debug) console.log("error al refrescar las credenciales:");
         if (debug) console.log(errorRefreshCredentials);
-        window.location.replace("/home/index.html");
+        alert('Su sesión ha caducado. ¿Actualizar página para refrescar credenciales?');
+        if (confirm("Su sesión ha caducado. ¿Actualizar página para refrescar credenciales?")) {
+          location.reload();
+        } else {
+          window.location.replace("/home/index.html"); // Si ha caducado la sesión, avisamos y redirigimos a la home.
+        }
       } else {
         if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
         if (debug) console.log('Estas son las credenciales y refrescadas:');
