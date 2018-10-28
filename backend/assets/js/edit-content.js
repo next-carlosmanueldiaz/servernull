@@ -254,7 +254,7 @@ app.controller('myCtrl', function ($scope) {
               } else {
                 // OBTENEMOS contents.json
                 var file = JSON.parse(fileData.Body.toString('utf-8'));
-                const type = getQueryVariable("id");
+                const type = getQueryVariable("tipo");
                 var date = new Date(); // No necesito guardar la fecha porque puedo darle la vuelta al mostrar el fichero en la home con .reverse()
                 var content = {"title" : titulo, "type": type, "img": img, "date": date};
                 // AGREGAMOS el nuevo contenido a contents.json, al final del fichero
