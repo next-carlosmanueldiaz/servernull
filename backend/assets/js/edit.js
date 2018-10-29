@@ -58,7 +58,7 @@ const id = getQueryVariable("id");
 
 if (id) {
   var app = angular.module('myApp', []);
-  app.controller('editarCtrl', function ($scope) {
+  app.controller('myCtrl', function ($scope) {
     
     this.$onInit = function () {
       const permisos = getAccess();
