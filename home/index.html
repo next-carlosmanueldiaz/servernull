@@ -492,11 +492,11 @@
               <div class="wpb_wrapper">
                 <article data-new-block="363928" class="noticia formato1">
                   <div class="box-image">
-                    <div class="img-image" data-new-bg-img="" style="background-image: url('{{contents[index].img}}')"></div>
+                    <div class="img-image" data-new-bg-img="" style="background-image: url('{{contents[$index].img}}')"></div>
                     <div class="box-info ">
-                      <a data-new-link="" href="/home/content/html/{{contents[index].type}}/{{contents[index].slug}}.html" data-new-id="363928">
+                      <a data-new-link="" href="/home/content/html/{{contents[$index].type}}/{{contents[$index].slug}}.html" data-new-id="363928">
                         <h3 class="titular small" data-new-title="">
-                          {{contents[index].title}}
+                          {{contents[$index].title}}
                         </h3>
                       </a>
                       <ul class="bluepills" data-new-tags="">
@@ -509,16 +509,16 @@
               </div>
             </div>
           </div>
-          <div class="wpb_column vc_column_container col-sm-6" ng-if="contents[index+1].title">
+          <div class="wpb_column vc_column_container col-sm-6" ng-if="contents[$index+1].title">
             <div class="vc_column-inner ">
               <div class="wpb_wrapper">
                 <article data-new-block="383157" class="noticia formato2">
-                  <div class="box-image" data-new-bg-img="" style="background-image: url('{{contents[index+1].img}}')">
+                  <div class="box-image" data-new-bg-img="" style="background-image: url('{{contents[$index+1].img}}')">
                     <div class="filterGrad"></div>
                     <div class="box-info ">
-                      <a data-new-link="" href="/home/content/html/{{contents[index+1].type}}/{{contents[index+1].slug}}.html" data-new-id="383157">
+                      <a data-new-link="" href="/home/content/html/{{contents[$index+1].type}}/{{contents[$index+1].slug}}.html" data-new-id="383157">
                         <h3 class="titular small" data-new-title="">
-                          {{contents[index+1].title}}
+                          {{contents[$index+1].title}}
                         </h3>
                       </a>
                       <ul class="bluepills" data-new-tags="">
