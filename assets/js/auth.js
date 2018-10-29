@@ -82,30 +82,34 @@ function getCurrentGoogleUser() {
 }
 
 function onLogIn(googleUser) {
-  if (!googleUser.error) {
-    var profile = googleUser.getBasicProfile();
-    if (debug) console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    if (debug) console.log('Name: ' + profile.getName());
-    if (debug) console.log('Image URL: ' + profile.getImageUrl());
-    if (debug) console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  if (typeof googleUser !== "undefined") {
+    if (typeof googleUser.error !== "undefined") {
+      var profile = googleUser.getBasicProfile();
+      if (debug) console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      if (debug) console.log('Name: ' + profile.getName());
+      if (debug) console.log('Image URL: ' + profile.getImageUrl());
+      if (debug) console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-    var id_token = googleUser.getAuthResponse().id_token;
-    if (debug) console.log('id_token: ' + id_token); // Token para aws
-    if (debug) console.log('You are now logged in. (Google account)');
+      var id_token = googleUser.getAuthResponse().id_token;
+      if (debug) console.log('id_token: ' + id_token); // Token para aws
+      if (debug) console.log('You are now logged in. (Google account)');
 
-    // PARA CAMBIAR A USUARIO AUTENTICADO
-    // Almacenamos el id_token del usuario autenticado en la sesión para poder recuperarlo posteriormente 
-    // y hacer el cambio de usuario no autenticado (invitado) a usuario autenticado.
-    // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
-    // Esta variable se evalúa en la función getCredentials() del fichero contents.js para saber:
-    // - Si hay id_token: usuario logueado, que puede ser administrador
-    // - Si no hay id_token: usuario invitado.
-    // ====================================================================================
-    sessionStorage.IdentityPoolId = IdentityPoolId;
-    sessionStorage.id_token = id_token;
-    // ====================================================================================
+      // PARA CAMBIAR A USUARIO AUTENTICADO
+      // Almacenamos el id_token del usuario autenticado en la sesión para poder recuperarlo posteriormente 
+      // y hacer el cambio de usuario no autenticado (invitado) a usuario autenticado.
+      // https://docs.aws.amazon.com/es_es/cognito/latest/developerguide/switching-identities.html
+      // Esta variable se evalúa en la función getCredentials() del fichero contents.js para saber:
+      // - Si hay id_token: usuario logueado, que puede ser administrador
+      // - Si no hay id_token: usuario invitado.
+      // ====================================================================================
+      sessionStorage.IdentityPoolId = IdentityPoolId;
+      sessionStorage.id_token = id_token;
+      // ====================================================================================
+    } else {
+      if (debug) console.log(googleUser.error);
+    }
   } else {
-    console.log(googleUser.error);
+    if (debug) console.log("googleUser no definido.");
   }
 }
 
