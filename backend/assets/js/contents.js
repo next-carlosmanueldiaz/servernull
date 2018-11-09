@@ -96,7 +96,7 @@ app.controller('myCtrl', function ($scope) {
   this.$onInit = function () {
     const permisos = getAccess();
 
-    $scope.bucket = sessionStorage.bucket;
+    $scope.bucket = bucket;
     $scope.key = 'home/content/json/contents.json';
     
     s3 = new AWS.S3();
@@ -106,7 +106,7 @@ app.controller('myCtrl', function ($scope) {
         if (debug) console.log('Error al leer  ' + $scope.key + ' o no tiene permisos.');
         if (debug) console.log(errGetObject);
         //window.location.replace("/home/index.html");
-        expiredToken();
+        // expiredToken();
       } else {
         var file = JSON.parse(data.Body.toString('utf-8'));
         for (var key in file) {
