@@ -259,6 +259,7 @@ function userLoggedIn(providerName, token) {
       if (debug) console.log('Obtenemos las credenciales existentes, refrescándolas si no han sido ya cargadas o han expirado.');
       if (debug) console.log('NUEVAS Credenciales:');
       if (debug) console.log(AWS.config.credentials);
+      if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
       if (debug) console.log('========================================');
     });
 
