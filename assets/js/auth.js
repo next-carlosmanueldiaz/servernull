@@ -102,8 +102,8 @@ function onLogIn(googleUser) {
       // - Si hay id_token: usuario logueado, que puede ser administrador
       // - Si no hay id_token: usuario invitado.
       // ====================================================================================
-      // sessionStorage.IdentityPoolId = IdentityPoolId;
-      // sessionStorage.id_token = id_token;
+      sessionStorage.IdentityPoolId = IdentityPoolId;
+      sessionStorage.id_token = id_token;
       // ====================================================================================
     } else {
       if (debug) console.log(googleUser.error);
