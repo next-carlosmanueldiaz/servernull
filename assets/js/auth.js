@@ -216,6 +216,7 @@ function setUnauth() {
       if (debug) console.log('Credenciales:');
       // if (debug) console.log(AWS.config.credentials);
       if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
+      if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.expireTime);
       if (debug) console.log('====================================================================');
     }
   }); // Fin de refresco de credenciales
@@ -253,13 +254,17 @@ function userLoggedIn(providerName, token) {
     if (debug) console.log('Credenciales AWS.config.credentials.get():');
     if (debug) console.log('Vamos a obtener las credenciales existentes, refrescándolas si no han sido ya cargadas o han expirado.');
     if (debug) console.log('........................................');
-     // Obtain AWS credentials, and refresh if expired
+    
+    // TOKEN EXPIRED.. UPDATING TOKEN
+    // Actualizamos las credenciales
+    // get() obtain AWS credentials, and refresh if expired
     AWS.config.credentials.get(function(){
       if (debug) console.log('........................................');
       if (debug) console.log('Obtenemos las credenciales existentes, refrescándolas si no han sido ya cargadas o han expirado.');
       if (debug) console.log('NUEVAS Credenciales:');
       if (debug) console.log(AWS.config.credentials);
       if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
+      if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.expireTime);
       if (debug) console.log('========================================');
     });
 
