@@ -44,12 +44,7 @@ function getQueryVariable(variable) {
  * @returns {undefined}
  */
 function expiredToken() {
-  sessionStorage.accessKeyId = "";
-  sessionStorage.secretAccessKey = "";
-  sessionStorage.sessionToken = "";
-  sessionStorage.expired = "";
-  console.log('User signed out.');
-  
+  console.log('User signed out.'); 
   // window.location.replace("/home/index.html");
 }
 
