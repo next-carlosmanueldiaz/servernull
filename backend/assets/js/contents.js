@@ -94,28 +94,31 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
-    const permisos = getAccess();
-
-    $scope.bucket =  bucket;
-    $scope.key = 'home/content/json/contents.json';
-    
-    s3 = new AWS.S3();
-    var fileParams = { Bucket: $scope.bucket, Key: $scope.key };
-    s3.getObject(fileParams, function (errGetObject, data) {
-      if (errGetObject) {
-        if (debug) console.log('Error al leer  ' + $scope.key + ' o no tiene permisos.');
-        if (debug) console.log(errGetObject);
-        //window.location.replace("/home/index.html");
-        expiredToken();
-      } else {
-        var file = JSON.parse(data.Body.toString('utf-8'));
-        for (var key in file) {
-          file[key].slug = slugify(file[key].title);
+    const tiene_permisos = getAccess();
+    if (tiene_permisos) {
+      $scope.bucket =  bucket;
+      $scope.key = 'home/content/json/contents.json';
+      
+      s3 = new AWS.S3();
+      var fileParams = { Bucket: $scope.bucket, Key: $scope.key };
+      s3.getObject(fileParams, function (errGetObject, data) {
+        if (errGetObject) {
+          if (debug) console.log('Error al leer  ' + $scope.key + ' o no tiene permisos.');
+          if (debug) console.log(errGetObject);
+          //window.location.replace("/home/index.html");
+          expiredToken();
+        } else {
+          var file = JSON.parse(data.Body.toString('utf-8'));
+          for (var key in file) {
+            file[key].slug = slugify(file[key].title);
+          }
+          $scope.contents = file.reverse();
+          $scope.$apply();
         }
-        $scope.contents = file.reverse();
-        $scope.$apply();
-      }
-    });
+      });
+    } else {
+      if (debug) console.log('No es posible mostrar este contenido sin permisos.')
+    }
   }
 
   $scope.eliminar = function (id) {

@@ -44,12 +44,13 @@ function getAccess() {
     if (debug) console.log('A.- Establecemos el rol del Administrador (Autenticado).');
     userLoggedIn('accounts.google.com', sessionStorage.id_token);
     checkCurrentRoleIdentity();
+    return true;
   } else {
     // Acceso restringido sólo a administradores
     if (debug) console.log('Acceso restringido.');
     window.location.replace("/home/index.html");
+    return false;
   }
-  return true;
 }
 
 // Hay 2 situaciones posibles:
