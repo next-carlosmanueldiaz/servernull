@@ -244,30 +244,44 @@ function userLoggedIn(providerName, token) {
     if (debug) console.log('Estas son las credenciales y refrescadas:');
     if (debug) console.log('TOMAMOS EL ROL DE ADMINISTRADOR:');
     if (debug) console.log('========================================');
-    if (debug) console.log('Credenciales:');
+    if (debug) console.log('VIEJAS Credenciales:');
     if (debug) console.log(AWS.config.credentials);
     if (debug) console.log('========================================');
     sessionStorage.rol = "admin";
+    
+    if (debug) console.log('========================================');
+    if (debug) console.log('Credenciales AWS.config.credentials.get():');
+    if (debug) console.log('Vamos a obtener las credenciales existentes, refrescándolas si no han sido ya cargadas o han expirado.');
+    if (debug) console.log('........................................');
+     // Obtain AWS credentials, and refresh if expired
+    AWS.config.credentials.get(function(){
+      if (debug) console.log('........................................');
+      if (debug) console.log('Obtenemos las credenciales existentes, refrescándolas si no han sido ya cargadas o han expirado.');
+      if (debug) console.log('NUEVAS Credenciales:');
+      if (debug) console.log(AWS.config.credentials);
+      if (debug) console.log('========================================');
+    });
 
     // TOKEN EXPIRED.. UPDATING TOKEN
     // Actualizamos las credenciales
-    AWS.config.update({ region: sessionStorage.region, credentials: creds });
-    AWS.config.credentials.refresh((errorRefreshCredentials) => {
-      if (errorRefreshCredentials) {
-        if (debug) console.log("error al refrescar las credenciales:");
-        if (debug) console.log(errorRefreshCredentials);
-        console.log('Su sesión ha caducado. Actualizar página para refrescar credenciales.');
-        // window.location.replace("/home/index.html"); // Si ha caducado la sesión, avisamos y redirigimos a la home.
-      } else {
-        if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
-        if (debug) console.log('Estas son las credenciales y refrescadas:');
-        if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
-        if (debug) console.log('========================================');
-        if (debug) console.log('Credenciales:');
-        if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
-        if (debug) console.log('====================================================================');
-      }
-    }); // Fin de refresco de credenciales
+
+    // AWS.config.update({ region: sessionStorage.region, credentials: creds });
+    // AWS.config.credentials.refresh((errorRefreshCredentials) => {
+    //   if (errorRefreshCredentials) {
+    //     if (debug) console.log("error al refrescar las credenciales:");
+    //     if (debug) console.log(errorRefreshCredentials);
+    //     console.log('Su sesión ha caducado. Actualizar página para refrescar credenciales.');
+    //     // window.location.replace("/home/index.html"); // Si ha caducado la sesión, avisamos y redirigimos a la home.
+    //   } else {
+    //     if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
+    //     if (debug) console.log('Estas son las credenciales y refrescadas:');
+    //     if (debug) console.log('TOMAMOS POR DEFECTO EL ROL DEL INVITADO:');
+    //     if (debug) console.log('========================================');
+    //     if (debug) console.log('Credenciales:');
+    //     if (debug) console.log(' -> RoleSessionName: ' + AWS.config.credentials.params.RoleSessionName);
+    //     if (debug) console.log('====================================================================');
+    //   }
+    // }); // Fin de refresco de credenciales
 }
 
 /**
