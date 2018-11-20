@@ -875,11 +875,11 @@ small, .small {
   background: url("../img/logo-header.png") no-repeat top left;
   background-size: contain;
   display: block;
-  width: 96px;
-  height: 33px;
+  width: 128px;
+  height: 79px;
   position: absolute;
   left: 35px;
-  top: 35px;
+  top: 15px;
   text-indent: -90000px;
   overflow: hidden; }
   @media only screen and (max-width: 1200px) {
