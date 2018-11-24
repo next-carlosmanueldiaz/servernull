@@ -4,19 +4,22 @@
  * CC - by-nc-nd
  */
 
-var scripts = {
-    "urls": [
+var js = {
+    "librerias": [
+        // No dependientes entre si
         "https://code.jquery.com/jquery-1.9.1.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js",
         "https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js",
         "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js",
         "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js",
-        "../assets/js/config.js",
-        "../assets/js/auth.js",
         "https://apis.google.com/js/platform.js?onload=onLogIn",
         "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js",
         "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js",
         "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js",
+        "../assets/js/config.js",
+    ],
+    "scripts": [
+        "../assets/js/auth.js",
         "../assets/js/contents.js",
         "../assets/js/interacciones.js",
     ]
@@ -24,16 +27,27 @@ var scripts = {
 
 var idGoogleGapi = "googleGapi";
 
-var urls = scripts.urls;
+var librerias = js.librerias;
+var scripts = js.scripts;
 
-for (var i = 0; i < urls.length; i++) {
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    // script.async = 'async';
-    script.src = urls[i];
-    script.onload = function () {
-        console.log('Loaded script ' + i);
-        console.log(this);
+// Cargamos todas las librerías
+for (var i = 0; i < librerias.length; i++) {
+    var lib = document.createElement('script');
+    lib.type = 'text/javascript';
+    lib.async = 'async'; // Pueden cargarse todas las librerías de manera asíncrona.
+    lib.src = librerias[i];
+    // Una vez finalizada la carga de las librerías..
+    lib.onload = function () {
+        // Recorremos todos los scrpts de autor
+        for (var j = 0; j < scripts.length; j++) {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            // script.async = "async";
+            script.src = scripts[j];
+            document.head.appendChild(script);
+            console.log('Script ' + j + " -> " + script.src);
+        }
     };
-    document.head.appendChild(script);
+    document.head.appendChild(lib);
+    console.log('Librería ' + i + " -> " + script.src);
 }
