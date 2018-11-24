@@ -35,7 +35,7 @@ var libstoload = librerias.length;
 for (var i = 0; i < librerias.length; i++) {
     var lib = document.createElement('script');
     lib.type = 'text/javascript';
-    lib.async = 'async'; // Pueden cargarse todas las librerías de manera asíncrona.
+    lib.async = 'async'; // Pueden cargarse todas de manera asíncrona.
     lib.src = librerias[i];
     if (librerias[i] == "https://apis.google.com/js/platform.js?onload=onLogIn") {
         lib.id = "googleGapi";
@@ -64,7 +64,7 @@ function loadScripts() {
     for (var j = 0; j < scripts.length; j++) {
         var script = document.createElement('script');
         script.type = 'text/javascript';
-        // script.async = "async";
+        script.async = "async";
         script.src = scripts[j];
         document.head.appendChild(script);
         console.log('Script ' + j + " -> " + script.src);
