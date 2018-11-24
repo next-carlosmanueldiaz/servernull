@@ -29,7 +29,7 @@ var urls = scripts.urls;
 for (var i = 0; i < urls.length; i+=1) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.async = 'async';
+    // script.async = 'async';
     script.src = urls[i];
     script.onload = function () {
         console.log('Loaded script');
