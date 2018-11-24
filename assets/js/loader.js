@@ -49,5 +49,5 @@ for (var i = 0; i < librerias.length; i++) {
         }
     };
     document.head.appendChild(lib);
-    console.log('Librería ' + i + " -> " + script.src);
+    console.log('Librería ' + i + " -> " + lib.src);
 }
