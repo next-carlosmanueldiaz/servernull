@@ -161,6 +161,23 @@ function checkCurrentRoleIdentity() {
   });
 }
 
+function onGoogleLoad() {
+  gapi.load('auth2,signin2', function() {
+    var auth2 = gapi.auth2.init();
+    auth2.then(function() {
+      // Current values
+      var isSignedIn = auth2.isSignedIn.get();
+      var currentUser = auth2.currentUser.get();
+
+      if (isSignedIn) {
+        if (debug) console.log('El usuario está autenticado con google.');
+      } else {
+        if (debug) console.log('El usuario NO está autenticado con google.');
+      }
+    });
+  });
+}
+
 // Obtiene el id_token del usuario logueado con google.
 /*
   https://developers.google.com/identity/sign-in/web/backend-auth
