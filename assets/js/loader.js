@@ -44,8 +44,7 @@ for (var i = 0; i < librerias.length; i++) {
     // Cada vez que se carga una librería, la contamos
     lib.onload = function () {
         libsloaded++;
-        console.log('Librería ' + libsloaded + ' cargada');
-        console.log(this.src);
+        console.log('Librería ' + libsloaded + ' cargada: ' + this.src);
         if (libsloaded === libstoload) {
             loadScripts();
         }
