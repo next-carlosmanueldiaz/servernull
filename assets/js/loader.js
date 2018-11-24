@@ -28,26 +28,42 @@ var js = {
 var idGoogleGapi = "googleGapi";
 
 var librerias = js.librerias;
-var scripts = js.scripts;
+var libsloaded = 0;
+var libstoload = librerias.length;
 
 // Cargamos todas las librerías
+//-----------------------------------------------------------------
 for (var i = 0; i < librerias.length; i++) {
     var lib = document.createElement('script');
     lib.type = 'text/javascript';
     lib.async = 'async'; // Pueden cargarse todas las librerías de manera asíncrona.
     lib.src = librerias[i];
-    // Una vez finalizada la carga de las librerías..
+    document.head.appendChild(lib);
+    console.log('Cargando librería ' + i + " -> " + lib.src);
+
+    // Cada vez que se carga una librería, la contamos
     lib.onload = function () {
-        // Recorremos todos los scrpts de autor
-        for (var j = 0; j < scripts.length; j++) {
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            // script.async = "async";
-            script.src = scripts[j];
-            document.head.appendChild(script);
-            console.log('Script ' + j + " -> " + script.src);
+        libsloaded++;
+        console.log('Librería cargada' + " -> " + lib.src);
+        if (libsloaded === libstoload) {
+            loadScripts();
         }
     };
-    document.head.appendChild(lib);
-    console.log('Librería ' + i + " -> " + lib.src);
+}
+
+/** 
+ * Una vez finalizada la carga de todas las librerías, 
+ * cargamos los scripts que las usan.
+*/
+function loadScripts() {
+    var scripts = js.scripts;
+    // Recorremos todos los scrpts de autor
+    for (var j = 0; j < scripts.length; j++) {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        // script.async = "async";
+        script.src = scripts[j];
+        document.head.appendChild(script);
+        console.log('Script ' + j + " -> " + script.src);
+    }
 }
