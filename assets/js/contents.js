@@ -104,7 +104,7 @@ app.controller('myCtrl', function ($scope) {
 
           if (key == last) {
             $scope.titular = file[key];
-            $scope.titular.img = "background-image: url('" + $scope.titular.img + "');"
+            // $scope.titular.img = "background-image: url('" + $scope.titular.img + "');"
             file.splice(key, 1);
           }
         }
