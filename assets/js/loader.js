@@ -45,6 +45,7 @@ for (var i = 0; i < librerias.length; i++) {
     lib.onload = function () {
         libsloaded++;
         console.log('Librería ' + libsloaded + ' cargada');
+        console.log(this.src);
         if (libsloaded === libstoload) {
             loadScripts();
         }
