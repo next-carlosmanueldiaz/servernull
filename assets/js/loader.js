@@ -32,7 +32,7 @@ for (var i = 0; i < urls.length; i++) {
     // script.async = 'async';
     script.src = urls[i];
     script.onload = function () {
-        console.log('Loaded script');
+        console.log('Loaded script' + i);
         console.log(this);
     };
     document.head.appendChild(script);
