@@ -26,7 +26,7 @@ var idGoogleGapi = "googleGapi";
 
 var urls = scripts.urls;
 
-for (var i = 0; i < urls.length; i+=1) {
+for (var i = 0; i <= urls.length; i++) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
     // script.async = 'async';
