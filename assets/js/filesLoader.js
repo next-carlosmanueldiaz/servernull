@@ -1,3 +1,6 @@
+/**
+ * https://stackoverflow.com/questions/14521108/dynamically-load-js-inside-js
+ */
 function filesLoader() {
 
     var opts = {

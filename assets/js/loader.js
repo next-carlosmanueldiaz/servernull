@@ -2,6 +2,7 @@
  * JavaScript Loader
  * by Carlos Manuel Díaz Jorge
  * CC - by-nc-nd
+ * https://stackoverflow.com/questions/14521108/dynamically-load-js-inside-js
  */
 
 var js = {
