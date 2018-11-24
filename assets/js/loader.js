@@ -36,7 +36,7 @@ var libstoload = librerias.length;
 for (var i = 0; i < librerias.length; i++) {
     var lib = document.createElement('script');
     lib.type = 'text/javascript';
-    // lib.async = 'async'; // Pueden cargarse todas las librerías de manera asíncrona.
+    lib.async = 'async'; // Pueden cargarse todas las librerías de manera asíncrona.
     lib.src = librerias[i];
     document.head.appendChild(lib);
     console.log('Cargando librería ' + i + " -> " + lib.src);
