@@ -7,12 +7,13 @@
 var js = {
     "librerias": [
         // No dependientes entre si
-        "https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.24/bootstrap-native.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js",
         "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.24/bootstrap-native.min.js",
         "https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js",
         "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js",
         "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js",
+        "https://apis.google.com/js/platform.js?onload=onLogIn",
         "../assets/js/config.js",
     ],
     "scripts": [
@@ -21,8 +22,6 @@ var js = {
         "../assets/js/interacciones.js",
     ]
 };
-
-var idGoogleGapi = "googleGapi";
 
 var librerias = js.librerias;
 var libsloaded = 0;
@@ -35,6 +34,10 @@ for (var i = 0; i < librerias.length; i++) {
     lib.type = 'text/javascript';
     lib.async = 'async'; // Pueden cargarse todas las librerías de manera asíncrona.
     lib.src = librerias[i];
+    if (librerias[i] == "https://apis.google.com/js/platform.js?onload=onLogIn") {
+        lib.id = "googleGapi";
+    }
+
     document.head.appendChild(lib);
     console.log('Cargando librería ' + i + " -> " + lib.src);
 
