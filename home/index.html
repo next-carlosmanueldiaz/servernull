@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ServerNull proof of concept">
     <meta name="google-signin-client_id" content="{{googleSigninClientId}}">
-    <script type="text/havascript" src="../assets/js/loader.js"></script>
+    <script id="googleGapi" src="https://apis.google.com/js/platform.js?onload=onLogIn" async defer></script>
+    <script src="../assets/js/loader.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../assets/css/master.css">
     <style media="all" onload="if (media !== 'all') media = 'all'">
       .login-box {
