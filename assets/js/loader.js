@@ -7,8 +7,8 @@
 var js = {
     "librerias": [
         // No dependientes entre si
+        "https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.24/bootstrap-native.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js",
-        "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js",
         "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js",
         "https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js",
         "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js",
