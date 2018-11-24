@@ -14,11 +14,11 @@ var js = {
         "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js",
         "https://apis.google.com/js/platform.js?onload=onLogIn",
         "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js",
-        "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js",
         "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js",
         "../assets/js/config.js",
     ],
     "scripts": [
+        "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js",
         "../assets/js/auth.js",
         "../assets/js/contents.js",
         "../assets/js/interacciones.js",
