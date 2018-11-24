@@ -10,6 +10,7 @@ var js = {
         "https://apis.google.com/js/platform.js?onload=onLogIn",
         "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js",
         "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js",
+        "https://code.jquery.com/jquery-1.9.1.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js",
         "https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js",
         "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js",
