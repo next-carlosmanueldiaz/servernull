@@ -60,7 +60,7 @@ function loadLevel(numLevel, levels) {
 			if (loaded === toLoad) {
 				// Una vez cargados todos los scripts del nivel,
 				// cargamos el siguiente.. si lo hay
-				if(!typeof levels[numLevel+1] === 'undefined') { 
+				if( !(typeof levels[numLevel+1] === 'undefined') ) { 
 					loadLevel(numLevel+1, levels)
 				}
 			}
