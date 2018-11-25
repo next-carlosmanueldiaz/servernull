@@ -39,9 +39,9 @@ loadLevel(0, js.levels);
  * Una vez finalizada la carga de todas las librerías del nivel, 
  * cargamos los scripts del siguiente nivel.
 */
-function loadLevel(level, levels) {
+function loadLevel(numLevel, levels) {
 	var loaded = 0;
-	var level = levels[level];
+	var level = levels[numLevel];
 	var toLoad = level.length;
   // Recorremos todos los scrpts de autor
   for (var i = 0; i < level.length; i++) {
@@ -60,8 +60,8 @@ function loadLevel(level, levels) {
 			if (loaded === toLoad) {
 				// Una vez cargados todos los scripts del nivel,
 				// cargamos el siguiente.. si lo hay
-				if(!typeof levels[level+1] === 'undefined') { 
-					loadLevel(level+1, levels)
+				if(!typeof levels[numLevel+1] === 'undefined') { 
+					loadLevel(numLevel+1, levels)
 				}
 			}
 		};
