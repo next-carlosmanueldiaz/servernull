@@ -14,12 +14,13 @@ var js = {
         "https://code.jquery.com/jquery-1.9.1.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js",
         "https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js",
-        "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js",
-        "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js",
+        "../assets/js/deferImages.js",
         "../assets/js/config.js",
     ],
     "scripts": [
         "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js",
+        "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js",
+        "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js",
         "../assets/js/auth.js",
         "../assets/js/contents.js",
         "../assets/js/interacciones.js",
@@ -30,7 +31,7 @@ var librerias = js.librerias;
 var libsloaded = 0;
 var libstoload = librerias.length;
 
-// Cargamos todas las librerías
+// Cargamos todas las librerías base
 //-----------------------------------------------------------------
 for (var i = 0; i < librerias.length; i++) {
     var lib = document.createElement('script');
@@ -40,7 +41,6 @@ for (var i = 0; i < librerias.length; i++) {
     if (librerias[i] == "https://apis.google.com/js/platform.js?onload=onLogIn") {
         lib.id = "googleGapi";
     }
-
     document.head.appendChild(lib);
     console.log('Cargando librería ' + i + " -> " + lib.src);
 
