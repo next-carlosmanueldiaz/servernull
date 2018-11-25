@@ -51,12 +51,12 @@ function loadLevel(numLevel, levels) {
 		script.async = "async";
 		script.src = level[i];
 		document.head.appendChild(script);
-		console.log('Script ' + i + " -> " + script.src);
+		console.log(numLevel + " - " +  i + " -> " + script.src);
 			
 		// Cada vez que se carga una librería, la contamos al cargarse
 		script.onload = function () {
 			loaded++;
-			console.log('Librería ' + loaded + ' cargada: ' + this.src);
+			console.log(numLevel + " - " + loaded + ' cargada: ' + this.src);
 			if (loaded === toLoad) {
 				// Una vez cargados todos los scripts del nivel,
 				// cargamos el siguiente.. si lo hay
