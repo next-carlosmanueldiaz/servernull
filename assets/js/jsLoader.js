@@ -49,6 +49,7 @@ loadLevel(0, js.levels);
  * cargamos los scripts del siguiente nivel.
 */
 function loadLevel(numLevel, levels) {
+	debug = false;
 	var loaded = 0;
 	var level = levels[numLevel];
 	var toLoad = level.length;
@@ -61,12 +62,12 @@ function loadLevel(numLevel, levels) {
 		script.type = 'text/javascript';
 		script.src = Object.values(level[i])[0];
 		document.head.appendChild(script);
-		console.log(numLevel + "-" +  i + " -> " + script.src);
+		if (debug) console.log(numLevel + "-" +  i + " -> " + script.src);
 			
 		// Cada vez que se carga una librería, la contamos al cargarse
 		script.onload = function () {
 			loaded++;
-			console.log(numLevel + "-" + loaded + ' cargada: ' + this.src);
+			if (debug) console.log(numLevel + "-" + loaded + ' cargada: ' + this.src);
 			if (loaded === toLoad) {
 				// Una vez cargados todos los scripts del nivel,
 				// cargamos el siguiente.. si lo hay
