@@ -49,7 +49,7 @@ loadLevel(0, js.levels);
  * cargamos los scripts del siguiente nivel.
 */
 function loadLevel(numLevel, levels) {
-	debug = true;
+	debug = false;
 	var loaded = 0;
 	var level = levels[numLevel];
 	var toLoad = level.length;
