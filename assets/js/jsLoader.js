@@ -50,9 +50,9 @@ function loadLevel(numLevel, levels) {
   for (var i = 0; i < level.length; i++) {
 		// Creamos el objeto script
 		var script = document.createElement('script');
-		script.type = 'text/javascript';
-		script.async = "async";
 		script.id = Object.keys(level[i])[0]; // Establecemos la KEY como ID.
+		script.async = "async";
+		script.type = 'text/javascript';
 		script.src = Object.values(level[i])[0];
 		document.head.appendChild(script);
 		console.log(numLevel + "-" +  i + " -> " + script.src);
