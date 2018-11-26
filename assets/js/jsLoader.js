@@ -5,6 +5,12 @@
  * https://stackoverflow.com/questions/14521108/dynamically-load-js-inside-js
  */
 
+ /**
+	* LISTADO DE SCRIPTS Y SUS DEPENDENCIAS (ORDEN DE CARGA)
+	* Cada elemento de este array es un nivel.
+	* Cada nivel se cargará después de terminar la carga de los scripts del anterior nivel.
+	* En cada nivel, todos sus scripts se cargan en paralelo (async)
+	*/
  var js = {
     "levels": [
 			[
@@ -65,7 +71,7 @@ function loadLevel(numLevel, levels) {
 				// Una vez cargados todos los scripts del nivel,
 				// cargamos el siguiente.. si lo hay
 				if( !(typeof levels[numLevel+1] === 'undefined') ) { 
-					loadLevel(numLevel+1, levels)
+					loadLevel(numLevel+1, levels); // <== LLAMADA RECURSIVA A CARGAR EL SIGUIENTE NIVEL.
 				}
 			}
 		};
