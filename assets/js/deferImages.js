@@ -44,7 +44,7 @@ window.addEventListener('load', function() {
 
 function deferBackgroundImage() {
   var imgDefer = document.querySelectorAll('div[data-src]');
-  var style = "background-image: url({url})";
+  var style = "background-image: url('{url}')";
   for (var i = 0; i < imgDefer.length; i++) {
     imgDefer[i].setAttribute('style', style.replace("{url}", imgDefer[i].getAttribute('data-src')));
   }
