@@ -9,26 +9,29 @@
     "levels": [
 			[
         // No dependientes entre si
-        "https://apis.google.com/js/platform.js?onload=onLogIn",
-        "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js",
-        "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js",
-        "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js",
-        "https://code.jquery.com/jquery-1.9.1.min.js",
-        "https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js",
-        "../assets/js/deferImages.js",
-        "../assets/js/config.js",
+        {"googleGapi"	: "https://apis.google.com/js/platform.js?onload=onLogIn"},
+        {"underscore"	: "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.j"},
+        {"angular"		: "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"},
+        {"popper"			: "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"},
+        {"jquery"			: "https://code.jquery.com/jquery-1.9.1.min.js"},
+        {"aws-sdk"		: "https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js"},
+        {"deferImages": "../assets/js/deferImages.js"},
+        {"config"			: "../assets/js/config.js"},
 			],
 			[
-					"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js", // <- popper and jQuery
-					"https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js", // <- aws-sdk
-					"https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js", // <- aws-sdk
-					"../assets/js/interacciones.js", // jquery
+				{"bootstrap"	: "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"}, // <- popper and jQuery
+				{"cognito"		: "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js"}, // <- aws-sdk
+				{"interaccion": "../assets/js/interacciones.js"}, // jquery
 			],
 			[
-					"../assets/js/auth.js", // <- aws-sdk, aws-cognito-sdk, amazon-cognito-identity
+				{"cognito-id"	: "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"}, // <- aws-sdk
+				
 			],
 			[
-				"../assets/js/contents.js", // <- angular, underscore
+				{"auth"				: "../assets/js/auth.js"}, // <- aws-sdk, aws-cognito-sdk, amazon-cognito-identity
+			],
+			[
+				{"contents"		: "../assets/js/contents.js"}, // <- angular, underscore
 			]
 		]
  };
@@ -49,7 +52,8 @@ function loadLevel(numLevel, levels) {
 		var script = document.createElement('script');
 		script.type = 'text/javascript';
 		script.async = "async";
-		script.src = level[i];
+		script.id = Object.keys(level[i])[0]; // Establecemos la KEY como ID.
+		script.src = Object.values(level[i])[0];
 		document.head.appendChild(script);
 		console.log(numLevel + "-" +  i + " -> " + script.src);
 			
