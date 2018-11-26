@@ -66,6 +66,7 @@ function loadLevel(numLevel, levels) {
 			
 		// Cada vez que se carga una librería, la contamos al cargarse
 		script.onload = function () {
+			debug = false;
 			loaded++;
 			if (debug) console.log(numLevel + "-" + loaded + ' cargada: ' + this.src);
 			if (loaded === toLoad) {
