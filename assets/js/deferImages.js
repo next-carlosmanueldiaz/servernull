@@ -50,5 +50,5 @@ function deferBackgroundImage() {
     imgDefer[i].setAttribute('style', style.replace("{url}", imgDefer[i].getAttribute('data-src')));
   }
 }
-// window.onload = deferBackgroundImage();
+window.onload = deferBackgroundImage();
 
