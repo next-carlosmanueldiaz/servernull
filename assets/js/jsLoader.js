@@ -14,7 +14,9 @@
  var js = {
     "levels": [
 			[
-        // No dependientes entre si
+				// No dependientes entre si
+				{"underscore"	: "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"},
+        {"angular"		: "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"},	
         {"googleGapi"	: "https://apis.google.com/js/platform.js?onload=onLogIn"},
         {"popper"			: "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"},
         {"jquery"			: "https://code.jquery.com/jquery-1.9.1.min.js"},
@@ -28,9 +30,7 @@
 				{"interaccion": "../assets/js/interacciones.js"}, // jquery
 			],
 			[
-				{"cognito-id"	: "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"}, // <- aws-sdk
-				{"underscore"	: "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"},
-        {"angular"		: "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"},				
+				{"cognito-id"	: "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"}, // <- aws-sdk			
 			],
 			[
 				{"auth"				: "../assets/js/auth.js"}, // <- aws-sdk, aws-cognito-sdk, amazon-cognito-identity

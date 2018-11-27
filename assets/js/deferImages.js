@@ -39,7 +39,7 @@ window.addEventListener('load', function() {
 
 /**
  * Difiere todas las propiedades CSS background-image
- * 
+ * https://codepen.io/anon/pen/rryxoK
  */
 
 function deferBackgroundImage() {
