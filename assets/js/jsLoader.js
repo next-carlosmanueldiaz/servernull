@@ -23,15 +23,14 @@
         {"config"			: "../assets/js/config.js"},
 			],
 			[
-				{"underscore"	: "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"},
-        {"angular"		: "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"},
 				{"bootstrap"	: "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"}, // <- popper and jQuery
 				{"cognito"		: "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js"}, // <- aws-sdk
 				{"interaccion": "../assets/js/interacciones.js"}, // jquery
 			],
 			[
 				{"cognito-id"	: "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"}, // <- aws-sdk
-				
+				{"underscore"	: "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"},
+        {"angular"		: "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"},				
 			],
 			[
 				{"auth"				: "../assets/js/auth.js"}, // <- aws-sdk, aws-cognito-sdk, amazon-cognito-identity
