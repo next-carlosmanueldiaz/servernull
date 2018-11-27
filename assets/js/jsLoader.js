@@ -16,8 +16,6 @@
 			[
         // No dependientes entre si
         {"googleGapi"	: "https://apis.google.com/js/platform.js?onload=onLogIn"},
-        {"underscore"	: "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"},
-        {"angular"		: "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"},
         {"popper"			: "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"},
         {"jquery"			: "https://code.jquery.com/jquery-1.9.1.min.js"},
         {"aws-sdk"		: "https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js"},
@@ -25,6 +23,8 @@
         {"config"			: "../assets/js/config.js"},
 			],
 			[
+				{"underscore"	: "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"},
+        {"angular"		: "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"},
 				{"bootstrap"	: "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"}, // <- popper and jQuery
 				{"cognito"		: "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js"}, // <- aws-sdk
 				{"interaccion": "../assets/js/interacciones.js"}, // jquery
