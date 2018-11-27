@@ -100,11 +100,11 @@ app.controller('myCtrl', function ($scope) {
 
         for (var key in file) {
           file[key].slug = slugify(file[key].title);
-          // file[key].img = "background-image: url('" + file[key].img + "');"
+          file[key].img = "background-image: url('" + file[key].img + "');"
 
           if (key == last) {
             $scope.titular = file[key];
-            // $scope.titular.img = "background-image: url('" + $scope.titular.img + "');"
+            $scope.titular.img = "background-image: url('" + $scope.titular.img + "');"
             file.splice(key, 1);
           }
         }

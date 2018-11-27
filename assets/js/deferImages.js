@@ -43,6 +43,7 @@ window.addEventListener('load', function() {
  */
 
 function deferBackgroundImage() {
+	// Tomamos todos los divs con atributo data-src
   var imgDefer = document.querySelectorAll('div[data-src]');
   var style = "background-image: url('{url}')";
   for (var i = 0; i < imgDefer.length; i++) {
