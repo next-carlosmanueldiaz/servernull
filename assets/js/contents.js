@@ -52,6 +52,11 @@ function slugify (text) {
 }
 
 var app = angular.module('myApp', []);
+
+app.filter('trusted', ['$sce', function ($sce) {
+   return $sce.trustAsResourceUrl;
+}]);
+
 app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
