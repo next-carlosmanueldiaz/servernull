@@ -110,7 +110,7 @@ app.controller('myCtrl', function ($scope) {
 
         // Tomamos sólo los artículos para la portada, dándoles la vuelta al array con .reverse()
         $scope.contents = file.reverse();
-        $scope.$apply();
+        $scope.$apply();        
       }
     });
   }
