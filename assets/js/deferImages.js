@@ -48,7 +48,9 @@ function deferBackgroundImage() {
 	var style = "background-image: url({url})";
   // var style = "{url}";
   for (var i = 0; i < imgDefer.length; i++) {
-    imgDefer[i].setAttribute('style', style.replace("{url}", imgDefer[i].getAttribute('data-src')));
+		oldStyle = imgDefer[i].getAttribute('style');
+		newStyle = style.replace("{url}", imgDefer[i].getAttribute('data-src')) + currentStyle;
+    imgDefer[i].setAttribute('style', newStyle );
   }
 }
 window.onload = deferBackgroundImage();
