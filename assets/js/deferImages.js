@@ -49,7 +49,7 @@ function deferBackgroundImage() {
   // var style = "{url}";
   for (var i = 0; i < imgDefer.length; i++) {
 		oldStyle = imgDefer[i].getAttribute('style');
-		newStyle = style.replace("{url}", imgDefer[i].getAttribute('data-src')) + currentStyle;
+		newStyle = style.replace("{url}", imgDefer[i].getAttribute('data-src')) + oldStyle;
     imgDefer[i].setAttribute('style', newStyle );
   }
 }
