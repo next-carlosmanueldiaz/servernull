@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(event) {
+// document.addEventListener("DOMContentLoaded", function(event) {
     var defaultThrottle = 250;
     window.stickyFrom = null;
     var stickyEnabled = true;
@@ -117,4 +117,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
       });
       
     });
-  });
+//   });

@@ -106,9 +106,10 @@ app.controller('myCtrl', function ($scope) {
   
   /**
    * SUBMIT FORMULARIO: 
+   *  - Creamos el fichero HTML DEL POST mezclando la base (html.html), template y datos:  slug-title.html
    *  - guardamos los datos del contenido en el nuevo json:                       slug-tittle.json
-   *  - Creamos el fichero HTML mezclando la base (html.html), template y datos:  slug-title.html
    *  - Actualizamos el JSON con el listado de contenidos: home/content/json/contents.json
+   *  - ACTUALIZAMOS EL index.html DE LA PÁGINA PRINCIPAL con el nuevo artículo
    * 
    * @returns {undefined}
    */
@@ -117,9 +118,9 @@ app.controller('myCtrl', function ($scope) {
     var titulo = $scope.cts[$scope.pos].fields[0].value;
     var title = slugify(titulo);
     
-    // HTML
+    // HTML (POST)
     // ========================================================================
-    // Obtenemos el HTML GENÉRICO
+    // Obtenemos el HTML GENÉRICO DEL POST
     const keyHtml = 'backend/html.html';
     // ========================================================================
     var fileParams = {Bucket: $scope.bucket, Key: keyHtml};
@@ -143,7 +144,7 @@ app.controller('myCtrl', function ($scope) {
         }
         html = html.replace("{{content}}", tpl);
         
-        // Guardamos el fichero HTML
+        // Guardamos el fichero HTML del POST
         var keyC = 'home/content/html/' + $scope.cts[$scope.pos].id + '/' + title + '.html';
         var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyC, Body: html, ContentType: "text/html"};
         s3.putObject(paramsHtmlObject, function (errSavingFile, dataPutObject) {
@@ -190,6 +191,7 @@ app.controller('myCtrl', function ($scope) {
     contenido += "]";
     
     // Guardamos los datos del nuevo contenido en un fichero JSON
+    // ========================================================================
     var paramsObject = { Bucket: $scope.bucket, Key: keyC, Body: contenido };
     s3.putObject(paramsObject, function (errSavingFile, dataPutObject) {
       if (errSavingFile) {
