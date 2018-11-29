@@ -31,6 +31,8 @@
  *      https://www.filamentgroup.com/lab/async-css.html
  *      https://stackoverflow.com/questions/32759272/how-to-load-css-asynchronously
  * 
+ *    Dentro de los css también hay enlaces a ficheros externos que deberían revisarse.
+ * 
  *  IMAGENES
  *  - Cargar las imagenes una vez que se haya cargado la página: tanto <img> como <style>background-image</style>
  *    Mediante un simple script podemos cargar todas las imagenes de la página de forma diferida
@@ -42,6 +44,9 @@
  *      Para agregar un background en cualquier capa, se le agregará a la capa el atributo data-src.
  *      El script de carga diferida aplicará el background a la capa una vez finalizada la carga del HTML.
  * 
+ *  FONTS (CSS): 
+ *  - Cargar las fuentes también ralentiza la carga de la página.
+ *    https://www.lockedownseo.com/load-google-fonts-asynchronously-for-page-speed/
  * -------------------------------------------------------------------------------------------
  */
 
