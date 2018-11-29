@@ -34,6 +34,7 @@ var region = '';
  * @type String
  */
 var googleSigninClientId = '';
+document.getElementById("google-client-id").content = googleSigninClientId;
 
 /**
  * User Pool Id Admins
