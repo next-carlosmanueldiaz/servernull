@@ -66,7 +66,7 @@ var js = {
       { "googleGapi": "https://apis.google.com/js/platform.js?onload=onLogIn" },
       { "popper": "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" },
       { "jquery": "https://code.jquery.com/jquery-1.9.1.min.js" },
-      { "aws-sdk": "https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js" },
+      { "aws-sdk": "https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.368.0/aws-sdk.min.js" },
       { "config": "../assets/js/config.js" },
     ],
     [
