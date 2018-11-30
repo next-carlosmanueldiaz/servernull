@@ -7,3 +7,6 @@
 Pipfile
 Pipfile.lock
 venv/
+
+node_modules/
+package-lock.json
