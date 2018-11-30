@@ -61,8 +61,8 @@ var js = {
   "fases": [
     [
       // No dependientes entre si
-      { "underscore": "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" },
-      { "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" },
+      // { "underscore": "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" },
+      // { "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" },
       { "googleGapi": "https://apis.google.com/js/platform.js?onload=onLogIn" },
       { "popper": "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" },
       { "jquery": "https://code.jquery.com/jquery-1.9.1.min.js" },
