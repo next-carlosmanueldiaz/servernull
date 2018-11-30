@@ -304,8 +304,8 @@ app.controller('myCtrl', function ($scope) {
                         //=========================================================================================
                         var fileHTML = data.Body.toString('utf-8');
                         // CONVERTIRMOS EL TEXTO A DOM
-                        doc = new DOMParser().parseFromString(fileHTML, "text/xml");
-            
+                        doc = new DOMParser().parseFromString(fileHTML, "text/html");
+                        
                         //=========================================================================================
                         // Eliminamos los elementos que no son artículos del fichero contents.json
                         for (var key in file) {
@@ -366,3 +366,8 @@ app.controller('myCtrl', function ($scope) {
     });
   }; // /submit
 });
+
+
+
+
+
