@@ -339,7 +339,7 @@ app.controller('myCtrl', function ($scope) {
 
                         var oSerializer = new XMLSerializer();
                         var sXML = oSerializer.serializeToString(doc);
-                        var paramsHTMLObject = { Bucket: $scope.bucket, Key: keyHome, Body: sXML };
+                        var paramsHTMLObject = { Bucket: $scope.bucket, Key: keyHome, Body: sXML, ContentType: "text/html", ContentEncoding: "deflate", Expires: nextweek};
                         s3.putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {
                           if (errSavingFile) {
                             if (debug) console.log('El fichero HTML ' + keyHome + ' NO existe en el bucket o no tiene permisos.');
