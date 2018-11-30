@@ -281,7 +281,7 @@ app.controller('myCtrl', function ($scope) {
                     if (debug) console.log(errSavingFile);
                     expiredToken();
                   } else {
-                    if (debug) console.log('Fichero contents.json guardado correctamente en ' + keyCL);
+                    if (debug) console.log('%c JSON ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyCL);
 
                     //---------------------------------------------------------------------------------
                     // MODIFICAMOS LA HOME
@@ -308,24 +308,24 @@ app.controller('myCtrl', function ($scope) {
             
                         //=========================================================================================
                         // Eliminamos los elementos que no son artículos del fichero contents.json
-                        for (var key in fileContents) {
-                          if (fileContents[key].type != "article") {
+                        for (var key in file) {
+                          if (file[key].type != "article") {
                             // Elimina el elemento del array que no es un artículo
-                            fileContents.splice(key, 1);
+                            file.splice(key, 1);
                           }
                         }
-                        var last = fileContents.length - 1; // Empieza en cero.
+                        var last = file.length - 1; // Empieza en cero.
                         // Obtenemos el slug y sacamos el titular del último elemento
-                        for (var key in fileContents) {
-                          fileContents[key].slug = slugify(fileContents[key].title);
+                        for (var key in file) {
+                          file[key].slug = slugify(file[key].title);
                           // fileContents[key].img = "background-image: url(" + fileContents[key].img + ");"
                           if (key == last) {
-                            var titular = fileContents[key];
-                            fileContents.splice(key, 1);
+                            var titular = file[key];
+                            file.splice(key, 1);
                           }
                         }
                         // Tomamos sólo los artículos para la portada, dándoles la vuelta al array con .reverse()
-                        $scope.contents = fileContents.reverse();
+                        file = file.reverse();
                         //=========================================================================================
                         // Aplicamos el json directamente sobre home/index.html
                         doc.getElementById('titular').setAttribute('data-src', titular.img);
