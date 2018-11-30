@@ -337,6 +337,8 @@ app.controller('myCtrl', function ($scope) {
                         // doc.getElementById('').innerHTML = "";
                         // doc.getElementById('').innerHTML = "";
 
+                        var today = new Date();
+                        var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
                         var oSerializer = new XMLSerializer();
                         var sXML = oSerializer.serializeToString(doc);
                         var paramsHTMLObject = { Bucket: $scope.bucket, Key: keyHome, Body: sXML, ContentType: "text/html", ContentEncoding: "deflate", Expires: nextweek};
