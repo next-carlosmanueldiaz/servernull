@@ -80,14 +80,13 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
-    // Esto obliga a que ng-app y ng-controller estén en la etiqueta <html>
-    $scope.googleSigninClientId = googleSigninClientId;
     const permisos = getAccess();
 
     $scope.bucket = sessionStorage.bucket;
     $scope.type = getQueryVariable('tipo');
     $scope.slug = getQueryVariable('id');
-    
+    // JSON
+    //---------------------------------------------------------------------------------
     var keyJson = 'home/content/json/' + $scope.type + '/' + $scope.slug  + '.json';
     
     var fileParams = {Bucket: $scope.bucket, Key: keyJson};
@@ -128,6 +127,8 @@ app.controller('myCtrl', function ($scope) {
   $scope.submit = function () {
     var titulo = "";
     const permisos = getAccess();
+
+    //---------------------------------------------------------------------------------
     // Necesitamos content-types.json para obtener el css y tpl
     const keyCT = 'private/content-types/json/content-types.json';
     var fileParams = {Bucket: $scope.bucket, Key: keyCT};
@@ -147,9 +148,9 @@ app.controller('myCtrl', function ($scope) {
           }
         }
         
-        // HTML
+        // HTML POST
         // ========================================================================
-        // Obtenemos el HTML GENÉRICO
+        // Obtenemos el HTML GENÉRICO DEL POST
         const keyHtml = 'backend/html.html';
         var fileParams = {Bucket: $scope.bucket, Key: keyHtml};
         s3 = new AWS.S3();
@@ -160,6 +161,7 @@ app.controller('myCtrl', function ($scope) {
             // expiredToken();
           } else {
             // Rellenamos el contenido del HTML con los datos
+            //---------------------------------------------------------------------------------
             var html = fileData.Body.toString('utf-8');
             html = html.replace("{{googleSigninClientId}}", $scope.googleSigninClientId);
             html = html.replace("{{title}}", $scope.content[0].value);
@@ -203,6 +205,7 @@ app.controller('myCtrl', function ($scope) {
           }
         });
         
+        // JSON POST
         // ========================================================================
         var keyJSON = 'home/content/json/' + $scope.type + '/' + $scope.slug + '.json';
         // ========================================================================
@@ -231,7 +234,7 @@ app.controller('myCtrl', function ($scope) {
         contenido = contenido.slice(0, -1);
         contenido += "]";
 
-        // Guardamos los datos del contenido en el fichero JSON
+        // Guardamos los datos del contenido en el fichero JSON DEL POST
         var paramsObject = { Bucket: $scope.bucket, Key: keyJSON, Body: contenido };
         s3.putObject(paramsObject, function (errSavingFile, dataPutObject) {
           if (errSavingFile) {
@@ -253,6 +256,7 @@ app.controller('myCtrl', function ($scope) {
                 expiredToken();
               } else {
                 // OBTENEMOS contents.json
+                //---------------------------------------------------------------------------------
                 const type = getQueryVariable("tipo");
                 const slug = getQueryVariable("id");
                 var file = JSON.parse(fileData.Body.toString('utf-8'));
@@ -277,8 +281,80 @@ app.controller('myCtrl', function ($scope) {
                     if (debug) console.log(errSavingFile);
                     expiredToken();
                   } else {
-                    if (debug) console.log('Fichero guardado correctamente en ' + keyCL);
-                    // if (debug) console.log(dataPutObject);
+                    if (debug) console.log('Fichero contents.json guardado correctamente en ' + keyCL);
+
+                    //---------------------------------------------------------------------------------
+                    // MODIFICAMOS LA HOME
+                    // Cada vez que se modifica el contenido de un artículo, la home cambia.
+                    // No vamos a usar angular para la home, ya que es una mala solución
+                    // Usaremos HTML
+
+                    // Cargamos el fichero home/index.html
+                    var keyHome = 'home/index.html';
+                    s3 = new AWS.S3();
+                    var fileParams = { Bucket: $scope.bucket, Key: keyHome };
+                    s3.getObject(fileParams, function (errGetObject, data) {
+                      if (errGetObject) {
+                        if (debug) console.log('Error al leer  ' + keyContents + ' o no tiene permisos.');
+                        if (debug) console.log(errGetObject);
+                        // expiredToken();
+                      } else {
+                        //=========================================================================================
+                        // OBTENEMOS EL HTML DE index.html en forma de texto
+                        //=========================================================================================
+                        var fileHTML = data.Body.toString('utf-8');
+                        // CONVERTIRMOS EL TEXTO A DOM
+                        doc = new DOMParser().parseFromString(fileHTML, "text/xml");
+            
+                        //=========================================================================================
+                        // Eliminamos los elementos que no son artículos del fichero contents.json
+                        for (var key in fileContents) {
+                          if (fileContents[key].type != "article") {
+                            // Elimina el elemento del array que no es un artículo
+                            fileContents.splice(key, 1);
+                          }
+                        }
+                        var last = fileContents.length - 1; // Empieza en cero.
+                        // Obtenemos el slug y sacamos el titular del último elemento
+                        for (var key in fileContents) {
+                          fileContents[key].slug = slugify(fileContents[key].title);
+                          // fileContents[key].img = "background-image: url(" + fileContents[key].img + ");"
+                          if (key == last) {
+                            var titular = fileContents[key];
+                            fileContents.splice(key, 1);
+                          }
+                        }
+                        // Tomamos sólo los artículos para la portada, dándoles la vuelta al array con .reverse()
+                        $scope.contents = fileContents.reverse();
+                        //=========================================================================================
+                        // Aplicamos el json directamente sobre home/index.html
+                        doc.getElementById('titular').setAttribute('data-src', titular.img);
+                        // /home/content/html/{{titular.type}}/{{titular.slug}}.html
+                        var titularLink = "/home/content/html/" + titular.type + "/" + titular.slug + ".html";
+                        doc.getElementById('titular-link').setAttribute('href', titularLink);                       
+                        doc.getElementById('titular-title').innerHTML = titular.title;
+
+                        // doc.getElementById('').innerHTML = "";
+                        // doc.getElementById('').innerHTML = "";
+
+                        var oSerializer = new XMLSerializer();
+                        var sXML = oSerializer.serializeToString(doc);
+                        var paramsHTMLObject = { Bucket: $scope.bucket, Key: keyHome, Body: sXML };
+                        s3.putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {
+                          if (errSavingFile) {
+                            if (debug) console.log('El fichero HTML ' + keyHome + ' NO existe en el bucket o no tiene permisos.');
+                            if (debug) console.log('Error guardando el fichero')
+                            if (debug) console.log(errSavingFile);
+                          } else {
+                            if (debug) console.log('Fichero index.html guardado correctamente en ' + keyHome);
+                          }
+                        }); // /putObject('contents.json)
+                      }
+                    });
+                    // Cargamos el fichero index.html de la home
+                    // 
+
+
                   }
                 }); // /putObject('contents.json)
               }
