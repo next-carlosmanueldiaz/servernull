@@ -82,7 +82,7 @@ app.controller('myCtrl', function ($scope) {
   this.$onInit = function () {
     const permisos = getAccess();
 
-    $scope.bucket = sessionStorage.bucket;
+    $scope.bucket = bucket; // config.js
     $scope.type = getQueryVariable('tipo');
     $scope.slug = getQueryVariable('id');
     // JSON
@@ -339,7 +339,7 @@ app.controller('myCtrl', function ($scope) {
 
                         var oSerializer = new XMLSerializer();
                         var sXML = oSerializer.serializeToString(doc);
-                        var paramsHTMLObject = { Bucket: $scope.bucket, Key: keyHome, Body: sXML };
+                        var paramsHTMLObject = { Bucket: $scope.bucket, Key: keyHome, Body: doc };
                         s3.putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {
                           if (errSavingFile) {
                             if (debug) console.log('El fichero HTML ' + keyHome + ' NO existe en el bucket o no tiene permisos.');
