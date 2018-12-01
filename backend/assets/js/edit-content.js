@@ -356,15 +356,37 @@ app.controller('myCtrl', function ($scope) {
                         file = file.reverse();
                         //=========================================================================================
                         // Aplicamos el json directamente sobre home/index.html
+
+                        // TITULAR HOME
                         doc.getElementById('titular').setAttribute('data-src', titular.img);
                         // /home/content/html/{{titular.type}}/{{titular.slug}}.html
                         var titularLink = "/home/content/html/" + titular.type + "/" + titular.slug + ".html";
-                        doc.getElementById('titular-link').setAttribute('href', titularLink);                       
+                        doc.getElementById('titular-link').setAttribute('href', titularLink);
                         doc.getElementById('titular-title').innerHTML = titular.title;
 
-                        // doc.getElementById('').innerHTML = "";
-                        // doc.getElementById('').innerHTML = "";
+                        // ARTICULOS
+                        for (var key in file) {
+                          if (key % 2 == 0) {
+                            var teaserMidIzq = doc.getElementById('teaser-mid-izq');
+                            teaserMidIzq.setAttribute('id', 'teaser-mid-izq-' + key);
+                            teaserMidIzq.getElementById('teaser-izq-img').setAttribute('data-src', file.img);
+                            var teaserMidIzqLink = "/home/content/html/" + file.type + "/" + file.slug + ".html";
+                            teaserMidIzq.getElementById('teaser-izq-link').setAttribute('href', teaserMidIzqLink);
+                            teaserMidIzq.getElementById('teaser-izq-title').innerHTML = file.title;
+                            doc.getElementById('container-inside').appendChild(teaserMidIzq);
 
+                          } else {
+                            var teaserMidIzq = doc.getElementById('teaser-mid-izq');
+                            teaserMidIzq.setAttribute('id', 'teaser-mid-izq-' + key);
+                            teaserMidIzq.getElementById('teaser-izq-img').setAttribute('data-src', file.img);
+                            var teaserMidIzqLink = "/home/content/html/" + file.type + "/" + file.slug + ".html";
+                            teaserMidIzq.getElementById('teaser-izq-link').setAttribute('href', teaserMidIzqLink);
+                            teaserMidIzq.getElementById('teaser-izq-title').innerHTML = file.title;
+                            doc.getElementById('container-inside').appendChild(teaserMidIzq);
+                          }
+                          
+                          // doc.getElementById('').innerHTML = "";
+                        }
                         //=========================================================================================                       
                         // Subimos el fichero home/index.html
 

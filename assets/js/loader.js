@@ -31,6 +31,12 @@
  *      https://www.filamentgroup.com/lab/async-css.html
  *      https://stackoverflow.com/questions/32759272/how-to-load-css-asynchronously
  * 
+ *      CSS CRÍTICO
+ *      Renderizamos la parte superior de la página con estilos inline
+ *      https://www.smashingmagazine.com/2015/08/understanding-critical-css/
+ *      Usando la herramienta Critical: 
+ *        https://github.com/addyosmani/critical
+ * 
  *    Dentro de los css también hay enlaces a ficheros externos que deberían revisarse.
  * 
  *  IMAGENES

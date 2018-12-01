@@ -322,16 +322,16 @@
 
       <div class="container" ng-repeat="content in contents | orderBy: reverse:true">
         <!-- FILA CON DOS COLUMNAS -->
-        <div class="row wpb_row vc_row-fluid" ng-if="$even">
-          <div class="wpb_column vc_column_container col-sm-6">
+        <div id="container-inside" class="row wpb_row vc_row-fluid" ng-if="$even">
+          <div id="teaser-mid-izq" class="wpb_column vc_column_container col-sm-6">
             <div class="vc_column-inner ">
               <div class="wpb_wrapper">
                 <article data-new-block="363928" class="noticia formato1">
                   <div class="box-image">
-                    <div class="img-image img-image-{{$index}}"></div>
+                    <div id="teaser-izq-img" class="img-image"></div>
                     <div class="box-info ">
-                      <a data-new-link="" href="/home/content/html/{{contents[$index].type}}/{{contents[$index].slug}}.html" data-new-id="363928">
-                        <h3 class="titular small" data-new-title="">
+                      <a id="teaser-izq-link" href="/home/content/html/{{contents[$index].type}}/{{contents[$index].slug}}.html" data-new-id="363928">
+                        <h3 id="teaser-izq-title" class="titular small" data-new-title="">
                           {{contents[$index].title}}
                         </h3>
                       </a>
@@ -345,15 +345,15 @@
               </div>
             </div>
           </div>
-          <div class="wpb_column vc_column_container col-sm-6" ng-if="contents[$index+1].title">
+          <div id="teaser-mid-der" class="wpb_column vc_column_container col-sm-6" ng-if="contents[$index+1].title">
             <div class="vc_column-inner ">
               <div class="wpb_wrapper">
                 <article data-new-block="383157" class="noticia formato2">
-                  <div class="box-image box-image-{{$index+1}}">
+                  <div id="teaser-der-img" class="box-image">
                     <div class="filterGrad-anulado"></div>
                     <div class="box-info ">
-                      <a data-new-link="" href="/home/content/html/{{contents[$index+1].type}}/{{contents[$index+1].slug}}.html" data-new-id="383157">
-                        <h3 class="titular small" data-new-title="">
+                      <a id="teaser-der-link" href="/home/content/html/{{contents[$index+1].type}}/{{contents[$index+1].slug}}.html" data-new-id="383157">
+                        <h3 id="teaser-der-title" class="titular small" data-new-title="">
                           {{contents[$index+1].title}}
                         </h3>
                       </a>
