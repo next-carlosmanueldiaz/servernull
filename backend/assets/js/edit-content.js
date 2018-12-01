@@ -411,6 +411,7 @@ app.controller('myCtrl', function ($scope) {
                             if (debug) console.log(errSavingFile);
                           } else {
                             if (debug) console.log('%c HTML ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyHome);
+                            if (debug) console.log(dataPutObject);
                           }
                         }); // /putObject('contents.json)
                       }
