@@ -196,6 +196,13 @@ app.controller('myCtrl', function ($scope) {
             // Guardamos el fichero HTML
             var keyHTML = 'home/content/html/' + $scope.type + '/' + $scope.slug + '.html';
             
+            // Hacemos MD5 del contenido del archivo para calcular su hash e incluirlo en ETag
+            var hash = calcMD5(htmlData);
+            if (debug) console.log('============================================================================================');
+            if (debug) console.log('Hash MD5 del contenido de ' + keyHTML);
+            if (debug) console.log(hash);
+            if (debug) console.log('============================================================================================');
+
             // PAKO - DEFLATE FILE
             // https://github.com/nodeca/pako
             var pako = window.pako;
@@ -205,12 +212,6 @@ app.controller('myCtrl', function ($scope) {
             var now = new Date();
             var nextweek = new Date(now.getFullYear(), now.getMonth(), now.getDate()+7);
             
-            // Hacemos MD5 del contenido del archivo para calcular su hash e incluirlo en ETag
-            var hash = calcMD5(htmlData);
-            if (debug) console.log('============================================================================================');
-            if (debug) console.log('Hash MD5 del contenido de ' + keyHTML);
-            if (debug) console.log(hash);
-            if (debug) console.log('============================================================================================');
             // Para usar pako.deflate, debemos indicarlo en el objeto subido con el atributo ContentEncoding con el valor deflate
             var paramsHtmlObject = { 
               Bucket: $scope.bucket, 
@@ -373,8 +374,11 @@ app.controller('myCtrl', function ($scope) {
                         //=========================================================================================                       
                         // Subimos el fichero home/index.html
 
+                        var oSerializer = new XMLSerializer();
+                        var sHTML = oSerializer.serializeToString(doc);
+                        
                         // Hacemos MD5 del contenido del archivo para calcular su hash e incluirlo en ETag
-                        var hash = calcMD5(htmlData);
+                        var hash = calcMD5(sHTML);
                         if (debug) console.log('============================================================================================');
                         if (debug) console.log('Hash MD5 del contenido de ' + keyHome);
                         if (debug) console.log(hash);
@@ -382,13 +386,12 @@ app.controller('myCtrl', function ($scope) {
 
                         var now = new Date();
                         var nextweek = new Date(now.getFullYear(), now.getMonth(), now.getDate()+7);
-                        var oSerializer = new XMLSerializer();
-                        var sXML = oSerializer.serializeToString(doc);
+
                         // PAKO - DEFLATE FILE
                         // https://github.com/nodeca/pako
                         var pako = window.pako;
                         // Para usar pako.deflate, debemos indicarlo en putObject el atributo ContentEncoding con el valor deflate
-                        var htmlData = pako.deflate(sXML);
+                        var htmlData = pako.deflate(sHTML);
                         var paramsHTMLObject = { 
                           Bucket: $scope.bucket, 
                           Key: keyHome, 

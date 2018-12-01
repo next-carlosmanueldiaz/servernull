@@ -4,6 +4,7 @@
  * Copyright (C) Paul Johnston 1999 - 2000.
  * Updated by Greg Holt 2000 - 2001.
  * See http://pajhome.org.uk/site/legal.html for details.
+ * http://lig-membres.imag.fr/donsez/cours/exemplescourstechnoweb/js_securehash/
  */
 
 /*
