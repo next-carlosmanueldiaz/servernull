@@ -220,10 +220,10 @@ app.controller('myCtrl', function ($scope) {
               ContentType: "text/html", 
               ContentEncoding: "deflate",
               Expires: nextweek,
-              Metadata: {
-                'LastModified': now.toString(),
-                'ETag': hash
-              }
+              // Metadata: {
+              //   'LastModified': now.toString(),
+              //   'ETag': hash
+              // }
             };
             // var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "", Expires: nextweek};
             s3.putObject(paramsHtmlObject, function (errSavingFile, dataPutObject) {
@@ -399,10 +399,10 @@ app.controller('myCtrl', function ($scope) {
                           ContentType: "text/html", 
                           ContentEncoding: "deflate", 
                           Expires: nextweek,
-                          Metadata: {
-                            'LastModified': now.toString(),
-                            'ETag': hash
-                          }
+                          // Metadata: {
+                          //   'LastModified': now.toString(),
+                          //   'ETag': hash
+                          // }
                         };
                         s3.putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {
                           if (errSavingFile) {
