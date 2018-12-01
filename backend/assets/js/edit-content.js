@@ -367,7 +367,7 @@ app.controller('myCtrl', function ($scope) {
                         // ARTICULOS
                         for (var key in file) {
                           if (key % 2 == 0) {                          
-                            var teaserMidIzqOriginal = document.getElementById('teaser-mid-izq');
+                            var teaserMidIzqOriginal = doc.getElementById('teaser-mid-izq');
                             var teaserMidIzqClone = teaserMidIzqOriginal.cloneNode(true); // "deep" clone
                             teaserMidIzqClone.id = 'teaser-mid-izq-' + key;
                             teaserMidIzqClone.getElementById('teaser-izq-img').setAttribute('data-src', file[key].img);
