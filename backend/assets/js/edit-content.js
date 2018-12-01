@@ -366,10 +366,12 @@ app.controller('myCtrl', function ($scope) {
 
                         // Primero nos cargamos todos los previamente generados
                         var generated = doc.getElementById("container-inside").querySelectorAll(".generated");
-                        for (var i in generated) {
-                          doc.getElementById("container-inside").removeChild(generated[i]);
+                        if (generated.length > 0) {
+                          for (var i in generated) {
+                            doc.getElementById("container-inside").removeChild(generated[i]);
+                          }
                         }
-
+                        
                         // ARTICULOS
                         for (var key in file) {
                           if (key % 2 == 0) {
