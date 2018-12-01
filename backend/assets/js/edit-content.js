@@ -73,6 +73,22 @@ function slugify (text) {
     .replace(/-+$/, '')             // Trim - from end of text
 }
 
+function getHash(str, algo = "SHA-256") {
+  let strBuf = new TextEncoder('utf-8').encode(str);
+  return crypto.subtle.digest(algo, strBuf)
+    .then(hash => {
+      window.hash = hash;
+      // here hash is an arrayBuffer, 
+      // so we'll connvert it to its hex version
+      let result = '';
+      const view = new DataView(hash);
+      for (let i = 0; i < hash.byteLength; i += 4) {
+        result += ('00000000' + view.getUint32(i).toString(16)).slice(-8);
+      }
+      return result;
+    });
+}
+
 // const debug = true;
 // const tengoAcceso = getCredentials();
 
@@ -189,30 +205,38 @@ app.controller('myCtrl', function ($scope) {
             var now = new Date();
             var nextweek = new Date(now.getFullYear(), now.getMonth(), now.getDate()+7);
             
-            // Para usar pako.deflate, debemos indicarlo en el objeto subido con el atributo ContentEncoding con el valor deflate
-            var paramsHtmlObject = { 
-              Bucket: $scope.bucket, 
-              Key: keyHTML, 
-              Body: htmlData, 
-              ContentType: "text/html", 
-              ContentEncoding: "deflate", 
-              Expires: nextweek,
-              Metadata: {
-                'LastModified': now.toString(),
-                'ETag': now.toString()
-              }
-            };
-            // var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "", Expires: nextweek};
-            s3.putObject(paramsHtmlObject, function (errSavingFile, dataPutObject) {
-              if (errSavingFile) {
-                if (debug) console.log('El fichero ' + keyHTML + ' NO existe en el bucket o no tiene permisos.');
-                if (debug) console.log('Error guardando el fichero')
-                if (debug) console.log(errSavingFile);
-                // expiredToken();
-              } else {
-                if (debug) console.log('%c HTML ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyHTML);
-              }
-            }); // / putObject('title.html)
+            // Hacemos SHA-256 del contenido del archivo para calcular su hash e incluirlo en ETag ()
+            // La función retorna una promesa, por lo que debemos seguir con el codigo en el then
+            getHash(htmlData).then(hash => {
+              if (debug) console.log('============================================================================================');
+              if (debug) console.log('Hash SHA-256 de ' + keyHTML);
+              if (debug) console.log(hash);
+              if (debug) console.log('============================================================================================');
+              // Para usar pako.deflate, debemos indicarlo en el objeto subido con el atributo ContentEncoding con el valor deflate
+              var paramsHtmlObject = { 
+                Bucket: $scope.bucket, 
+                Key: keyHTML, 
+                Body: htmlData, 
+                ContentType: "text/html", 
+                ContentEncoding: "deflate",
+                Expires: nextweek,
+                Metadata: {
+                  'LastModified': now.toString(),
+                  'ETag': hash
+                }
+              };
+              // var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "", Expires: nextweek};
+              s3.putObject(paramsHtmlObject, function (errSavingFile, dataPutObject) {
+                if (errSavingFile) {
+                  if (debug) console.log('El fichero ' + keyHTML + ' NO existe en el bucket o no tiene permisos.');
+                  if (debug) console.log('Error guardando el fichero')
+                  if (debug) console.log(errSavingFile);
+                  // expiredToken();
+                } else {
+                  if (debug) console.log('%c HTML ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyHTML);
+                }
+              }); // / putObject('home/index.html)
+            }); // end getHash() request
           }
         });
         
