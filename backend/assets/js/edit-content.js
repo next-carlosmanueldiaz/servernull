@@ -368,18 +368,18 @@ app.controller('myCtrl', function ($scope) {
                         for (var key in file) {
                           if (key % 2 == 0) {
                             doc.getElementById('teaser-mid-izq').setAttribute('id', 'teaser-mid-izq-' + key);
-                            doc.getElementById('teaser-izq-img').setAttribute('data-src', file.img);
-                            var teaserMidIzqLink = "/home/content/html/" + file.type + "/" + file.slug + ".html";
+                            doc.getElementById('teaser-izq-img').setAttribute('data-src', file[key].img);
+                            var teaserMidIzqLink = "/home/content/html/" + file[key].type + "/" + file[key].slug + ".html";
                             doc.getElementById('teaser-izq-link').setAttribute('href', teaserMidIzqLink);
-                            doc.getElementById('teaser-izq-title').innerHTML = file.title;
+                            doc.getElementById('teaser-izq-title').innerHTML = file[key].title;
                             doc.getElementById('container-inside').appendChild(doc.getElementById('teaser-mid-izq-' + key));
                             doc.getElementById('teaser-mid-izq-' + key).setAttribute('id', 'teaser-mid-izq');
                           } else {
                             doc.getElementById('teaser-mid-der').setAttribute('id', 'teaser-mid-der-' + key);
-                            doc.getElementById('teaser-der-img').setAttribute('data-src', file.img);
-                            var teaserMidIzqLink = "/home/content/html/" + file.type + "/" + file.slug + ".html";
+                            doc.getElementById('teaser-der-img').setAttribute('data-src', file[key].img);
+                            var teaserMidIzqLink = "/home/content/html/" + file.type + "/" + file[key].slug + ".html";
                             doc.getElementById('teaser-der-link').setAttribute('href', teaserMidIzqLink);
-                            doc.getElementById('teaser-der-title').innerHTML = file.title;
+                            doc.getElementById('teaser-der-title').innerHTML = file[key].title;
                             doc.getElementById('container-inside').appendChild(doc.getElementById('teaser-mid-der-' + key));
                             doc.getElementById('teaser-mid-der-' + key).setAttribute('id', 'teaser-mid-der');
                           }
