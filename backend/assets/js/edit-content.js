@@ -198,8 +198,8 @@ app.controller('myCtrl', function ($scope) {
               ContentEncoding: "deflate", 
               Expires: nextweek,
               Metadata: {
-                'LastModified': now,
-                'ETag': now
+                'LastModified': now.toString(),
+                'ETag': now.toString()
               }
             };
             // var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "", Expires: nextweek};
@@ -367,8 +367,8 @@ app.controller('myCtrl', function ($scope) {
                           ContentEncoding: "deflate", 
                           Expires: nextweek,
                           Metadata: {
-                            'LastModified': now,
-                            'ETag': now
+                            'LastModified': now.toString(),
+                            'ETag': now.toString()
                           }
                         };
                         s3.putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {
