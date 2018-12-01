@@ -348,9 +348,8 @@ app.controller('myCtrl', function ($scope) {
 
                         //=========================================================================================
                         // Subimos el fichero home/index.html
-                        var date = new Date();
-                        var now =  new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                        var nextweek = new Date(date.getFullYear(), date.getMonth(), date.getDate()+7);
+                        var now = new Date();
+                        var nextweek = new Date(now.getFullYear(), now.getMonth(), now.getDate()+7);
                         var oSerializer = new XMLSerializer();
                         var sXML = oSerializer.serializeToString(doc);
                         // PAKO - DEFLATE FILE
@@ -365,7 +364,8 @@ app.controller('myCtrl', function ($scope) {
                           ContentType: "text/html", 
                           ContentEncoding: "deflate", 
                           Expires: nextweek,
-                          LastModified: now
+                          LastModified: now,
+                          ETag: now
                         };
                         s3.putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {
                           if (errSavingFile) {
