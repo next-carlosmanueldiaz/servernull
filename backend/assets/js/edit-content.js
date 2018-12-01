@@ -197,7 +197,7 @@ app.controller('myCtrl', function ($scope) {
             var keyHTML = 'home/content/html/' + $scope.type + '/' + $scope.slug + '.html';
             
             // Hacemos MD5 del contenido del archivo para calcular su hash e incluirlo en ETag
-            var hash = calcMD5(htmlData);
+            var hash = calcMD5(html);
             if (debug) console.log('============================================================================================');
             if (debug) console.log('Hash MD5 del contenido de ' + keyHTML);
             if (debug) console.log(hash);
