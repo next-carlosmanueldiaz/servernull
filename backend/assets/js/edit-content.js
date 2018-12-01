@@ -364,12 +364,20 @@ app.controller('myCtrl', function ($scope) {
                         doc.getElementById('titular-link').setAttribute('href', titularLink);
                         doc.getElementById('titular-title').innerHTML = titular.title;
 
+                        // Primero nos cargamos todos los previamente generados
+                        var generated = document.getElementById("container-inside").querySelectorAll(".generated");
+                        for (var i in generated) {
+                          document.getElementById("container-inside").removeChild(generated[i]);
+                        }
+
                         // ARTICULOS
                         for (var key in file) {
-                          if (key % 2 == 0) {                          
+                          if (key % 2 == 0) {
                             var teaserMidIzqOriginal = doc.getElementById('teaser-mid-izq');
                             var teaserMidIzqClone = teaserMidIzqOriginal.cloneNode(true); // "deep" clone
                             teaserMidIzqClone.id = 'teaser-mid-izq-' + key;
+                            teaserMidIzqClone.classList.add("generated");
+                            teaserMidIzqClone.style.display = "block";
                             teaserMidIzqClone.getElementsByClassName("teaser-izq-img")[0].setAttribute('data-src', file[key].img);
                             var teaserMidIzqLink = "/home/content/html/" + file[key].type + "/" + file[key].slug + ".html";
                             teaserMidIzqClone.getElementsByClassName("teaser-izq-link")[0].setAttribute('href', teaserMidIzqLink);
@@ -379,6 +387,8 @@ app.controller('myCtrl', function ($scope) {
                             var teaserMidDerOriginal = doc.getElementById('teaser-mid-der');
                             var teaserMidDerClone = teaserMidDerOriginal.cloneNode(true); // "deep" clone
                             teaserMidDerClone.id = 'teaser-mid-der-' + key;
+                            teaserMidDerClone.classList.add("generated");
+                            teaserMidDerClone.style.display = "block";
                             teaserMidDerClone.getElementsByClassName("teaser-der-img")[0].setAttribute('data-src', file[key].img);
                             var teaserMidDerLink = "/home/content/html/" + file[key].type + "/" + file[key].slug + ".html";
                             teaserMidDerClone.getElementsByClassName("teaser-der-link")[0].setAttribute('href', teaserMidDerLink);
