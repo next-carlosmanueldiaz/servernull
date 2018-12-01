@@ -320,20 +320,18 @@
         </div>
       </div>
 
-      <div class="container" ng-repeat="content in contents | orderBy: reverse:true">
+      <div class="container">
         <!-- FILA CON DOS COLUMNAS -->
-        <div id="container-inside" class="row wpb_row vc_row-fluid" ng-if="$even">
+        <div id="container-inside" class="row wpb_row vc_row-fluid">
           <div id="teaser-mid-izq" class="wpb_column vc_column_container col-sm-6">
             <div class="vc_column-inner ">
               <div class="wpb_wrapper">
-                <article data-new-block="363928" class="noticia formato1">
+                <article class="noticia formato1">
                   <div class="box-image">
-                    <div id="teaser-izq-img" class="img-image"></div>
+                    <div class="img-image teaser-izq-img"></div>
                     <div class="box-info ">
-                      <a id="teaser-izq-link" href="/home/content/html/{{contents[$index].type}}/{{contents[$index].slug}}.html" data-new-id="363928">
-                        <h3 id="teaser-izq-title" class="titular small" data-new-title="">
-                          {{contents[$index].title}}
-                        </h3>
+                      <a class="teaser-izq-link">
+                        <h3 class="titular small teaser-izq-title"></h3>
                       </a>
                       <ul class="bluepills" data-new-tags="">
                         <li data-new-tag=""><a href="https://www.bbva.com/es/asuntos-sociales/">Asuntos sociales</a></li>
@@ -345,17 +343,15 @@
               </div>
             </div>
           </div>
-          <div id="teaser-mid-der" class="wpb_column vc_column_container col-sm-6" ng-if="contents[$index+1].title">
+          <div id="teaser-mid-der" class="wpb_column vc_column_container col-sm-6">
             <div class="vc_column-inner ">
               <div class="wpb_wrapper">
-                <article data-new-block="383157" class="noticia formato2">
-                  <div id="teaser-der-img" class="box-image">
+                <article class="noticia formato2">
+                  <div class="box-image teaser-der-img">
                     <div class="filterGrad-anulado"></div>
                     <div class="box-info ">
-                      <a id="teaser-der-link" href="/home/content/html/{{contents[$index+1].type}}/{{contents[$index+1].slug}}.html" data-new-id="383157">
-                        <h3 id="teaser-der-title" class="titular small" data-new-title="">
-                          {{contents[$index+1].title}}
-                        </h3>
+                      <a class="teaser-der-link">
+                        <h3 class="titular small teaser-der-title"></h3>
                       </a>
                       <ul class="bluepills" data-new-tags="">
                         <li data-new-tag=""><a href="https://www.bbva.com/es/estilo-vida/restaurantes-cocina/cocina/">Cocina</a></li>

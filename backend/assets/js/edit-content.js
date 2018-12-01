@@ -370,22 +370,21 @@ app.controller('myCtrl', function ($scope) {
                             var teaserMidIzqOriginal = doc.getElementById('teaser-mid-izq');
                             var teaserMidIzqClone = teaserMidIzqOriginal.cloneNode(true); // "deep" clone
                             teaserMidIzqClone.id = 'teaser-mid-izq-' + key;
-                            teaserMidIzqClone.getElementById('teaser-izq-img').setAttribute('data-src', file[key].img);
+                            teaserMidIzqClone.getElementsByClassName("teaser-izq-img")[0].setAttribute('data-src', file[key].img);
                             var teaserMidIzqLink = "/home/content/html/" + file[key].type + "/" + file[key].slug + ".html";
-                            teaserMidIzqClone.getElementById('teaser-izq-link').setAttribute('href', teaserMidIzqLink);
-                            teaserMidIzqClone.getElementById('teaser-izq-title').innerHTML = file[key].title;
+                            teaserMidIzqClone.getElementsByClassName("teaser-izq-link")[0].setAttribute('href', teaserMidIzqLink);
+                            teaserMidIzqClone.getElementsByClassName("teaser-izq-title")[0].innerHTML = file[key].title;
                             teaserMidIzqOriginal.parentNode.appendChild(teaserMidIzqClone);
                           } else {
-                            var teaserMidIzqOriginal = document.getElementById('teaser-mid-izq');
-                            var teaserMidIzqClone = teaserMidIzqOriginal.cloneNode(true); // "deep" clone
-                            teaserMidIzqClone.id = 'teaser-mid-izq-' + key;
-                            teaserMidIzqClone.getElementById('teaser-izq-img').setAttribute('data-src', file[key].img);
-                            var teaserMidIzqLink = "/home/content/html/" + file[key].type + "/" + file[key].slug + ".html";
-                            teaserMidIzqClone.getElementById('teaser-izq-link').setAttribute('href', teaserMidIzqLink);
-                            teaserMidIzqClone.getElementById('teaser-izq-title').innerHTML = file[key].title;
-                            teaserMidIzqOriginal.parentNode.appendChild(teaserMidIzqClone);
+                            var teaserMidDerOriginal = doc.getElementById('teaser-mid-der');
+                            var teaserMidDerClone = teaserMidDerOriginal.cloneNode(true); // "deep" clone
+                            teaserMidDerClone.id = 'teaser-mid-der-' + key;
+                            teaserMidDerClone.getElementsByClassName("teaser-der-img")[0].setAttribute('data-src', file[key].img);
+                            var teaserMidDerLink = "/home/content/html/" + file[key].type + "/" + file[key].slug + ".html";
+                            teaserMidDerClone.getElementsByClassName("teaser-der-link")[0].setAttribute('href', teaserMidDerLink);
+                            teaserMidDerClone.getElementsByClassName("teaser-der-title")[0].innerHTML = file[key].title;
+                            teaserMidDerOriginal.parentNode.appendChild(teaserMidDerClone);
                           }
-                          
                           // doc.getElementById('').innerHTML = "";
                         }
                         //=========================================================================================                       
