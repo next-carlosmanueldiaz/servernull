@@ -61,7 +61,7 @@ var js = {
   "fases": [
     [
       // No dependientes entre si
-      { "aws-sdk": "https://sdk.amazonaws.com/js/aws-sdk-2.368.0.min.js" }, // https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js
+      { "aws-sdk": "https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.368.0/aws-sdk.min.js" }, // https://cdn.rawgit.com/aws/aws-sdk-js/master/dist/aws-sdk.js
       { "underscore": "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" },
       // { "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" },
       { "googleGapi": "https://apis.google.com/js/platform.js?onload=onLogIn" },

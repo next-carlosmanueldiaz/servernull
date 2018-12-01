@@ -186,8 +186,7 @@ app.controller('myCtrl', function ($scope) {
             // Para usar pako.deflate, debemos indicarlo en putObject el atributo ContentEncoding con el valor deflate
             var htmlData = pako.deflate(html);
                        
-            var date = new Date();
-            var now =  new Date(date.getFullYear(), date.getMonth(), date.getDate());
+            var now = new Date();
             var nextweek = new Date(date.getFullYear(), date.getMonth(), date.getDate()+7);
             
             // Para usar pako.deflate, debemos indicarlo en el objeto subido con el atributo ContentEncoding con el valor deflate
@@ -198,7 +197,10 @@ app.controller('myCtrl', function ($scope) {
               ContentType: "text/html", 
               ContentEncoding: "deflate", 
               Expires: nextweek,
-              LastModified: now
+              Metadata: {
+                'LastModified': now,
+                'ETag': now
+              }
             };
             // var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "", Expires: nextweek};
             s3.putObject(paramsHtmlObject, function (errSavingFile, dataPutObject) {
