@@ -177,4 +177,8 @@ function deferBackgroundImage() {
     imgDefer[i].setAttribute('style', newStyle );
   }
 }
-window.onload = deferBackgroundImage();
+// window.onload = deferBackgroundImage();
+window.addEventListener('load', function() {
+	// Ejecuta la función deferBackgroundImage()
+  deferBackgroundImage();
+}, false);
