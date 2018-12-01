@@ -186,11 +186,20 @@ app.controller('myCtrl', function ($scope) {
             // Para usar pako.deflate, debemos indicarlo en putObject el atributo ContentEncoding con el valor deflate
             var htmlData = pako.deflate(html);
                        
-            var today = new Date();
-            var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
+            var date = new Date();
+            var now =  new Date(date.getFullYear(), date.getMonth(), date.getDate());
+            var nextweek = new Date(date.getFullYear(), date.getMonth(), date.getDate()+7);
             
             // Para usar pako.deflate, debemos indicarlo en el objeto subido con el atributo ContentEncoding con el valor deflate
-            var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "deflate", Expires: nextweek};
+            var paramsHtmlObject = { 
+              Bucket: $scope.bucket, 
+              Key: keyHTML, 
+              Body: htmlData, 
+              ContentType: "text/html", 
+              ContentEncoding: "deflate", 
+              Expires: nextweek,
+              LastModified: now
+            };
             // var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "", Expires: nextweek};
             s3.putObject(paramsHtmlObject, function (errSavingFile, dataPutObject) {
               if (errSavingFile) {
@@ -337,8 +346,11 @@ app.controller('myCtrl', function ($scope) {
                         // doc.getElementById('').innerHTML = "";
                         // doc.getElementById('').innerHTML = "";
 
-                        var today = new Date();
-                        var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
+                        //=========================================================================================
+                        // Subimos el fichero home/index.html
+                        var date = new Date();
+                        var now =  new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                        var nextweek = new Date(date.getFullYear(), date.getMonth(), date.getDate()+7);
                         var oSerializer = new XMLSerializer();
                         var sXML = oSerializer.serializeToString(doc);
                         // PAKO - DEFLATE FILE
@@ -346,8 +358,15 @@ app.controller('myCtrl', function ($scope) {
                         var pako = window.pako;
                         // Para usar pako.deflate, debemos indicarlo en putObject el atributo ContentEncoding con el valor deflate
                         var htmlData = pako.deflate(sXML);
-
-                        var paramsHTMLObject = { Bucket: $scope.bucket, Key: keyHome, Body: htmlData, ContentType: "text/html", ContentEncoding: "deflate", Expires: nextweek};
+                        var paramsHTMLObject = { 
+                          Bucket: $scope.bucket, 
+                          Key: keyHome, 
+                          Body: htmlData, 
+                          ContentType: "text/html", 
+                          ContentEncoding: "deflate", 
+                          Expires: nextweek,
+                          LastModified: now
+                        };
                         s3.putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {
                           if (errSavingFile) {
                             if (debug) console.log('El fichero HTML ' + keyHome + ' NO existe en el bucket o no tiene permisos.');
