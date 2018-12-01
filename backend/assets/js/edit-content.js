@@ -367,22 +367,21 @@ app.controller('myCtrl', function ($scope) {
                         // ARTICULOS
                         for (var key in file) {
                           if (key % 2 == 0) {
-                            var teaserMidIzq = doc.getElementById('teaser-mid-izq');
-                            teaserMidIzq.setAttribute('id', 'teaser-mid-izq-' + key);
-                            teaserMidIzq.getElementById('teaser-izq-img').setAttribute('data-src', file.img);
+                            doc.getElementById('teaser-mid-izq').setAttribute('id', 'teaser-mid-izq-' + key);
+                            doc.getElementById('teaser-izq-img').setAttribute('data-src', file.img);
                             var teaserMidIzqLink = "/home/content/html/" + file.type + "/" + file.slug + ".html";
-                            teaserMidIzq.getElementById('teaser-izq-link').setAttribute('href', teaserMidIzqLink);
-                            teaserMidIzq.getElementById('teaser-izq-title').innerHTML = file.title;
-                            doc.getElementById('container-inside').appendChild(teaserMidIzq);
-
+                            doc.getElementById('teaser-izq-link').setAttribute('href', teaserMidIzqLink);
+                            doc.getElementById('teaser-izq-title').innerHTML = file.title;
+                            doc.getElementById('container-inside').appendChild(doc.getElementById('teaser-mid-izq-' + key));
+                            doc.getElementById('teaser-mid-izq-' + key).setAttribute('id', 'teaser-mid-izq');
                           } else {
-                            var teaserMidDer = doc.getElementById('teaser-mid-izq');
-                            teaserMidDer.setAttribute('id', 'teaser-mid-izq-' + key);
-                            teaserMidDer.getElementById('teaser-izq-img').setAttribute('data-src', file.img);
+                            doc.getElementById('teaser-mid-der').setAttribute('id', 'teaser-mid-der-' + key);
+                            doc.getElementById('teaser-der-img').setAttribute('data-src', file.img);
                             var teaserMidIzqLink = "/home/content/html/" + file.type + "/" + file.slug + ".html";
-                            teaserMidDer.getElementById('teaser-izq-link').setAttribute('href', teaserMidIzqLink);
-                            teaserMidDer.getElementById('teaser-izq-title').innerHTML = file.title;
-                            doc.getElementById('container-inside').appendChild(teaserMidDer);
+                            doc.getElementById('teaser-der-link').setAttribute('href', teaserMidIzqLink);
+                            doc.getElementById('teaser-der-title').innerHTML = file.title;
+                            doc.getElementById('container-inside').appendChild(doc.getElementById('teaser-mid-der-' + key));
+                            doc.getElementById('teaser-mid-der-' + key).setAttribute('id', 'teaser-mid-der');
                           }
                           
                           // doc.getElementById('').innerHTML = "";
