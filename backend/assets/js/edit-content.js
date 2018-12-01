@@ -205,38 +205,36 @@ app.controller('myCtrl', function ($scope) {
             var now = new Date();
             var nextweek = new Date(now.getFullYear(), now.getMonth(), now.getDate()+7);
             
-            // Hacemos SHA-256 del contenido del archivo para calcular su hash e incluirlo en ETag ()
-            // La función retorna una promesa, por lo que debemos seguir con el codigo en el then
-            getHash(htmlData).then(hash => {
-              if (debug) console.log('============================================================================================');
-              if (debug) console.log('Hash SHA-256 de ' + keyHTML);
-              if (debug) console.log(hash);
-              if (debug) console.log('============================================================================================');
-              // Para usar pako.deflate, debemos indicarlo en el objeto subido con el atributo ContentEncoding con el valor deflate
-              var paramsHtmlObject = { 
-                Bucket: $scope.bucket, 
-                Key: keyHTML, 
-                Body: htmlData, 
-                ContentType: "text/html", 
-                ContentEncoding: "deflate",
-                Expires: nextweek,
-                Metadata: {
-                  'LastModified': now.toString(),
-                  'ETag': hash
-                }
-              };
-              // var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "", Expires: nextweek};
-              s3.putObject(paramsHtmlObject, function (errSavingFile, dataPutObject) {
-                if (errSavingFile) {
-                  if (debug) console.log('El fichero ' + keyHTML + ' NO existe en el bucket o no tiene permisos.');
-                  if (debug) console.log('Error guardando el fichero')
-                  if (debug) console.log(errSavingFile);
-                  // expiredToken();
-                } else {
-                  if (debug) console.log('%c HTML ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyHTML);
-                }
-              }); // / putObject('home/index.html)
-            }); // end getHash() request
+            // Hacemos MD5 del contenido del archivo para calcular su hash e incluirlo en ETag
+            var hash = calcMD5(htmlData);
+            if (debug) console.log('============================================================================================');
+            if (debug) console.log('Hash MD5 del contenido de ' + keyHTML);
+            if (debug) console.log(hash);
+            if (debug) console.log('============================================================================================');
+            // Para usar pako.deflate, debemos indicarlo en el objeto subido con el atributo ContentEncoding con el valor deflate
+            var paramsHtmlObject = { 
+              Bucket: $scope.bucket, 
+              Key: keyHTML, 
+              Body: htmlData, 
+              ContentType: "text/html", 
+              ContentEncoding: "deflate",
+              Expires: nextweek,
+              Metadata: {
+                'LastModified': now.toString(),
+                'ETag': hash
+              }
+            };
+            // var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: htmlData, ContentType: "text/html", ContentEncoding: "", Expires: nextweek};
+            s3.putObject(paramsHtmlObject, function (errSavingFile, dataPutObject) {
+              if (errSavingFile) {
+                if (debug) console.log('El fichero ' + keyHTML + ' NO existe en el bucket o no tiene permisos.');
+                if (debug) console.log('Error guardando el fichero')
+                if (debug) console.log(errSavingFile);
+                // expiredToken();
+              } else {
+                if (debug) console.log('%c HTML ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyHTML);
+              }
+            }); // / putObject('home/index.html)
           }
         });
         
@@ -372,8 +370,16 @@ app.controller('myCtrl', function ($scope) {
                         // doc.getElementById('').innerHTML = "";
                         // doc.getElementById('').innerHTML = "";
 
-                        //=========================================================================================
+                        //=========================================================================================                       
                         // Subimos el fichero home/index.html
+
+                        // Hacemos MD5 del contenido del archivo para calcular su hash e incluirlo en ETag
+                        var hash = calcMD5(htmlData);
+                        if (debug) console.log('============================================================================================');
+                        if (debug) console.log('Hash MD5 del contenido de ' + keyHome);
+                        if (debug) console.log(hash);
+                        if (debug) console.log('============================================================================================');
+
                         var now = new Date();
                         var nextweek = new Date(now.getFullYear(), now.getMonth(), now.getDate()+7);
                         var oSerializer = new XMLSerializer();
@@ -392,7 +398,7 @@ app.controller('myCtrl', function ($scope) {
                           Expires: nextweek,
                           Metadata: {
                             'LastModified': now.toString(),
-                            'ETag': now.toString()
+                            'ETag': hash
                           }
                         };
                         s3.putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {
