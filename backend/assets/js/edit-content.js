@@ -187,7 +187,7 @@ app.controller('myCtrl', function ($scope) {
             var htmlData = pako.deflate(html);
                        
             var now = new Date();
-            var nextweek = new Date(date.getFullYear(), date.getMonth(), date.getDate()+7);
+            var nextweek = new Date(now.getFullYear(), now.getMonth(), now.getDate()+7);
             
             // Para usar pako.deflate, debemos indicarlo en el objeto subido con el atributo ContentEncoding con el valor deflate
             var paramsHtmlObject = { 
