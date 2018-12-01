@@ -377,7 +377,7 @@ app.controller('myCtrl', function ($scope) {
                           } else {
                             doc.getElementById('teaser-mid-der').setAttribute('id', 'teaser-mid-der-' + key);
                             doc.getElementById('teaser-der-img').setAttribute('data-src', file[key].img);
-                            var teaserMidIzqLink = "/home/content/html/" + file.type + "/" + file[key].slug + ".html";
+                            var teaserMidIzqLink = "/home/content/html/" + file[key].type + "/" + file[key].slug + ".html";
                             doc.getElementById('teaser-der-link').setAttribute('href', teaserMidIzqLink);
                             doc.getElementById('teaser-der-title').innerHTML = file[key].title;
                             doc.getElementById('container-inside').appendChild(doc.getElementById('teaser-mid-der-' + key));
