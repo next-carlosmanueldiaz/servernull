@@ -366,22 +366,24 @@ app.controller('myCtrl', function ($scope) {
 
                         // ARTICULOS
                         for (var key in file) {
-                          if (key % 2 == 0) {
-                            doc.getElementById('teaser-mid-izq').setAttribute('id', 'teaser-mid-izq-' + key);
-                            doc.getElementById('teaser-izq-img').setAttribute('data-src', file[key].img);
+                          if (key % 2 == 0) {                          
+                            var teaserMidIzqOriginal = document.getElementById('teaser-mid-izq');
+                            var teaserMidIzqClone = teaserMidIzqOriginal.cloneNode(true); // "deep" clone
+                            teaserMidIzqClone.id = 'teaser-mid-izq-' + key;
+                            teaserMidIzqClone.getElementById('teaser-izq-img').setAttribute('data-src', file[key].img);
                             var teaserMidIzqLink = "/home/content/html/" + file[key].type + "/" + file[key].slug + ".html";
-                            doc.getElementById('teaser-izq-link').setAttribute('href', teaserMidIzqLink);
-                            doc.getElementById('teaser-izq-title').innerHTML = file[key].title;
-                            doc.getElementById('container-inside').appendChild(doc.getElementById('teaser-mid-izq-' + key));
-                            doc.getElementById('teaser-mid-izq-' + key).setAttribute('id', 'teaser-mid-izq');
+                            teaserMidIzqClone.getElementById('teaser-izq-link').setAttribute('href', teaserMidIzqLink);
+                            teaserMidIzqClone.getElementById('teaser-izq-title').innerHTML = file[key].title;
+                            teaserMidIzqOriginal.parentNode.appendChild(teaserMidIzqClone);
                           } else {
-                            doc.getElementById('teaser-mid-der').setAttribute('id', 'teaser-mid-der-' + key);
-                            doc.getElementById('teaser-der-img').setAttribute('data-src', file[key].img);
+                            var teaserMidIzqOriginal = document.getElementById('teaser-mid-izq');
+                            var teaserMidIzqClone = teaserMidIzqOriginal.cloneNode(true); // "deep" clone
+                            teaserMidIzqClone.id = 'teaser-mid-izq-' + key;
+                            teaserMidIzqClone.getElementById('teaser-izq-img').setAttribute('data-src', file[key].img);
                             var teaserMidIzqLink = "/home/content/html/" + file[key].type + "/" + file[key].slug + ".html";
-                            doc.getElementById('teaser-der-link').setAttribute('href', teaserMidIzqLink);
-                            doc.getElementById('teaser-der-title').innerHTML = file[key].title;
-                            doc.getElementById('container-inside').appendChild(doc.getElementById('teaser-mid-der-' + key));
-                            doc.getElementById('teaser-mid-der-' + key).setAttribute('id', 'teaser-mid-der');
+                            teaserMidIzqClone.getElementById('teaser-izq-link').setAttribute('href', teaserMidIzqLink);
+                            teaserMidIzqClone.getElementById('teaser-izq-title').innerHTML = file[key].title;
+                            teaserMidIzqOriginal.parentNode.appendChild(teaserMidIzqClone);
                           }
                           
                           // doc.getElementById('').innerHTML = "";
