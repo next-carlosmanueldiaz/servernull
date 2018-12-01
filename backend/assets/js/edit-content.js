@@ -376,13 +376,13 @@ app.controller('myCtrl', function ($scope) {
                             doc.getElementById('container-inside').appendChild(teaserMidIzq);
 
                           } else {
-                            var teaserMidIzq = doc.getElementById('teaser-mid-izq');
-                            teaserMidIzq.setAttribute('id', 'teaser-mid-izq-' + key);
-                            teaserMidIzq.getElementById('teaser-izq-img').setAttribute('data-src', file.img);
+                            var teaserMidDer = doc.getElementById('teaser-mid-izq');
+                            teaserMidDer.setAttribute('id', 'teaser-mid-izq-' + key);
+                            teaserMidDer.getElementById('teaser-izq-img').setAttribute('data-src', file.img);
                             var teaserMidIzqLink = "/home/content/html/" + file.type + "/" + file.slug + ".html";
-                            teaserMidIzq.getElementById('teaser-izq-link').setAttribute('href', teaserMidIzqLink);
-                            teaserMidIzq.getElementById('teaser-izq-title').innerHTML = file.title;
-                            doc.getElementById('container-inside').appendChild(teaserMidIzq);
+                            teaserMidDer.getElementById('teaser-izq-link').setAttribute('href', teaserMidIzqLink);
+                            teaserMidDer.getElementById('teaser-izq-title').innerHTML = file.title;
+                            doc.getElementById('container-inside').appendChild(teaserMidDer);
                           }
                           
                           // doc.getElementById('').innerHTML = "";
