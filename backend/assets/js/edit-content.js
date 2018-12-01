@@ -195,13 +195,6 @@ app.controller('myCtrl', function ($scope) {
 
             // Guardamos el fichero HTML
             var keyHTML = 'home/content/html/' + $scope.type + '/' + $scope.slug + '.html';
-            
-            // Hacemos MD5 del contenido del archivo para calcular su hash e incluirlo en ETag
-            var hash = calcMD5(html);
-            if (debug) console.log('============================================================================================');
-            if (debug) console.log('Hash MD5 del contenido de ' + keyHTML);
-            if (debug) console.log(hash);
-            if (debug) console.log('============================================================================================');
 
             // PAKO - DEFLATE FILE
             // https://github.com/nodeca/pako
@@ -220,6 +213,7 @@ app.controller('myCtrl', function ($scope) {
               ContentType: "text/html", 
               ContentEncoding: "deflate",
               Expires: nextweek,
+              CacheControl: "max-age=2592000", // 30 dias: 60 * 60 * 24 * 30
               // Metadata: {
               //   'LastModified': now.toString(),
               //   'ETag': hash
@@ -377,13 +371,6 @@ app.controller('myCtrl', function ($scope) {
                         var oSerializer = new XMLSerializer();
                         var sHTML = oSerializer.serializeToString(doc);
                         
-                        // Hacemos MD5 del contenido del archivo para calcular su hash e incluirlo en ETag
-                        var hash = calcMD5(sHTML);
-                        if (debug) console.log('============================================================================================');
-                        if (debug) console.log('Hash MD5 del contenido de ' + keyHome);
-                        if (debug) console.log(hash);
-                        if (debug) console.log('============================================================================================');
-
                         var now = new Date();
                         var nextweek = new Date(now.getFullYear(), now.getMonth(), now.getDate()+30);
 
@@ -399,6 +386,7 @@ app.controller('myCtrl', function ($scope) {
                           ContentType: "text/html", 
                           ContentEncoding: "deflate", 
                           Expires: nextweek,
+                          CacheControl: "max-age=2592000", // 30 dias: 60 * 60 * 24 * 30
                           // Metadata: {
                           //   'LastModified': now.toString(),
                           //   'ETag': hash
