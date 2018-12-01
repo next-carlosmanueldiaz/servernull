@@ -365,9 +365,9 @@ app.controller('myCtrl', function ($scope) {
                         doc.getElementById('titular-title').innerHTML = titular.title;
 
                         // Primero nos cargamos todos los previamente generados
-                        var generated = document.getElementById("container-inside").querySelectorAll(".generated");
+                        var generated = doc.getElementById("container-inside").querySelectorAll(".generated");
                         for (var i in generated) {
-                          document.getElementById("container-inside").removeChild(generated[i]);
+                          doc.getElementById("container-inside").removeChild(generated[i]);
                         }
 
                         // ARTICULOS
