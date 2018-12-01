@@ -364,8 +364,10 @@ app.controller('myCtrl', function ($scope) {
                           ContentType: "text/html", 
                           ContentEncoding: "deflate", 
                           Expires: nextweek,
-                          LastModified: now,
-                          ETag: now
+                          Metadata: {
+                            'LastModified': now,
+                            'ETag': now
+                          }
                         };
                         s3.putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {
                           if (errSavingFile) {
