@@ -1,8 +1,3 @@
-//var debug = true;
-// const tengoAcceso = getCredentials();
-var bucket = sessionStorage.bucket;
-var key = 'private/content-types/json/content-types.json';
-
 /**
  * Comprueba y recupera las credenciales de la sesión
  * @returns {Boolean}
