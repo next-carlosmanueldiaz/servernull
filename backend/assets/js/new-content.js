@@ -85,17 +85,17 @@ app.controller('myCtrl', function ($scope) {
     const keyCT = 'private/content-types/json/content-types.json';
     var fileParams = {Bucket: $scope.bucket, Key: keyCT};
     s3 = new AWS.S3();
-    s3.getObject(fileParams, function (errGetObject, fileData) {
+    s3.getObject(fileParams, function (errGetObject, fileDataContentTypes) {
       if (errGetObject) {
         if (debug) console.log('El fichero ' + key + ' NO existe en el bucket o no tiene permisos.');
         if (debug) console.log(errGetObject);
         expiredToken();
       } else {
         const id = getQueryVariable("id");
-        var file = JSON.parse(fileData.Body.toString('utf-8'));
-        $scope.cts = file;
-        for (var key in file) {
-          if (file[key].id === id) {
+        var contentTypes = JSON.parse(fileDataContentTypes.Body.toString('utf-8'));
+        $scope.cts = contentTypes;
+        for (var key in contentTypes) {
+          if (contentTypes[key].id === id) {
             $scope.pos = key;
           }
         }
@@ -145,8 +145,8 @@ app.controller('myCtrl', function ($scope) {
         html = html.replace("{{content}}", tpl);
         
         // Guardamos el fichero HTML del POST
-        var keyC = 'home/content/html/' + $scope.cts[$scope.pos].id + '/' + title + '.html';
-        var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyC, Body: html, ContentType: "text/html"};
+        var keyHTML = 'home/content/html/' + $scope.cts[$scope.pos].id + '/' + title + '.html';
+        var paramsHtmlObject = { Bucket: $scope.bucket, Key: keyHTML, Body: html, ContentType: "text/html"};
         s3.putObject(paramsHtmlObject, function (errSavingFile, dataPutObject) {
           if (errSavingFile) {
             if (debug) console.log('El fichero ' + key + ' NO existe en el bucket o no tiene permisos.');
@@ -154,7 +154,7 @@ app.controller('myCtrl', function ($scope) {
             if (debug) console.log(errSavingFile);
             expiredToken();
           } else {
-            if (debug) console.log('Fichero guardado correctamente en ' + keyC);
+            if (debug) console.log('Fichero guardado correctamente en ' + keyHTML);
             // if (debug) console.log(dataPutObject);
           }
         }); // / putObject('title.html)
@@ -200,27 +200,27 @@ app.controller('myCtrl', function ($scope) {
         if (debug) console.log(errSavingFile);
         expiredToken();
       } else {
-        if (debug) console.log('Fichero guardado correctamente en ' + keyC);
+        if (debug) console.log('%c JSON ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyC);
         // if (debug) console.log(dataPutObject);
         // ========================================================================
         // ACTUALIZAMOS (OBTENEMOS, AGREGAMOS Y GUARDAMOS) EL JSON CON EL LISTADO DE CONTENIDOS
         const keyCL = 'home/content/json/contents.json';
         // ========================================================================
         var fileParams = {Bucket: $scope.bucket, Key: keyCL};
-        s3.getObject(fileParams, function (errGetObject, fileData) {
+        s3.getObject(fileParams, function (errGetObject, fileDataContents) {
           if (errGetObject) {
             if (debug) console.log('El fichero ' + key + ' NO existe en el bucket o no tiene permisos.');
             if (debug) console.log(errGetObject);
             expiredToken();
           } else {
             // OBTENEMOS contents.json
-            var file = JSON.parse(fileData.Body.toString('utf-8'));
+            var contents = JSON.parse(fileDataContents.Body.toString('utf-8'));
             const type = getQueryVariable("id");
             var date = new Date(); // No necesito guardar la fecha porque puedo darle la vuelta al mostrar el fichero en la home con .reverse()
             var content = {"title" : titulo, "type": type, "img": img, "date": date};
             // AGREGAMOS el nuevo contenido a contents.json, al final del fichero
-            file.push(content);
-            var fileContents = JSON.stringify(file);
+            contents.push(content);
+            var fileContents = JSON.stringify(contents);
             // GUARDAMOS el nuevo contents.json
             var paramsContentsObject = { Bucket: $scope.bucket, Key: keyCL, Body: fileContents };
             s3.putObject(paramsContentsObject, function (errSavingFile, dataPutObject) {
@@ -230,8 +230,131 @@ app.controller('myCtrl', function ($scope) {
                 if (debug) console.log(errSavingFile);
                 expiredToken();
               } else {
-                if (debug) console.log('Fichero guardado correctamente en ' + keyCL);
-                // if (debug) console.log(dataPutObject);
+                if (debug) console.log('%c JSON ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyCL);
+                //---------------------------------------------------------------------------------
+                // MODIFICAMOS LA HOME
+                // Cada vez que se modifica el contenido de un artículo, la home cambia.
+                // No vamos a usar angular para la home, ya que es una mala solución, usaremos HTML
+
+                // Cargamos el fichero home/index.html
+                var keyHome = 'home/index.html';
+                s3 = new AWS.S3();
+                var fileParams = { Bucket: $scope.bucket, Key: keyHome };
+                s3.getObject(fileParams, function (errGetObject, data) {
+                  if (errGetObject) {
+                    if (debug) console.log('Error al leer  ' + keyContents + ' o no tiene permisos.');
+                    if (debug) console.log(errGetObject);
+                    // expiredToken();
+                  } else {
+                    //=========================================================================================
+                    // OBTENEMOS EL HTML DE index.html en forma de texto
+                    //=========================================================================================
+                    var fileHTML = data.Body.toString('utf-8');
+                    // CONVERTIRMOS EL TEXTO A DOM
+                    doc = new DOMParser().parseFromString(fileHTML, "text/html");
+                    //=========================================================================================
+                    // contents.json
+                    // Eliminamos los elementos que no son artículos del fichero contents.json
+                    for (var key in contents) {
+                      if (contents[key].type != "article") {
+                        // Elimina el elemento del array que no es un artículo
+                        contents.splice(key, 1);
+                      }
+                    }
+                    var last = contents.length - 1; // Empieza en cero.
+                    //-----------------------------------------------------------------------------------------
+                    // Obtenemos el slug y sacamos el titular del último elemento
+                    for (var key in contents) {
+                      contents[key].slug = slugify(contents[key].title);
+                      if (key == last) {
+                        var titular = contents[key];
+                        contents.splice(key, 1);
+                      }
+                    }
+                    // Tomamos sólo los artículos para la portada, dándoles la vuelta al array con .reverse()
+                    contents = contents.reverse();
+                    //=========================================================================================
+                    // Aplicamos el json directamente sobre home/index.html
+
+                    // TITULAR HOME
+                    doc.getElementById('titular').setAttribute('data-src', titular.img);
+                    // /home/content/html/{{titular.type}}/{{titular.slug}}.html
+                    var titularLink = "/home/content/html/" + titular.type + "/" + titular.slug + ".html";
+                    doc.getElementById('titular-link').setAttribute('href', titularLink);
+                    doc.getElementById('titular-title').innerHTML = titular.title;
+
+                    // Primero nos cargamos todos los previamente generados
+                    var generated = doc.getElementById("container-inside").querySelectorAll(".generated");
+                    if (generated.length > 0) {
+                      for (var i=0; i < generated.length;i++) {
+                        doc.getElementById("container-inside").removeChild(generated[i]);
+                      }
+                    }
+
+                    // ARTICULOS
+                    for (var key in contents) {
+                      if (key % 2 == 0) {
+                        var teaserMidIzqOriginal = doc.getElementById('teaser-mid-izq');
+                        var teaserMidIzqClone = teaserMidIzqOriginal.cloneNode(true); // "deep" clone
+                        teaserMidIzqClone.id = 'teaser-mid-izq-' + key;
+                        teaserMidIzqClone.classList.add("generated");
+                        teaserMidIzqClone.style.display = "block";
+                        teaserMidIzqClone.getElementsByClassName("teaser-izq-img")[0].setAttribute('data-src', contents[key].img);
+                        var teaserMidIzqLink = "/home/content/html/" + contents[key].type + "/" + contents[key].slug + ".html";
+                        teaserMidIzqClone.getElementsByClassName("teaser-izq-link")[0].setAttribute('href', teaserMidIzqLink);
+                        teaserMidIzqClone.getElementsByClassName("teaser-izq-title")[0].innerHTML = contents[key].title;
+                        teaserMidIzqOriginal.parentNode.appendChild(teaserMidIzqClone);
+                      } else {
+                        var teaserMidDerOriginal = doc.getElementById('teaser-mid-der');
+                        var teaserMidDerClone = teaserMidDerOriginal.cloneNode(true); // "deep" clone
+                        teaserMidDerClone.id = 'teaser-mid-der-' + key;
+                        teaserMidDerClone.classList.add("generated");
+                        teaserMidDerClone.style.display = "block";
+                        teaserMidDerClone.getElementsByClassName("teaser-der-img")[0].setAttribute('data-src', contents[key].img);
+                        var teaserMidDerLink = "/home/content/html/" + contents[key].type + "/" + contents[key].slug + ".html";
+                        teaserMidDerClone.getElementsByClassName("teaser-der-link")[0].setAttribute('href', teaserMidDerLink);
+                        teaserMidDerClone.getElementsByClassName("teaser-der-title")[0].innerHTML = contents[key].title;
+                        teaserMidDerOriginal.parentNode.appendChild(teaserMidDerClone);
+                      }
+                    }
+                    //=========================================================================================                       
+                    // Subimos el fichero home/index.html
+
+                    var oSerializer = new XMLSerializer();
+                    var sHTML = oSerializer.serializeToString(doc);
+
+                    var now = new Date();
+                    var nextweek = new Date(now.getFullYear(), now.getMonth(), now.getDate()+30);
+
+                    // PAKO - DEFLATE FILE
+                    // https://github.com/nodeca/pako
+                    var pako = window.pako;
+                    // Para usar pako.deflate, debemos indicarlo en putObject el atributo ContentEncoding con el valor deflate
+                    var htmlData = pako.deflate(sHTML);
+                    var paramsHTMLObject = { 
+                      Bucket: $scope.bucket, 
+                      Key: keyHome, 
+                      Body: htmlData, 
+                      ContentType: "text/html", 
+                      ContentEncoding: "deflate", 
+                      Expires: nextweek,
+                      CacheControl: "max-age=2592000", // 30 dias: 60 * 60 * 24 * 30
+                      // Metadata: {
+                      //   'LastModified': now.toString(),
+                      //   'ETag': hash
+                      // }
+                    };
+                    s3.putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {
+                      if (errSavingFile) {
+                        if (debug) console.log('El fichero HTML ' + keyHome + ' NO existe en el bucket o no tiene permisos.');
+                        if (debug) console.log('Error guardando el fichero')
+                        if (debug) console.log(errSavingFile);
+                      } else {
+                        if (debug) console.log('%c HTML ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyHome);
+                      }
+                    }); // /putObject('contents.json)
+                  }
+                }); // Cargamos el fichero home/index.html
               }
             }); // /putObject('contents.json)
           }

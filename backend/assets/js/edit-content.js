@@ -125,8 +125,8 @@ app.controller('myCtrl', function ($scope) {
         .replace(/\\f/g, "\\f");
         // remove non-printable and other non-valid JSON chars
         f = f.replace(/[\u0000-\u0019]+/g,""); 
-        var file = JSON.parse(f);
-        $scope.content = file;
+        var content = JSON.parse(f);
+        $scope.content = content;
         $scope.$apply();
       }
     });
@@ -156,10 +156,10 @@ app.controller('myCtrl', function ($scope) {
         // expiredToken();
       } else {
         const id = getQueryVariable("id");
-        var file = JSON.parse(fileData.Body.toString('utf-8'));
-        $scope.cts = file;
-        for (var key in file) {
-          if (file[key].id === $scope.type) {
+        var contentTypes = JSON.parse(fileData.Body.toString('utf-8'));
+        $scope.cts = contentTypes;
+        for (var key in contentTypes) {
+          if (contentTypes[key].id === $scope.type) {
             $scope.pos = key;
           }
         }
@@ -287,19 +287,19 @@ app.controller('myCtrl', function ($scope) {
                 //---------------------------------------------------------------------------------
                 const type = getQueryVariable("tipo");
                 const slug = getQueryVariable("id");
-                var file = JSON.parse(fileData.Body.toString('utf-8'));
+                var contents = JSON.parse(fileData.Body.toString('utf-8'));
                 var date = new Date(); // No necesito guardar la fecha porque puedo darle la vuelta al mostrar el fichero en la home con .reverse()
                 var content = {"date": date, "img": img, "slug": slug, "title" : titulo, "type": type };
                 var pos = -1;
-                for (var key in file) {
-                  if (file[key].slug === slug) {
+                for (var key in contents) {
+                  if (contents[key].slug === slug) {
                     pos = key;
                   }
                 }
-                file.splice(pos, 1); // Eliminamos el contenido antiguo
+                contents.splice(pos, 1); // Eliminamos el contenido antiguo
                 // AGREGAMOS el nuevo contenido a contents.json al final del fichero
-                file.push(content);
-                var fileContents = JSON.stringify(file);
+                contents.push(content);
+                var fileContents = JSON.stringify(contents);
                 // GUARDAMOS el nuevo contents.json
                 var paramsContentsObject = { Bucket: $scope.bucket, Key: keyCL, Body: fileContents };
                 s3.putObject(paramsContentsObject, function (errSavingFile, dataPutObject) {
@@ -333,27 +333,27 @@ app.controller('myCtrl', function ($scope) {
                         var fileHTML = data.Body.toString('utf-8');
                         // CONVERTIRMOS EL TEXTO A DOM
                         doc = new DOMParser().parseFromString(fileHTML, "text/html");
-                        
                         //=========================================================================================
+                        // contents.json (contents)
                         // Eliminamos los elementos que no son artículos del fichero contents.json
-                        for (var key in file) {
-                          if (file[key].type != "article") {
+                        for (var key in contents) {
+                          if (contents[key].type != "article") {
                             // Elimina el elemento del array que no es un artículo
-                            file.splice(key, 1);
+                            contents.splice(key, 1);
                           }
                         }
-                        var last = file.length - 1; // Empieza en cero.
+                        var last = contents.length - 1; // Empieza en cero.
                         // Obtenemos el slug y sacamos el titular del último elemento
-                        for (var key in file) {
-                          file[key].slug = slugify(file[key].title);
-                          // fileContents[key].img = "background-image: url(" + fileContents[key].img + ");"
+                        //-----------------------------------------------------------------------------------------
+                        for (var key in contents) {
+                          contents[key].slug = slugify(contents[key].title);
                           if (key == last) {
-                            var titular = file[key];
-                            file.splice(key, 1);
+                            var titular = contents[key];
+                            contents.splice(key, 1);
                           }
                         }
                         // Tomamos sólo los artículos para la portada, dándoles la vuelta al array con .reverse()
-                        file = file.reverse();
+                        contents = contents.reverse();
                         //=========================================================================================
                         // Aplicamos el json directamente sobre home/index.html
 
@@ -373,17 +373,17 @@ app.controller('myCtrl', function ($scope) {
                         }
 
                         // ARTICULOS
-                        for (var key in file) {
+                        for (var key in contents) {
                           if (key % 2 == 0) {
                             var teaserMidIzqOriginal = doc.getElementById('teaser-mid-izq');
                             var teaserMidIzqClone = teaserMidIzqOriginal.cloneNode(true); // "deep" clone
                             teaserMidIzqClone.id = 'teaser-mid-izq-' + key;
                             teaserMidIzqClone.classList.add("generated");
                             teaserMidIzqClone.style.display = "block";
-                            teaserMidIzqClone.getElementsByClassName("teaser-izq-img")[0].setAttribute('data-src', file[key].img);
-                            var teaserMidIzqLink = "/home/content/html/" + file[key].type + "/" + file[key].slug + ".html";
+                            teaserMidIzqClone.getElementsByClassName("teaser-izq-img")[0].setAttribute('data-src', contents[key].img);
+                            var teaserMidIzqLink = "/home/content/html/" + contents[key].type + "/" + contents[key].slug + ".html";
                             teaserMidIzqClone.getElementsByClassName("teaser-izq-link")[0].setAttribute('href', teaserMidIzqLink);
-                            teaserMidIzqClone.getElementsByClassName("teaser-izq-title")[0].innerHTML = file[key].title;
+                            teaserMidIzqClone.getElementsByClassName("teaser-izq-title")[0].innerHTML = contents[key].title;
                             teaserMidIzqOriginal.parentNode.appendChild(teaserMidIzqClone);
                           } else {
                             var teaserMidDerOriginal = doc.getElementById('teaser-mid-der');
@@ -391,10 +391,10 @@ app.controller('myCtrl', function ($scope) {
                             teaserMidDerClone.id = 'teaser-mid-der-' + key;
                             teaserMidDerClone.classList.add("generated");
                             teaserMidDerClone.style.display = "block";
-                            teaserMidDerClone.getElementsByClassName("teaser-der-img")[0].setAttribute('data-src', file[key].img);
-                            var teaserMidDerLink = "/home/content/html/" + file[key].type + "/" + file[key].slug + ".html";
+                            teaserMidDerClone.getElementsByClassName("teaser-der-img")[0].setAttribute('data-src', contents[key].img);
+                            var teaserMidDerLink = "/home/content/html/" + contents[key].type + "/" + contents[key].slug + ".html";
                             teaserMidDerClone.getElementsByClassName("teaser-der-link")[0].setAttribute('href', teaserMidDerLink);
-                            teaserMidDerClone.getElementsByClassName("teaser-der-title")[0].innerHTML = file[key].title;
+                            teaserMidDerClone.getElementsByClassName("teaser-der-title")[0].innerHTML = contents[key].title;
                             teaserMidDerOriginal.parentNode.appendChild(teaserMidDerClone);
                           }
                           // doc.getElementById('').innerHTML = "";
@@ -436,11 +436,7 @@ app.controller('myCtrl', function ($scope) {
                           }
                         }); // /putObject('contents.json)
                       }
-                    });
-                    // Cargamos el fichero index.html de la home
-                    // 
-
-
+                    }); // Cargamos el fichero home/index.html
                   }
                 }); // /putObject('contents.json)
               }
