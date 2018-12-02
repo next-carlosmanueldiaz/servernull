@@ -81,7 +81,7 @@ app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
     const permisos = getAccess();
-    $scope.bucket = sessionStorage.bucket;
+    $scope.bucket = bucket;
     const keyCT = 'private/content-types/json/content-types.json';
     var fileParams = {Bucket: $scope.bucket, Key: keyCT};
     s3 = new AWS.S3();
