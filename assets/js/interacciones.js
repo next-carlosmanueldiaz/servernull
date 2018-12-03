@@ -7,10 +7,10 @@
       // Sólo muestra la cabecera cuando está arriba del todo.
       if(window.scrollY==0){
         // Si está arriba del todo, muestra
-        document.getElementsByClassName('header-main').removeClass('oculta-header'); // despliega header
+        document.getElementsByClassName('header-main').classList.remove('oculta-header'); // despliega header
       } else {
         // Si no está arriba del todo (hace scroll), oculta
-        document.getElementsByClassName('header-main').addClass('oculta-header'); // comprime header
+        document.getElementsByClassName('header-main').classList.add('oculta-header'); // comprime header
       }
     });
 
