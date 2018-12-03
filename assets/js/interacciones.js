@@ -4,12 +4,13 @@
     var stickyEnabled = true;
     
     window.addEventListener("scroll", function(){
+      // Sólo muestra la cabecera cuando está arriba del todo.
       if(window.scrollY==0){
-        // goToTop.style.display = "none";
-        document.getElementsByClassName('header-main').removeClass('muestra-header');
+        // Si está arriba del todo, muestra
+        document.getElementsByClassName('header-main').removeClass('oculta-header'); // despliega header
       } else {
-        document.getElementsByClassName('header-main').removeClass('muestra-header');
-        // goToTop.style.display = "block";
+        // Si no está arriba del todo (hace scroll), oculta
+        document.getElementsByClassName('header-main').addClass('oculta-header'); // comprime header
       }
     });
 
