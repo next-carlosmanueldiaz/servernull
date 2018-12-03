@@ -84,448 +84,471 @@
     <noscript><link rel="stylesheet" href="../assets/css/home.css" media="none" onload="if(media!=='all')media='all'"></noscript>
   </head>
   <body>
-    <div class="body-wrapper desktop">
-      <header id="header-main" class="header-main">
-        <!-- ============= Row superior: navegación ============= -->
-        <a href="/home/index.html" class="link-map">
-        Diez ideas, Innovación, Invención, I+D, Creatividad
+    <header id="header-main" class="header-main">
+      <!-- ============= Row superior: navegación ============= -->
+      <a href="/home/index.html" class="link-map">
+       Diez ideas, Innovación, Invención, I+D, Creatividad
+      </a>
+      <!-- Navegación row superior -->
+      <ul class="header-nav" style="width: auto; left: 277px;">
+      <li class="magic-bg" style="width: 55px; height: 100px; top: 0px; left: 1305px;"></li>
+      <li class="titlelimit"></li>
+      <!-- Login user -->
+      <li>
+        <a href="#" class="btn btn-login btn-info btn-sm">
+          <span class="glyphicon glyphicon-log-in"></span> Log in
         </a>
-        <!-- Navegación row superior -->
-        <ul class="header-nav" style="width: auto; left: 277px;">
-        <li class="magic-bg" style="width: 55px; height: 100px; top: 0px; left: 1305px;"></li>
-        <li class="titlelimit"></li>
-        <!-- Login user -->
-        <li>
-          <a href="#" class="btn btn-login btn-info btn-sm">
-            <span class="glyphicon glyphicon-log-in"></span> Log in
-          </a>
-          <div class="login-box">
-            <div class="row">
-              <div class="col text-center">
-                <div class="g-signin2" data-onsuccess="onLogIn"></div>
-              </div>
+        <div class="login-box">
+          <div class="row">
+            <div class="col text-center">
+              <div class="g-signin2" data-onsuccess="onLogIn"></div>
             </div>
-            <div class="row">
-              <div class="col text-center">
-                <a href="register.html">Solicitar acceso</a><br>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col text-center">
-                <a href="#" onclick="signOut();">Sign out</a><br>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col text-center">
-                <div id="enlace-backend"><a href="/backend/index.html">Panel de Control</a></div>
-              </div>
-            </div>          
           </div>
-        </li>
-        <li class="search-btn"><a href="" class="buscador" data-menu="#openSearch" data-focus="#panel-searcher"></a></li>
-        <li class="toggle-menu rs_skip">
-          <!-- Icono hamburguesa -->
-          <button type="button" class="toggle-icon" data-menu="#openMenu">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </li>
-        </ul>
-        <!-- ============= Row inferior: tags y switch ============= -->
-
-        <!-- Tags -->
-        <div class="header-tags">
-        <ul class="bluepills featured">
-          <li><a href="#" onclick="return false;">Accionistas e inversores</a></li>
-          <li><a href="#">Información corporativa</a></li>
-        </ul>
-        <span>Atentos a:</span>
-
-        <ul class="bluepills">
-
-          <li><a href="#">Resultados</a></li>
-          <li><a href="#">Fintech</a></li>
-          <li><a href="#">'Creando Oportunidades'</a></li>
-        </ul>
+          <div class="row">
+            <div class="col text-center">
+              <a href="register.html">Solicitar acceso</a><br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <a href="#" onclick="signOut();">Sign out</a><br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <div id="enlace-backend"><a href="/backend/index.html">Panel de Control</a></div>
+            </div>
+          </div>          
         </div>
+      </li>
+      <li class="search-btn"><a href="" class="buscador" data-menu="#openSearch" data-focus="#panel-searcher"></a></li>
+      <li class="toggle-menu rs_skip">
+        <!-- Icono hamburguesa -->
+        <button type="button" class="toggle-icon" data-menu="#openMenu">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </li>
+      </ul>
+      <!-- ============= Row inferior: tags y switch ============= -->
 
-        <!-- Switch languages -->
+      <!-- Tags -->
+      <div class="header-tags">
+      <ul class="bluepills featured">
+        <li><a href="#" onclick="return false;">Accionistas e inversores</a></li>
+        <li><a href="#">Información corporativa</a></li>
+      </ul>
+      <span>Atentos a:</span>
+
+      <ul class="bluepills">
+
+        <li><a href="#">Resultados</a></li>
+        <li><a href="#">Fintech</a></li>
+        <li><a href="#">'Creando Oportunidades'</a></li>
+      </ul>
+      </div>
+
+      <!-- Switch languages -->
+      <div class="switch-lang">
+      <a href="#" onclick="document.location.href = '/en/';" data-erase-country-preference="" class="initialized">
+        <label class="language " id="eng">eng</label>
+
+        <div class="toggle">
+          <input type="checkbox" id="switcher" class="check">
+          <b class="b switch"></b>
+        </div>
+        <label class="language is-active" id="esp">esp</label>
+      </a>
+      </div>
+
+
+
+      <!-- ============= Modales ============= -->
+
+
+      <!-- Modal Menú categorías -->
+      <div class="menu-modal rs_skip" style="right: 0px; display: none;" id="openMenu">
+      <div class="panel_open modal-menu">
         <div class="switch-lang">
-        <a href="#" onclick="document.location.href = '/en/';" data-erase-country-preference="" class="initialized">
-          <label class="language " id="eng">eng</label>
+          <a href="#" onclick="document.location.href = '/en/';" data-erase-country-preference="" class="initialized">
+            <label class="language " id="eng">eng</label>
 
-          <div class="toggle">
-            <input type="checkbox" id="switcher" class="check">
-            <b class="b switch"></b>
-          </div>
-          <label class="language is-active" id="esp">esp</label>
-        </a>
-        </div>
-
-
-
-        <!-- ============= Modales ============= -->
-
-
-        <!-- Modal Menú categorías -->
-        <div class="menu-modal rs_skip" style="right: 0px; display: none;" id="openMenu">
-        <div class="panel_open modal-menu">
-          <div class="switch-lang">
-            <a href="#" onclick="document.location.href = '/en/';" data-erase-country-preference="" class="initialized">
-              <label class="language " id="eng">eng</label>
-
-              <div class="toggle">
-                <input type="checkbox" id="switcher" class="check">
-                <b class="b switch"></b>
-              </div>
-              <label class="language is-active" id="esp">esp</label>
-            </a>
-          </div>
-
-
-          <nav class="menu-body rs_skip" data-menu-version="20171122142722" style="margin-top: 100px; right: 0px;">
-            <div class="row">
-              <div class="col-sm-6 menu-tags-group">
-                <h2 lang="" class="blueline">Destacados</h2>
-                <ul class="bluepills">
-                  <li lang="es"><a href="#">Análisis y opinión</a></li>
-                  <li lang="es"><a href="#">Finanzas</a></li>
-                  <li lang="es"><a href="#">Economía</a></li>
-                  <li lang="es"><a href="#">Fintech</a></li>
-                  <li lang="es"><a href="#">Innovación</a></li>
-                  <li lang="es"><a href="#">Vida y cultura</a></li>
-                  <li lang="es"><a href="#">Países</a></li>
-                  <li lang="es"><a href="#">Últimas noticias</a></li>
-                  <li lang="es"><a href="#">Creando oportunidades</a></li>
-                </ul>
-              </div>
-              <div class="col-sm-6 menu-tags-group">
-                <h2 lang="es" class="blueline">Temas</h2>
-                <ul class="bluepills">
-                  <li lang="es"><a href="#">Historia</a></li>
-                  <li lang="es"><a href="#">Ciudad</a></li>
-                  <li lang="es"><a href="#">Educación financiera</a></li>
-                  <li lang="es"><a href="#">Research</a></li>
-                  <li lang="es"><a href="#">Labs</a></li>
-                  <li lang="es"><a href="#">Especiales países</a></li>
-                </ul>
-              </div>
-              <div class="col-sm-6 menu-tags-group">
-                <h2 lang="es" class="blueline">Social Media</h2>
-                <ul class="bluepills">
-                  <li lang="es"><a href="#" target="_blank">social media</a></li>
-                  <li lang="es"><a href="#">Actividad en Twitter</a></li>
-                </ul>
-              </div>
-              <div class="col-sm-6 menu-tags-group">
-                <h2 lang="es" class="blueline">Prensa</h2>
-                <ul class="bluepills">
-                  <li lang="es"><a href="#">Notas de prensa</a></li>
-                  <li lang="es"><a href="#">Contacto</a></li>
-                  <li lang="es"><a href="#">Imágenes</a></li>
-                  <li lang="es"><a href="#">Biografías</a></li>
-                  <li lang="es"><a href="#">Premios y reconocimientos</a></li>
-                  <li lang="es"><a href="#">Staff Communications</a></li>
-                </ul>
-              </div>
-              <div class="col-sm-6 menu-tags-group">
-                <h2 lang="es" class="blueline">Te interesa</h2>
-                <ul class="bluepills">
-                  <li lang="es"><a href="#">Agenda 2017</a></li>
-                  <li lang="es"><a href="#">Vídeos</a></li>
-                  <li lang="es"><a href="#">Descargas</a></li>
-                  <li lang="es"><a href="#">Infografías</a></li>
-                  <li lang="es"><a href="#">Mapa del sitio</a></li>
-                  <li lang="es"><a href="#">Francisco González Rodríguez</a></li>
-                  <li lang="es"><a href="#">Carlos Torres Vila</a></li>
-                </ul>
-              </div>
-              <div class="col-sm-6 menu-tags-group">
-                <h2 lang="es" class="blueline">Patrocinios</h2>
-                <ul class="bluepills">
-                  <li lang="es"><a href="#">Patrocinio</a></li>
-                </ul>
-              </div>
-              <div class="col-sm-6 menu-tags-group">
-                <h2 lang="es" class="blueline">Información corporativa</h2>
-                <ul class="bluepills">
-                  <li lang="es"><a href="#">Carta del Presidente</a></li>
-                  <li lang="es"><a href="#">Acerca del Grupo</a></li>
-                  <li lang="es"><a href="#">Historia</a></li>
-                  <li lang="es"><a href="#">Datos básicos</a></li>
-                  <li lang="es"><a href="#">Organigrama</a></li>
-                  <li lang="es"><a href="#">La Transformación</a></li>
-                  <li lang="es"><a href="">Presentación Institucional</a></li>
-                  <li lang="es"><a href="#">Código de conducta</a></li>
-                </ul>
-              </div>
-              <div class="col-sm-6 menu-tags-group">
-                <h2 lang="es" class="blueline">Otras webs del grupo</h2>
-                <ul class="bluepills">
-                  <li lang="es"><a href="#" class="menu-item-custom">Todas las webs</a></li>
-                </ul>
-              </div>
-              <div class="col-sm-6 menu-tags-group">
-                <h2 lang="es" class="blueline">Información financiera</h2>
-                <ul class="bluepills">
-                  <li lang="es"><a href="#">Resultados</a></li>
-                  <li lang="es"><a href="#">Memoria anual</a></li>
-                  <li lang="es"><a href="#">Informes trimestrales de resultados</a></li>
-                  <li lang="es"><a href="#">Hechos relevantes</a></li>
-                  <li lang="es"><a href="#">Emisiones</a></li>
-                </ul>
-              </div>
+            <div class="toggle">
+              <input type="checkbox" id="switcher" class="check">
+              <b class="b switch"></b>
             </div>
-          </nav>
-        </div>
+            <label class="language is-active" id="esp">esp</label>
+          </a>
         </div>
 
 
-        <!-- Modal Buscador -->
-        <div class="menu-modal rs_skip" style="right: 0px; display: none;" id="openSearch">
-          <div class="panel_open modal-search">
-            <!-- Modal body -->
-            <div class="menu-body" style="margin-top: 100px; right: 0px;">
-              <div class="styled-search">
-                <form id="search-formulario" role="search" method="get" action="" target="_blank" class="navbar-form ng-pristine ng-valid" data-search="#">
-                  <div class="form-group">
-                    <input id="panel-searcher" data-dynamic-search="" type="text" name="searchbbvaes" value="" autocomplete="off" placeholder="Buscar..." class="initialized">
-                    <button type="submit" class="btn"></button>
-                  </div>
-                </form>
-              </div>
-              <div class="search-results">  
-              </div>
-              <div class="search-pills hidden" data-base-url="#">
-                <h2 class="blueline"><span>Estas son tus búsquedas más recientes</span></h2>
-                <ul class="bluepills truncatePills">
-                </ul>
-              </div>
+        <nav class="menu-body rs_skip" data-menu-version="20171122142722" style="margin-top: 100px; right: 0px;">
+          <div class="row">
+            <div class="col-sm-6 menu-tags-group">
+              <h2 lang="" class="blueline">Destacados</h2>
+              <ul class="bluepills">
+                <li lang="es"><a href="#">Análisis y opinión</a></li>
+                <li lang="es"><a href="#">Finanzas</a></li>
+                <li lang="es"><a href="#">Economía</a></li>
+                <li lang="es"><a href="#">Fintech</a></li>
+                <li lang="es"><a href="#">Innovación</a></li>
+                <li lang="es"><a href="#">Vida y cultura</a></li>
+                <li lang="es"><a href="#">Países y BBVA</a></li>
+                <li lang="es"><a href="#">Últimas noticias</a></li>
+                <li lang="es"><a href="#">Creando oportunidades</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6 menu-tags-group">
+              <h2 lang="es" class="blueline">Temas</h2>
+              <ul class="bluepills">
+                <li lang="es"><a href="#">Historia de BBVA</a></li>
+                <li lang="es"><a href="#">Ciudad BBVA</a></li>
+                <li lang="es"><a href="#">Educación financiera</a></li>
+                <li lang="es"><a href="#">BBVA Research</a></li>
+                <li lang="es"><a href="#">BBVA Labs</a></li>
+                <li lang="es"><a href="#">Especiales países BBVA</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6 menu-tags-group">
+              <h2 lang="es" class="blueline">Social Media</h2>
+              <ul class="bluepills">
+                <li lang="es"><a href="#" target="_blank">BBVA en social media</a></li>
+                <li lang="es"><a href="#">Actividad BBVA en Twitter</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6 menu-tags-group">
+              <h2 lang="es" class="blueline">Prensa</h2>
+              <ul class="bluepills">
+                <li lang="es"><a href="#">Notas de prensa</a></li>
+                <li lang="es"><a href="#">Contacto</a></li>
+                <li lang="es"><a href="#">Imágenes</a></li>
+                <li lang="es"><a href="#">Biografías</a></li>
+                <li lang="es"><a href="#">Premios y reconocimientos</a></li>
+                <li lang="es"><a href="#">Staff Communications</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6 menu-tags-group">
+              <h2 lang="es" class="blueline">Te interesa</h2>
+              <ul class="bluepills">
+                <li lang="es"><a href="#">Agenda 2017</a></li>
+                <li lang="es"><a href="#">Vídeos</a></li>
+                <li lang="es"><a href="#">Descargas</a></li>
+                <li lang="es"><a href="#">Infografías</a></li>
+                <li lang="es"><a href="#">Mapa del sitio</a></li>
+                <li lang="es"><a href="#">Francisco González Rodríguez</a></li>
+                <li lang="es"><a href="#">Carlos Torres Vila</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6 menu-tags-group">
+              <h2 lang="es" class="blueline">Patrocinios</h2>
+              <ul class="bluepills">
+                <li lang="es"><a href="#">El Celler de Can Roca</a></li>
+                <li lang="es"><a href="http://www.fundeu.es/" target="_blank">Fundéu BBVA</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6 menu-tags-group">
+              <h2 lang="es" class="blueline">Información corporativa</h2>
+              <ul class="bluepills">
+                <li lang="es"><a href="#">Carta del Presidente</a></li>
+                <li lang="es"><a href="#">Acerca del Grupo</a></li>
+                <li lang="es"><a href="#">Historia de BBVA</a></li>
+                <li lang="es"><a href="#">Datos básicos</a></li>
+                <li lang="es"><a href="#">Organigrama</a></li>
+                <li lang="es"><a href="#">La Transformación en BBVA</a></li>
+                <li lang="es"><a href="">Presentación Institucional</a></li>
+                <li lang="es"><a href="#">Código de conducta</a></li>
+                <li lang="es"><a href="#">Estrategia Fiscal BBVA</a></li>
+                <li lang="es"><a href="#">USA Patriot Act</a></li>
+                <li lang="es"><a href="#">FATCA</a></li>
+                <li lang="es"><a href="#">BBVA en el mundo</a></li>
+                <li lang="es"><a href="#">Factsheet</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6 menu-tags-group">
+              <h2 lang="es" class="blueline">Otras webs del grupo</h2>
+              <ul class="bluepills">
+                <li lang="es"><a href="#" class="menu-item-custom">Todas las webs</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6 menu-tags-group">
+              <h2 lang="es" class="blueline">Información financiera BBVA</h2>
+              <ul class="bluepills">
+                <li lang="es"><a href="#">BBVA en 2016</a></li>
+                <li lang="es"><a href="#">Resultados BBVA</a></li>
+                <li lang="es"><a href="#">La acción BBVA</a></li>
+                <li lang="es"><a href="#">Memoria anual</a></li>
+                <li lang="es"><a href="#">Informes trimestrales de resultados</a></li>
+                <li lang="es"><a href="#">Hechos relevantes</a></li>
+                <li lang="es"><a href="#">Emisiones</a></li>
+              </ul>
             </div>
           </div>
-        </div>
+        </nav>
+      </div>
+      </div>
 
 
-        <!-- Modal Directos -->
-        <div class="menu-modal rs_skip" style="display: none;" id="openLiveView">
-          <div class="panel_open modal-LiveView">
-            <!-- Modal body -->
-            <div class="menu-body"></div>
-          </div>
-        </div>
-        <div class="reading-progress" style="width: 0%; display: none;"></div>
-      </header>
-      <div id="containers" class="containers" data-redirect-home="">
-        <div>
-          <div class="vc_row wpb_row vc_row-fluid" style="padding-top: 0px;">
-            <div class="wpb_column vc_column_container vc_col-sm-12">
-              <div class="vc_column-inner ">
-                <div class="wpb_wrapper">
-        
-                  <section data-new-block="462887" class="noticia destacada hero-shortcode">
-                    <div id="titular" class="box-image" style="background-position: 50% 50%">
-                      <div class="filterGrad-ANULADO"></div>
-                      <div class="hoverState2">
-                        <div class="container">
-                          <div class="row">
-                            <a id="titular-link" data-new-id="462887" class="hoverLink" style="width: 100%;">
-                              <div class="col-md-7 col-sm-12 left-box" data-same-height="hero-5ef7a6f4" style="height: 1px;">
-                                <div class="box-info">
-                                  <h1 id="titular-title" class="titular"></h1>
-                                </div>
-                              </div>
-        
-                              <div class="col-md-5 col-sm-12 right-box" data-same-height="hero-5ef7a6f4" style="height: 1px;">
-                                <div class="box-info animated" data-ellipsis-paragraph="" id="ellipsishero">
-                                  <div class="subtitulo" data-new-excerpt="">
-                                    <p></p>
-                                  </div>
-                                </div>
-                              </div>
-                            </a>
-        
-                            <ul class="bluepills" data-new-tags="">
-                              <li data-new-tag="">
-                                <a href="#">Carlos Díaz</a>
-                              </li>
-                              <li data-new-tag="">
-                                <a href="#">Innovación</a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="line-v"></div>
-                      </div>
-                    </div>
-                  </section>
+      <!-- Modal Buscador -->
+      <div class="menu-modal rs_skip" style="right: 0px; display: none;" id="openSearch">
+        <div class="panel_open modal-search">
+          <!-- Modal body -->
+          <div class="menu-body" style="margin-top: 100px; right: 0px;">
+            <div class="styled-search">
+              <form id="search-formulario" role="search" method="get" action="" target="_blank" class="navbar-form ng-pristine ng-valid" data-search="#">
+                <div class="form-group">
+                  <input id="panel-searcher" data-dynamic-search="" type="text" name="searchbbvaes" value="" autocomplete="off" placeholder="Buscar..." class="initialized">
+                  <button type="submit" class="btn"></button>
                 </div>
-              </div>
+              </form>
+            </div>
+            <div class="search-results">  
+            </div>
+            <div class="search-pills hidden" data-base-url="#">
+              <h2 class="blueline"><span>Estas son tus búsquedas más recientes</span></h2>
+              <ul class="bluepills truncatePills">
+              </ul>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="container">
-          <!-- FILA CON DOS COLUMNAS -->
-          <div id="container-inside" class="row wpb_row vc_row-fluid">
-            <div style="display: none;" class="wpb_column vc_column_container vc_col-sm-12">
-              <div class="vc_column-inner ">
-                <div class="wpb_wrapper">
-                  <article data-new-block="461080" class="noticia formato2">
-                    <div class="box-image" data-new-bg-img="" style="">
-                      <div class="filterGrad"></div>                
-                        <div class="box-info ">
-                          <a data-new-link="" href="#" data-new-id="461080">
-                            <h3 class="titular small" data-new-title="">
-                              
-                            </h3>
+
+      <!-- Modal Directos -->
+      <div class="menu-modal rs_skip" style="display: none;" id="openLiveView">
+        <div class="panel_open modal-LiveView">
+          <!-- Modal body -->
+          <div class="menu-body"></div>
+        </div>
+      </div>
+      <div class="reading-progress" style="width: 0%; display: none;"></div>
+    </header>
+    <div id="containers" class="containers" data-redirect-home="">
+      <div>
+        <div class="vc_row wpb_row vc_row-fluid" style="padding-top: 0px;">
+          <div class="wpb_column vc_column_container vc_col-sm-12">
+            <div class="vc_column-inner ">
+              <div class="wpb_wrapper">
+      
+                <section data-new-block="462887" class="noticia destacada hero-shortcode">
+                  <div id="titular" class="box-image" style="background-position: 50% 50%">
+                    <div class="filterGrad-ANULADO"></div>
+                    <div class="hoverState2">
+                      <div class="container">
+                        <div class="row">
+                          <a id="titular-link" data-new-id="462887" class="hoverLink" style="width: 100%;">
+                            <div class="col-md-7 col-sm-12 left-box" data-same-height="hero-5ef7a6f4" style="height: 1px;">
+                              <div class="box-info">
+                                <h1 id="titular-title" class="titular"></h1>
+                              </div>
+                            </div>
+      
+                            <div class="col-md-5 col-sm-12 right-box" data-same-height="hero-5ef7a6f4" style="height: 1px;">
+                              <div class="box-info animated" data-ellipsis-paragraph="" id="ellipsishero">
+                                <div class="subtitulo" data-new-excerpt="">
+                                  <p></p>
+                                </div>
+                              </div>
+                            </div>
                           </a>
+      
                           <ul class="bluepills" data-new-tags="">
-                            <li data-new-tag=""><a href="/aplicaciones/">Aplicaciones</a></li>
-                            <li data-new-tag=""><a href="/banca-movil/">Banca móvil</a></li>
+                            <li data-new-tag="">
+                              <a href="#">Carlos Díaz</a>
+                            </li>
+                            <li data-new-tag="">
+                              <a href="#">Innovación</a>
+                            </li>
                           </ul>
                         </div>
-                    </div>
-                  </article>
-                </div>
-              </div>
-            </div>
-            <div id="teaser-mid-izq" style="display: none;" class="wpb_column vc_column_container col-sm-6">
-              <div class="vc_column-inner ">
-                <div class="wpb_wrapper">
-                  <article class="noticia formato1">
-                    <div class="box-image">
-                      <div class="img-image teaser-izq-img"></div>
-                      <div class="box-info ">
-                        <a class="teaser-izq-link">
-                          <h3 class="titular small teaser-izq-title"></h3>
-                        </a>
-                        <ul class="bluepills" data-new-tags="">
-                          <li data-new-tag=""><a href="/asuntos-sociales/">Asuntos sociales</a></li>
-                          <li data-new-tag=""><a href="/educacion-financiera/">Educación financiera</a></li>
-                        </ul>
                       </div>
+                      <div class="line-v"></div>
                     </div>
-                  </article>
-                </div>
-              </div>
-            </div>
-            <div id="teaser-mid-der" style="display: none;" class="wpb_column vc_column_container col-sm-6">
-              <div class="vc_column-inner ">
-                <div class="wpb_wrapper">
-                  <article class="noticia formato2">
-                    <div class="box-image teaser-der-img">
-                      <div class="filterGrad-anulado"></div>
-                      <div class="box-info ">
-                        <a class="teaser-der-link">
-                          <h3 class="titular small teaser-der-title"></h3>
-                        </a>
-                        <ul class="bluepills" data-new-tags="">
-                          <li data-new-tag=""><a href="/cocina/">Cocina</a></li>
-                          <li data-new-tag=""><a href="/gastronomia/">Gastronomía</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </article>
-                </div>
+                  </div>
+                </section>
               </div>
             </div>
           </div>
-          <div class="vc_row-full-width"></div>
-        </div><!-- // container -->
+        </div>
       </div>
-      <footer>
-          <!-- Modal -->
-          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-body">
+
+      <div class="container">
+        <!-- FILA CON DOS COLUMNAS -->
+        <div id="container-inside" class="row wpb_row vc_row-fluid">
+          <div style="display: none;" class="wpb_column vc_column_container vc_col-sm-12">
+            <div class="vc_column-inner ">
+              <div class="wpb_wrapper">
+                <article data-new-block="461080" class="noticia formato2">
+                  <div class="box-image" data-new-bg-img="" style="">
+                    <div class="filterGrad"></div>                
+                      <div class="box-info ">
+                        <a data-new-link="" href="#" data-new-id="461080">
+                          <h3 class="titular small" data-new-title="">
+                            
+                          </h3>
+                        </a>
+                        <ul class="bluepills" data-new-tags="">
+                          <li data-new-tag=""><a href="/aplicaciones/">Aplicaciones</a></li>
+                          <li data-new-tag=""><a href="/banca-movil/">Banca móvil</a></li>
+                        </ul>
                       </div>
                   </div>
-                  <!-- /.modal-content -->
+                </article>
               </div>
-              <!-- /.modal-dialog -->
+            </div>
           </div>
-          <!-- /.modal -->
-      
-          <div class="container">
+          <div id="teaser-mid-izq" style="display: none;" class="wpb_column vc_column_container col-sm-6">
+            <div class="vc_column-inner ">
+              <div class="wpb_wrapper">
+                <article class="noticia formato1">
+                  <div class="box-image">
+                    <div class="img-image teaser-izq-img"></div>
+                    <div class="box-info ">
+                      <a class="teaser-izq-link">
+                        <h3 class="titular small teaser-izq-title"></h3>
+                      </a>
+                      <ul class="bluepills" data-new-tags="">
+                        <li data-new-tag=""><a href="/asuntos-sociales/">Asuntos sociales</a></li>
+                        <li data-new-tag=""><a href="/educacion-financiera/">Educación financiera</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div id="teaser-mid-der" style="display: none;" class="wpb_column vc_column_container col-sm-6">
+            <div class="vc_column-inner ">
+              <div class="wpb_wrapper">
+                <article class="noticia formato2">
+                  <div class="box-image teaser-der-img">
+                    <div class="filterGrad-anulado"></div>
+                    <div class="box-info ">
+                      <a class="teaser-der-link">
+                        <h3 class="titular small teaser-der-title"></h3>
+                      </a>
+                      <ul class="bluepills" data-new-tags="">
+                        <li data-new-tag=""><a href="/cocina/">Cocina</a></li>
+                        <li data-new-tag=""><a href="/gastronomia/">Gastronomía</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="vc_row-full-width"></div>
+      </div><!-- // container -->
+    </div>
+    <footer>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    
+        <div class="container">
+    
+                                    
+            
             <div class="pie-footer">
-              <ul class="transaccionales" data-transaccionales-version="20171118083818">
-                <li>Acceso clientes:</li>
-                <li>
-                  <a href="#" target="_blank">Diez Ideas</a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-              <!-- Avisos legales -->
-              <ul class="legal">
-                <ul>
+                <ul class="transaccionales" data-transaccionales-version="20171118083818">
+                  <li>Acceso clientes:</li>
                   <li>
-                    <a href="/aviso-legal/" data-modalize-iframe="" class="external">Aviso legal</a>
-                  </li>
-                  <li>
-                    <a href="/seguridad/" data-modalize-iframe="" class="external">Seguridad</a>
-                  </li>
-                  <li>
-                    <a href="/mapa-del-sitio/" target="_blank" class="external">Mapa del sitio</a>
-                  </li>
-                  <li>
-                    <a href="/rss/notas-de-prensa" target="_blank" class="external">RSS</a>
-                  </li>
-                  <li>
-                    <a href="/contacto/" target="_blank" class="external">Contacto</a>
+                    <a href="#" target="_blank">Diez Ideas</a>
                   </li>
                 </ul>
-                <!-- Redes sociales -->
-                <ul class="social-icons">
-                  <li>
-                    <a href="#" target="_blank">
-                      <i class="fa fa-facebook fa-lg"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i class="fa fa-twitter fa-lg"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i class="fa fa-linkedin fa-lg"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i class="fa fa-google-plus fa-lg"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i class="fa fa-youtube fa-lg"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i class="fa fa-instagram fa-lg"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i class="fa fa-pinterest fa-lg"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i class="fa fa-snapchat fa-lg"></i>
-                    </a>
-                  </li>
-                </ul>
-              </ul>
+                <div class="clearfix"></div>
+                <!-- Avisos legales -->
+                <ul class="legal" data-bottom-version="20180208161337">
+     
+    
+    <ul>
+      <li>
+        <a href="/aviso-legal/" data-modalize-iframe="" class="external">Aviso legal</a>
+      </li>
+      <li>
+        <a href="/seguridad/" data-modalize-iframe="" class="external">Seguridad</a>
+      </li>
+      <li>
+        <a href="/mapa-del-sitio/" target="_blank" class="external">Mapa del sitio</a>
+      </li>
+      <li>
+        <a href="/rss/notas-de-prensa" target="_blank" class="external">RSS</a>
+      </li>
+      <li>
+        <a href="/contacto/" target="_blank" class="external">Contacto</a>
+      </li>
+    </ul>
+    
+    
+    
+    <!--
+         FILE ARCHIVED ON 21:54:46 Oct 20, 2018 AND RETRIEVED FROM THE
+         INTERNET ARCHIVE ON 21:54:47 Oct 20, 2018.
+         JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+    
+         ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+         SECTION 108(a)(3)).
+    -->
+    </ul>
+    <!-- Redes sociales -->
+    <ul class="social-icons" data-redessociales-version="20170520070436">
+      <li>
+        <a href="/save/https://www.facebook.com/GrupoBBVA" target="_blank">
+          <i class="fa fa-facebook fa-lg"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <i class="fa fa-twitter fa-lg"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <i class="fa fa-linkedin fa-lg"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <i class="fa fa-google-plus fa-lg"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <i class="fa fa-youtube fa-lg"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <i class="fa fa-instagram fa-lg"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <i class="fa fa-pinterest fa-lg"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <i class="fa fa-snapchat fa-lg"></i>
+        </a>
+      </li>
+    </ul>
             </div>
             <div class="clearfix"></div>
-          </div>
-      </footer>
-    </div>
+        </div>
+    </footer>
   </body>
 </html>
