@@ -8,9 +8,11 @@
       if(window.scrollY==0){
         // Si está arriba del todo, muestra
         document.getElementById('header-main').classList.remove('oculta-header'); // despliega header
+        document.getElementById('containers').style.paddingTop = "153px";
       } else {
         // Si no está arriba del todo (hace scroll), oculta
         document.getElementById('header-main').classList.add('oculta-header'); // comprime header
+        document.getElementById('containers').style.paddingTop = "100px";
       }
     });
 
