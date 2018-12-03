@@ -73,8 +73,14 @@ function slugify (text) {
     .replace(/-+$/, '')             // Trim - from end of text
 }
 
-// const debug = true;
-// const tengoAcceso = getCredentials();
+/**
+ * Obtiene valores aleatorios entre min y max
+ * @param {int} min 
+ * @param {int} max 
+ */
+function getRandomArbitrary(min, max) {
+  return Math.ceil(Math.random() * (max - min) + min);
+}
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
@@ -290,6 +296,11 @@ app.controller('myCtrl', function ($scope) {
                         doc.getElementById("container-inside").removeChild(generated[i]);
                       }
                     }
+
+                    // Cálculo aleatorio de las columnas de cada fila de los teasers de la home
+                    // Cada vez que se crea o actualiza un articulo se vuelven a obtener aleatoriamente.
+                    var items = [[3, 6, 3],[3, 9],[4, 8],[5, 7],[6, 6],[8, 4],[9, 3],[12]];
+                    var pos = items[getRandomArbitrary(0, 7)];
 
                     // ARTICULOS
                     for (var key in contents) {
