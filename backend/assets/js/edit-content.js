@@ -318,7 +318,7 @@ app.controller('myCtrl', function ($scope) {
                     // Usaremos HTML
 
                     // Cargamos el fichero /index.html
-                    var keyHome = '/index.html';
+                    var keyHome = 'index.html';
                     s3 = new AWS.S3();
                     var fileParams = { Bucket: $scope.bucket, Key: keyHome };
                     s3.getObject(fileParams, function (errGetObject, data) {
