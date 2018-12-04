@@ -242,7 +242,7 @@ app.controller('myCtrl', function ($scope) {
                 // Cada vez que se modifica el contenido de un artículo, la home cambia.
                 // No vamos a usar angular para la home, ya que es una mala solución, usaremos HTML
 
-                // Cargamos el fichero index.html (home)
+                // Cargamos el fichero index.html (home) <--- en la raiz del bucket
                 var keyHome = 'index.html';
                 s3 = new AWS.S3();
                 var fileParams = { Bucket: $scope.bucket, Key: keyHome };
