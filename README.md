@@ -278,7 +278,7 @@ Now we will set the application configuration:
 [Upload and Lauch](#table-of-contents)
 --------------------
 Upload all files of this repository to the bucket.
-Go to [https://**your-bucket-name**.s3-**your-region**.amazonaws.com/home/index.html](https://your-bucket-name.s3-your-region.amazonaws.com/home/index.html) 	
+Go to [https://**your-bucket-name**.s3-**your-region**.amazonaws.com/index.html](https://your-bucket-name.s3-your-region.amazonaws.com/index.html) 	
 
 [Sign-up Users in User Pool](#table-of-contents)
 --------------------
@@ -300,6 +300,6 @@ ie: [https://server-null.s3-eu-west-1.amazonaws.com/home/register.html](https://
 
 [Demo](#table-of-contents)
 --------------------
-You can see the demo page at [https://server-null.s3-eu-west-1.amazonaws.com/home/index.html](https://server-null.s3-eu-west-1.amazonaws.com/home/index.html)
+You can see the demo page at [https://server-null.s3-eu-west-1.amazonaws.com/index.html](https://server-null.s3-eu-west-1.amazonaws.com/index.html)
 
 If you want to be a Admin and manage the Application Backend, you will need to ask **Admin sign-up** to [carlos.manuel@beeva.com](mailto:carlos.manuel@beeva.com)

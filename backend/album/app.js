@@ -38,7 +38,7 @@ function listAlbums() {
   s3.listObjects(paramsListAlbums, function(errListobjects, dataListObjects) {
     if (errListobjects) {
       alert('There was an error listing your albums: ' + errListobjects.message);
-      window.location.replace("/home/index.html");
+      window.location.replace("/index.html");
     } else {
       var albums = dataListObjects.CommonPrefixes.map(function(commonPrefix) {
         var prefix = commonPrefix.Prefix;
@@ -90,13 +90,13 @@ function createAlbum(albumName) {
     }
     if (err.code !== 'NotFound') {
       return alert('There was an error creating your album: ' + err.message);
-      window.location.replace("/home/index.html");
+      window.location.replace("/index.html");
     }
     
     s3.putObject({Key: albumKey}, function(err, data) {
       if (err) {
         return alert('There was an error creating your album: ' + err.message);
-        window.location.replace("/home/index.html");
+        window.location.replace("/index.html");
       }
       alert('Successfully created album.');
       viewAlbum(albumName);
@@ -110,7 +110,7 @@ function viewAlbum(albumName) {
   s3.listObjects({Prefix: albumPhotosKey}, function(err, data) {
     if (err) {
       return alert('There was an error viewing your album: ' + err.message);
-      window.location.replace("/home/index.html");
+      window.location.replace("/index.html");
     }
     // `this` references the AWS.Response instance that represents the response
     var href = this.request.httpRequest.endpoint.href;

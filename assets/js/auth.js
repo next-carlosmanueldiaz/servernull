@@ -48,7 +48,7 @@ function getAccess() {
   } else {
     // Acceso restringido sólo a administradores
     if (debug) console.log('Acceso restringido.');
-    window.location.replace("/home/index.html");
+    window.location.replace("/index.html");
     return false;
   }
 }
@@ -294,7 +294,7 @@ function userLoggedIn(providerName, token) {
     //     if (debug) console.log("error al refrescar las credenciales:");
     //     if (debug) console.log(errorRefreshCredentials);
     //     console.log('Su sesión ha caducado. Actualizar página para refrescar credenciales.');
-    //     // window.location.replace("/home/index.html"); // Si ha caducado la sesión, avisamos y redirigimos a la home.
+    //     // window.location.replace("/index.html"); // Si ha caducado la sesión, avisamos y redirigimos a la home.
     //   } else {
     //     if (debug) console.log('Successfully logged on amazon after UPDATE & REFRESH!');
     //     if (debug) console.log('Estas son las credenciales y refrescadas:');
@@ -351,7 +351,7 @@ function register(googleUser) {
             if (debug) console.log('Usuario encontrado en el userpool Admins');
             if (debug) console.log(getUserData);           // successful response
             if (debug) console.log('USUARIO CONFIRMADO EN EL USER POOL DE ADMINS.');
-            window.location.replace("/home/index.html");
+            window.location.replace("/index.html");
           }
         });
       },

@@ -26,7 +26,7 @@ function expiredToken() {
   sessionStorage.expired = "";
   console.log('User signed out.');
   
-  // window.location.replace("/home/index.html"); // No redireccionamos
+  // window.location.replace("/index.html"); // No redireccionamos
 }
 
 /**
