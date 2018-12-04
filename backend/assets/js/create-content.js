@@ -32,7 +32,7 @@ function expiredToken() {
   sessionStorage.sessionToken = "";
   sessionStorage.expired = "";
   console.log('User signed out.');
-  // window.location.replace("/home/index.html");
+  // window.location.replace("/index.html");
 }
 
 var app = angular.module('myApp', []);
@@ -49,7 +49,7 @@ app.controller('myCtrl', function ($scope) {
       if (errGetObject) {
         if (debug) console.log('El fichero ' + $scope.key + ' NO existe en el bucket o no tiene permisos.');
         if (debug) console.log(errGetObject);
-        //window.location.replace("/home/index.html");
+        //window.location.replace("/index.html");
         // expiredToken();
       } else {
         var file = JSON.parse(fileData.Body.toString('utf-8'));

@@ -49,7 +49,7 @@ function expiredToken() {
   sessionStorage.sessionToken = "";
   sessionStorage.expired = "";
   console.log('User signed out.');
-  // window.location.replace("/home/index.html");
+  // window.location.replace("/index.html");
 }
 
 /**
@@ -229,7 +229,7 @@ app.controller('myCtrl', function ($scope) {
               } else {
                 if (debug) console.log('%c HTML ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyHTML);
               }
-            }); // / putObject('home/index.html)
+            }); // / putObject('/index.html)
           }
         });
         
@@ -317,8 +317,8 @@ app.controller('myCtrl', function ($scope) {
                     // No vamos a usar angular para la home, ya que es una mala solución
                     // Usaremos HTML
 
-                    // Cargamos el fichero home/index.html
-                    var keyHome = 'home/index.html';
+                    // Cargamos el fichero /index.html
+                    var keyHome = '/index.html';
                     s3 = new AWS.S3();
                     var fileParams = { Bucket: $scope.bucket, Key: keyHome };
                     s3.getObject(fileParams, function (errGetObject, data) {
@@ -355,7 +355,7 @@ app.controller('myCtrl', function ($scope) {
                         // Tomamos sólo los artículos para la portada, dándoles la vuelta al array con .reverse()
                         contents = contents.reverse();
                         //=========================================================================================
-                        // Aplicamos el json directamente sobre home/index.html
+                        // Aplicamos el json directamente sobre /index.html
 
                         // TITULAR HOME
                         doc.getElementById('titular').setAttribute('data-src', titular.img);
@@ -400,7 +400,7 @@ app.controller('myCtrl', function ($scope) {
                           // doc.getElementById('').innerHTML = "";
                         }
                         //=========================================================================================                       
-                        // Subimos el fichero home/index.html
+                        // Subimos el fichero /index.html
 
                         var oSerializer = new XMLSerializer();
                         var sHTML = oSerializer.serializeToString(doc);
@@ -436,7 +436,7 @@ app.controller('myCtrl', function ($scope) {
                           }
                         }); // /putObject('contents.json)
                       }
-                    }); // Cargamos el fichero home/index.html
+                    }); // Cargamos el fichero /index.html
                   }
                 }); // /putObject('contents.json)
               }
