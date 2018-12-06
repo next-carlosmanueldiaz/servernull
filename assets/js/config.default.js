@@ -18,6 +18,13 @@ var debug = false;
 var bucket = '';
 
 /**
+ * Domain URL
+ * ie: https://www.diezideas.com/
+ * @type String
+ */
+var domainURL = '';
+
+/**
  * AWS Region
  * ie: 'eu-west-1'
  * @type String
