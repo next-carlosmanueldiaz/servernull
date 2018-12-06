@@ -73,18 +73,18 @@ var js = {
       { "googleGapi": "https://apis.google.com/js/platform.js?onload=onLogIn" },
       { "popper": "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" },
       { "jquery": "https://code.jquery.com/jquery-1.9.1.min.js" },
-      { "config": "/assets/js/config.js" },
+      { "config": domainURL + "/assets/js/config.js" },
     ],
     [
       { "bootstrap": "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" }, // <- popper and jQuery
       { "cognito": "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js" }, // <- aws-sdk
-      { "interaccion": "/assets/js/interacciones.js" }, // jquery
+      { "interaccion": domainURL + "/assets/js/interacciones.js" }, // jquery
     ],
     [
       { "cognito-id": "https://cdn.rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js" }, // <- aws-sdk			
     ],
     [
-      { "auth": "/assets/js/auth.js" }, // <- aws-sdk, aws-cognito-sdk, amazon-cognito-identity
+      { "auth": domainURL + "/assets/js/auth.js" }, // <- aws-sdk, aws-cognito-sdk, amazon-cognito-identity
     ]
   ]
 };
