@@ -888,9 +888,9 @@ small, .small {
   @media only screen and (max-width: 480px) {
     .header-main .link-map {
       left: 15px;
-      top: 20px;
-      height: 28px;
-      background-image: url("../img/logo-header-140.png"); } }
+      top: 10px;
+      height: 50px;
+      background-image: url("../img/logo-header.png"); } }
 @media only screen and (max-width: 767px) {
   .header-main.fixed .header-nav {
     min-height: initial !important; } }
