@@ -73,7 +73,6 @@ var js = {
       { "googleGapi": "https://apis.google.com/js/platform.js?onload=onLogIn" },
       { "popper": "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" },
       { "jquery": "https://code.jquery.com/jquery-1.9.1.min.js" },
-      { "config": domainURL + "/assets/js/config.js" },
     ],
     [
       { "bootstrap": "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" }, // <- popper and jQuery
