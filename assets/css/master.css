@@ -6066,10 +6066,10 @@ aside.positioned {
   font-size: 14px;
   padding: 50px 0; }
   @media only screen and (min-width: 768px) {
-    .static .bbva-site .col:nth-child(2n+1) {
+    .static .site .col:nth-child(2n+1) {
       clear: both; } }
   @media only screen and (max-width: 767px) {
-    .static .bbva-site {
+    .static .site {
       margin-bottom: 20px; } }
   .static .outer_link {
     color: #49a5e6;
@@ -6100,7 +6100,7 @@ aside.positioned {
       vertical-align: bottom; }
     .static .noticia.formato1 .fa-twitter {
       color: #237aba; }
-  .static .bbva-site .noticia.formato1 .box-info {
+  .static .site .noticia.formato1 .box-info {
     min-height: 130px; }
   @media only screen and (max-width: 767px) {
     .static .col-xs-1, .static .col-sm-1, .static .col-md-1, .static .col-lg-1,
