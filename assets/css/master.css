@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /**
 *
-* MASTER FILEbbvaB
+* MASTER FILE
 *
 **/
 /* -------------------------------------------------------------------------
@@ -19,54 +19,54 @@
  * ---------------------------------------------------------------------- */
 @font-face {
   font-family: 'BLight';
-  src: url("../fonts/coronita/BentonSansBBVA-Light.eot");
+  src: url("../fonts/coronita/BentonSans-Light.eot");
   /* IE9 Compat Modes */
-  src: url("../fonts/coronita/BentonSansBBVA-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/coronita/BentonSansBBVA-Light.woff2") format("woff2"), url("../fonts/coronita/BentonSansBBVA-Light.woff") format("woff"), url("../fonts/coronita/BentonSansBBVA-Light.ttf") format("truetype"), url("../fonts/coronita/BentonSansBBVA-Light.svg#BentonSansBBVA-Light") format("svg");
+  src: url("../fonts/coronita/BentonSans-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/coronita/BentonSans-Light.woff2") format("woff2"), url("../fonts/coronita/BentonSans-Light.woff") format("woff"), url("../fonts/coronita/BentonSans-Light.ttf") format("truetype"), url("../fonts/coronita/BentonSans-Light.svg#BentonSans-Light") format("svg");
   /* Legacy iOS */
   font-style: normal;
   font-weight: normal;
   text-rendering: optimizeLegibility; }
 @font-face {
   font-family: 'BBook';
-  src: url("../fonts/coronita/BentonSansBBVA-Book.eot");
+  src: url("../fonts/coronita/BentonSans-Book.eot");
   /* IE9 Compat Modes */
-  src: url("../fonts/coronita/BentonSansBBVA-Book.eot?#iefix") format("embedded-opentype"), url("../fonts/coronita/BentonSansBBVA-Book.woff2") format("woff2"), url("../fonts/coronita/BentonSansBBVA-Book.woff") format("woff"), url("../fonts/coronita/BentonSansBBVA-Book.svg#BentonSansBBVA-Book") format("svg");
+  src: url("../fonts/coronita/BentonSans-Book.eot?#iefix") format("embedded-opentype"), url("../fonts/coronita/BentonSans-Book.woff2") format("woff2"), url("../fonts/coronita/BentonSans-Book.woff") format("woff"), url("../fonts/coronita/BentonSans-Book.svg#BentonSans-Book") format("svg");
   /* Legacy iOS */
   font-style: normal;
   font-weight: normal;
   text-rendering: optimizeLegibility; }
 @font-face {
   font-family: 'BBook';
-  src: url("../fonts/coronita/BentonSansBBVA-BookItalic.eot");
+  src: url("../fonts/coronita/BentonSans-BookItalic.eot");
   /* IE9 Compat Modes */
-  src: url("../fonts/coronita/BentonSansBBVA-BookItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/coronita/BentonSansBBVA-BookItalic.woff2") format("woff2"), url("../fonts/coronita/BentonSansBBVA-BookItalic.woff") format("woff"), url("../fonts/coronita/BentonSansBBVA-BookItalic.svg#BentonSansBBVA-BookItalic") format("svg");
+  src: url("../fonts/coronita/BentonSans-BookItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/coronita/BentonSans-BookItalic.woff2") format("woff2"), url("../fonts/coronita/BentonSans-BookItalic.woff") format("woff"), url("../fonts/coronita/BentonSans-BookItalic.svg#BentonSans-BookItalic") format("svg");
   /* Legacy iOS */
   font-style: italic;
   font-weight: normal;
   text-rendering: optimizeLegibility; }
 @font-face {
   font-family: 'BMedium';
-  src: url("../fonts/coronita/BentonSansBBVA-Medium.eot");
+  src: url("../fonts/coronita/BentonSans-Medium.eot");
   /* IE9 Compat Modes */
-  src: url("../fonts/coronita/BentonSansBBVA-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/coronita/BentonSansBBVA-Medium.woff2") format("woff2"), url("../fonts/coronita/BentonSansBBVA-Medium.woff") format("woff"), url("../fonts/coronita/BentonSansBBVA-Medium.svg#BentonSansBBVA-Medium") format("svg");
+  src: url("../fonts/coronita/BentonSans-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/coronita/BentonSans-Medium.woff2") format("woff2"), url("../fonts/coronita/BentonSans-Medium.woff") format("woff"), url("../fonts/coronita/BentonSans-Medium.svg#BentonSans-Medium") format("svg");
   /* Legacy iOS */
   font-style: normal;
   font-weight: normal;
   text-rendering: optimizeLegibility; }
 @font-face {
   font-family: 'BMedium';
-  src: url("../fonts/coronita/BentonSansBBVA-MediumItalic.eot");
+  src: url("../fonts/coronita/BentonSans-MediumItalic.eot");
   /* IE9 Compat Modes */
-  src: url("../fonts/coronita/BentonSansBBVA-MediumItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/coronita/BentonSansBBVA-MediumItalic.woff2") format("woff2"), url("../fonts/coronita/BentonSansBBVA-MediumItalic.woff") format("woff"), url("../fonts/coronita/BentonSansBBVA-MediumItalic.svg#BentonSansBBVA-MediumItalic") format("svg");
+  src: url("../fonts/coronita/BentonSans-MediumItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/coronita/BentonSans-MediumItalic.woff2") format("woff2"), url("../fonts/coronita/BentonSans-MediumItalic.woff") format("woff"), url("../fonts/coronita/BentonSans-MediumItalic.svg#BentonSans-MediumItalic") format("svg");
   /* Legacy iOS */
   font-style: italic;
   font-weight: normal;
   text-rendering: optimizeLegibility; }
 @font-face {
   font-family: 'BBold';
-  src: url("../fonts/coronita/BentonSansBBVA-Bold.eot");
+  src: url("../fonts/coronita/BentonSans-Bold.eot");
   /* IE9 Compat Modes */
-  src: url("../fonts/coronita/BentonSansBBVA-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/coronita/BentonSansBBVA-Bold.woff2") format("woff2"), url("../fonts/coronita/BentonSansBBVA-Bold.woff") format("woff"), url("../fonts/coronita/BentonSansBBVA-Bold.svg#BentonSansBBVA-Bold") format("svg");
+  src: url("../fonts/coronita/BentonSans-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/coronita/BentonSans-Bold.woff2") format("woff2"), url("../fonts/coronita/BentonSans-Bold.woff") format("woff"), url("../fonts/coronita/BentonSans-Bold.svg#BentonSans-Bold") format("svg");
   /* Legacy iOS */
   font-style: normal;
   font-weight: normal;
@@ -91,75 +91,75 @@
   text-rendering: optimizeLegibility; }
 /* old fonts
 @font-face {
-	font-family: 'bbvaBook';
-	src: url('../fonts/bbvaweb-book.eot');
-	src: url('../fonts/bbvaweb-book.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/bbvaweb-book.woff') format('woff'),
-		 url('../fonts/bbvaweb-book.ttf') format('truetype'),
-		 url('../fonts/bbvaweb-book.svg#bbvaBook') format('svg');
+	font-family: 'webBook';
+	src: url('../fonts/web-book.eot');
+	src: url('../fonts/web-book.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-book.woff') format('woff'),
+		 url('../fonts/web-book.ttf') format('truetype'),
+		 url('../fonts/web-book.svg#webBook') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
 
 
 @font-face {
-	font-family: 'bbvaBook';
-	src: url('../fonts/bbvaweb-bookitalic.eot');
-	src: url('../fonts/bbvaweb-bookitalic.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/bbvaweb-bookitalic.woff') format('woff'),
-		 url('../fonts/bbvaweb-bookitalic.ttf') format('truetype'),
-		 url('../fonts/bbvaweb-bookitalic.svg#bbvaBook') format('svg');
+	font-family: 'webBook';
+	src: url('../fonts/web-bookitalic.eot');
+	src: url('../fonts/web-bookitalic.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-bookitalic.woff') format('woff'),
+		 url('../fonts/web-bookitalic.ttf') format('truetype'),
+		 url('../fonts/web-bookitalic.svg#webBook') format('svg');
 	font-weight: normal;
 	font-style: italic;
 }
 @font-face {
-	font-family: 'bbvaLight';
-	src: url('../fonts/bbvaweb-light.eot');
-	src: url('../fonts/bbvaweb-light.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/bbvaweb-light.woff') format('woff'),
-		 url('../fonts/bbvaweb-light.ttf') format('truetype'),
-		 url('../fonts/bbvaweb-light.svg#bbvaLight') format('svg');
+	font-family: 'webLight';
+	src: url('../fonts/web-light.eot');
+	src: url('../fonts/web-light.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-light.woff') format('woff'),
+		 url('../fonts/web-light.ttf') format('truetype'),
+		 url('../fonts/web-light.svg#webLight') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
 @font-face {
-	font-family: 'bbvaLight';
-	src: url('../fonts/bbvaweb-lightitalic.eot');
-	src: url('../fonts/bbvaweb-lightitalic.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/bbvaweb-lightitalic.woff') format('woff'),
-		 url('../fonts/bbvaweb-lightitalic.ttf') format('truetype'),
-		 url('../fonts/bbvaweb-lightitalic.svg#bbvaLightItalic.svg') format('svg');
+	font-family: 'webLight';
+	src: url('../fonts/web-lightitalic.eot');
+	src: url('../fonts/web-lightitalic.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-lightitalic.woff') format('woff'),
+		 url('../fonts/web-lightitalic.ttf') format('truetype'),
+		 url('../fonts/web-lightitalic.svg#webLightItalic.svg') format('svg');
 	font-weight: normal;
 	font-style: italic;
 }
 
 @font-face {
-	font-family: 'bbvaMedium';
-	src: url('../fonts/bbvaweb-medium.eot');
-	src: url('../fonts/bbvaweb-medium.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/bbvaweb-medium.woff') format('woff'),
-		 url('../fonts/bbvaweb-medium.ttf') format('truetype'),
-		 url('../fonts/bbvaweb-medium.svg#bbvaMedium') format('svg');
+	font-family: 'webMedium';
+	src: url('../fonts/web-medium.eot');
+	src: url('../fonts/web-medium.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-medium.woff') format('woff'),
+		 url('../fonts/web-medium.ttf') format('truetype'),
+		 url('../fonts/web-medium.svg#webMedium') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
 @font-face {
-	font-family: 'bbvaMedium';
-	src: url('../fonts/bbvaweb-mediumitalic.eot');
-	src: url('../fonts/bbvaweb-mediumitalic.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/bbvaweb-mediumitalic.woff') format('woff'),
-		 url('../fonts/bbvaweb-mediumitalic.ttf') format('truetype'),
-		 url('../fonts/bbvaweb-mediumitalic.svg#bbvaMedium') format('svg');
+	font-family: 'webMedium';
+	src: url('../fonts/web-mediumitalic.eot');
+	src: url('../fonts/web-mediumitalic.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-mediumitalic.woff') format('woff'),
+		 url('../fonts/web-mediumitalic.ttf') format('truetype'),
+		 url('../fonts/web-mediumitalic.svg#webMedium') format('svg');
 	font-weight: normal;
 	font-style: italic;
 }
 @font-face {
-	font-family: 'bbvaSemibold';
-	src: url('../fonts/bbvaweb-semibold.eot');
-	src: url('../fonts/bbvaweb-semibold.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/bbvaweb-semibold.woff') format('woff'),
-		 url('../fonts/bbvaweb-semibold.ttf') format('truetype'),
-		 url('../fonts/bbvaweb-semibold.svg#bbvaSemibold.svg') format('svg');
+	font-family: 'webSemibold';
+	src: url('../fonts/web-semibold.eot');
+	src: url('../fonts/web-semibold.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-semibold.woff') format('woff'),
+		 url('../fonts/web-semibold.ttf') format('truetype'),
+		 url('../fonts/web-semibold.svg#webSemibold.svg') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -5207,7 +5207,7 @@ aside.positioned {
     padding: 20px;
     background-color: #f6f6f6; }
 
-/*=====  Noticia New BBVA Storytelling  ======*/
+/*=====  Noticia New Storytelling  ======*/
 .format-storytelling2 {
   padding-top: 0; }
   .format-storytelling2 video {
@@ -6061,7 +6061,7 @@ aside.positioned {
 .search-results .canales {
   margin-top: 30px; }
 
-/*==========  Otras webs del BBVA  ==========*/
+/*==========  Otras webs  ==========*/
 .static {
   font-size: 14px;
   padding: 50px 0; }
@@ -6144,7 +6144,7 @@ aside.positioned {
       top: 15px;
       left: 15px; } }
 
-/*==========  Listado de webs BBVA por paises de Contacto  ==========*/
+/*==========  Listado de webs por paises de Contacto  ==========*/
 .links-list {
   margin-bottom: 50px; }
   .links-list table {
