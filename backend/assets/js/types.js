@@ -60,8 +60,8 @@ app.controller('myCtrl', function ($scope) {
   
   this.$onInit = function () {
     // Esto obliga a que ng-app y ng-controller estén en la etiqueta <html>
-    $scope.googleSigninClientId = googleSigninClientId;
-    $scope.bucket = sessionStorage.bucket;
+    //$scope.googleSigninClientId = googleSigninClientId;
+    $scope.bucket = bucket;
     // Comprobar acceso
     const permisos = getAccess();
 
@@ -73,8 +73,8 @@ app.controller('myCtrl', function ($scope) {
       if (errGetObject) {
         if (debug) console.log('Error al leer  ' + this.key + ' o no tiene permisos.');
         if (debug) console.log(errGetObject);
-        window.location.replace("/index.html");
-        expiredToken();
+        // window.location.replace("/index.html");
+        // expiredToken();
       } else {
         var file = JSON.parse(data.Body.toString('utf-8'));
         $scope.cts = file;
