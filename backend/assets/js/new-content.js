@@ -152,7 +152,26 @@ app.controller('myCtrl', function ($scope) {
     // Lo primero que vamos a hacer es guardar las imagenes que hay
     for (var key in $scope.cts[$scope.pos].fields) {
       if ($scope.cts[$scope.pos].fields[key].type == 'image') {
-        if (debug) console.log($scope.cts[$scope.pos].fields[key].name);
+        var idFileField = $scope.cts[$scope.pos].fields[key].id;
+        var files = document.getElementById(idFileField).files;
+        if (!files.length) {
+          console.log('Campo obligatorio.');
+        } else {
+          var file = files[0];
+          var fileName = file.name;
+          // var albumPhotosKey = encodeURIComponent(albumName) + '//';
+          var photoKey = "s3://" + bucket + '/home/assets/img/' + file.name;
+          s3.upload({
+            Key: photoKey,
+            Body: file,
+            ACL: 'public-read'
+          }, function(err, data) {
+            if (err) {
+              console.log('Error subiendo la foto: ', err.message);
+            }
+            console.log('Foto subida correctamente: ' + photoKey);
+          });
+        }
       }
     }
 
