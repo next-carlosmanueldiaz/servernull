@@ -88,6 +88,7 @@ app.controller('myCtrl', function ($scope) {
   this.$onInit = function () {
     const permisos = getAccess();
     $scope.bucket = bucket;
+    // Leemos content-types.json para obtener los campos del tipo de contenido
     const keyCT = 'private/content-types/json/content-types.json';
     var fileParams = {Bucket: $scope.bucket, Key: keyCT};
     s3 = new AWS.S3();
@@ -110,6 +111,30 @@ app.controller('myCtrl', function ($scope) {
     });
   }
   
+  function addPhoto(file) {
+
+    var files = document.getElementById('photoupload').files;
+    if (!files.length) {
+      return alert('Please choose a file to upload first.');
+    }
+    var file = files[0];
+    var fileName = file.name;
+    var albumPhotosKey = encodeURIComponent(albumName) + '//';
+  
+    var photoKey = albumPhotosKey + fileName;
+    s3.upload({
+      Key: photoKey,
+      Body: file,
+      ACL: 'public-read'
+    }, function(err, data) {
+      if (err) {
+        return alert('There was an error uploading your photo: ', err.message);
+      }
+      alert('Successfully uploaded photo.');
+      viewAlbum(albumName);
+    });
+  }
+  
   /**
    * SUBMIT FORMULARIO: 
    *  - Creamos el fichero HTML DEL POST mezclando la base (html.html), template y datos:  slug-title.html
@@ -124,6 +149,13 @@ app.controller('myCtrl', function ($scope) {
     var titulo = $scope.cts[$scope.pos].fields[0].value;
     var title = slugify(titulo);
     
+    // Lo primero que vamos a hacer es guardar las imagenes que hay
+    for (var key in $scope.cts[$scope.pos].fields) {
+      if ($scope.cts[$scope.pos].fields[key].typè == 'image') {
+        if (debug) console.log($scope.cts[$scope.pos].fields[key].name);
+      }
+    }
+
     // HTML (POST)
     // ========================================================================
     // Obtenemos el HTML GENÉRICO DEL POST
@@ -131,6 +163,7 @@ app.controller('myCtrl', function ($scope) {
     // ========================================================================
     var fileParams = {Bucket: $scope.bucket, Key: keyHtml};
     s3 = new AWS.S3();
+    // Cargamos la plantilla html.html
     s3.getObject(fileParams, function (errGetObject, fileData) {
       if (errGetObject) {
         if (debug) console.log('El fichero ' + key + ' NO existe en el bucket o no tiene permisos.');
@@ -142,6 +175,12 @@ app.controller('myCtrl', function ($scope) {
         html = html.replace("{{title}}", $scope.cts[$scope.pos].fields[0].value);
         html = html.replace("{{script}}", "\r\n" + $scope.cts[$scope.pos].js);
         html = html.replace("{{css}}", $scope.cts[$scope.pos].css);
+        
+        // SISTEMA DE COMENTARIOS DISQUS: https://disqus.com/ universalcode
+        // El código de disqus se incluye en la plantilla (TPL) del tipo de contenido (artículo)
+        html = html.replace("{{PAGE_URL}}", domainURL + 'home/content/html/' + $scope.cts[$scope.pos].id + '/' + title + '.html');
+        html = html.replace("{{PAGE_IDENTIFIER}}", title);
+        html = html.replace("{{DISQUSID}}", domain); // TPL
         
         var tpl = $scope.cts[$scope.pos].tpl;
         for (var key in $scope.cts[$scope.pos].fields) {
@@ -196,7 +235,7 @@ app.controller('myCtrl', function ($scope) {
     contenido = contenido.slice(0, -1);
     contenido += "]";
     
-    // Guardamos los datos del nuevo contenido en un fichero JSON
+    // Guardamos los datos del nuevo contenido en el fichero JSON
     // ========================================================================
     var paramsObject = { Bucket: $scope.bucket, Key: keyC, Body: contenido };
     s3.putObject(paramsObject, function (errSavingFile, dataPutObject) {

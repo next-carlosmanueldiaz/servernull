@@ -18,6 +18,12 @@ var debug = false;
 var bucket = '';
 
 /**
+ * Domain name
+ * ie: diezideas
+ */
+var domain = '';
+
+/**
  * Domain URL (without final slash)
  * ie: https://www.diezideas.com
  * @type String
