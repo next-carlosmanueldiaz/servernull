@@ -151,7 +151,7 @@ app.controller('myCtrl', function ($scope) {
     
     // Lo primero que vamos a hacer es guardar las imagenes que hay
     for (var key in $scope.cts[$scope.pos].fields) {
-      if ($scope.cts[$scope.pos].fields[key].name == 'Image') {
+      if ($scope.cts[$scope.pos].fields[key].type == 'image') {
         if (debug) console.log($scope.cts[$scope.pos].fields[key].name);
       }
     }
