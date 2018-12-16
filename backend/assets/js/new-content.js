@@ -162,6 +162,7 @@ app.controller('myCtrl', function ($scope) {
           // var albumPhotosKey = encodeURIComponent(albumName) + '//';
           var photoKey = "s3://" + bucket + '/home/assets/img/' + file.name;
           s3.upload({
+            Bucket: bucket,
             Key: photoKey,
             Body: file,
             ACL: 'public-read'
