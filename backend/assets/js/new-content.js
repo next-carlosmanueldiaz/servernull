@@ -111,30 +111,6 @@ app.controller('myCtrl', function ($scope) {
     });
   }
   
-  function addPhoto(file) {
-
-    var files = document.getElementById('photoupload').files;
-    if (!files.length) {
-      return alert('Please choose a file to upload first.');
-    }
-    var file = files[0];
-    var fileName = file.name;
-    var albumPhotosKey = encodeURIComponent(albumName) + '//';
-  
-    var photoKey = albumPhotosKey + fileName;
-    s3.upload({
-      Key: photoKey,
-      Body: file,
-      ACL: 'public-read'
-    }, function(err, data) {
-      if (err) {
-        return alert('There was an error uploading your photo: ', err.message);
-      }
-      alert('Successfully uploaded photo.');
-      viewAlbum(albumName);
-    });
-  }
-  
   /**
    * SUBMIT FORMULARIO: 
    *  - Creamos el fichero HTML DEL POST mezclando la base (html.html), template y datos:  slug-title.html
@@ -160,17 +136,17 @@ app.controller('myCtrl', function ($scope) {
           var file = files[0];
           var fileName = file.name;
           // var albumPhotosKey = encodeURIComponent(albumName) + '//';
-          var photoKey = "s3://" + bucket + '/home/assets/img/' + file.name;
+          $scope.cts[$scope.pos].fields[key].value = "s3://" + bucket + '/home/assets/img/' + file.name;
           s3.upload({
             Bucket: bucket,
-            Key: photoKey,
+            Key: $scope.cts[$scope.pos].fields[key].value,
             Body: file,
             ACL: 'public-read'
           }, function(err, data) {
             if (err) {
               console.log('Error subiendo la foto: ', err.message);
             }
-            console.log('Foto subida correctamente: ' + photoKey);
+            console.log('Foto subida correctamente: ' + $scope.cts[$scope.pos].fields[key].value);
           });
         }
       }
