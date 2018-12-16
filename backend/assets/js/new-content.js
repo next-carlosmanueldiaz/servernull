@@ -136,17 +136,18 @@ app.controller('myCtrl', function ($scope) {
           var file = files[0];
           var fileName = file.name;
           // var albumPhotosKey = encodeURIComponent(albumName) + '//';
-          $scope.cts[$scope.pos].fields[key].value = "s3://" + bucket + '/home/assets/img/' + file.name;
+          var photoKey = "s3://" + bucket + '/home/assets/img/' + file.name;
+          $scope.cts[$scope.pos].fields[key].value = domainURL + '/home/assets/img/' + file.name;
           s3.upload({
             Bucket: bucket,
-            Key: $scope.cts[$scope.pos].fields[key].value,
+            Key: photoKey,
             Body: file,
             ACL: 'public-read'
           }, function(err, data) {
             if (err) {
               console.log('Error subiendo la foto: ', err.message);
             }
-            console.log('Foto subida correctamente: ' + $scope.cts[$scope.pos].fields[key].value);
+            console.log('Foto subida correctamente: ' + photoKey);
           });
         }
       }
