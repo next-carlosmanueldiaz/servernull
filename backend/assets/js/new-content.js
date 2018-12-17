@@ -136,7 +136,7 @@ app.controller('myCtrl', function ($scope) {
           var file = files[0];
           var fileName = file.name;
           // var albumPhotosKey = encodeURIComponent(albumName) + '//';
-          var photoKey = "s3://" + bucket + '/home/assets/img/' + file.name;
+          var photoKey = 'home/assets/img/' + file.name;
           $scope.cts[$scope.pos].fields[key].value = domainURL + '/home/assets/img/' + file.name;
           s3.upload({
             Bucket: bucket,
