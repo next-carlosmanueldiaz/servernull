@@ -63,6 +63,7 @@
                     <input ng-model="field.value" ng-if="field.type == 'text'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
                     <input ng-model="field.value" ng-if="field.type == 'image'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
                     <input ng-model="field.value" ng-if="field.type == 'number'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
+                    <img ng-if="field.type == 'image'" src="{{field.value}}"/>
                     <textarea ng-model="field.value" ng-if="field.type == 'textarea'" id="{{field.id}}" style="width: 100%;" class="areatext" rows="8"></textarea>
                     <div ng-if="form.$submitted || form.name.$touched" style="display: inline-block;">
                       <div style="color:red" ng-show="form.name.$error.required">Obligatorio.</div>

@@ -2356,7 +2356,11 @@ body.en .pie-footer .legal {
       min-height: 400px; } }
   .noticia.destacada .box-info {
     bottom: 0;
-    position: absolute; }
+    position: absolute; 
+    background-color: rgb(1, 1, 1, 0.5);
+    padding: 12px;
+    border-radius: 10px;
+  }
     .noticia.destacada .box-info p {
       font-size: 20px;
       line-height: 25px; }
