@@ -72,7 +72,7 @@
                     <input ng-model="field.value" ng-if="field.type == 'image'" type="file" id="{{field.id}}" name="{{field.id}}" required="" />
                   </div>
                   <div ng-if="field.type == 'image'" class="col-lg-6">
-                    <img ng-if="field.type == 'image'" style="width: 400px;" src="{{field.value}}"/>
+                    <img class="float-right" ng-if="field.type == 'image'" style="max-width: 400px;" src="{{field.value}}"/>
                   </div>
                 </div>
                 <div class="row">
