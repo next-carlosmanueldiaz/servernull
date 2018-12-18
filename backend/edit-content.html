@@ -71,8 +71,8 @@
                   <div ng-if="field.type == 'image'" class="col-lg-6">
                     <label class="margin-bottom-2"> {{field.name}} <span style="color: red;">*</span>:</label>
                     <input ng-model="field.value" ng-if="field.type == 'image'" type="file" id="{{field.id}}" name="{{field.id}}" required="" />
-                    <img class="float-right" ng-if="field.type == 'image'" style="max-width: 400px;" src="{{field.value}}"/>
-                    <!-- <div>{{field.value}}</div> -->
+                    <img ng-if="field.type == 'image'" style="max-width: 400px; margin: 10px;" src="{{field.value}}"/>
+                    <div>{{field.value}}</div>
                   </div>
                   <div ng-if="field.type == 'image'" class="col-lg-6">
                     
