@@ -113,11 +113,10 @@ app.controller('myCtrl', function ($scope) {
         if (debug) console.log(errGetObject);
         expiredToken();
       } else {
-        const id = getQueryVariable("id");
         var contentTypes = JSON.parse(fileDataContentTypes.Body.toString('utf-8'));
         $scope.cts = contentTypes;
         for (var key in contentTypes) {
-          if (contentTypes[key].id === id) {
+          if (contentTypes[key].id === $scope.type) {
             $scope.pos = key;
           }
         }
