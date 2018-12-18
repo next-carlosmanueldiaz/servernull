@@ -54,7 +54,7 @@
           <div class="col-lg-12">
             <div>
               <form id="nc" name="form" ng-submit="submit()" class="css-form" novalidate>
-                <div class="row margin-bottom-20" ng-repeat="field in cts track by $index">
+                <div class="row margin-bottom-20" ng-repeat="field in cts[pos].fields track by $index">
                   <div ng-if="field.type != 'image'" class="col">
                     <label class="margin-bottom-2"> {{field.name}} <span style="color: red;">*</span>:</label>
                     
