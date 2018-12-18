@@ -121,36 +121,37 @@ app.controller('myCtrl', function ($scope) {
             $scope.pos = key;
           }
         }
-        $scope.$apply();
-      }
-    });
 
-     // VALORES slug.json
-    //---------------------------------------------------------------------------------
-    var keyJson = 'home/content/json/' + $scope.type + '/' + $scope.slug  + '.json';
-    
-    var fileParams = {Bucket: $scope.bucket, Key: keyJson};
-    s3 = new AWS.S3();
-    s3.getObject(fileParams, function (errGetObject, fileData) {
-      if (errGetObject) {
-        if (debug) console.log('El fichero ' + keyJson + ' NO existe en el bucket o no tiene permisos.');
-        if (debug) console.log(errGetObject);
-        // expiredToken();
-      } else {
-        var f = fileData.Body.toString('utf-8');
-        // preserve newlines, etc - use valid JSON
-        f = f.replace(/\\n/g, "\\n")  
-        .replace(/\\'/g, "\\'")
-        .replace(/\\"/g, '\\"')
-        .replace(/\\&/g, "\\&")
-        .replace(/\\r/g, "\\r")
-        .replace(/\\t/g, "\\t")
-        .replace(/\\b/g, "\\b")
-        .replace(/\\f/g, "\\f");
-        // remove non-printable and other non-valid JSON chars
-        f = f.replace(/[\u0000-\u0019]+/g,""); 
-        var content = JSON.parse(f);
-        $scope.content = content;
+        // VALORES slug.json
+        //---------------------------------------------------------------------------------
+        // var keyJson = 'home/content/json/' + $scope.type + '/' + $scope.slug  + '.json';
+        
+        // var fileParams = {Bucket: $scope.bucket, Key: keyJson};
+        // s3 = new AWS.S3();
+        // s3.getObject(fileParams, function (errGetObject, fileData) {
+        //   if (errGetObject) {
+        //     if (debug) console.log('El fichero ' + keyJson + ' NO existe en el bucket o no tiene permisos.');
+        //     if (debug) console.log(errGetObject);
+        //     // expiredToken();
+        //   } else {
+        //     var f = fileData.Body.toString('utf-8');
+        //     // preserve newlines, etc - use valid JSON
+        //     f = f.replace(/\\n/g, "\\n")  
+        //     .replace(/\\'/g, "\\'")
+        //     .replace(/\\"/g, '\\"')
+        //     .replace(/\\&/g, "\\&")
+        //     .replace(/\\r/g, "\\r")
+        //     .replace(/\\t/g, "\\t")
+        //     .replace(/\\b/g, "\\b")
+        //     .replace(/\\f/g, "\\f");
+        //     // remove non-printable and other non-valid JSON chars
+        //     f = f.replace(/[\u0000-\u0019]+/g,""); 
+        //     var content = JSON.parse(f);
+        //     $scope.content = content;
+        //     // $scope.$apply();
+        //   }
+        // });
+
         $scope.$apply();
       }
     });
