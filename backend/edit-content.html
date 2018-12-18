@@ -67,11 +67,11 @@
                       <div style="color:red" ng-show="form.name.$error.required">Obligatorio.</div>
                     </div>
                   </div>
-                  <div ng-if="field.type == 'image'" class="col-6">
+                  <div ng-if="field.type == 'image'" class="col-lg-6">
                     <label class="margin-bottom-2"> {{field.name}} <span style="color: red;">*</span>:</label>
                     <input ng-model="field.value" ng-if="field.type == 'image'" type="file" id="{{field.id}}" name="{{field.id}}" required="" />
                   </div>
-                  <div ng-if="field.type == 'image'" class="col-6">
+                  <div ng-if="field.type == 'image'" class="col-lg-6">
                     <img ng-if="field.type == 'image'" style="width: 400px;" src="{{field.value}}"/>
                   </div>
                 </div>
