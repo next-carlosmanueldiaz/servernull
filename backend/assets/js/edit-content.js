@@ -101,7 +101,31 @@ app.controller('myCtrl', function ($scope) {
     $scope.bucket = bucket; // config.js
     $scope.type = getQueryVariable('tipo');
     $scope.slug = getQueryVariable('id');
-    // JSON
+
+    // CAMPOS: content-types.json
+    // Leemos content-types.json para obtener los campos del tipo de contenido
+    const keyCT = 'private/content-types/json/content-types.json';
+    var fileParams = {Bucket: $scope.bucket, Key: keyCT};
+    s3 = new AWS.S3();
+    s3.getObject(fileParams, function (errGetObject, fileDataContentTypes) {
+      if (errGetObject) {
+        if (debug) console.log('El fichero ' + key + ' NO existe en el bucket o no tiene permisos.');
+        if (debug) console.log(errGetObject);
+        expiredToken();
+      } else {
+        const id = getQueryVariable("id");
+        var contentTypes = JSON.parse(fileDataContentTypes.Body.toString('utf-8'));
+        $scope.cts = contentTypes;
+        for (var key in contentTypes) {
+          if (contentTypes[key].id === id) {
+            $scope.pos = key;
+          }
+        }
+        $scope.$apply();
+      }
+    });
+
+     // VALORES slug.json
     //---------------------------------------------------------------------------------
     var keyJson = 'home/content/json/' + $scope.type + '/' + $scope.slug  + '.json';
     
