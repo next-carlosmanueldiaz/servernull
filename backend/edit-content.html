@@ -62,7 +62,7 @@
                     <!--<input class="title" ng-model="field.value" ng-if="field.type == 'title'" type="text" id="{{field.id}}" name="{{field.id}}" required="" readonly/>-->
                     <input ng-model="field.value" ng-if="field.type == 'text'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
                     <input ng-model="field.value" ng-if="field.type == 'number'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
-                    <textarea ng-model="field.value" ng-if="field.type == 'textarea'" id="{{field.id}}" style="width: 100%;" class="areatext" rows="8"></textarea>
+                    <textarea ng-model="field.value" ng-if="field.type == 'textarea' && field.id == 'body'" id="{{field.id}}" style="width: 100%;" class="areatext" rows="8"></textarea>
                     <div ng-if="form.$submitted || form.name.$touched" style="display: inline-block;">
                       <div style="color:red" ng-show="form.name.$error.required">Obligatorio.</div>
                     </div>
@@ -70,6 +70,8 @@
                   <div ng-if="field.type == 'image'" class="col-lg-6">
                     <label class="margin-bottom-2"> {{field.name}} <span style="color: red;">*</span>:</label>
                     <input ng-model="field.value" ng-if="field.type == 'image'" type="file" id="{{field.id}}" name="{{field.id}}" required="" />
+                    <br/>
+                    <textarea ng-model="field.value" ng-if="field.type == 'textarea' && field.id == 'subtitle'" id="{{field.id}}" style="width: 100%;" class="areatext" rows="3"></textarea>
                   </div>
                   <div ng-if="field.type == 'image'" class="col-lg-6">
                     <img class="float-right" ng-if="field.type == 'image'" style="max-width: 400px;" src="{{field.value}}"/>
