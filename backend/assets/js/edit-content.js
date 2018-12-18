@@ -143,7 +143,7 @@ app.controller('myCtrl', function ($scope) {
   $scope.submit = function () {
     var titulo = "";
     const permisos = getAccess();
-
+   
     //---------------------------------------------------------------------------------
     // Necesitamos content-types.json para obtener el css y tpl
     const keyCT = 'private/content-types/json/content-types.json';
@@ -161,6 +161,34 @@ app.controller('myCtrl', function ($scope) {
         for (var key in contentTypes) {
           if (contentTypes[key].id === $scope.type) {
             $scope.pos = key;
+          }
+        }
+
+        // Guardamos las imagenes que hay
+        for (var key in $scope.cts[$scope.pos].fields) {
+          if ($scope.cts[$scope.pos].fields[key].type == 'image') {
+            var idFileField = $scope.cts[$scope.pos].fields[key].id;
+            var files = document.getElementById(idFileField).files;
+            if (!files.length) {
+              console.log('Campo obligatorio.');
+            } else {
+              var file = files[0];
+              var fileName = file.name;
+              // var albumPhotosKey = encodeURIComponent(albumName) + '//';
+              var photoKey = 'home/assets/img/' + file.name;
+              $scope.cts[$scope.pos].fields[key].value = domainURL + '/home/assets/img/' + file.name;
+              s3.upload({
+                Bucket: bucket,
+                Key: photoKey,
+                Body: file,
+                ACL: 'public-read'
+              }, function(err, data) {
+                if (err) {
+                  console.log('Error subiendo la foto: ', err.message);
+                }
+                console.log('Foto subida correctamente: ' + photoKey);
+              });
+            }
           }
         }
         

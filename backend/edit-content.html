@@ -55,19 +55,24 @@
             <div>
               <form id="nc" name="form" ng-submit="submit()" class="css-form" novalidate>
                 <div class="row margin-bottom-20" ng-repeat="field in content track by $index">
-                  <div class="col">
+                  <div ng-if="field.type != 'image'" class="col">
                     <label class="margin-bottom-2"> {{field.name}} <span style="color: red;">*</span>:</label>
-                    <br/>
+                    
                     <span ng-if="field.type == 'title'"><strong>{{field.value}}</strong></span>
                     <!--<input class="title" ng-model="field.value" ng-if="field.type == 'title'" type="text" id="{{field.id}}" name="{{field.id}}" required="" readonly/>-->
                     <input ng-model="field.value" ng-if="field.type == 'text'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
-                    <input ng-model="field.value" ng-if="field.type == 'image'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
                     <input ng-model="field.value" ng-if="field.type == 'number'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
-                    <img ng-if="field.type == 'image'" src="{{field.value}}"/>
                     <textarea ng-model="field.value" ng-if="field.type == 'textarea'" id="{{field.id}}" style="width: 100%;" class="areatext" rows="8"></textarea>
                     <div ng-if="form.$submitted || form.name.$touched" style="display: inline-block;">
                       <div style="color:red" ng-show="form.name.$error.required">Obligatorio.</div>
                     </div>
+                  </div>
+                  <div ng-if="field.type == 'image'" class="col-6">
+                    <label class="margin-bottom-2"> {{field.name}} <span style="color: red;">*</span>:</label>
+                    <input ng-model="field.value" ng-if="field.type == 'image'" type="file" id="{{field.id}}" name="{{field.id}}" required="" />
+                  </div>
+                  <div ng-if="field.type == 'image'" class="col-6">
+                    <img ng-if="field.type == 'image'" style="width: 400px;" src="{{field.value}}"/>
                   </div>
                 </div>
                 <div class="row">
