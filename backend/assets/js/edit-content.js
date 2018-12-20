@@ -155,12 +155,11 @@ app.controller('myCtrl', function ($scope) {
                 }
               }
             }
-            
+            $scope.$apply();
           }
         });
       }
     });
-    $scope.$apply();
   }
   
   /**
