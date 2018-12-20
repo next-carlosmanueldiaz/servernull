@@ -114,50 +114,53 @@ app.controller('myCtrl', function ($scope) {
         expiredToken();
       } else {
         var contentTypes = JSON.parse(fileDataContentTypes.Body.toString('utf-8'));
-
-        // VALORES slug.json
-        //---------------------------------------------------------------------------------
-        var keyJson = 'home/content/json/' + $scope.type + '/' + $scope.slug  + '.json';
-        
-        var fileParams = {Bucket: $scope.bucket, Key: keyJson};
-        s3 = new AWS.S3();
-        s3.getObject(fileParams, function (errGetObject, fileData) {
-          if (errGetObject) {
-            if (debug) console.log('El fichero ' + keyJson + ' NO existe en el bucket o no tiene permisos.');
-            if (debug) console.log(errGetObject);
-            // expiredToken();
-          } else {
-            var f = fileData.Body.toString('utf-8');
-            // preserve newlines, etc - use valid JSON
-            f = f.replace(/\\n/g, "\\n")  
-            .replace(/\\'/g, "\\'")
-            .replace(/\\"/g, '\\"')
-            .replace(/\\&/g, "\\&")
-            .replace(/\\r/g, "\\r")
-            .replace(/\\t/g, "\\t")
-            .replace(/\\b/g, "\\b")
-            .replace(/\\f/g, "\\f");
-            // remove non-printable and other non-valid JSON chars
-            f = f.replace(/[\u0000-\u0019]+/g,""); 
-            var content = JSON.parse(f);
-            $scope.content = content;
-            // $scope.$apply();
-          }
-        });
-
-
         $scope.cts = contentTypes;
         for (var key in contentTypes) {
           if (contentTypes[key].id === $scope.type) {
             $scope.pos = key;
           }
         }
-
-
-
-        $scope.$apply();
       }
     });
+
+    // VALORES slug.json
+    //---------------------------------------------------------------------------------
+    var keyJson = 'home/content/json/' + $scope.type + '/' + $scope.slug  + '.json';
+    var fileParams = {Bucket: $scope.bucket, Key: keyJson};
+    s3 = new AWS.S3();
+    s3.getObject(fileParams, function (errGetObject, fileData) {
+      if (errGetObject) {
+        if (debug) console.log('El fichero ' + keyJson + ' NO existe en el bucket o no tiene permisos.');
+        if (debug) console.log(errGetObject);
+        // expiredToken();
+      } else {
+        var f = fileData.Body.toString('utf-8');
+        // preserve newlines, etc - use valid JSON
+        f = f.replace(/\\n/g, "\\n")  
+        .replace(/\\'/g, "\\'")
+        .replace(/\\"/g, '\\"')
+        .replace(/\\&/g, "\\&")
+        .replace(/\\r/g, "\\r")
+        .replace(/\\t/g, "\\t")
+        .replace(/\\b/g, "\\b")
+        .replace(/\\f/g, "\\f");
+        // remove non-printable and other non-valid JSON chars
+        f = f.replace(/[\u0000-\u0019]+/g,"");
+        var content = JSON.parse(f);
+
+        // Agregamos valores a la estructura de datos
+        for (var kCts in $scope.cts[$scope.pos].fields) {
+          for (var k in $scope.content) {
+            if ($scope.cts[$scope.pos].fields[kCts].id == $scope.content[k].id) {
+              $scope.cts[$scope.pos].fields[kCts].value = $scope.content[k].value;
+            }
+          }
+        }
+        $scope.content = content;
+      }
+    });
+
+    $scope.$apply();
   }
   
   /**
