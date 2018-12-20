@@ -72,8 +72,9 @@
                     <input ng-model="field.value" ng-if="field.type == 'image'" type="file" id="{{field.id}}" name="{{field.id}}" required="" />
                   </div>
                   <div ng-if="field.type == 'image'" class="col-lg-6">
-                    <img ng-if="field.type == 'image'" style="max-width: 400px; margin-top: 10px;margin-bottom: 10px;" src="{{field.value}}"/>
-                    <div>{{field.value}}</div>
+                    <a href="{{field.value}}" target="_blank">
+                      <img ng-if="field.type == 'image'" style="max-width: 400px; margin-top: 10px;margin-bottom: 10px;" src="{{field.value}}"/>
+                    </a>
                   </div>
                 </div>
                 <div class="row">
