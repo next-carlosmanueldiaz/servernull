@@ -69,6 +69,7 @@
                   </div>
                   <div ng-if="field.type == 'image'" class="col-lg-6">
                     <label class="margin-bottom-2"> {{field.name}} <span style="color: red;">*</span>:</label>
+                    <br/>
                     <input ng-model="field.value" ng-if="field.type == 'image'" type="file" id="{{field.id}}" name="{{field.id}}" required="" />
                   </div>
                   <div ng-if="field.type == 'image'" class="col-lg-6">
