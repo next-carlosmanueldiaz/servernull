@@ -120,8 +120,6 @@ app.controller('myCtrl', function ($scope) {
             $scope.pos = key;
           }
         }
-      }
-    });
 
     // VALORES slug.json
     //---------------------------------------------------------------------------------
@@ -159,7 +157,8 @@ app.controller('myCtrl', function ($scope) {
         
       }
     });
-
+      }
+    });
     $scope.$apply();
   }
   
