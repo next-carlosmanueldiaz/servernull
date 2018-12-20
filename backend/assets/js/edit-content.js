@@ -147,7 +147,7 @@ app.controller('myCtrl', function ($scope) {
         // remove non-printable and other non-valid JSON chars
         f = f.replace(/[\u0000-\u0019]+/g,"");
         var content = JSON.parse(f);
-
+        $scope.content = content;
         // Agregamos valores a la estructura de datos
         for (var kCts in $scope.cts[$scope.pos].fields) {
           for (var k in $scope.content) {
@@ -156,7 +156,7 @@ app.controller('myCtrl', function ($scope) {
             }
           }
         }
-        $scope.content = content;
+        
       }
     });
 
