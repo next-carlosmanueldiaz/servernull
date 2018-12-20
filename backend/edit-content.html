@@ -74,7 +74,7 @@
                   </div>
                   <div ng-if="field.type == 'image'" class="col-lg-6">
                     <a href="{{field.value}}" target="_blank">
-                      <img ng-if="field.type == 'image'" style="max-width: 400px; margin-top: 10px;margin-bottom: 10px;" src="{{field.value}}"/>
+                      <img id="{{field.id}}" ng-if="field.type == 'image'" style="max-width: 400px; margin-top: 10px;margin-bottom: 10px;" src="{{field.value}}"/>
                     </a>
                   </div>
                 </div>
@@ -93,6 +93,13 @@
             <a href="/backend/index.html">Volver al listado</a>
           </div>
         </div>
+        <div class="row">
+          <div class="col">Teaser: 525 x 475</div>
+        </div>
+        <div class="row">
+            <div class="col">Imagen: 525 x 475</div>
+          </div>
+  
       </main>
     </div>
   </body>
