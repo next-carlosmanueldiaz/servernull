@@ -57,7 +57,6 @@
                 <div class="row margin-bottom-20" ng-repeat="field in cts[pos].fields track by $index">
                   <div ng-if="field.type != 'image'" class="col">
                     <label class="margin-bottom-2"> {{field.name}} <span style="color: red;">*</span>:</label>
-                    
                     <span ng-if="field.type == 'title'"><strong>{{field.value}}</strong></span>
                     <!--<input class="title" ng-model="field.value" ng-if="field.type == 'title'" type="text" id="{{field.id}}" name="{{field.id}}" required="" readonly/>-->
                     <input ng-model="field.value" ng-if="field.type == 'text'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
@@ -71,6 +70,8 @@
                   <div ng-if="field.type == 'image'" class="col-lg-6">
                     <label class="margin-bottom-2"> {{field.name}} <span style="color: red;">*</span>:</label>
                     <input ng-model="field.value" ng-if="field.type == 'image'" type="file" id="{{field.id}}" name="{{field.id}}" required="" />
+                  </div>
+                  <div ng-if="field.type == 'image'" class="col-lg-6">
                     <img ng-if="field.type == 'image'" style="max-width: 400px; margin-top: 10px;margin-bottom: 10px;" src="{{field.value}}"/>
                     <div>{{field.value}}</div>
                   </div>
