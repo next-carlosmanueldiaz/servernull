@@ -71,6 +71,9 @@
                     <label class="margin-bottom-2"> {{field.name}} <span style="color: red;">*</span>:</label>
                     <br/>
                     <input ng-model="field.value" ng-if="field.type == 'image'" type="file" id="{{field.id}}" name="{{field.id}}" required="" />
+                    <br/>
+                    <div class="row"><div class="col">Imagen: 1024 x 614</div></div>
+                    <div class="row"><div class="col">Teaser: 525 x 475</div></div>            
                   </div>
                   <div ng-if="field.type == 'image'" class="col-lg-6">
                     <a href="{{field.value}}" target="_blank">
@@ -92,14 +95,7 @@
           <div class="col-lg-12 text-center margin-all-20">
             <a href="/backend/index.html">Volver al listado</a>
           </div>
-        </div>
-        <div class="row">
-          <div class="col">Teaser: 525 x 475</div>
-        </div>
-        <div class="row">
-            <div class="col">Imagen: 1024 x 614</div>
-          </div>
-  
+        </div>      
       </main>
     </div>
   </body>
