@@ -151,6 +151,7 @@ app.controller('myCtrl', function ($scope) {
               for (var k in $scope.content) {
                 if ($scope.cts[$scope.pos].fields[kCts].id == $scope.content[k].id) {
                   $scope.cts[$scope.pos].fields[kCts].value = $scope.content[k].value;
+                  continue; // una vez encontrado, siguiente iteración
                 }
               }
             }
