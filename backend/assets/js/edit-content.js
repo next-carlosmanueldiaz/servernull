@@ -154,11 +154,8 @@ app.controller('myCtrl', function ($scope) {
                     $scope.cts[$scope.pos].fields[kCts].value = $scope.content[k].value;
                     // Si es una imagen, obtenemos sus dimensiones naturales
                     if ($scope.cts[$scope.pos].fields[kCts].type == 'image') {
-                      var img = new Image();
-                      img.src = $scope.content[k].value;
-                      img.onload = function() {
-                        $scope.cts[$scope.pos].fields[kCts].dimensions = this.width + 'x' + this.height
-                      }
+                      var img = document.getElementById($scope.cts[$scope.pos].fields[kCts].id);
+                      $scope.cts[$scope.pos].fields[kCts].dimensions = img.naturalHeight + " x " + img..naturalWidth;
                     }
                     break; // una vez encontrado, sale del bucle interno
                   }
