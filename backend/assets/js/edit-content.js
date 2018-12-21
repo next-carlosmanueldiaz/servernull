@@ -155,7 +155,7 @@ app.controller('myCtrl', function ($scope) {
                     // Si es una imagen, obtenemos sus dimensiones naturales
                     if ($scope.cts[$scope.pos].fields[kCts].type == 'image') {
                       var img = document.getElementById($scope.cts[$scope.pos].fields[kCts].id);
-                      $scope.cts[$scope.pos].fields[kCts].dimensions = img.naturalHeight + " x " + img..naturalWidth;
+                      $scope.cts[$scope.pos].fields[kCts].dimensions = img.naturalHeight + " x " + img.naturalWidth;
                     }
                     break; // una vez encontrado, sale del bucle interno
                   }
@@ -513,8 +513,3 @@ app.controller('myCtrl', function ($scope) {
     });
   }; // /submit
 });
-
-
-
-
-
