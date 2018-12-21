@@ -283,7 +283,8 @@ app.controller('myCtrl', function ($scope) {
         var keyJSON = 'home/content/json/' + $scope.type + '/' + $scope.slug + '.json';
         // ========================================================================
         // Generamos el JSON con los datos del contenido
-        var img = "";
+        var imgTitular = "";
+        var imgTeaser = "";
         var contenido = "[";
         // Recogemos los valores del formulario
         for (var key in $scope.cts[$scope.pos].fields) {
@@ -296,9 +297,14 @@ app.controller('myCtrl', function ($scope) {
 
           var campo = '{ "id" : "' + idCampo + '", "name" : "' + nameCampo + '", "type" : "' + typeCampo + '", "value" : "' + valueCampo + '" },';
 
-          if (img == "") {
+          if (imgTeaser == "") {
             if (idCampo == "imgTeaser") {
-              img = valueCampo;
+              imgTeaser = valueCampo;
+            }
+          }
+          if (imgTitular == "") {
+            if (idCampo == "img") {
+              imgTitular = valueCampo;
             }
           }
 
@@ -334,7 +340,7 @@ app.controller('myCtrl', function ($scope) {
                 const slug = getQueryVariable("id");
                 var contents = JSON.parse(fileData.Body.toString('utf-8'));
                 var date = new Date(); // No necesito guardar la fecha porque puedo darle la vuelta al mostrar el fichero en la home con .reverse()
-                var content = {"date": date, "img": img, "slug": slug, "title" : titulo, "type": type };
+                var content = {"date": date, "img": imgTeaser, "slug": slug, "title" : titulo, "type": type };
                 var pos = -1;
                 for (var key in contents) {
                   if (contents[key].slug === slug) {
@@ -403,8 +409,7 @@ app.controller('myCtrl', function ($scope) {
                         // Aplicamos el json directamente sobre /index.html
 
                         // TITULAR HOME
-                        var urlImgTitular = getUrlImgTitular(titular.slug);
-                        doc.getElementById('titular').setAttribute('data-src', urlImgTitular);
+                        doc.getElementById('titular').setAttribute('data-src', imgTitular);
                         // /home/content/html/{{titular.type}}/{{titular.slug}}.html
                         var titularLink = "/home/content/html/" + titular.type + "/" + titular.slug + ".html";
                         doc.getElementById('titular-link').setAttribute('href', titularLink);
@@ -494,12 +499,3 @@ app.controller('myCtrl', function ($scope) {
     });
   }; // /submit
 });
-
-
-function getUrlImgTitular(slugTitular) {
-  for (var key in $scope.content) {
-    if ($scope.content[key].slug == slugTitular) {
-      return $cope.content[key].img
-    }
-  }
-}
