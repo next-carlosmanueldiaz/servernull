@@ -403,7 +403,8 @@ app.controller('myCtrl', function ($scope) {
                         // Aplicamos el json directamente sobre /index.html
 
                         // TITULAR HOME
-                        doc.getElementById('titular').setAttribute('data-src', titular.img);
+                        var urlImgTitular = getUrlImgTitular(titular.slug);
+                        doc.getElementById('titular').setAttribute('data-src', urlImgTitular);
                         // /home/content/html/{{titular.type}}/{{titular.slug}}.html
                         var titularLink = "/home/content/html/" + titular.type + "/" + titular.slug + ".html";
                         doc.getElementById('titular-link').setAttribute('href', titularLink);
@@ -493,3 +494,12 @@ app.controller('myCtrl', function ($scope) {
     });
   }; // /submit
 });
+
+
+function getUrlImgTitular(slugTitular) {
+  for (var key in $scope.content) {
+    if ($scope.content[key].slug == slugTitular) {
+      return $cope.content[key].img
+    }
+  }
+}
