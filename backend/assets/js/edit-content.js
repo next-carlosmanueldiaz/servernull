@@ -183,9 +183,9 @@ app.controller('myCtrl', function ($scope) {
         }
 
         // Subimos las imagenes que haya
-        for (var key in $scope.cts[$scope.pos].fields) {
-          if ($scope.cts[$scope.pos].fields[key].type == 'image') {
-            var idFileField = $scope.cts[$scope.pos].fields[key].id;
+        for (var key in $scope.content) {
+          if ($scope.content[key].type == 'image') {
+            var idFileField = $scope.content[key].id;
             var files = document.getElementById(idFileField).files;
             if (!files.length) {
               console.log('Campo obligatorio.');
@@ -194,7 +194,7 @@ app.controller('myCtrl', function ($scope) {
               var fileName = file.name;
               // var albumPhotosKey = encodeURIComponent(albumName) + '//';
               var photoKey = 'home/assets/img/' + file.name;
-              $scope.cts[$scope.pos].fields[key].value = domainURL + '/home/assets/img/' + file.name;
+              $scope.content[key].value = domainURL + '/home/assets/img/' + file.name;
               s3.upload({
                 Bucket: bucket,
                 Key: photoKey,
