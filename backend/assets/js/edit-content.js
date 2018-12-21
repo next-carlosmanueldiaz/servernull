@@ -431,7 +431,7 @@ app.controller('myCtrl', function ($scope) {
                             teaserMidIzqClone.id = 'teaser-mid-izq-' + key;
                             teaserMidIzqClone.classList.add("generated");
                             teaserMidIzqClone.style.display = "block";
-                            teaserMidIzqClone.getElementsByClassName("teaser-izq-img")[0].setAttribute('data-src', contents[key].imgTeaser);
+                            teaserMidIzqClone.getElementsByClassName("teaser-izq-img")[0].setAttribute('data-src', contents[key].img);
                             var teaserMidIzqLink = "/home/content/html/" + contents[key].type + "/" + contents[key].slug + ".html";
                             teaserMidIzqClone.getElementsByClassName("teaser-izq-link")[0].setAttribute('href', teaserMidIzqLink);
                             teaserMidIzqClone.getElementsByClassName("teaser-izq-title")[0].innerHTML = contents[key].title;
@@ -442,7 +442,7 @@ app.controller('myCtrl', function ($scope) {
                             teaserMidDerClone.id = 'teaser-mid-der-' + key;
                             teaserMidDerClone.classList.add("generated");
                             teaserMidDerClone.style.display = "block";
-                            teaserMidDerClone.getElementsByClassName("teaser-der-img")[0].setAttribute('data-src', contents[key].imgTeaser);
+                            teaserMidDerClone.getElementsByClassName("teaser-der-img")[0].setAttribute('data-src', contents[key].img);
                             var teaserMidDerLink = "/home/content/html/" + contents[key].type + "/" + contents[key].slug + ".html";
                             teaserMidDerClone.getElementsByClassName("teaser-der-link")[0].setAttribute('href', teaserMidDerLink);
                             teaserMidDerClone.getElementsByClassName("teaser-der-title")[0].innerHTML = contents[key].title;
