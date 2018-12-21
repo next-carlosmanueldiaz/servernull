@@ -89,9 +89,6 @@ function getHash(str, algo = "SHA-256") {
     });
 }
 
-// const debug = true;
-// const tengoAcceso = getCredentials();
-
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
   
@@ -146,17 +143,6 @@ app.controller('myCtrl', function ($scope) {
             f = f.replace(/[\u0000-\u0019]+/g,"");
             var content = JSON.parse(f);
             $scope.content = content;
-            // Agregamos valores a la estructura de datos
-            for (var kCts in $scope.cts[$scope.pos].fields) {
-              for (var k in $scope.content) {
-                if ($scope.cts[$scope.pos].fields[kCts].id == $scope.content[k].id) {
-                  if (typeof $scope.content[k].value !== 'undefined' && $scope.content[k].value !== "" ) {
-                    $scope.cts[$scope.pos].fields[kCts].value = $scope.content[k].value;
-                    break; // una vez encontrado, sale del bucle interno
-                  }
-                }
-              }
-            }
             $scope.$apply();
           }
         });
