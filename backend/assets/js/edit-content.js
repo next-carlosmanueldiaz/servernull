@@ -297,7 +297,7 @@ app.controller('myCtrl', function ($scope) {
           var campo = '{ "id" : "' + idCampo + '", "name" : "' + nameCampo + '", "type" : "' + typeCampo + '", "value" : "' + valueCampo + '" },';
 
           if (img == "") {
-            if (idCampo == "img") {
+            if (idCampo == "imgTeaser") {
               img = valueCampo;
             }
           }
