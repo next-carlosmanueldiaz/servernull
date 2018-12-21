@@ -150,8 +150,18 @@ app.controller('myCtrl', function ($scope) {
             for (var kCts in $scope.cts[$scope.pos].fields) {
               for (var k in $scope.content) {
                 if ($scope.cts[$scope.pos].fields[kCts].id == $scope.content[k].id) {
-                  $scope.cts[$scope.pos].fields[kCts].value = $scope.content[k].value;
-                  continue; // una vez encontrado, siguiente iteración
+                  if (typeof $scope.content[k].value !== 'undefined' && $scope.content[k].value !== "" ) {
+                    $scope.cts[$scope.pos].fields[kCts].value = $scope.content[k].value;
+                    // Si es una imagen, obtenemos sus dimensiones naturales
+                    if ($scope.cts[$scope.pos].fields[kCts].type == 'image') {
+                      var img = new Image();
+                      img.src = $scope.content[k].value;
+                      img.onload = function() {
+                        $scope.cts[$scope.pos].fields[kCts].dimensions = this.width + 'x' + this.height
+                      }
+                    }
+                    break; // una vez encontrado, sale del bucle interno
+                  }
                 }
               }
             }
@@ -194,7 +204,7 @@ app.controller('myCtrl', function ($scope) {
           }
         }
 
-        // Guardamos las imagenes que hay
+        // Subimos las imagenes que haya
         for (var key in $scope.cts[$scope.pos].fields) {
           if ($scope.cts[$scope.pos].fields[key].type == 'image') {
             var idFileField = $scope.cts[$scope.pos].fields[key].id;
