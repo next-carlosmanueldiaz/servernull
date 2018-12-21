@@ -81,7 +81,7 @@
                   </div>
                   <div ng-if="field.type == 'image'" class="col-lg-6">
                     <a href="{{field.value}}" target="_blank">
-                      <img id="{{field.id}}" onmouseover="alert(this.naturalHeight + ' x '+ this.naturalWidth);" ng-if="field.type == 'image'" style="max-width: 400px; margin-top: 10px;margin-bottom: 10px;" src="{{field.value}}"/>
+                      <img id="{{field.id}}" title="this.naturalHeight + ' x '+ this.naturalWidth" ng-if="field.type == 'image'" style="max-width: 400px; margin-top: 10px;margin-bottom: 10px;" src="{{field.value}}"/>
                     </a>
                   </div>
                 </div>
