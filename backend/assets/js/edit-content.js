@@ -239,7 +239,6 @@ app.controller('myCtrl', function ($scope) {
             // Rellenamos el contenido del HTML con los datos
             //---------------------------------------------------------------------------------
             var html = fileData.Body.toString('utf-8');
-            html = html.replace("{{googleSigninClientId}}", $scope.googleSigninClientId);
             html = html.replace("{{title}}", $scope.content[0].value);
             html = html.replace("{{script}}", "\r\n" + $scope.cts[$scope.pos].js);
             html = html.replace("{{css}}", "\r\n" + $scope.cts[$scope.pos].css);
