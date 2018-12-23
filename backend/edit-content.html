@@ -78,7 +78,7 @@
                     <div class="row"><div class="col">Imagen: 1024 x 614</div></div>
                     <div class="row"><div class="col">Teaser: 600 x 475</div></div>            
                   </div>
-                  <div ng-if="field.type == 'image'" class="col-lg-6">
+                  <div ng-if="field.type == 'image'" class="col-lg-6 text-right">
                     <a href="{{field.value}}" target="_blank">
                       <img id="{{field.id}}" onload="this.title = (this.naturalHeight + 'px height X '+ this.naturalWidth + 'px width');" ng-if="field.type == 'image'" style="max-width: 400px; margin-top: 10px;margin-bottom: 10px;" src="{{field.value}}"/>
                     </a>
