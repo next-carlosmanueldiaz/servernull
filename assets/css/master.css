@@ -2383,7 +2383,7 @@ body.en .pie-footer .legal {
     height: auto; }
   .noticia.destacada .box-image {
     background-position: center right;
-    height: 700px; }
+    height: 600px; }
     @media only screen and (max-width: 1024px) {
       .noticia.destacada .box-image {
         height: 520px; } }
