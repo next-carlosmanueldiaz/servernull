@@ -422,7 +422,7 @@ app.controller('myCtrl', function ($scope) {
                         var titularLink = "/home/content/html/" + titular.type + "/" + titular.slug + ".html";
                         doc.getElementById('titular-link').setAttribute('href', titularLink);
                         doc.getElementById('titular-title').innerHTML = titular.title;
-                        doc.getElementById('subtitulo').innerHTML = '<p>' + subtitulo + '</p>'; 
+                        // doc.getElementById('subtitulo').innerHTML = '<p>' + subtitulo + '</p>'; 
 
                         // Primero nos cargamos todos los previamente generados
                         var generated = doc.getElementById("container-inside").querySelectorAll(".generated");
