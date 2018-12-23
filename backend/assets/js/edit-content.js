@@ -202,9 +202,9 @@ app.controller('myCtrl', function ($scope) {
                 ACL: 'public-read'
               }, function(err, data) {
                 if (err) {
-                  console.log('Error subiendo la foto: ', err.message);
+                  if (debug) console.log('Error subiendo la foto: ', err.message);
                 }
-                console.log('Foto subida correctamente: ' + photoKey);
+                if (debug) console.log('%c IMG ', 'background: #222; color: #bada55', 'subida correctamente en ' + data.Key);
               });
             }
           }
