@@ -362,8 +362,10 @@ app.controller('myCtrl', function ($scope) {
                   } else {
                     if (debug) console.log('%c JSON ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyCL);
 
-                    //---------------------------------------------------------------------------------
+                    //=========================================================================================
+                    //=========================================================================================
                     // MODIFICAMOS LA HOME
+                    //-----------------------------------------------------------------------------------------
                     // Cada vez que se modifica el contenido de un artículo, la home cambia.
                     // No vamos a usar angular para la home, ya que es una mala solución
                     // Usaremos HTML
@@ -414,6 +416,7 @@ app.controller('myCtrl', function ($scope) {
                         var titularLink = "/home/content/html/" + titular.type + "/" + titular.slug + ".html";
                         doc.getElementById('titular-link').setAttribute('href', titularLink);
                         doc.getElementById('titular-title').innerHTML = titular.title;
+                        doc.getElementById('subtitulo').innerHTML = titular.subtitle;
 
                         // Primero nos cargamos todos los previamente generados
                         var generated = doc.getElementById("container-inside").querySelectorAll(".generated");
