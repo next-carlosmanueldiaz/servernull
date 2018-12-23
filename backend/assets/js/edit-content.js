@@ -285,6 +285,7 @@ app.controller('myCtrl', function ($scope) {
         // Generamos el JSON con los datos del contenido
         var imgTitular = "";
         var imgTeaser = "";
+        var subtitulo = "";
         var contenido = "[";
         // Recogemos los valores del formulario
         for (var key in $scope.cts[$scope.pos].fields) {
@@ -305,6 +306,11 @@ app.controller('myCtrl', function ($scope) {
           if (imgTitular == "") {
             if (idCampo == "img") {
               imgTitular = valueCampo;
+            }
+          }
+          if (subtitulo == "") {
+            if (idCampo == "subtitle") {
+              subtitulo = valueCampo;
             }
           }
 
@@ -416,7 +422,7 @@ app.controller('myCtrl', function ($scope) {
                         var titularLink = "/home/content/html/" + titular.type + "/" + titular.slug + ".html";
                         doc.getElementById('titular-link').setAttribute('href', titularLink);
                         doc.getElementById('titular-title').innerHTML = titular.title;
-                        doc.getElementById('subtitulo').innerHTML = titular.subtitle;
+                        doc.getElementById('subtitulo').innerHTML = subtitulo;
 
                         // Primero nos cargamos todos los previamente generados
                         var generated = doc.getElementById("container-inside").querySelectorAll(".generated");
