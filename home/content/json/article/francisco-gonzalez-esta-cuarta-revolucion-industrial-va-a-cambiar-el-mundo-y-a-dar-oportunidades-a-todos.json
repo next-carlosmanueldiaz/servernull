@@ -1,26 +1,30 @@
-[
-  {
-    "id": "title",
-    "name": "Título",
-    "type": "title",
-    "value": "Francisco González: “Esta cuarta revolución industrial va a cambiar el mundo y a dar oportunidades a todos”"
-  },
-  {
-    "id": "img",
-    "name": "Image",
-    "type": "image",
-    "value": "https://www.bbva.com/es/wp-content/uploads/2017/10/francisco-gonzalez-bbva-gloria-lomana-2-e1508852627244-1920x0-c-f.jpg"
-  },
-  {
-    "id": "subtitle",
-    "name": "Subtitle",
-    "type": "text",
-    "value": "En una conversación con la periodista Gloria Lomana en el Forbes Summit, el presidente de BBVA ofreció su visión sobre la transformación que está provocando la revolución digital. Para Francisco González, esta cuarta revolución industrial va a cambiar el mundo y a ofrecer oportunidades para todos."
-  },
-  {
-    "id": "body",
-    "name": "Body",
-    "type": "textarea",
-    "value": "El presidente de BBVA se declaró “un optimista tecnológico”. A su juicio, a corto plazo, el cambio tecnológico implica la pérdida de puestos de trabajo y genera incertidumbre en los sectores tradicionales. Pero a medio y largo plazo –aseguró– la tecnología aumentará significativamente la productividad e impulsará el crecimiento.<br/><br/>Francisco González llamó la atención sobre la importancia de la gestión activa de los cambios por parte de los poderes públicos en este periodo de transición, para proteger a las personas, y no los puestos de trabajo que queden obsoletos, y conseguir una mejor distribución de la riqueza.<br/><br/>Los factores esenciales serán la inversión en capital humano, la gestión del talento, políticas activas de empleo y una visión a largo plazo. En este sentido, aseguró que no hay problema de trabajo sino de formación: hay una enorme demanda insatisfecha de perfiles especializados en nuevas tecnologías. Por ejemplo, destacó Francisco González, faltan un millón de empleos por cubrir en materia de ciberseguridad.<br/><br/>Un ejemplo de la magnitud del cambio y del potencial disruptivo de la revolución digital es el sector bancario. BBVA inició su proceso de transformación hace ya diez años, y ahora está en plena fase de ejecución, aseguró Francisco González."
-  }
-]
+[{
+  "id": "title",
+  "name": "Título",
+  "type": "title",
+  "value": "Francisco González: “Esta cuarta revolución industrial va a cambiar el mundo y a dar oportunidades a todos”"
+}, 
+{
+  "id": "imgTeaser",
+  "name": "Image Teaser",
+  "type": "image",
+  "value": "https://servernull.s3-eu-west-1.amazonaws.com/home/assets/img/francisco-gonzalez-bbva-gloria-lomana-2-e1508852627244-1920x0-c-f.jpg"
+}, 
+{
+  "id": "img",
+  "name": "Image",
+  "type": "image",
+  "value": "https://servernull.s3-eu-west-1.amazonaws.com/home/assets/img/francisco-gonzalez-bbva-gloria-lomana-2-e1508852627244-1920x0-c-f.jpg"
+}, 
+{
+  "id": "subtitle",
+  "name": "Subtitle",
+  "type": "text",
+  "value": "En una conversación con la periodista Gloria Lomana en el Forbes Summit, el presidente de BBVA ofreció su visión sobre la transformación que está provocando la revolución digital. Para Francisco González, esta cuarta revolución industrial va a cambiar el mundo y a ofrecer oportunidades para todos."
+}, 
+{
+  "id": "body",
+  "name": "Body",
+  "type": "textarea",
+  "value": "El presidente de BBVA se declaró “un optimista tecnológico”. A su juicio, a corto plazo, el cambio tecnológico implica la pérdida de puestos de trabajo y genera incertidumbre en los sectores tradicionales. Pero a medio y largo plazo –aseguró– la tecnología aumentará significativamente la productividad e impulsará el crecimiento.<br/><br/>Francisco González llamó la atención sobre la importancia de la gestión activa de los cambios por parte de los poderes públicos en este periodo de transición, para proteger a las personas, y no los puestos de trabajo que queden obsoletos, y conseguir una mejor distribución de la riqueza.<br/><br/>Los factores esenciales serán la inversión en capital humano, la gestión del talento, políticas activas de empleo y una visión a largo plazo. En este sentido, aseguró que no hay problema de trabajo sino de formación: hay una enorme demanda insatisfecha de perfiles especializados en nuevas tecnologías. Por ejemplo, destacó Francisco González, faltan un millón de empleos por cubrir en materia de ciberseguridad.<br/><br/>Un ejemplo de la magnitud del cambio y del potencial disruptivo de la revolución digital es el sector bancario. BBVA inició su proceso de transformación hace ya diez años, y ahora está en plena fase de ejecución, aseguró Francisco González."
+}]
