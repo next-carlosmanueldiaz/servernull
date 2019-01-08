@@ -16,7 +16,7 @@ app.controller('myCtrl', function ($scope) {
     // Manejamos los estados completado/rechazado de la promesa
     promiseGetIndex.then(
       function(fileData) {
-        var content = JSON.parse(fileData.Body.toString('utf-8'));
+        var content = fileData.Body.toString('utf-8');
         $scope.html = content;
         $scope.$apply();
       },
