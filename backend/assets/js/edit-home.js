@@ -15,9 +15,9 @@ app.controller('myCtrl', function ($scope) {
 
     // Manejamos los estados completado/rechazado de la promesa
     promiseGetIndex.then(
-      function(data) {
+      function(fileData) {
         const id = getQueryVariable("id");
-        var content = JSON.parse(fileDataContentTypes.Body.toString('utf-8'));
+        var content = JSON.parse(fileData.Body.toString('utf-8'));
         $scope.html = content;
         $scope.$apply();
       },
