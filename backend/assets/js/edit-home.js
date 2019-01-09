@@ -28,7 +28,7 @@ app.controller('myCtrl', function ($scope) {
 
         // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
         // ----------------------------------------------------------------------------------------------------
-        var editor1 = CKEDITOR.replace('editor1', {
+        var editor1 = CKEDITOR.replace('htmlCode', {
           extraAllowedContent: 'div',
           height: 460
         });
