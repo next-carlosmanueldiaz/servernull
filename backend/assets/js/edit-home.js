@@ -28,27 +28,13 @@ app.controller('myCtrl', function ($scope) {
 
         // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
         // ----------------------------------------------------------------------------------------------------
-        var editor1 = CKEDITOR.replace('htmlCode', {
-          extraAllowedContent: 'div',
-          height: 460
-        });
-        editor1.on('instanceReady', function() {
-          // Output self-closing tags the HTML4 way, like <br>.
-          this.dataProcessor.writer.selfClosingEnd = '>';
-    
-          // Use line breaks for block elements, tables, and lists.
-          var dtd = CKEDITOR.dtd;
-          for (var e in CKEDITOR.tools.extend({}, dtd.$nonBodyContent, dtd.$block, dtd.$listItem, dtd.$tableContent)) {
-            this.dataProcessor.writer.setRules(e, {
-              indent: true,
-              breakBeforeOpen: true,
-              breakAfterOpen: true,
-              breakBeforeClose: true,
-              breakAfterClose: true
-            });
-          }
-          // Start in source mode.
-          this.setMode('source');
+        CKEDITOR.replace('htmlCode', {
+          fullPage: true,
+          extraPlugins: 'docprops',
+          // Disable content filtering because if you use full page mode, you probably
+          // want to  freely enter any HTML content in source mode without any limitations.
+          allowedContent: true,
+          height: 320
         });
         // ----------------------------------------------------------------------------------------------------
       },
