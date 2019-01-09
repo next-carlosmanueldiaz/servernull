@@ -12,16 +12,6 @@ app.controller('myCtrl', function ($scope) {
     const permisos = getAccess(); // auth.js
     $scope.bucket = bucket; // config.js
 
-    // 
-    ClassicEditor
-      .create(document.querySelector('#html'))
-      .then(editor => {
-        console.log(editor);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-
     // ----------------------------------------------------------------------------------------------------
     // HOME: Leemos el fichero /index.html
     const keyHome = 'index.html';
@@ -35,6 +25,16 @@ app.controller('myCtrl', function ($scope) {
         var content = fileData.Body.toString('utf-8');
         $scope.html = content;
         $scope.$apply();
+
+        // CKEDITOR
+        ClassicEditor
+          .create(document.querySelector('#html'))
+          .then(editor => {
+            console.log(editor);
+          })
+          .catch(error => {
+            console.error(error);
+          });
       },
       function(errGetObject) {
         if (debug) console.log('El fichero ' + key + ' NO existe en el bucket o no tiene permisos.');
