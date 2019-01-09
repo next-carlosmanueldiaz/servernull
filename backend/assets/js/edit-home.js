@@ -1,4 +1,9 @@
-
+/**
+ * Editar la home (/index.html)
+ * Usamos promesas para gestionar mejor las peticiones asíncronas y organizar mejor el código de las peticiones a AWS SDK
+ * Una mejor organización de código puede ser la creación de una clase con las diferentes peticiones.
+ * Gestión de promesas: https://docs.aws.amazon.com/es_es/sdk-for-javascript/v2/developer-guide/using-promises.html
+ */
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
@@ -7,11 +12,22 @@ app.controller('myCtrl', function ($scope) {
     const permisos = getAccess(); // auth.js
     $scope.bucket = bucket; // config.js
 
+    // 
+    ClassicEditor
+      .create(document.querySelector('#html'))
+      .then(editor => {
+        console.log(editor);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+    // ----------------------------------------------------------------------------------------------------
+    // HOME: Leemos el fichero /index.html
     const keyHome = 'index.html';
     var fileParams = {Bucket: $scope.bucket, Key: keyHome};
     var reqGetIndex = new AWS.S3().getObject(fileParams, function (errGetObject, fileDataContentTypes) {});
-    // create the promise object
-    var promiseGetIndex = reqGetIndex.promise();
+    var promiseGetIndex = reqGetIndex.promise(); // create the promise object
 
     // Manejamos los estados completado/rechazado de la promesa
     promiseGetIndex.then(
@@ -27,4 +43,7 @@ app.controller('myCtrl', function ($scope) {
       }
     );
   }
+
+
+
 });
