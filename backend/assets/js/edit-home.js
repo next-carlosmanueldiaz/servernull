@@ -23,18 +23,34 @@ app.controller('myCtrl', function ($scope) {
     promiseGetIndex.then(
       function(fileData) {
         var content = fileData.Body.toString('utf-8');
-        $scope.html = content;
+        $scope.htmlCode = content;
         $scope.$apply();
 
-        // CKEDITOR
-        ClassicEditor
-          .create(document.querySelector('#html'))
-          .then(editor => {
-            console.log(editor);
-          })
-          .catch(error => {
-            console.error(error);
-          });
+        // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
+        // ----------------------------------------------------------------------------------------------------
+        var editor1 = CKEDITOR.replace('editor1', {
+          extraAllowedContent: 'div',
+          height: 460
+        });
+        editor1.on('instanceReady', function() {
+          // Output self-closing tags the HTML4 way, like <br>.
+          this.dataProcessor.writer.selfClosingEnd = '>';
+    
+          // Use line breaks for block elements, tables, and lists.
+          var dtd = CKEDITOR.dtd;
+          for (var e in CKEDITOR.tools.extend({}, dtd.$nonBodyContent, dtd.$block, dtd.$listItem, dtd.$tableContent)) {
+            this.dataProcessor.writer.setRules(e, {
+              indent: true,
+              breakBeforeOpen: true,
+              breakAfterOpen: true,
+              breakBeforeClose: true,
+              breakAfterClose: true
+            });
+          }
+          // Start in source mode.
+          this.setMode('source');
+        });
+        // ----------------------------------------------------------------------------------------------------
       },
       function(errGetObject) {
         if (debug) console.log('El fichero ' + key + ' NO existe en el bucket o no tiene permisos.');
