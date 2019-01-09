@@ -53,7 +53,7 @@ app.controller('myCtrl', function ($scope) {
         // ----------------------------------------------------------------------------------------------------
       },
       function(errGetObject) {
-        if (debug) console.log('El fichero ' + key + ' NO existe en el bucket o no tiene permisos.');
+        if (debug) console.log('El fichero ' + fileParams.key + ' NO existe en el bucket o no tiene permisos.');
         if (debug) console.log(errGetObject);
         expiredToken();
       }
