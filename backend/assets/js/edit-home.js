@@ -36,7 +36,7 @@ app.controller('myCtrl', function ($scope) {
         CKEDITOR.replace('htmlCode');
       },
       function(errGetObject) {
-        if (debug) console.log('El fichero ' + key + ' NO existe en el bucket o no tiene permisos.');
+        if (debug) console.log('El fichero ' + keyHome + ' NO existe en el bucket o no tiene permisos.');
         if (debug) console.log(errGetObject);
         expiredToken();
       }
