@@ -45,7 +45,7 @@ app.controller('myCtrl', function ($scope) {
         $scope.$apply();
 
         // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
-        CKEDITOR.replace('editor1', {
+        CKEDITOR.replace('htmlCode', {
           fullPage: true,
           extraPlugins: 'docprops',
           // Disable content filtering because if you use full page mode, you probably
