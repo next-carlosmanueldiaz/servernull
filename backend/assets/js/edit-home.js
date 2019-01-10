@@ -17,10 +17,8 @@ function expiredToken() {
  /**
   * Obtenemos las entidades HTML del html guardado para poderlo mostrar en CKEditor.
   */
-function toHtmlEntities(str) {
-  var p = document.createElement("p");
-  p.textContent = str;
-  return p.innerHTML;
+function htmlEntities(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 var app = angular.module('myApp', []);
@@ -41,7 +39,7 @@ app.controller('myCtrl', function ($scope) {
     promiseGetIndex.then(
       function(fileData) {
         var content = fileData.Body.toString('utf-8');
-        $scope.htmlCode = toHtmlEntities(content);
+        $scope.htmlCode = htmlEntities(content);
         $scope.$apply();
 
         // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
