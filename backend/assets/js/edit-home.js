@@ -5,6 +5,18 @@
  * Gestión de promesas: https://docs.aws.amazon.com/es_es/sdk-for-javascript/v2/developer-guide/using-promises.html
  */
 
+/**
+ * Error: The provided token has expired.
+ * @returns {undefined}
+ */
+function expiredToken() {
+  console.log('User signed out.');
+  // window.location.replace("/");
+}
+
+ /**
+  * Obtenemos las entidades HTML del html guardado para poderlo mostrar en CKEditor.
+  */
 function toHtmlEntities(str) {
   var p = document.createElement("p");
   p.textContent = str;
