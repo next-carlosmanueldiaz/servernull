@@ -45,14 +45,7 @@ app.controller('myCtrl', function ($scope) {
         $scope.$apply();
 
         // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
-        ClassicEditor
-          .create(document.querySelector('#htmlCode'))
-          .then(editor => {
-            console.log(editor);
-          })
-          .catch(error => {
-            console.error(error);
-          });
+        CKEDITOR.replace('htmlCode');
       },
       function(errGetObject) {
         if (debug) console.log('El fichero ' + key + ' NO existe en el bucket o no tiene permisos.');
