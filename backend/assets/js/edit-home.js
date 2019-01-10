@@ -45,7 +45,14 @@ app.controller('myCtrl', function ($scope) {
         $scope.$apply();
 
         // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
-        CKEDITOR.replace('htmlCode');
+        CKEDITOR.replace('editor1', {
+          fullPage: true,
+          extraPlugins: 'docprops',
+          // Disable content filtering because if you use full page mode, you probably
+          // want to  freely enter any HTML content in source mode without any limitations.
+          allowedContent: true,
+          height: 320
+        });
       },
       function(errGetObject) {
         if (debug) console.log('El fichero ' + keyHome + ' NO existe en el bucket o no tiene permisos.');
