@@ -5,6 +5,24 @@
  * Gestión de promesas: https://docs.aws.amazon.com/es_es/sdk-for-javascript/v2/developer-guide/using-promises.html
  */
 
+/**
+ * Convert a string to HTML entities
+ */
+String.prototype.toHtmlEntities = function() {
+  return this.replace(/./gm, function(s) {
+      return "&#" + s.charCodeAt(0) + ";";
+  });
+};
+
+/**
+* Create string from HTML entities
+*/
+String.fromHtmlEntities = function(string) {
+  return (string+"").replace(/&#\d+;/gm,function(s) {
+      return String.fromCharCode(s.match(/\d+/gm)[0]);
+  })
+};
+
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
 
@@ -23,23 +41,21 @@ app.controller('myCtrl', function ($scope) {
     promiseGetIndex.then(
       function(fileData) {
         var content = fileData.Body.toString('utf-8');
-        $scope.htmlCode = content;
+        $scope.htmlCode = content.toHtmlEntities();
         $scope.$apply();
 
         // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
-        // ----------------------------------------------------------------------------------------------------
-        CKEDITOR.replace('htmlCode', {
-          fullPage: true,
-          extraPlugins: 'docprops',
-          // Disable content filtering because if you use full page mode, you probably
-          // want to  freely enter any HTML content in source mode without any limitations.
-          allowedContent: true,
-          height: 320
-        });
-        // ----------------------------------------------------------------------------------------------------
+        ClassicEditor
+          .create(document.querySelector('#htmlCode'))
+          .then(editor => {
+            console.log(editor);
+          })
+          .catch(error => {
+            console.error(error);
+          });
       },
       function(errGetObject) {
-        if (debug) console.log('El fichero ' + fileParams.key + ' NO existe en el bucket o no tiene permisos.');
+        if (debug) console.log('El fichero ' + key + ' NO existe en el bucket o no tiene permisos.');
         if (debug) console.log(errGetObject);
         expiredToken();
       }
