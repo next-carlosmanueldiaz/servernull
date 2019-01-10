@@ -5,23 +5,11 @@
  * Gestión de promesas: https://docs.aws.amazon.com/es_es/sdk-for-javascript/v2/developer-guide/using-promises.html
  */
 
-/**
- * Convert a string to HTML entities
- */
-String.prototype.toHtmlEntities = function() {
-  return this.replace(/./gm, function(s) {
-      return "&#" + s.charCodeAt(0) + ";";
-  });
-};
-
-/**
-* Create string from HTML entities
-*/
-String.fromHtmlEntities = function(string) {
-  return (string+"").replace(/&#\d+;/gm,function(s) {
-      return String.fromCharCode(s.match(/\d+/gm)[0]);
-  })
-};
+function toHtmlEntities(str) {
+  var p = document.createElement("p");
+  p.textContent = str;
+  return p.innerHTML;
+}
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
@@ -41,7 +29,7 @@ app.controller('myCtrl', function ($scope) {
     promiseGetIndex.then(
       function(fileData) {
         var content = fileData.Body.toString('utf-8');
-        $scope.htmlCode = content.toHtmlEntities();
+        $scope.htmlCode = toHtmlEntities(content);
         $scope.$apply();
 
         // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
