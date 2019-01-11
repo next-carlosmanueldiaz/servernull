@@ -52,7 +52,7 @@ app.controller('myCtrl', function ($scope) {
           // Deshabilita el filtro de contenido porque si usamos el modo de página completa, probablemente
           // queremos libremente meter cualquier contenido en modo source sin limitaciones.
           allowedContent: true,
-          height: 320
+          height: 640
         });
       },
       function(errGetObject) {
