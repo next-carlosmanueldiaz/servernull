@@ -47,9 +47,7 @@ app.controller('myCtrl', function ($scope) {
         CKEDITOR.replace('htmlCode', {
           fullPage: true,
           extraPlugins: 'docprops',
-          // Disable content filtering because if you use full page mode, you probably
-          // want to  freely enter any HTML content in source mode without any limitations.
-          // Deshabilita el filtro de contenido porque si usamos el modo de página completa, probablemente
+          // Deshabilitamos el filtro de contenido porque si usamos el modo de página completa, probablemente
           // queremos libremente meter cualquier contenido en modo source sin limitaciones.
           allowedContent: true,
           height: 640
@@ -63,6 +61,48 @@ app.controller('myCtrl', function ($scope) {
     );
   }
 
+  /**
+   * SUBMIT FORMULARIO:
+   * Guardamos el fichero index.html de la home.
+   */
+  $scope.submit = function () {
+    const permisos = getAccess(); // auth.js
+    $scope.bucket = bucket; // config.js
 
+    // ----------------------------------------------------------------------------------------------------
+    // HOME: Guardamos en el fichero /index.html
+    // ----------------------------------------------------------------------------------------------------
+    const keyHome = 'index.html';
+    var now = new Date();
+    var nextweek = new Date(now.getFullYear(), now.getMonth(), now.getDate()+30);
 
+    // PAKO - DEFLATE FILE
+    // https://github.com/nodeca/pako
+    var pako = window.pako;
+    // Para usar pako.deflate, debemos indicarlo en putObject el atributo ContentEncoding con el valor deflate
+    var htmlData = pako.deflate($scope.htmlCode);
+    var paramsHTMLObject = { 
+      Bucket: $scope.bucket, 
+      Key: keyHome, 
+      Body: htmlData, 
+      ContentType: "text/html", 
+      ContentEncoding: "deflate", 
+      Expires: nextweek,
+      CacheControl: "max-age=2592000", // 30 dias: 60 * 60 * 24 * 30
+    };
+
+    var reqPutIndex = new AWS.S3().putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {});
+    var promisePutIndex = reqPutIndex.promise(); // create the promise object
+    // Manejamos los estados completado/rechazado de la promesa
+    promisePutIndex.then(
+      function(dataPutObject) {
+        if (debug) console.log('%c HTML ', 'background: #222; color: #bada55', 'guardado correctamente en ' + keyHome);
+      },
+      function(errSavingFile) {
+        if (debug) console.log('El fichero HTML ' + keyHome + ' NO existe en el bucket o no tiene permisos.');
+        if (debug) console.log('Error guardando el fichero')
+        if (debug) console.log(errSavingFile);
+      }
+    );
+  };
 });
