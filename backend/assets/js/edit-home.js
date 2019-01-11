@@ -48,6 +48,8 @@ app.controller('myCtrl', function ($scope) {
           extraPlugins: 'docprops',
           // Disable content filtering because if you use full page mode, you probably
           // want to  freely enter any HTML content in source mode without any limitations.
+          // Deshabilita el filtro de contenido porque si usamos el modo de página completa, probablemente
+          // queremos libremente meter cualquier contenido en modo source sin limitaciones.
           allowedContent: true,
           height: 320
         });

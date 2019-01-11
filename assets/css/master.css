@@ -1212,7 +1212,9 @@ small, .small {
 .switch-lang {
   position: absolute;
   right: 20px;
-  top: 116px; }
+  top: 116px; 
+  display: none;
+}
 .switch-lang .toggle, .switch-lang .language {
   display: inline-block;
   vertical-align: middle; }
