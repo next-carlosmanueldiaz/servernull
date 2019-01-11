@@ -39,7 +39,8 @@ app.controller('myCtrl', function ($scope) {
     promiseGetIndex.then(
       function(fileData) {
         var content = fileData.Body.toString('utf-8');
-        $scope.htmlCode = htmlEntities(content);
+        // $scope.htmlCode = htmlEntities(content);
+        $scope.htmlCode = content;
         $scope.$apply();
 
         // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
