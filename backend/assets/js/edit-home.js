@@ -14,10 +14,10 @@ function expiredToken() {
   // window.location.replace("/");
 }
 
-function deferImg(){
+function deferImg(doc){
 	var debug = false;
 	// Toma todas las imagenes con la clase 'deferload'
-	var $images = document.querySelectorAll("img.deferload");
+	var $images = doc.querySelectorAll("img.deferload");
 	// Si hay imagenes en la pagina, ejecuta cada una y actualiza su src.
 	if($images.length > 0) {
 		for (var i = 0, len = $images.length; i < len; i++) {		
@@ -30,7 +30,8 @@ function deferImg(){
 			if (debug) console.log("Image No." + $lognumber + " loaded");
 		}
 	}
-	if (debug) console.log("All Images loaded");
+  if (debug) console.log("All Images loaded");
+  return doc;
 }
 
 //===============================================================================
@@ -78,7 +79,9 @@ app.controller('myCtrl', function ($scope) {
         var fileHTML = fileData.Body.toString('utf-8');
         // CONVERTIRMOS EL TEXTO A DOM para operar con el DOM
         var doc = new DOMParser().parseFromString(fileHTML, "text/html");
+        // FORZAMOS LA CARGA DE IMÁGENES
         doc = deferBackgroundImage(doc);
+        doc = deferImg(doc);
         // RECONVERTIRMOS EL DOM EN TEXTO
         var oSerializer = new XMLSerializer();
         var sHTML = oSerializer.serializeToString(doc);
