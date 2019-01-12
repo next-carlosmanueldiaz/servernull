@@ -79,8 +79,11 @@ app.controller('myCtrl', function ($scope) {
         // CONVERTIRMOS EL TEXTO A DOM para operar con el DOM
         var doc = new DOMParser().parseFromString(fileHTML, "text/html");
         doc = deferBackgroundImage(doc);
+        // RECONVERTIRMOS EL DOM EN TEXTO
+        var oSerializer = new XMLSerializer();
+        var sHTML = oSerializer.serializeToString(doc);
 
-        $scope.htmlCode = fileHTML;
+        $scope.htmlCode = sHTML;
         $scope.$apply();
 
         // Mostramos el CKEDITOR con el contenido del textarea
