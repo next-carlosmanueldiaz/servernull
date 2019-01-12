@@ -14,12 +14,25 @@ function expiredToken() {
   // window.location.replace("/");
 }
 
- /**
-  * Obtenemos las entidades HTML del html guardado para poderlo mostrar en CKEditor.
-  */
-function htmlEntities(str) {
-  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+function deferImg(){
+	var debug = false;
+	// Toma todas las imagenes con la clase 'deferload'
+	var $images = document.querySelectorAll("img.deferload");
+	// Si hay imagenes en la pagina, ejecuta cada una y actualiza su src.
+	if($images.length > 0) {
+		for (var i = 0, len = $images.length; i < len; i++) {		
+			// Obtenemos la url de cada imagen desde el atributo data-src
+			var image_url = $images[i].getAttribute("data-src");
+			// Establecemos el src
+			$images[i].src = image_url;		
+			// debugging
+			var $lognumber = i + 1;
+			if (debug) console.log("Image No." + $lognumber + " loaded");
+		}
+	}
+	if (debug) console.log("All Images loaded");
 }
+
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
@@ -78,9 +91,9 @@ app.controller('myCtrl', function ($scope) {
 
     // PAKO - DEFLATE FILE
     // https://github.com/nodeca/pako
-    var pako = window.pako;
     // Para usar pako.deflate, debemos indicarlo en putObject el atributo ContentEncoding con el valor deflate
-    var htmlData = pako.deflate($scope.htmlCode);
+    var pako = window.pako;   
+    var htmlData = pako.deflate(CKEDITOR.instances.htmlCode.getData()); // Obtenemos el html modificado del ckeditor
     var paramsHTMLObject = { 
       Bucket: $scope.bucket, 
       Key: keyHome, 
@@ -93,6 +106,7 @@ app.controller('myCtrl', function ($scope) {
 
     var reqPutIndex = new AWS.S3().putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {});
     var promisePutIndex = reqPutIndex.promise(); // create the promise object
+    
     // Manejamos los estados completado/rechazado de la promesa
     promisePutIndex.then(
       function(dataPutObject) {
