@@ -45,17 +45,16 @@ app.controller('myCtrl', function ($scope) {
     // HOME: Leemos el fichero /index.html
     const keyHome = 'index.html';
     var fileParams = {Bucket: $scope.bucket, Key: keyHome};
-    var reqGetIndex = new AWS.S3().getObject(fileParams, function (errGetObject, fileDataContentTypes) {});
-    var promiseGetIndex = reqGetIndex.promise(); // create the promise object
 
+    var promiseGetIndex = new AWS.S3().getObject(fileParams, function (errGetObject, fileDataContentTypes) {}).promise(); // create the promise object
     // Manejamos los estados completado/rechazado de la promesa
     promiseGetIndex.then(
       function(fileData) {
         var content = fileData.Body.toString('utf-8');
-        // $scope.htmlCode = htmlEntities(content);
         $scope.htmlCode = content;
         $scope.$apply();
 
+        // Mostramos el CKEDITOR con el contenido del textarea
         // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
         CKEDITOR.replace('htmlCode', {
           fullPage: true,
@@ -104,9 +103,7 @@ app.controller('myCtrl', function ($scope) {
       CacheControl: "max-age=2592000", // 30 dias: 60 * 60 * 24 * 30
     };
 
-    var reqPutIndex = new AWS.S3().putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {});
-    var promisePutIndex = reqPutIndex.promise(); // create the promise object
-    
+    var promisePutIndex = new AWS.S3().putObject(paramsHTMLObject, function (errSavingFile, dataPutObject) {}).promise(); // create the promise object
     // Manejamos los estados completado/rechazado de la promesa
     promisePutIndex.then(
       function(dataPutObject) {
