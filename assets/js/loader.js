@@ -174,14 +174,14 @@ window.addEventListener('load', function() {
 function deferBackgroundImage() {
 	// Tomamos todos los divs con atributo data-src
 	var imgDefer = document.querySelectorAll('div[data-src]');
-	var style = "background-image: url({url});";
+	var styleBackgroundImg = "background-image: url({url});";
   // var style = "{url}";
   for (var i = 0; i < imgDefer.length; i++) {
     oldStyle = imgDefer[i].getAttribute('style');
     if (oldStyle) {
-      newStyle = style.replace("{url}", imgDefer[i].getAttribute('data-src')) + oldStyle;
+      newStyle = styleBackgroundImg.replace("{url}", imgDefer[i].getAttribute('data-src')) + oldStyle;
     } else {
-      newStyle = style.replace("{url}", imgDefer[i].getAttribute('data-src'));
+      newStyle = styleBackgroundImg.replace("{url}", imgDefer[i].getAttribute('data-src'));
     }
 		
     imgDefer[i].setAttribute('style', newStyle );

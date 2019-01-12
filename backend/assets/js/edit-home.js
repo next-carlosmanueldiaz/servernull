@@ -33,6 +33,31 @@ function deferImg(){
 	if (debug) console.log("All Images loaded");
 }
 
+//===============================================================================
+
+/**
+ * Difiere todas las propiedades CSS background-image
+ * https://codepen.io/anon/pen/rryxoK
+ */
+
+function deferBackgroundImage(doc) {
+	// Tomamos todos los divs con atributo data-src
+	var imgDefer = doc.querySelectorAll('div[data-src]');
+	var styleBackgroundImg = "background-image: url({url});";
+  // var style = "{url}";
+  for (var i = 0; i < imgDefer.length; i++) {
+    oldStyle = imgDefer[i].getAttribute('style');
+    if (oldStyle) {
+      newStyle = styleBackgroundImg.replace("{url}", imgDefer[i].getAttribute('data-src')) + oldStyle;
+    } else {
+      newStyle = styleBackgroundImg.replace("{url}", imgDefer[i].getAttribute('data-src'));
+    }
+		
+    imgDefer[i].setAttribute('style', newStyle );
+  }
+
+  return doc;
+}
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope) {
@@ -50,8 +75,12 @@ app.controller('myCtrl', function ($scope) {
     // Manejamos los estados completado/rechazado de la promesa
     promiseGetIndex.then(
       function(fileData) {
-        var content = fileData.Body.toString('utf-8');
-        $scope.htmlCode = content;
+        var fileHTML = fileData.Body.toString('utf-8');
+        // CONVERTIRMOS EL TEXTO A DOM para operar con el DOM
+        var doc = new DOMParser().parseFromString(fileHTML, "text/html");
+        doc = deferBackgroundImage(doc);
+
+        $scope.htmlCode = fileHTML;
         $scope.$apply();
 
         // Mostramos el CKEDITOR con el contenido del textarea
