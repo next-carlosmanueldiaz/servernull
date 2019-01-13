@@ -11,10 +11,17 @@
  */
 function expiredToken() {
   console.log('User signed out.');
-  // window.location.replace("/");
+  window.location.replace("/");
 }
 
-function deferImg(doc){
+/**
+ * Cargamos/Borra las imágenes en el atributo src de los tags <img>
+ * El atributo src de los <img> no debe estar relleno originalmente en el HTML para evitar la carga automática e incontrolada de imágenes.
+ * La carga mediante esta función se hace de arriba a abajo, insertando el valor de data-src en el atributo src.
+ * @param {String} doc 
+ * @param {String} direction {forward, reward}
+ */
+function deferImg(doc, direction){
 	var debug = false;
 	// Toma todas las imagenes con la clase 'deferload'
 	var $images = doc.querySelectorAll("img.deferload");
@@ -23,8 +30,12 @@ function deferImg(doc){
 		for (var i = 0, len = $images.length; i < len; i++) {		
 			// Obtenemos la url de cada imagen desde el atributo data-src
 			var image_url = $images[i].getAttribute("data-src");
-			// Establecemos el src
-			$images[i].src = image_url;		
+      // Establecemos el src
+      if (direction == "forward") {
+        $images[i].src = image_url;
+      } else {
+        $images[i].src = "";
+      }
 			// debugging
 			var $lognumber = i + 1;
 			if (debug) console.log("Image No." + $lognumber + " loaded");
@@ -35,13 +46,13 @@ function deferImg(doc){
 }
 
 //===============================================================================
-
 /**
- * Difiere todas las propiedades CSS background-image
+ * Carga las imágenes indicadas en los estilos CSS "background-image".
+ * Este estilo no debe existir originalmente en los HTML ni CSS, para evitar la carga automática e incontrolada de imágenes.
+ * Esta función obtiene todos los divs del HTML con atributo data-src y les agrega el estilo background-image con la url que contiene el campo data-src.
  * https://codepen.io/anon/pen/rryxoK
  */
-
-function deferBackgroundImage(doc) {
+function deferBackgroundImage(doc, direction) {
 	// Tomamos todos los divs con atributo data-src
 	var imgDefer = doc.querySelectorAll('div[data-src]');
 	var styleBackgroundImg = "background-image: url({url});";
@@ -49,9 +60,18 @@ function deferBackgroundImage(doc) {
   for (var i = 0; i < imgDefer.length; i++) {
     oldStyle = imgDefer[i].getAttribute('style');
     if (oldStyle) {
-      newStyle = styleBackgroundImg.replace("{url}", imgDefer[i].getAttribute('data-src')) + oldStyle;
+      if (direction == "forward") {
+        newStyle = styleBackgroundImg.replace("{url}", imgDefer[i].getAttribute('data-src')) + oldStyle;
+      } else {
+        var styleToRemove = styleBackgroundImg.replace("{url}", imgDefer[i].getAttribute('data-src'));
+        newStyle = oldStyle.replace(styleToRemove, "");
+      }
     } else {
-      newStyle = styleBackgroundImg.replace("{url}", imgDefer[i].getAttribute('data-src'));
+      if (direction == "forward") {
+        newStyle = styleBackgroundImg.replace("{url}", imgDefer[i].getAttribute('data-src'));
+      } else {
+        newStyle = "";
+      }
     }
 		
     imgDefer[i].setAttribute('style', newStyle );
@@ -79,9 +99,9 @@ app.controller('myCtrl', function ($scope) {
         var fileHTML = fileData.Body.toString('utf-8');
         // CONVERTIRMOS EL TEXTO A DOM para operar con el DOM
         var doc = new DOMParser().parseFromString(fileHTML, "text/html");
-        // FORZAMOS LA CARGA DE IMÁGENES
-        doc = deferBackgroundImage(doc);
-        doc = deferImg(doc);
+        // FORZAMOS LA PRECARGA DE IMÁGENES.
+        doc = deferBackgroundImage(doc, "forward");
+        doc = deferImg(doc, "forward");
         // RECONVERTIRMOS EL DOM EN TEXTO
         var oSerializer = new XMLSerializer();
         var sHTML = oSerializer.serializeToString(doc);
@@ -123,11 +143,22 @@ app.controller('myCtrl', function ($scope) {
     var now = new Date();
     var nextweek = new Date(now.getFullYear(), now.getMonth(), now.getDate()+30);
 
+    // Antes de actualizar el contenido, le quitamos las imágenes que le agregamos en Init:
+    fileHTML = CKEDITOR.instances.htmlCode.getData();
+    // CONVERTIRMOS EL TEXTO A DOM para operar con el DOM
+    var doc = new DOMParser().parseFromString(fileHTML, "text/html");
+    // FORZAMOS LA PRECARGA DE IMÁGENES.
+    doc = deferBackgroundImage(doc, "reward"); // deshacemos la carga de imagenes con estilos
+    doc = deferImg(doc, "reward"); // deshacemos la carga de imagenes 
+    // RECONVERTIRMOS EL DOM EN TEXTO
+    var oSerializer = new XMLSerializer();
+    var sHTML = oSerializer.serializeToString(doc);
+
     // PAKO - DEFLATE FILE
     // https://github.com/nodeca/pako
     // Para usar pako.deflate, debemos indicarlo en putObject el atributo ContentEncoding con el valor deflate
     var pako = window.pako;   
-    var htmlData = pako.deflate(CKEDITOR.instances.htmlCode.getData()); // Obtenemos el html modificado del ckeditor
+    var htmlData = pako.deflate(sHTML); // Obtenemos el html modificado del ckeditor
     var paramsHTMLObject = { 
       Bucket: $scope.bucket, 
       Key: keyHome, 
