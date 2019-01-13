@@ -13,7 +13,6 @@ function expiredToken() {
   console.log('User signed out.');
   window.location.replace("/");
 }
-
 /**
  * Cargamos/Borra las imágenes en el atributo src de los tags <img>
  * El atributo src de los <img> no debe estar relleno originalmente en el HTML para evitar la carga automática e incontrolada de imágenes.
@@ -44,7 +43,6 @@ function deferImg(doc, direction){
   if (debug) console.log("All Images loaded");
   return doc;
 }
-
 //===============================================================================
 /**
  * Carga las imágenes indicadas en los estilos CSS "background-image".
@@ -113,7 +111,7 @@ app.controller('myCtrl', function ($scope) {
         // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
         CKEDITOR.replace('htmlCode', {
           fullPage: true,
-          extraPlugins: 'docprops',
+          // extraPlugins: 'docprops',
           // Deshabilitamos el filtro de contenido porque si usamos el modo de página completa, probablemente
           // queremos libremente meter cualquier contenido en modo source sin limitaciones.
           allowedContent: true,
@@ -148,8 +146,8 @@ app.controller('myCtrl', function ($scope) {
     // CONVERTIRMOS EL TEXTO A DOM para operar con el DOM
     var doc = new DOMParser().parseFromString(fileHTML, "text/html");
     // FORZAMOS LA PRECARGA DE IMÁGENES.
-    doc = deferBackgroundImage(doc, "reward"); // deshacemos la carga de imagenes con estilos
-    doc = deferImg(doc, "reward"); // deshacemos la carga de imagenes 
+    doc = deferBackgroundImage(doc, "rewind"); // deshacemos la carga de imagenes con estilos
+    doc = deferImg(doc, "rewind"); // deshacemos la carga de imagenes 
     // RECONVERTIRMOS EL DOM EN TEXTO
     var oSerializer = new XMLSerializer();
     var sHTML = oSerializer.serializeToString(doc);
