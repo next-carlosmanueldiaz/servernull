@@ -313,6 +313,19 @@ app.controller('myCtrl', function ($scope) {
 
           valueCampo = valueCampo.replace(/(\r?\n|\r|\n)/gm, '<br/>');
 
+          if (subtitulo == "") {
+            if (idCampo == "subtitle") {
+              subtitulo = CKEDITOR.instances.subtitle.getData();
+              valueCampo = subtitulo;
+            }
+          }
+          if (body == "") {
+            if (idCampo == "body") {
+              body = CKEDITOR.instances.body.getData();
+              valueCampo = body;
+            }
+          }
+
           var campo = '{ "id" : "' + idCampo + '", "name" : "' + nameCampo + '", "type" : "' + typeCampo + '", "value" : "' + valueCampo + '" },';
 
           if (imgTeaser == "") {
@@ -323,16 +336,6 @@ app.controller('myCtrl', function ($scope) {
           if (imgTitular == "") {
             if (idCampo == "img") {
               imgTitular = valueCampo;
-            }
-          }
-          if (subtitulo == "") {
-            if (idCampo == "subtitle") {
-              subtitulo = CKEDITOR.instances.subtitle.getData();
-            }
-          }
-          if (body == "") {
-            if (idCampo == "body") {
-              body = CKEDITOR.instances.body.getData();;
             }
           }
 
