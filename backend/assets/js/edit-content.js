@@ -144,6 +144,26 @@ app.controller('myCtrl', function ($scope) {
             var content = JSON.parse(f);
             $scope.content = content;
             $scope.$apply();
+
+            // Mostramos el CKEDITOR con el contenido del textarea
+            // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
+            CKEDITOR.replace('subtitle', {
+              fullPage: true,
+              // extraPlugins: 'docprops',
+              // Deshabilitamos el filtro de contenido porque si usamos el modo de página completa, probablemente
+              // queremos libremente meter cualquier contenido en modo source sin limitaciones.
+              allowedContent: true,
+              height: 640
+            });
+            CKEDITOR.replace('body', {
+              fullPage: true,
+              // extraPlugins: 'docprops',
+              // Deshabilitamos el filtro de contenido porque si usamos el modo de página completa, probablemente
+              // queremos libremente meter cualquier contenido en modo source sin limitaciones.
+              allowedContent: true,
+              height: 640
+            });
+
           }
         });
       }
