@@ -150,18 +150,14 @@ app.controller('myCtrl', function ($scope) {
             CKEDITOR.replace('subtitle', {
               fullPage: true,
               // extraPlugins: 'docprops',
-              // Deshabilitamos el filtro de contenido porque si usamos el modo de página completa, probablemente
-              // queremos libremente meter cualquier contenido en modo source sin limitaciones.
               allowedContent: true,
-              height: 640
+              height: 100
             });
             CKEDITOR.replace('body', {
               fullPage: true,
               // extraPlugins: 'docprops',
-              // Deshabilitamos el filtro de contenido porque si usamos el modo de página completa, probablemente
-              // queremos libremente meter cualquier contenido en modo source sin limitaciones.
               allowedContent: true,
-              height: 640
+              height: 440
             });
 
           }
@@ -306,6 +302,7 @@ app.controller('myCtrl', function ($scope) {
         var imgTitular = "";
         var imgTeaser = "";
         var subtitulo = "";
+        var body = "";
         var contenido = "[";
         // Recogemos los valores del formulario
         for (var key in $scope.cts[$scope.pos].fields) {
@@ -330,7 +327,12 @@ app.controller('myCtrl', function ($scope) {
           }
           if (subtitulo == "") {
             if (idCampo == "subtitle") {
-              subtitulo = valueCampo;
+              subtitulo = CKEDITOR.instances.subtitle.getData();
+            }
+          }
+          if (body == "") {
+            if (idCampo == "body") {
+              body = CKEDITOR.instances.body.getData();;
             }
           }
 
