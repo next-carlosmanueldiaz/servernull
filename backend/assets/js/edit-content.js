@@ -148,13 +148,13 @@ app.controller('myCtrl', function ($scope) {
             // Mostramos el CKEDITOR con el contenido del textarea
             // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
             CKEDITOR.replace('subtitle', {
-              fullPage: true,
+              fullPage: false,
               // extraPlugins: 'docprops',
               allowedContent: true,
               height: 100
             });
             CKEDITOR.replace('body', {
-              fullPage: true,
+              fullPage: false,
               // extraPlugins: 'docprops',
               allowedContent: true,
               height: 440
