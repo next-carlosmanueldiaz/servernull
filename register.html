@@ -29,22 +29,29 @@
         top: 30%;
         transform: translate(-50%, -50%);
         text-align: center;
+        max-width: 700px;
+      }
+
+      .g-signin2 {
+        text-align: -webkit-center;
       }
     </style>
   </head>
   <body>
     <div class="centrado-total">
-        <h3>Registro de Administradores</h3>
+        <h4>Registro de Administradores</h4>
+        <br/>
         <div class="g-signin2" data-onsuccess="register"></div>
         <br/>
         <a href="/">Inicio</a>
         <br/>
         <a href="#" onclick="signOut();">Sign out</a>
         <br/>
-        <h3>Registro de Administradores previa solicitud</h3>
+        <h4>Registro de Administradores previa solicitud</h4>
+        <br/>
         <p>Antes de iniciar el proceso de autenticación y cambio de contraseña de esta página es necesario
           enviar una solicitud de inclusión en la lista de Administradores, enviando un email a la siguiente
-          dirección: <a href="mailto:carlos.manuel@beeva.com">carlos.manuel@beeva.com</a>.<br/>
+          dirección: <a href="mailto:carlos.manuel@beeva.com?subject=Administradores&body=Solicito que me incluya como administrador">carlos.manuel@beeva.com</a>.<br/>
           Una vez sea incluido en la lista, podrá continuar el proceso de autenticación de esta página.
         </p>
     </div>
