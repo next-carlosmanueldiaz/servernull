@@ -324,6 +324,7 @@ function register(googleUser) {
     var id_token = googleUser.getAuthResponse().id_token;
     if (debug) console.log('id_token: ' + id_token); // Token para aws
     if (debug) console.log('You are now logged in. (Google)');
+    if (debug) console.log('------------------------------------------------------------------------');
     AWS.config.region = region;
     var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
     var poolData = {UserPoolId: userPoolId, ClientId: appClientId};
@@ -342,6 +343,7 @@ function register(googleUser) {
         const access_token = result.getAccessToken().getJwtToken();
         if (debug) console.log('access token: + ' + access_token);
         if (debug) console.log('idToken + ' + result.idToken.jwtToken);
+        if (debug) console.log('authenticateUser: ' + JSON.stringify(result));
         const paramGetUser = { AccessToken: access_token };
         cognitoidentityserviceprovider.getUser(paramGetUser, function (errGetUser, getUserData) {
           if (errGetUser) {
@@ -351,7 +353,7 @@ function register(googleUser) {
             if (debug) console.log('Usuario encontrado en el userpool Admins');
             if (debug) console.log(getUserData);           // successful response
             if (debug) console.log('USUARIO CONFIRMADO EN EL USER POOL DE ADMINS.');
-            window.location.replace("/index.html");
+            window.location.replace("/");
           }
         });
       },
