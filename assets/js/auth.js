@@ -359,7 +359,11 @@ function register(googleUser) {
       },
       onFailure: function (err) {
         if (debug) console.log('Error al autenticar al usuario. Mantenemos el usuario como invitado.');
+        if (debug) console.log(err.code);
+        if (debug) console.log(err.message);
+        if (debug) console.log('------------------------------------------------------------------------');
         if (debug) console.log(err);
+        if (debug) console.log('------------------------------------------------------------------------');
       },
       mfaRequired: function (codeDeliveryDetails) {
         var verificationCode = prompt('Please input verification code', '');

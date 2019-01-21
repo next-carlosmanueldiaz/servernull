@@ -21,6 +21,9 @@
     <script type="text/javascript" src="../assets/js/auth.js"></script>
     <style>
       .centrado-total {
+        padding: 80px;
+        border: 1px solid #2671e2;
+        background-color: #e9ecef;
         position: absolute;
         left: 50%;
         top: 30%;
@@ -31,12 +34,18 @@
   </head>
   <body>
     <div class="centrado-total">
+        <h3>Registro de Administradores</h3>
         <div class="g-signin2" data-onsuccess="register"></div>
         <br/>
         <a href="/">Inicio</a>
         <br/>
         <a href="#" onclick="signOut();">Sign out</a>
         <br/>
+        <h3>Registro de Administradores previa solicitud</h3>
+        <p>Antes de iniciar el proceso de autenticación y cambio de contraseña de esta página es necesario
+          enviar una solicitud de inclusión en la lista de Administradores, enviando un email a la siguiente
+          dirección: <a href="mailto:carlos.manuel@beeva.com">carlos.manuel@beeva.com</a>
+        </p>
     </div>
   </body>
 </html>
