@@ -20,18 +20,28 @@
     <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css" crossorigin="anonymous">
     <script type="text/javascript" src="../assets/js/config.js"></script>
     <script type="text/javascript" src="../assets/js/auth.js"></script>
+    <style>
+      .centrado-total {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
   </head>
   <body>
-    <ul>
-      <li>
-        <a target="_blank" href="/index.html">
-          Inicio
-        </a>
-      </li>
-    </ul>
-    <div class="g-signin2" data-onsuccess="register"></div>
-    <br/>
-    <a href="#" onclick="signOut();">Sign out</a>
-    <br/>
+    <div class="centrado-total">
+      <ul>
+          <li>
+            <a target="_blank" href="/index.html">
+              Inicio
+            </a>
+          </li>
+        </ul>
+        <div class="g-signin2" data-onsuccess="register"></div>
+        <br/>
+        <a href="#" onclick="signOut();">Sign out</a>
+        <br/>
+    </div>
   </body>
 </html>
