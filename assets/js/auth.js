@@ -335,7 +335,7 @@ function register(googleUser) {
     var authenticationData = { Username: username, Password : passwordTemporal};
     var authenticationDetails = new AWSCognito.CognitoIdentityServiceProvider.AuthenticationDetails(authenticationData);
     if (debug) console.log('authenticationDetails:');
-    if (debug) console.log(authenticationDetails);
+    if (debug) console.log(JSON.stringify(authenticationDetails));
     
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: function (result) {
