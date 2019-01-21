@@ -362,7 +362,7 @@ function register(googleUser) {
         if (debug) console.log(err.code);
         if (debug) console.log(err.message);
         if (err.code == "UserNotFoundException") {
-          alert("Usuario no encontrado en la lista de Administradores.<br/> Solicite su inclusión para poder finalizar el proceso de registro.");
+          alert("\nUsuario no encontrado en la lista de Administradores.\nSolicite su inclusión para poder finalizar el proceso de registro.");
         }
         if (debug) console.log('------------------------------------------------------------------------');
         if (debug) console.log(err);
