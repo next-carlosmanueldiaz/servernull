@@ -65,6 +65,11 @@
                     <input ng-model="field.value" ng-if="field.type == 'number'" type="text" id="{{field.id}}" name="{{field.id}}" required="" />
                     <textarea ng-model="field.value" ng-if="field.type == 'textarea' && field.id == 'subtitle'" id="{{field.id}}" style="width: 100%;" class="areatext" rows="3"></textarea>
                     <textarea ng-model="field.value" ng-if="field.type == 'textarea' && field.id == 'body'" id="{{field.id}}" style="width: 100%;" class="areatext" rows="8"></textarea>
+                    <div ng-if="field.type == 'image'">
+                      <div class="row"><div class="col" style="font-size: 14px;">Recomendaciones:</div></div>
+                      <div class="row"><div class="col" style="font-size: 14px;">Imagen: 1024 x 614</div></div>
+                      <div class="row"><div class="col" style="font-size: 14px;">Teaser: 600 x 475</div></div>        
+                    </div>
                     <div ng-if="form.$submitted || form.name.$touched" style="display: inline-block;">
                       <div style="color:red" ng-show="form.name.$error.required">Obligatorio.</div>
                     </div>
