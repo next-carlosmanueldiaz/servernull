@@ -223,7 +223,10 @@ app.controller('myCtrl', function ($scope) {
     // ========================================================================
     var keyC = 'home/content/json/' + $scope.cts[$scope.pos].id + '/' + title + '.json';
     // ========================================================================
-    var img = "";
+    var imgTitular = "";
+    var imgTeaser = "";
+    var subtitulo = "";
+    var body = "";
     var contenido = "[";
     // Recogemos los valores del formulario
     for (var key in $scope.cts[$scope.pos].fields) {
@@ -233,12 +236,30 @@ app.controller('myCtrl', function ($scope) {
       var valueCampo  = $scope.cts[$scope.pos].fields[key].value;
       
       valueCampo = valueCampo.replace(/(\r?\n|\r|\n)/gm, '<br/>');
+
+      if (subtitulo == "") {
+        if (idCampo == "subtitle") {
+          subtitulo = CKEDITOR.instances.subtitle.getData();
+          valueCampo = subtitulo;
+        }
+      }
+      if (body == "") {
+        if (idCampo == "body") {
+          body = CKEDITOR.instances.body.getData();
+          valueCampo = body;
+        }
+      }
       
       var campo = '{ "id" : "' + idCampo + '", "name" : "' + nameCampo + '", "type" : "' + typeCampo + '", "value" : "' + valueCampo + '" },';
       
-      if (img == "") {
+      if (imgTeaser == "") {
+        if (idCampo == "imgTeaser") {
+          imgTeaser = valueCampo;
+        }
+      }
+      if (imgTitular == "") {
         if (idCampo == "img") {
-          img = valueCampo;
+          imgTitular = valueCampo;
         }
       }
 
@@ -274,7 +295,7 @@ app.controller('myCtrl', function ($scope) {
             var contents = JSON.parse(fileDataContents.Body.toString('utf-8'));
             const type = getQueryVariable("id");
             var date = new Date(); // No necesito guardar la fecha porque puedo darle la vuelta al mostrar el fichero en la home con .reverse()
-            var content = {"title" : titulo, "type": type, "img": img, "date": date};
+            var content = {"date": date, "img": imgTeaser, "slug": title, "title" : titulo, "type": type };
             // AGREGAMOS el nuevo contenido a contents.json, al final del fichero
             contents.push(content);
             var fileContents = JSON.stringify(contents);

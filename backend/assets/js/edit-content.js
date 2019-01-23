@@ -299,8 +299,8 @@ app.controller('myCtrl', function ($scope) {
         var keyJSON = 'home/content/json/' + $scope.type + '/' + $scope.slug + '.json';
         // ========================================================================
         // Generamos el JSON con los datos del contenido
-        var imgTitular = "";
         var imgTeaser = "";
+        var imgTitular = "";
         var subtitulo = "";
         var body = "";
         var contenido = "[";
