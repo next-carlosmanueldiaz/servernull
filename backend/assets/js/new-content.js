@@ -107,6 +107,21 @@ app.controller('myCtrl', function ($scope) {
           }
         }
         $scope.$apply();
+
+        // Mostramos el CKEDITOR con el contenido del textarea
+        // CKEDITOR (lo cargamos después de meter el contenido en el textarea)
+        CKEDITOR.replace('subtitle', {
+          fullPage: false,
+          // extraPlugins: 'docprops',
+          allowedContent: true,
+          height: 100
+        });
+        CKEDITOR.replace('body', {
+          fullPage: false,
+          // extraPlugins: 'docprops',
+          allowedContent: true,
+          height: 440
+        });
       }
     });
   }
