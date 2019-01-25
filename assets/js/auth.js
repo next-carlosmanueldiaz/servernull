@@ -405,7 +405,7 @@ function genPassword() {
 
   for (i=0; i<4; i++) {
     var tipo = Math.round(Math.random() * (4 - 0) + parseInt(0));
-    var valor = valores[tipo].charAt(Math.floor(Math.random()*valores[tipo].length));
+    var valor = valores[tipo].charAt(Math.floor(Math.random()*(valores[tipo].length - 1));
     if (tipo == 3) {
       valor = valor.toUpperCase();
     }
