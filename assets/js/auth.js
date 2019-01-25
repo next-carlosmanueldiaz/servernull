@@ -406,7 +406,7 @@ function genPassword() {
   pwd += valores[2].charAt(Math.floor(Math.random()*valores[2].length)); // Caracter especial
 
   for (i=0; i<4; i++) {
-    var tipo = Math.round(Math.random() * 3);
+    var tipo = Math.round(Math.random() * 3); // Números entre 0 y 3 (incluidos)
     var valor = valores[tipo].charAt(Math.floor(Math.random()*(valores[tipo].length - 1)));
     if (tipo == 3) {
       valor = valor.toUpperCase();
