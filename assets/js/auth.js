@@ -353,7 +353,8 @@ function register(googleUser) {
             if (debug) console.log('Usuario encontrado en el userpool Admins');
             if (debug) console.log(getUserData);           // successful response
             if (debug) console.log('USUARIO CONFIRMADO EN EL USER POOL DE ADMINS.');
-            alert('USUARIO CONFIRMADO EN EL USER POOL DE ADMINISTRADORES. \n ¡Bienvenido!\n\nYa puede acceder como Administrador al Panel de control en la página principal.');
+            alert('USUARIO CONFIRMADO EN EL USER POOL DE ADMINISTRADORES.\n\n¡Bienvenido!\n\nYa puede autenticarse y acceder como Administrador al Panel de control en la página principal.');
+            signOut();
             window.location.replace("/");
           }
         });
