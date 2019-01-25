@@ -382,9 +382,9 @@ function register(googleUser) {
         delete userAttributes.email_verified; // it's returned but not valid to submit
         // let newPassword = prompt('Se requiere una nueva password!');
         let newPassword = genPassword();
-        if (debug) console.log('------------------------------------------------------------------------');
-        if (debug) console.log('Nueva password generada: ' + newPassword);
-        if (debug) console.log('------------------------------------------------------------------------');
+        // if (debug) console.log('------------------------------------------------------------------------');
+        // if (debug) console.log('Nueva password generada: ' + newPassword);
+        // if (debug) console.log('------------------------------------------------------------------------');
         cognitoUser.completeNewPasswordChallenge(newPassword, userAttributes, this);
       }
     });
