@@ -379,11 +379,39 @@ function register(googleUser) {
         if (debug) console.log(requiredAttributes);
         
         delete userAttributes.email_verified; // it's returned but not valid to submit
-        let newPassword = prompt('Se requiere una nueva password!');
+        // let newPassword = prompt('Se requiere una nueva password!');
+        let newPassword = genPassword();
+        if (debug) console.log('------------------------------------------------------------------------');
+        if (debug) console.log('Nueva password generada: ' + newPassword);
+        if (debug) console.log('------------------------------------------------------------------------');
         cognitoUser.completeNewPasswordChallenge(newPassword, userAttributes, this);
       }
     });
   }
+}
+
+/**
+ * Generador de contraseña de 8 caracteres incluyendo mayúsculas, minúsculas, números y caracteres especiales.
+ * Por ejemplo Mm41n$
+ */
+function genPassword() {
+  var valores = ['abcdefghijkmnpqrtuvwxyz', '1234567890', '!@#$&%*()+=-[]\/{}|:<>?,.', 'abcdefghijkmnpqrtuvwxyz'];
+  // Números entre 1 y 4
+  var pwd = "";
+  pwd += valores[0].charAt(Math.floor(Math.random()*valores[0].length)).toUpperCase(); // Mayúscula
+  pwd += valores[0].charAt(Math.floor(Math.random()*valores[0].length)); // Minúscula
+  pwd += valores[1].charAt(Math.floor(Math.random()*valores[1].length)); // Número
+  pwd += valores[2].charAt(Math.floor(Math.random()*valores[2].length)); // Caracter especial
+
+  for (i=0; i<4; i++) {
+    var tipo = Math.round(Math.random() * (4 - 0) + parseInt(0));
+    var valor = valores[tipo].charAt(Math.floor(Math.random()*valores[tipo].length));
+    if (valor == 3) {
+      valor = valor.toUpperCase();
+    }
+    pwd += valor;
+  }
+  return pwd;
 }
 
 /**
