@@ -353,7 +353,7 @@ function register(googleUser) {
             if (debug) console.log('Usuario encontrado en el userpool Admins');
             if (debug) console.log(getUserData);           // successful response
             if (debug) console.log('USUARIO CONFIRMADO EN EL USER POOL DE ADMINS.');
-            alert('USUARIO CONFIRMADO EN EL USER POOL DE ADMINS. \nBienvenido!\n\nYa puede acceder como Administrador al Panel de control.');
+            alert('USUARIO CONFIRMADO EN EL USER POOL DE ADMINISTRADORES. \n ¡Bienvenido!\n\nYa puede acceder como Administrador al Panel de control en la página principal.');
             window.location.replace("/");
           }
         });
@@ -405,7 +405,7 @@ function genPassword() {
   pwd += valores[2].charAt(Math.floor(Math.random()*valores[2].length)); // Caracter especial
 
   for (i=0; i<4; i++) {
-    var tipo = Math.round(Math.random() * (4 - 0) + parseInt(0));
+    var tipo = Math.round(Math.random() * 3);
     var valor = valores[tipo].charAt(Math.floor(Math.random()*(valores[tipo].length - 1)));
     if (tipo == 3) {
       valor = valor.toUpperCase();
