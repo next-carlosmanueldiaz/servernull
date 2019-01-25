@@ -397,14 +397,10 @@ function register(googleUser) {
  * Por ejemplo Mm41n$
  */
 function genPassword() {
-  var valores = ['abcdefghijkmnpqrtuvwxyz', '1234567890', '!@#$&%*()+=-[]\/{}|:<>?,.', 'abcdefghijkmnpqrtuvwxyz'];
-  // Números entre 1 y 4
   var pwd = "";
+  var valores = ['abcdefghijkmnpqrtuvwxyz', '1234567890', '!@#$&%*()+=-[]\/{}|:<>?,.', 'abcdefghijkmnpqrtuvwxyz'];
   pwd += valores[0].charAt(Math.floor(Math.random()*valores[0].length)).toUpperCase(); // Mayúscula
   pwd += valores[0].charAt(Math.floor(Math.random()*valores[0].length)); // Minúscula
-  pwd += valores[1].charAt(Math.floor(Math.random()*valores[1].length)); // Número
-  pwd += valores[2].charAt(Math.floor(Math.random()*valores[2].length)); // Caracter especial
-
   for (i=0; i<4; i++) {
     var tipo = Math.round(Math.random() * 3); // Números entre 0 y 3 (incluidos)
     var valor = valores[tipo].charAt(Math.floor(Math.random()*(valores[tipo].length - 1)));
@@ -413,6 +409,8 @@ function genPassword() {
     }
     pwd += valor;
   }
+  pwd += valores[1].charAt(Math.floor(Math.random()*valores[1].length)); // Número 
+  pwd += valores[2].charAt(Math.floor(Math.random()*valores[2].length)); // Caracter especial
   return pwd;
 }
 
