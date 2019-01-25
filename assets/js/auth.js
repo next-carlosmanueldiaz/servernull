@@ -353,6 +353,7 @@ function register(googleUser) {
             if (debug) console.log('Usuario encontrado en el userpool Admins');
             if (debug) console.log(getUserData);           // successful response
             if (debug) console.log('USUARIO CONFIRMADO EN EL USER POOL DE ADMINS.');
+            alert('USUARIO CONFIRMADO EN EL USER POOL DE ADMINS. \nBienvenido!\n\nYa puede acceder como Administrador al Panel de control.');
             window.location.replace("/");
           }
         });
