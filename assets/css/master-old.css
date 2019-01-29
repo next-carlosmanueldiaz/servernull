@@ -1,11 +1,9 @@
 @charset "UTF-8";
 /**
- * MASTER.CSS
- * - Hacemos relativas las url de los ficheros de fuentes en su src.
- * - Quitamos el nombre propietario de los nombres de las fuentes.
- * - Agregamos font-display: fallback; [auto|block|swap|fallback|optional] (recomendación pagespeed insights)
- * - No necesitamos quitar background-image, ya que no se obliga a la carga de ficheros que no se pintan en el html.
- */
+*
+* MASTER FILE
+*
+**/
 /* -------------------------------------------------------------------------
  * VARIABLES
  * ---------------------------------------------------------------------- */
@@ -27,8 +25,7 @@
   /* Legacy iOS */
   font-style: normal;
   font-weight: normal;
-  text-rendering: optimizeLegibility; 
-  font-display: fallback; }
+  text-rendering: optimizeLegibility; }
 @font-face {
   font-family: 'BBook';
   src: url("../fonts/coronita/BentonSans-Book.eot");
@@ -37,8 +34,7 @@
   /* Legacy iOS */
   font-style: normal;
   font-weight: normal;
-  text-rendering: optimizeLegibility; 
-  font-display: fallback; }
+  text-rendering: optimizeLegibility; }
 @font-face {
   font-family: 'BBook';
   src: url("../fonts/coronita/BentonSans-BookItalic.eot");
@@ -47,8 +43,7 @@
   /* Legacy iOS */
   font-style: italic;
   font-weight: normal;
-  text-rendering: optimizeLegibility;
-  font-display: fallback; }
+  text-rendering: optimizeLegibility; }
 @font-face {
   font-family: 'BMedium';
   src: url("../fonts/coronita/BentonSans-Medium.eot");
@@ -57,8 +52,7 @@
   /* Legacy iOS */
   font-style: normal;
   font-weight: normal;
-  text-rendering: optimizeLegibility; 
-  font-display: fallback; }
+  text-rendering: optimizeLegibility; }
 @font-face {
   font-family: 'BMedium';
   src: url("../fonts/coronita/BentonSans-MediumItalic.eot");
@@ -67,8 +61,7 @@
   /* Legacy iOS */
   font-style: italic;
   font-weight: normal;
-  text-rendering: optimizeLegibility; 
-  font-display: fallback; }
+  text-rendering: optimizeLegibility; }
 @font-face {
   font-family: 'BBold';
   src: url("../fonts/coronita/BentonSans-Bold.eot");
@@ -77,8 +70,7 @@
   /* Legacy iOS */
   font-style: normal;
   font-weight: normal;
-  text-rendering: optimizeLegibility; 
-  font-display: fallback; }
+  text-rendering: optimizeLegibility; }
 @font-face {
   font-family: 'BTiempos';
   src: url("../fonts/coronita/TiemposTextWeb-Regular.eot");
@@ -87,8 +79,7 @@
   /* Modern Browsers */
   font-style: normal;
   font-weight: normal;
-  text-rendering: optimizeLegibility; 
-  font-display: fallback; }
+  text-rendering: optimizeLegibility; }
 @font-face {
   font-family: 'BTiempos';
   src: url("../fonts/coronita/TiemposTextWeb-RegularItalic.eot");
@@ -97,8 +88,82 @@
   /* Modern Browsers */
   font-style: italic;
   font-weight: normal;
-  text-rendering: optimizeLegibility; 
-  font-display: fallback; }
+  text-rendering: optimizeLegibility; }
+/* old fonts
+@font-face {
+	font-family: 'webBook';
+	src: url('../fonts/web-book.eot');
+	src: url('../fonts/web-book.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-book.woff') format('woff'),
+		 url('../fonts/web-book.ttf') format('truetype'),
+		 url('../fonts/web-book.svg#webBook') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'webBook';
+	src: url('../fonts/web-bookitalic.eot');
+	src: url('../fonts/web-bookitalic.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-bookitalic.woff') format('woff'),
+		 url('../fonts/web-bookitalic.ttf') format('truetype'),
+		 url('../fonts/web-bookitalic.svg#webBook') format('svg');
+	font-weight: normal;
+	font-style: italic;
+}
+@font-face {
+	font-family: 'webLight';
+	src: url('../fonts/web-light.eot');
+	src: url('../fonts/web-light.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-light.woff') format('woff'),
+		 url('../fonts/web-light.ttf') format('truetype'),
+		 url('../fonts/web-light.svg#webLight') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'webLight';
+	src: url('../fonts/web-lightitalic.eot');
+	src: url('../fonts/web-lightitalic.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-lightitalic.woff') format('woff'),
+		 url('../fonts/web-lightitalic.ttf') format('truetype'),
+		 url('../fonts/web-lightitalic.svg#webLightItalic.svg') format('svg');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'webMedium';
+	src: url('../fonts/web-medium.eot');
+	src: url('../fonts/web-medium.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-medium.woff') format('woff'),
+		 url('../fonts/web-medium.ttf') format('truetype'),
+		 url('../fonts/web-medium.svg#webMedium') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'webMedium';
+	src: url('../fonts/web-mediumitalic.eot');
+	src: url('../fonts/web-mediumitalic.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-mediumitalic.woff') format('woff'),
+		 url('../fonts/web-mediumitalic.ttf') format('truetype'),
+		 url('../fonts/web-mediumitalic.svg#webMedium') format('svg');
+	font-weight: normal;
+	font-style: italic;
+}
+@font-face {
+	font-family: 'webSemibold';
+	src: url('../fonts/web-semibold.eot');
+	src: url('../fonts/web-semibold.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/web-semibold.woff') format('woff'),
+		 url('../fonts/web-semibold.ttf') format('truetype'),
+		 url('../fonts/web-semibold.svg#webSemibold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+*/
 /* -------------------------------------------------------------------------
  * GENERAL
  * ---------------------------------------------------------------------- */
@@ -690,7 +755,9 @@ small, .small {
   margin-bottom: 1px; }
 
 .wpb_row {
-  margin-bottom: 0px !important; }
+  margin-bottom: 0px !important; 
+  padding-top: 30px;
+}
 
 .vc_desktop .noticia {
   /*margin-bottom: 0!important;*/ }
@@ -808,11 +875,11 @@ small, .small {
   background: url("../img/logo-header.png") no-repeat top left;
   background-size: contain;
   display: block;
-  width: 96px; /** 128px **/
-  height: 33px; /** 79px **/
+  width: 128px;
+  height: 79px;
   position: absolute;
   left: 35px;
-  top: 35px; /** 15px **/
+  top: 15px;
   text-indent: -90000px;
   overflow: hidden; }
   @media only screen and (max-width: 1200px) {
@@ -821,8 +888,8 @@ small, .small {
   @media only screen and (max-width: 480px) {
     .header-main .link-map {
       left: 15px;
-      top: 20px; /** 10px **/
-      height: 28px; /** 50px **/
+      top: 10px;
+      height: 50px;
       background-image: url("../img/logo-header.png"); } }
 @media only screen and (max-width: 767px) {
   .header-main.fixed .header-nav {
@@ -1145,7 +1212,9 @@ small, .small {
 .switch-lang {
   position: absolute;
   right: 20px;
-  top: 116px; }
+  top: 116px; 
+  display: none;
+}
 .switch-lang .toggle, .switch-lang .language {
   display: inline-block;
   vertical-align: middle; }
@@ -1676,7 +1745,7 @@ body.en .pie-footer .legal {
   position: relative; }
   .pie-footer .legal {
     background: #072146 url("../img/logo-footer.png") no-repeat 15px 0;
-    margin: 50px auto 80px auto; /** 50px auto 0px auto */
+    margin: 50px auto 0px auto;
     padding: 75px 15px 15px 16px;
     position: relative;
     width: 1200px; }
@@ -2290,6 +2359,9 @@ body.en .pie-footer .legal {
   .noticia.destacada .box-info {
     bottom: 0;
     position: absolute; 
+    background-color: rgb(1, 1, 1, 0.5);
+    padding: 12px;
+    border-radius: 10px;
   }
     .noticia.destacada .box-info p {
       font-size: 20px;
@@ -2887,7 +2959,8 @@ body.en .pie-footer .legal {
   .hoverState2:after {
     width: 100%;
     height: 100%;
-    background-color: #072146;
+    /* background-color: #072146; */
+    background-color: rgba(255, 255, 255, 0.1);
     opacity: 0;
     content: "";
     display: block;
@@ -2964,8 +3037,7 @@ body.en .pie-footer .legal {
     left: 59.5%;
     padding: 0 20px;
     -webkit-transition: all 0.5s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    }
+    transition: all 0.2s ease-in-out; }
     @media only screen and (max-width: 1024px) {
       .hoverState2 .bluepills {
         left: 60.5%; } }
@@ -2985,8 +3057,7 @@ body.en .pie-footer .legal {
     }*/ }
     .noticia:hover .hoverState2 .bluepills {
       opacity: 1;
-      bottom: 54px;
-      }
+      bottom: 54px; }
     .noticia:hover .hoverState2 .box-info.animated {
       opacity: 1;
       /*margin-top: 40px;
@@ -3046,7 +3117,7 @@ body.en .pie-footer .legal {
   .article-header .box-info.tag-fix {
     min-height: 475px; }
   .article-header .box-info {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.5);
     color: #000;
     min-height: 445px;
     width: 100%;
@@ -3090,7 +3161,7 @@ body.en .pie-footer .legal {
       overflow: hidden; }
       .article-header .box-info .bluepills li a {
         border: 0;
-        background: #bdbdbd;
+        background: #737373;
         transition: background 0.3s ease; }
         .article-header .box-info .bluepills li a:hover {
           text-decoration: none;
@@ -5142,7 +5213,7 @@ aside.positioned {
     padding: 20px;
     background-color: #f6f6f6; }
 
-/*=====  Noticia New  Storytelling  ======*/
+/*=====  Noticia New Storytelling  ======*/
 .format-storytelling2 {
   padding-top: 0; }
   .format-storytelling2 video {
@@ -5996,15 +6067,15 @@ aside.positioned {
 .search-results .canales {
   margin-top: 30px; }
 
-/*==========  Otras webs del   ==========*/
+/*==========  Otras webs  ==========*/
 .static {
   font-size: 14px;
   padding: 50px 0; }
   @media only screen and (min-width: 768px) {
-    .static .bbva-site .col:nth-child(2n+1) {
+    .static .site .col:nth-child(2n+1) {
       clear: both; } }
   @media only screen and (max-width: 767px) {
-    .static .bbva-site {
+    .static .site {
       margin-bottom: 20px; } }
   .static .outer_link {
     color: #49a5e6;
@@ -6035,7 +6106,7 @@ aside.positioned {
       vertical-align: bottom; }
     .static .noticia.formato1 .fa-twitter {
       color: #237aba; }
-  .static .bbva-site .noticia.formato1 .box-info {
+  .static .site .noticia.formato1 .box-info {
     min-height: 130px; }
   @media only screen and (max-width: 767px) {
     .static .col-xs-1, .static .col-sm-1, .static .col-md-1, .static .col-lg-1,
@@ -6079,7 +6150,7 @@ aside.positioned {
       top: 15px;
       left: 15px; } }
 
-/*==========  Listado de webs  por paises de Contacto  ==========*/
+/*==========  Listado de webs por paises de Contacto  ==========*/
 .links-list {
   margin-bottom: 50px; }
   .links-list table {
@@ -8672,7 +8743,8 @@ body.en #cookie-law-info-bar span:before {
   content: '';
   display: block;
   position: absolute;
-  background: #072146;
+  /* background: #072146; */
+  background: rgba(255, 255, 255, 0.33);
   margin: 0;
   top: 0;
   left: 0;
@@ -8750,8 +8822,7 @@ body.en #cookie-law-info-bar span:before {
   max-height: 160px;
   margin-top: 30px;
   opacity: 1;
-  filter: alpha(opacity=100);
-  }
+  filter: alpha(opacity=100); }
 
 .noticia.formato1:hover .bluepills {
   margin-top: 15px; }
