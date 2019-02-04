@@ -95,7 +95,6 @@ loadLevel(0, js.fases);
  * cargamos los scripts del siguiente nivel.
 */
 function loadLevel(numLevel, fases) {
-  debug = false;
   var loaded = 0;
   var level = fases[numLevel];
   var toLoad = level.length;
@@ -112,7 +111,6 @@ function loadLevel(numLevel, fases) {
 
     // Cada vez que se carga una librería, la contamos al cargarse
     script.onload = function () {
-      debug = false;
       loaded++;
       if (debug) console.log(numLevel + "-" + loaded + ' cargada: ' + this.src);
       if (loaded === toLoad) {
@@ -139,7 +137,6 @@ function loadLevel(numLevel, fases) {
  * La carga de imágenes no impide la carga de la página (se cargan en paralelo)
  */
 function deferImg(){
-	var debug = false;
 	// Toma todas las imagenes con la clase 'deferload'
 	var $images = document.querySelectorAll("img.deferload");
 	// Si hay imagenes en la pagina, ejecuta cada una y actualiza su src.
